@@ -90,7 +90,7 @@ export const baseConfig = [
               position: "before",
             },
             {
-              pattern: "@/libs/**",
+              pattern: "@/lib/**",
               group: "internal",
               position: "before",
             },
