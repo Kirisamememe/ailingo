@@ -1,0 +1,10 @@
+---
+description: 
+globs: *.tsx,*.ts
+alwaysApply: false
+---
+* ReactとTypeScriptのベストプラクティスに従うこと
+* if文は早期リターンを使用すること
+* DOM要素取得時はgetElementByIdではなくrefを使用すること
+* 関数はできる限り全てアロー関数を使うこと
+

@@ -1,0 +1,32 @@
+'use client';
+
+import type { ReactNode } from 'react';
+import { createContext, use } from 'react';
+
+type {{pascalCase contextName}}ContextType = {
+  // FIXME: コンテキストの型を定義してください
+};
+
+/** FIXME: ~を管理するコンテキスト */
+const {{pascalCase contextName}}Context = createContext<{{pascalCase contextName}}ContextType | undefined>(undefined);
+
+type {{pascalCase contextName}}ProviderProps = {
+  /** 子要素 */
+  children: ReactNode;
+};
+
+/** {{pascalCase contextName}}ContextのProviderコンポーネント */
+export const {{pascalCase contextName}}Provider = ({ children }: {{pascalCase contextName}}ProviderProps) => {
+  return <{{pascalCase contextName}}Context>{children}</{{pascalCase contextName}}Context>;
+};
+
+/** {{pascalCase contextName}}Contextのカスタムフック */
+export const use{{pascalCase contextName}}Context = () => {
+  const context = use({{pascalCase contextName}}Context);
+
+  if (!context) {
+    throw new Error('use{{pascalCase contextName}}Context must be used within a {{pascalCase contextName}}Provider');
+  }
+
+  return context;
+};

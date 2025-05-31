@@ -1,0 +1,67 @@
+{
+  "name": "ailingo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack -p 3222",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "format:check": "prettier 'src/**/*.{js,mjs,jsx,ts,mts,tsx,css,json}' --check",
+    "format:write": "prettier 'src/**/*.{js,mjs,jsx,ts,mts,tsx,css,json}' --write",
+    "lint-js": "eslint 'src/**/*.{js,mjs,jsx,ts,mts,tsx}'",
+    "lint-js:fix": "eslint 'src/**/*.{js,mjs,jsx,ts,mts,tsx}' --fix",
+    "lint-css": "stylelint 'src/**/*.{css}'",
+    "lint-css:fix": "stylelint 'src/**/*.{css}' --fix",
+    "plop": "cross-env NODE_OPTIONS='--import tsx' plop --plopfile=plopfile.ts",
+    "prepare": "husky"
+  },
+  "dependencies": {
+    "next": "15.3.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "zod": "^3.25.13"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
+    "@eslint/compat": "^1.2.7",
+    "@eslint/eslintrc": "^3",
+    "@tailwindcss/postcss": "^4",
+    "@types/eslint-config-prettier": "^6.11.3",
+    "@types/eslint-plugin-jsx-a11y": "^6.10.0",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "cross-env": "^7.0.3",
+    "eslint": "^9",
+    "eslint-config-next": "15.3.2",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-import": "^2.31.0",
+    "eslint-plugin-jsdoc": "^50.6.3",
+    "eslint-plugin-prettier": "^5.4.0",
+    "eslint-plugin-react-compiler": "^19.1.0-rc.2",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.0.0",
+    "plop": "^4.0.1",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.11",
+    "tailwindcss": "^4",
+    "tsx": "^4.19.4",
+    "tw-animate-css": "^1.3.0",
+    "typescript": "^5",
+    "typescript-eslint": "^8.31.1"
+  },
+  "volta": {
+    "node": "22.15.0"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{css,json}": [
+      "prettier --write"
+    ]
+  }
+}

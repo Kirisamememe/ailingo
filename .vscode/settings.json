@@ -1,0 +1,26 @@
+{
+  "cSpell.words": [
+    "commitlint",
+    "groupwork",
+    "oklch",
+    "PBKDF",
+    "shinsotsu",
+    "sonner",
+    "tailwindcss",
+    "teamlab",
+    "tsconfigs"
+  ],
+  "files.autoSave": "onFocusChange",
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.useFlatConfig": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+  "editor.formatOnType": false,
+  "editor.codeActionsOnSave": {
+    // prettierとの競合を防ぐ (明示的にeslintを実行しない限り、eslintの修正は適用されない)
+    "source.fixAll.eslint": "explicit"
+  },
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.validate": true
+}

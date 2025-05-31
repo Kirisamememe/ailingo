@@ -1,0 +1,17 @@
+import type { ReactNode } from "react";
+
+type Props = {
+  /** 子要素 */
+  children?: ReactNode;
+}
+
+/** 
+ * {{pascalCase componentName}}コンポーネント 
+ */
+export const {{pascalCase componentName}} = ({ children }: Props) => {
+  return (
+    <div className="w-full">
+      {children}
+    </div>
+  );
+};
