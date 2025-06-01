@@ -1,7 +1,9 @@
 import "server-only";
+import type z from "zod/v4";
 import { dbExceptionHandler } from "@/lib/db";
 import type { WordCard } from "@/generated/prisma";
 import prisma from "@/prisma";
+import type { wordcardFormSchema } from "@/types/schema/wordcard";
 
 /**
  * WordCardService
@@ -32,15 +34,20 @@ class WordCardService {
   /**
    * 単語カードを作成する
    */
-  async create(wordCard: WordCard): Promise<WordCard> {
-    const newWordCard = await prisma.wordCard.create({ data: wordCard }).catch(dbExceptionHandler);
+  async create(
+    wordCard: z.infer<typeof wordcardFormSchema>,
+    operatorId: number,
+  ): Promise<WordCard> {
+    const newWordCard = await prisma.wordCard
+      .create({ data: { ...wordCard, authorId: operatorId } })
+      .catch(dbExceptionHandler);
     return newWordCard;
   }
 
   /**
    * 単語カードを更新する
    */
-  async update(id: number, wordCard: WordCard): Promise<WordCard> {
+  async update(id: number, wordCard: z.infer<typeof wordcardFormSchema>): Promise<WordCard> {
     const updatedWordCard = await prisma.wordCard
       .update({ where: { id }, data: wordCard })
       .catch(dbExceptionHandler);
