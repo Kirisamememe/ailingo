@@ -133,7 +133,7 @@ export const baseConfig = [
   },
   {
     name: "jsdoc",
-    ignores: ["src/app/*page.tsx", "src/app/*layout.tsx", "src/middleware.ts"],
+    ignores: ["src/app/**/page.tsx", "src/app/**/layout.tsx", "src/middleware.ts"],
     plugins: {
       jsdoc: eslintJsdocPlugin,
     },
