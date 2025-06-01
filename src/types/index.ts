@@ -1,1 +1,2 @@
-export * from "./schema/ai";
+export * from "./schema";
+export * from "./pos";
