@@ -34,12 +34,12 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     async session({ session, token }) {
       // JWTの加工が完了すると、ここでセッションに入れられる
       if (!token.email) {
-        return { ...session, user: { role: "BLOCKED" } };
+        return { ...session, user: { role: "BLOCKED", email: "" } };
       }
 
       const data = await userService.getUserByEmail(token.email);
       if (!data) {
-        return { ...session, user: { role: "BLOCKED" } };
+        return { ...session, user: { role: "BLOCKED", email: "" } };
       }
 
       const { user } = session;

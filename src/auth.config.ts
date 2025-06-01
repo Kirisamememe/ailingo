@@ -18,7 +18,7 @@ export const authConfig = {
       const pathname = request.nextUrl.pathname;
       const isLoggedIn = !!auth?.user;
       const localePattern = LOCALES.join("|");
-      const isOnAdmin = new RegExp(`^/(${localePattern})/admin/.+`).test(pathname);
+      const isOnProtected = new RegExp(`^/(${localePattern})/.+`).test(pathname);
       const isOnAuthPage = new RegExp(`^/(${localePattern})${loginPath}$`).test(pathname);
       const isAuthApi = authApi.includes(pathname);
 
@@ -26,13 +26,13 @@ export const authConfig = {
         return new Response(undefined, { status: 500 });
       }
 
-      if (isOnAdmin) {
+      if (isOnProtected) {
         if (isLoggedIn) return true;
         return Response.redirect(new URL(loginPath, request.nextUrl));
       }
 
       if (isLoggedIn && isOnAuthPage) {
-        return Response.redirect(new URL(`/`, request.nextUrl));
+        return Response.redirect(new URL(`/daily`, request.nextUrl));
       }
 
       if (isLoggedIn) {

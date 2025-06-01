@@ -7,7 +7,8 @@ import { auth } from "@/auth";
  */
 export async function getSession() {
   const session = await auth();
-  if (!session?.user) {
+  // FIXME: リダイレクトのロジックを見直す
+  if (!session?.user || session.user.role === "BLOCKED") {
     redirect("/login");
   }
 

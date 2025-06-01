@@ -5,7 +5,7 @@ import { authConfig } from "./auth.config";
 import { LOCALES } from "@/i18n/locale";
 import { routing } from "@/i18n/routing";
 
-export const publicPages = ["/login", "/material"];
+export const publicPages = ["/login"];
 
 export const authPages = ["/login"];
 
