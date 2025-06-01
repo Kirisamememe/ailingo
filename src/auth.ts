@@ -2,22 +2,21 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { authConfig } from "./auth.config";
-// import type { Role } from "./types";
+import type { Role } from "./types";
 import prisma from "@/prisma";
-// import { allowedEmailService, userService } from "./di/services";
-// import type { Role } from "./types/schema-editor";
+import { userService } from "@/services";
 
 declare module "next-auth" {
-  // type Session = {
-  //   operatorId: number;
-  //   user: {
-  //     email?: string;
-  //     role: Role;
-  //     name?: string;
-  //     image?: string;
-  //     nickname?: string;
-  //   };
-  // };
+  // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
+  interface Session {
+    operatorId: number;
+    user: {
+      email?: string;
+      role: Role;
+      name?: string;
+      image?: string;
+    };
+  }
 
   type JWT = {
     absoluteExp: number;
@@ -32,43 +31,31 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [Google],
   callbacks: {
-    signIn({ user }) {
-      // providerから認証成功のオブジェクトが返却されると、まずここに来る
-      const { email } = user;
-      if (!email) {
-        console.error("User email is missing");
-        return false;
+    async session({ session, token }) {
+      // JWTの加工が完了すると、ここでセッションに入れられる
+      if (!token.email) {
+        return { ...session, user: { role: "BLOCKED" } };
       }
 
-      return true;
-    },
-    session({ session }) {
-      // JWTの加工が完了すると、ここでセッションに入れられる
+      const data = await userService.getUserByEmail(token.email);
+      if (!data) {
+        return { ...session, user: { role: "BLOCKED" } };
+      }
 
-      // const { email, name } = token as {
-      //   email: string;
-      //   name: string;
-      //   nickname: string;
-      //   role: Role;
-      // };
-      // const { user } = session;
+      const { user } = session;
 
-      console.log(`---- session実行 ${new Date().toISOString()} -----`);
-
-      // if (!data) return;
-
-      // session = {
-      //   ...session,
-      //   operatorId: data.id,
-      //   user: {
-      //     ...user,
-      //     email,
-      //     name,
-      //     role: data.role,
-      //     nickname: data.nickname || "",
-      //     image: data.image || "",
-      //   },
-      // };
+      session = {
+        ...session,
+        operatorId: data.id,
+        user: {
+          ...user,
+          email: data.email,
+          name: data.name,
+          role: data.role as Role,
+          image: data.image ?? "",
+          emailVerified: data.emailVerified ?? null,
+        },
+      };
 
       return session;
     },

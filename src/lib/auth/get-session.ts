@@ -13,5 +13,6 @@ export async function getSession() {
 
   return {
     user: session.user,
+    operatorId: session.operatorId,
   };
 }
