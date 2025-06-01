@@ -24,9 +24,9 @@ class WordCardService {
   /**
    * 単語カードを複数件取得する
    */
-  async getMany(ids: number[]): Promise<WordCard[]> {
+  async getMany(): Promise<WordCard[]> {
     const wordCards = await prisma.wordCard
-      .findMany({ where: { id: { in: ids } } })
+      .findMany({ where: { deletedAt: null } })
       .catch(dbExceptionHandler);
     return wordCards;
   }
