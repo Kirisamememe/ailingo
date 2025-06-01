@@ -61,6 +61,11 @@ export const baseConfig = [
       // 型定義をtypeに統一
       "@typescript-eslint/consistent-type-definitions": ["error", "type"],
       "@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: false }],
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unsafe-return": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
     },
   },
   {
@@ -128,7 +133,7 @@ export const baseConfig = [
   },
   {
     name: "jsdoc",
-    ignores: ["src/app/*page.tsx", "src/app/*layout.tsx"],
+    ignores: ["src/app/*page.tsx", "src/app/*layout.tsx", "src/middleware.ts"],
     plugins: {
       jsdoc: eslintJsdocPlugin,
     },

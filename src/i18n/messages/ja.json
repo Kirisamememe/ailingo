@@ -1,0 +1,20 @@
+{
+  "common": {
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "stop": "停止",
+    "submit": "送信",
+    "generate": "生成",
+    "save": "保存",
+    "continue": "続ける",
+    "delete": "削除",
+    "ok": "はい",
+    "no": "いいえ",
+    "close": "閉じる",
+    "publish": "公開",
+    "editor": {
+      "createdBy": "作者 {name}",
+      "lastEdit": "最終編集 {name}"
+    }
+  }
+}

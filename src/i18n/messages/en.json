@@ -1,0 +1,20 @@
+{
+  "common": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "stop": "Stop",
+    "submit": "Submit",
+    "generate": "Generate",
+    "save": "Save",
+    "continue": "Continue",
+    "delete": "Delete",
+    "ok": "OK",
+    "no": "NO",
+    "close": "Close",
+    "publish": "Publish",
+    "editor": {
+      "createdBy": "Created By {name}",
+      "lastEdit": "Last Edit {name}"
+    }
+  }
+}
