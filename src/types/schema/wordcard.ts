@@ -76,3 +76,17 @@ export const wordcardFormSchema = wordcardBaseSchema.and(extraExampleOptionalSch
 export const wordcardAISchema = wordcardBaseSchema
   .and(definitionAISchema)
   .and(extraExampleRequiredSchema);
+
+/**
+ * ワードブックリスト
+ */
+export type WordListItem = {
+  /**
+   * ワードカードID
+   */
+  id: number;
+  /**
+   * ワード
+   */
+  word: string;
+};
