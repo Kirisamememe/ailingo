@@ -21,17 +21,36 @@ enum Role {
   BLOCKED
 }
 
+enum Language {
+  EN
+  JA
+  ZH_CN
+  ZH_TW
+  KO
+  FR
+  DE
+  ES
+  PT
+  IT
+  RU
+  VI
+
+  @@map("language")
+}
+
 model User {
   id            Int       @id @default(autoincrement())
   name          String    @default("Anonymous")
   role          Role      @default(VIEWER)
   image         String?
-  email         String?    @unique
+  email         String    @unique
   emailVerified DateTime?
-  nickname      String?
+
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
 
+  learningLanguage Language? @map("learning_language")
+  nativeLanguage Language? @map("native_language")
   accounts       Account[]
 
   @@map("user")
@@ -49,10 +68,21 @@ model Account {
   scope             String?
   id_token          String?
   session_state     String?
+
   createdAt         DateTime @default(now())
   updatedAt         DateTime @updatedAt
+
   user              User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@id([provider, providerAccountId])
   @@map("account")
+}
+
+model VerificationToken {
+  identifier String
+  token      String
+  expires    DateTime
+
+  @@id([identifier, token])
+  @@map("verification_token")
 }

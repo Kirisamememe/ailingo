@@ -13,7 +13,7 @@ export type User = {
   /**
    * ユーザーのメールアドレス
    */
-  email?: string;
+  email: string;
   /**
    * ユーザーの画像
    */

@@ -22,5 +22,6 @@
     "source.fixAll.eslint": "explicit"
   },
   "tailwindCSS.emmetCompletions": true,
-  "tailwindCSS.validate": true
+  "tailwindCSS.validate": true,
+  "i18n-ally.localesPaths": ["src/i18n", "src/i18n/messages"]
 }
