@@ -45,6 +45,7 @@ model User {
   image         String?
   email         String    @unique
   emailVerified DateTime?
+  masteredWords String @default("I, you, he, she, it, we, they") @map("mastered_words")
 
   createdAt     DateTime  @default(now()) @map("created_at")
   updatedAt     DateTime  @updatedAt @map("updated_at")
@@ -52,6 +53,7 @@ model User {
   learningLanguage Language? @map("learning_language")
   nativeLanguage Language? @map("native_language")
   accounts       Account[]
+  wordCards         WordCard[]
 
   @@map("user")
 }
@@ -85,4 +87,48 @@ model VerificationToken {
 
   @@id([identifier, token])
   @@map("verification_token")
+}
+
+enum POS {
+  NOUN
+  VERB
+  TRANSITIVE_VERB
+  INTRANSITIVE_VERB
+  ADJECTIVE
+  ADVERB
+  PREPOSITION
+  CONJUNCTION
+  PRONOUN
+  INTERJECTION
+  PHRASE
+  DETERMINER
+  SENTENCE
+  IDIOM
+  ORDINAL
+  OTHER
+}
+
+model WordCard {
+  id Int @id @default(autoincrement())
+  word String
+  phonetics String
+  pos POS
+  definition String
+  example1 String @map("example_1")
+  example2 String? @map("example_2")
+  example3 String? @map("example_3")
+  note String? @map("note")
+  retentionRate Int @default(1) @db.SmallInt @map("retention_rate")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  masteredAt DateTime? @map("mastered_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  language Language? 
+
+  authorId Int @map("author_id")
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@map("word_card")
 }
