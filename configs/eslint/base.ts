@@ -133,7 +133,12 @@ export const baseConfig = [
   },
   {
     name: "jsdoc",
-    ignores: ["src/app/**/page.tsx", "src/app/**/layout.tsx", "src/middleware.ts"],
+    ignores: [
+      "src/app/**/page.tsx",
+      "src/app/**/layout.tsx",
+      "src/middleware.ts",
+      "src/components/ui/**/*.tsx",
+    ],
     plugins: {
       jsdoc: eslintJsdocPlugin,
     },
@@ -173,6 +178,7 @@ export const baseConfig = [
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-redundant-type-constituents": "off",
       "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unnecessary-condition": "off",
     },
   },
 ];

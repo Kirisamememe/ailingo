@@ -4,10 +4,8 @@ import { Button as ButtonBase } from "./button";
 type ButtonProps = React.ComponentProps<typeof ButtonBase>;
 
 /**
- * MyButton component
+ * AppButton component
  */
-const Button: FC<ButtonProps> = (props) => {
-  return <ButtonBase {...props}>My Button</ButtonBase>;
+export const Button: FC<ButtonProps> = (props) => {
+  return <ButtonBase {...props}>{props.children}</ButtonBase>;
 };
-
-export default Button;

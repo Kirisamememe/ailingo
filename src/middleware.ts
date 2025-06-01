@@ -5,11 +5,9 @@ import { authConfig } from "./auth.config";
 import { LOCALES } from "@/i18n/locale";
 import { routing } from "@/i18n/routing";
 
-export const publicPages = ["/", "/login", "/material"];
+export const publicPages = ["/login", "/material"];
 
 export const authPages = ["/login"];
-
-export const authApi = ["/api/ai-generate"];
 
 const { auth } = NextAuth(authConfig);
 
@@ -18,13 +16,6 @@ const authMiddleware = auth((req) => intlMiddleware(req));
 const intlMiddleware = createMiddleware(routing);
 
 export default function middleware(req: NextRequest) {
-  const pathname = req.nextUrl.pathname;
-
-  if (authApi.includes(pathname)) {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    return (auth as any)(req);
-  }
-
   const publicPathnameRegex = RegExp(
     `^(/(${LOCALES.join("|")}))?(${publicPages
       .flatMap((p) => (p === "/" ? ["", "/"] : p))
@@ -53,5 +44,5 @@ export default function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
+  matcher: ["/((?!api|_next/static|_next/image|favicon.ico).*)"],
 };

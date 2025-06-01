@@ -1,7 +1,6 @@
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import Resend from "next-auth/providers/resend";
 import { authConfig } from "./auth.config";
 // import type { Role } from "./types";
 import prisma from "@/prisma";
@@ -31,7 +30,7 @@ declare module "next-auth" {
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
   adapter: PrismaAdapter(prisma),
-  providers: [Google, Resend],
+  providers: [Google],
   callbacks: {
     signIn({ user }) {
       // providerから認証成功のオブジェクトが返却されると、まずここに来る
