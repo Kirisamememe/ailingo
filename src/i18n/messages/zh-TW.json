@@ -16,5 +16,24 @@
       "createdBy": "作者 {name}",
       "lastEdit": "最後編輯 {name}"
     }
+  },
+  "sidebar": {
+    "titles": {
+      "general": "通用",
+      "aiBooster": "AI 助手"
+    },
+    "daily": "每日",
+    "wordbook": "單詞本",
+    "preference": "設定",
+    "quiz": "測驗",
+    "generatedMaterial": "語料生成",
+    "compositionCorrection": "作文批改",
+    "footer": {
+      "theme": "主題",
+      "profile": "個人資料",
+      "setting": "設定",
+      "language": "語言",
+      "signOut": "登出"
+    }
   }
 }

@@ -16,5 +16,24 @@
       "createdBy": "作者 {name}",
       "lastEdit": "最終編集 {name}"
     }
+  },
+  "sidebar": {
+    "titles": {
+      "general": "共通",
+      "aiBooster": "AIブースター"
+    },
+    "daily": "デイリー",
+    "wordbook": "単語帳",
+    "preference": "設定",
+    "quiz": "小テスト",
+    "generatedMaterial": "生成マテリアル",
+    "compositionCorrection": "作文添削",
+    "footer": {
+      "theme": "テーマ",
+      "profile": "プロフィール",
+      "setting": "設定",
+      "language": "言語",
+      "signOut": "ログアウト"
+    }
   }
 }

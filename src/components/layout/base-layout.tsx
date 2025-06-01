@@ -4,7 +4,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import type { ReactNode } from "react";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
-import { ThemeProvider } from "next-themes";
+import { ThemeProvider } from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
 import type { Locale } from "@/i18n";
 
@@ -37,7 +37,7 @@ type Props = {
  * @param locale
  * @returns
  */
-const BaseLayout = async ({ children, locale }: Props) => {
+export const BaseLayout = async ({ children, locale }: Props) => {
   const messages = await getMessages();
 
   return (
@@ -58,5 +58,3 @@ const BaseLayout = async ({ children, locale }: Props) => {
     </html>
   );
 };
-
-export default BaseLayout;

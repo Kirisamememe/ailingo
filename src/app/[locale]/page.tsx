@@ -1,15 +1,13 @@
-import { getTranslations } from "next-intl/server";
+import { getLocale } from "next-intl/server";
 import { getSession } from "@/lib/auth";
+import { redirect } from "@/i18n";
 
-const Home = async () => {
-  const t = await getTranslations();
-  const { operatorId } = await getSession();
+const RootPage = async () => {
+  await getSession();
 
-  return (
-    <div>
-      {t("common.confirm")} {operatorId}
-    </div>
-  );
+  const locale = await getLocale();
+
+  redirect({ href: "/daily", locale });
 };
 
-export default Home;
+export default RootPage;

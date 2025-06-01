@@ -16,5 +16,24 @@
       "createdBy": "Created By {name}",
       "lastEdit": "Last Edit {name}"
     }
+  },
+  "sidebar": {
+    "titles": {
+      "general": "General",
+      "aiBooster": "AI Booster"
+    },
+    "daily": "Daily",
+    "wordbook": "Wordbook",
+    "preference": "Preference",
+    "quiz": "Quiz",
+    "generatedMaterial": "Generated Material",
+    "compositionCorrection": "Composition Correction",
+    "footer": {
+      "theme": "Theme",
+      "profile": "Profile",
+      "setting": "Setting",
+      "language": "Language",
+      "signOut": "Sign Out"
+    }
   }
 }

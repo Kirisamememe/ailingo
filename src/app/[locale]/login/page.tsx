@@ -1,5 +1,5 @@
-import { LoginForm } from "@/components/login-form";
 import { FlexColumn } from "@/components/ui/flexbox";
+import { LoginForm } from "./_components/login-form";
 
 const LoginPage = () => {
   return (
