@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 
 type Props = {
   children: ReactNode;
-  locale: Locale;
+  locale?: Locale;
 };
 
 /**
@@ -37,11 +37,11 @@ type Props = {
  * @param locale
  * @returns
  */
-export const BaseLayout = async ({ children, locale }: Props) => {
+export const BaseLayout: React.FC<Props> = async ({ children, locale }) => {
   const messages = await getMessages();
 
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={locale ?? "en"} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <ThemeProvider
           attribute="class"

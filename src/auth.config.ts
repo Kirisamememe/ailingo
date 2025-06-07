@@ -26,13 +26,12 @@ export const authConfig = {
         return new Response(undefined, { status: 500 });
       }
 
-      if (isOnProtected) {
-        if (isLoggedIn) return true;
-        return Response.redirect(new URL(loginPath, request.nextUrl));
-      }
-
       if (isLoggedIn && isOnAuthPage) {
         return Response.redirect(new URL(`/daily`, request.nextUrl));
+      }
+      if (isOnProtected) {
+        if (isLoggedIn) return true;
+        return false;
       }
 
       if (isLoggedIn) {

@@ -9,7 +9,7 @@ import { userService } from "@/services";
 declare module "next-auth" {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
   interface Session {
-    operatorId: number;
+    operatorId: string;
     user: {
       email?: string;
       role: Role;

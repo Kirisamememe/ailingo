@@ -1,15 +1,18 @@
 import "server-only";
-import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
 import { auth } from "@/auth";
+import { redirect } from "@/i18n";
 
 /**
  * Get authenticated session
  */
 export async function getSession() {
   const session = await auth();
+  const locale = await getLocale();
   // FIXME: リダイレクトのロジックを見直す
   if (!session?.user || session.user.role === "BLOCKED") {
-    redirect("/login");
+    redirect({ href: "/login", locale });
+    return;
   }
 
   return {
