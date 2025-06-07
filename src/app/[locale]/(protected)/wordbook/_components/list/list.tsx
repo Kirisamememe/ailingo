@@ -11,7 +11,7 @@ type Props = {
  */
 export const WordbookList: React.FC<Props> = ({ wordList }) => {
   return (
-    <FlexColumn>
+    <FlexColumn className="w-64 shrink-0">
       {wordList.map((word) => (
         <ListItem key={word.id} listItem={word} />
       ))}

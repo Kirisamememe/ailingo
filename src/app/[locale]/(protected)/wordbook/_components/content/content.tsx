@@ -1,6 +1,7 @@
 "use client";
 
 import { useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { WordbookContentView } from "./content-view";
 import type { WordCard } from "@/generated/prisma/client";
@@ -17,13 +18,13 @@ export const WordbookContent: React.FC<Props> = ({ wordCards }) => {
   const wordCardId = Number(searchParams.get("wordCardId"));
   const wordCard = wordCards.find((wordCard) => wordCard.id === wordCardId);
 
-  if (!wordCard) {
-    return <div>Wordcard not found</div>;
-  }
-
   return (
-    <FlexColumn>
-      <WordbookContentView wordCard={wordCard} />
+    <FlexColumn className="bg-card/50 sticky top-12 h-fit min-h-[calc(100vh-8rem)] w-full rounded-md border p-6">
+      {wordCard && (
+        <Suspense>
+          <WordbookContentView wordCard={wordCard} />
+        </Suspense>
+      )}
     </FlexColumn>
   );
 };
