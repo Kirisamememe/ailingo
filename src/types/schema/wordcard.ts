@@ -17,7 +17,7 @@ export const wordcardBaseSchema = z.object({
     .string()
     .min(1, "phoneticsIsRequired")
     .max(100, "phoneticsIsTooLong")
-    .describe("Phonetics of the wordcard"),
+    .describe("Phonetics of the wordcard, like /ˈmɒdərət/."),
   example1: z
     .string()
     .min(1, "exampleIsRequired")
