@@ -11,8 +11,7 @@ export async function getSession() {
   const locale = await getLocale();
   // FIXME: リダイレクトのロジックを見直す
   if (!session?.user || session.user.role === "BLOCKED") {
-    redirect({ href: "/login", locale });
-    return;
+    return redirect({ href: "/login", locale });
   }
 
   return {

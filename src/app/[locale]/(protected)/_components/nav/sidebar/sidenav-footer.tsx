@@ -19,7 +19,8 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { auth, signOut } from "@/auth";
+import { signOutAction } from "../../../_actions";
+import { auth } from "@/auth";
 import { Link } from "@/i18n";
 
 /**
@@ -100,12 +101,7 @@ export const SideNavFooterContainer = async () => {
               {/* ログアウト */}
               <DropdownMenuGroup className="p-0">
                 <DropdownMenuItem asChild className="w-full py-0">
-                  <form
-                    action={async () => {
-                      "use server";
-                      await signOut({ redirectTo: "/admin" });
-                    }}
-                  >
+                  <form action={signOutAction}>
                     <Button
                       variant={"ghost"}
                       size={"icon"}

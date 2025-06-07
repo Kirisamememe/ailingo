@@ -5,7 +5,7 @@ import { useScrollState } from "@/components/providers";
 import { FlexRow } from "@/components/ui/flexbox";
 import { Separator } from "@/components/ui/separator";
 import { SidebarTrigger } from "@/components/ui/sidebar";
-import { Heading } from "@/components/ui/typography";
+import { Headline } from "@/components/ui/typography";
 
 type Props = {
   children: React.ReactNode;
@@ -28,7 +28,7 @@ export const HeaderWrapper: React.FC<Props> = ({ children }) => {
       <FlexRow p={3} gap={2} center>
         <SidebarTrigger className="size-9" />
         <Separator orientation="vertical" className="mr-2 py-2" />
-        <Heading>{children}</Heading>
+        <Headline>{children}</Headline>
       </FlexRow>
     </FlexRow>
   );
