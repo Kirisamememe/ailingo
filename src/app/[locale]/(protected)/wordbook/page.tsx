@@ -1,3 +1,4 @@
+import { getSession } from "@/lib/auth";
 import { InsetLayoutWithPadding } from "@/components/layout";
 import { FlexRow } from "@/components/ui/flexbox";
 import { WordbookContent } from "./_components/content";
@@ -6,7 +7,8 @@ import { AiReqForm } from "./_components/new-card";
 import { wordCardService } from "@/services";
 
 const WordbookPage = async () => {
-  const wordCards = await wordCardService.getMany();
+  const { operatorId } = await getSession();
+  const wordCards = await wordCardService.getMany(operatorId);
   const wordList = wordCards.map((wordCard) => ({
     id: wordCard.id,
     word: wordCard.word,
