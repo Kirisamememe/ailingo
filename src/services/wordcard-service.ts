@@ -1,5 +1,5 @@
 import "server-only";
-import type z from "zod/v4";
+import type z from "zod";
 import { dbExceptionHandler } from "@/lib/db";
 import type { WordCard } from "@/generated/prisma";
 import prisma from "@/prisma";
@@ -36,7 +36,7 @@ class WordCardService {
    */
   async create(
     wordCard: z.infer<typeof wordcardFormSchema>,
-    operatorId: number,
+    operatorId: string,
   ): Promise<WordCard> {
     const newWordCard = await prisma.wordCard
       .create({ data: { ...wordCard, authorId: operatorId } })

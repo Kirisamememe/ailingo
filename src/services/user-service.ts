@@ -8,7 +8,7 @@ class UserService {
   /**
    * ユーザーを取得する
    */
-  async getUser(id: number) {
+  async getUser(id: string) {
     const user = await prisma.user.findUnique({
       where: { id },
     });
