@@ -3,7 +3,7 @@ import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const labelTextVariants = cva("", {
+const captionVariants = cva("", {
   variants: {
     size: {
       10: "text-[0.625rem]",
@@ -72,7 +72,7 @@ const labelTextVariants = cva("", {
   },
 });
 
-export const LabelText: FC<ComponentProps<"span"> & VariantProps<typeof labelTextVariants>> = ({
+export const Caption: FC<ComponentProps<"span"> & VariantProps<typeof captionVariants>> = ({
   className,
   children,
   size,
@@ -87,7 +87,7 @@ export const LabelText: FC<ComponentProps<"span"> & VariantProps<typeof labelTex
 }) => (
   <span
     ref={ref}
-    className={cn(labelTextVariants({ size, height, weight, color, mx, mt, mb }), className)}
+    className={cn(captionVariants({ size, height, weight, color, mx, mt, mb }), className)}
     {...props}
   >
     {children}

@@ -3,7 +3,7 @@ import type { VariantProps } from "class-variance-authority";
 import { cva } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
-const headingVariants = cva("", {
+const headlineVariants = cva("", {
   variants: {
     size: {
       14: "text-sm",
@@ -68,7 +68,7 @@ const headingVariants = cva("", {
   },
 });
 
-export const Heading: FC<ComponentProps<"h6"> & VariantProps<typeof headingVariants>> = ({
+export const Headline: FC<ComponentProps<"h6"> & VariantProps<typeof headlineVariants>> = ({
   className,
   children,
   size,
@@ -82,7 +82,7 @@ export const Heading: FC<ComponentProps<"h6"> & VariantProps<typeof headingVaria
   ...props
 }) => (
   <h6
-    className={cn(headingVariants({ size, height, weight, color, py, mx, mb, clamp }), className)}
+    className={cn(headlineVariants({ size, height, weight, color, py, mx, mb, clamp }), className)}
     {...props}
   >
     {children}
