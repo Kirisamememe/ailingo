@@ -5,12 +5,8 @@ import { openai } from "@ai-sdk/openai";
 import type { LanguageModelV1 } from "ai";
 import { streamObject } from "ai";
 import type { z } from "zod";
-import {
-  type AIModel,
-  deepseekModelListTuple,
-  geminiModelListTuple,
-  openAIModelListTuple,
-} from "@/types";
+import { deepseekModelListTuple, geminiModelListTuple, openAIModelListTuple } from "@/constants";
+import { type AIModel } from "@/types";
 
 type Models = Record<AIModel, LanguageModelV1>;
 
@@ -39,10 +35,15 @@ class AI {
   generate(model: AIModel, prompt: string, system: string, schema: z.ZodType) {
     return streamObject({
       model: this.models[model],
-      prompt: prompt,
-      system: system,
-      schema: schema,
+      prompt,
+      system,
+      schema,
       maxTokens: 2000,
+      onError: (error) => {
+        if (error instanceof Error) {
+          throw error;
+        }
+      },
     });
   }
 }
