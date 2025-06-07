@@ -1,4 +1,7 @@
-import { z } from "zod/v4";
+import { z } from "zod";
+import { modelListTuple } from "@/constants/ai";
+import { LOCALES } from "@/i18n";
+import type { AILanguage } from "@/types";
 import { POS } from "@/types";
 
 /**
@@ -15,16 +18,13 @@ export const wordcardBaseSchema = z.object({
     .min(1, "phoneticsIsRequired")
     .max(100, "phoneticsIsTooLong")
     .describe("Phonetics of the wordcard"),
-  definitions: z
-    .string()
-    .min(1, "definitionIsRequired")
-    .max(500, "definitionIsTooLong")
-    .describe("Definition of the wordcard"),
   example1: z
     .string()
     .min(1, "exampleIsRequired")
     .max(500, "exampleIsTooLong")
-    .describe("Example of the wordcard"),
+    .describe(
+      "Example of the wordcard. Insert a line break (\n) after the example sentence and also write its translation.",
+    ),
 });
 
 const extraExampleRequiredSchema = z.object({
@@ -32,12 +32,16 @@ const extraExampleRequiredSchema = z.object({
     .string()
     .min(1, "exampleIsRequired")
     .max(500, "exampleIsTooLong")
-    .describe("Example of the wordcard"),
+    .describe(
+      "Example of the wordcard. Insert a line break (\n) after the example sentence and also write its translation.",
+    ),
   example3: z
     .string()
     .min(1, "exampleIsRequired")
     .max(500, "exampleIsTooLong")
-    .describe("Example of the wordcard"),
+    .describe(
+      "Example of the wordcard. Insert a line break (\n) after the example sentence and also write its translation.",
+    ),
 });
 
 /**
@@ -46,6 +50,14 @@ const extraExampleRequiredSchema = z.object({
 const extraExampleOptionalSchema = z.object({
   example2: z.string().max(500, "exampleIsTooLong").optional(),
   example3: z.string().max(500, "exampleIsTooLong").optional(),
+});
+
+const definitionsSchema = z.object({
+  definitions: z
+    .string()
+    .min(1, "definitionIsRequired")
+    .max(500, "definitionIsTooLong")
+    .describe("Definition of the wordcard"),
 });
 
 /**
@@ -57,7 +69,7 @@ const definitionAISchema = z.object({
       z.object({
         definition: z.object({
           pos: z.enum(POS).describe("Part of speech of the wordcard").default("OTHER"),
-          meaning: z.string().describe("Meaning of the definition"),
+          meaning: z.string().describe("Meaning of the definition."),
         }),
       }),
     )
@@ -68,7 +80,9 @@ const definitionAISchema = z.object({
 /**
  * ワードカードフォームスキーマ
  */
-export const wordcardFormSchema = wordcardBaseSchema.and(extraExampleOptionalSchema);
+export const wordcardFormSchema = wordcardBaseSchema
+  .and(definitionsSchema)
+  .and(extraExampleOptionalSchema);
 
 /**
  * AIワードカードリクエストスキーマ
@@ -76,6 +90,23 @@ export const wordcardFormSchema = wordcardBaseSchema.and(extraExampleOptionalSch
 export const wordcardAISchema = wordcardBaseSchema
   .and(definitionAISchema)
   .and(extraExampleRequiredSchema);
+
+/**
+ * ワードカードフォームスキーマ配列
+ */
+export const wordcardAISchemaArray = z.object({
+  wordcards: z.array(wordcardAISchema).describe("Wordcards of the wordcard"),
+});
+
+/**
+ * 単語カードリクエストスキーマ
+ */
+export const wordcardRequestSchema = z.object({
+  model: z.enum(modelListTuple),
+  learningLanguage: z.enum(LOCALES as [AILanguage]),
+  translationLanguage: z.enum(LOCALES as [AILanguage]),
+  words: z.string(),
+});
 
 /**
  * ワードブックリスト

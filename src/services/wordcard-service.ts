@@ -26,7 +26,7 @@ class WordCardService {
    */
   async getMany(): Promise<WordCard[]> {
     const wordCards = await prisma.wordCard
-      .findMany({ where: { deletedAt: null } })
+      .findMany({ where: { deletedAt: null }, orderBy: { updatedAt: "desc" } })
       .catch(dbExceptionHandler);
     return wordCards;
   }
@@ -42,6 +42,16 @@ class WordCardService {
       .create({ data: { ...wordCard, authorId: operatorId } })
       .catch(dbExceptionHandler);
     return newWordCard;
+  }
+
+  /**
+   * 単語カードを複数件作成する
+   */
+  async createMany(wordcards: z.infer<typeof wordcardFormSchema>[], operatorId: string) {
+    const newWordCards = await prisma.wordCard
+      .createMany({ data: wordcards.map((wordcard) => ({ ...wordcard, authorId: operatorId })) })
+      .catch(dbExceptionHandler);
+    return newWordCards;
   }
 
   /**
