@@ -1,5 +1,5 @@
+import type { Locale } from "@/i18n";
 import { LOCALES } from "@/i18n";
-import type { AILanguage } from "@/types";
 
 /**
  * モデルリスト
@@ -31,4 +31,4 @@ export const modelListTuple = [
 /**
  * AI言語プロンプト
  */
-export const languagePrompt = [...LOCALES] as const as AILanguage[];
+export const languagePrompt = [...LOCALES] as const as Locale[];

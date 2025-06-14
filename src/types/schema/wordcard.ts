@@ -1,7 +1,7 @@
 import { z } from "zod";
-import { modelListTuple } from "@/constants/ai";
+import { modelListTuple } from "@/constants";
+import type { Locale } from "@/i18n";
 import { LOCALES } from "@/i18n";
-import type { AILanguage } from "@/types";
 import { POS } from "@/types";
 
 /**
@@ -103,8 +103,8 @@ export const wordcardAISchemaArray = z.object({
  */
 export const wordcardRequestSchema = z.object({
   model: z.enum(modelListTuple),
-  learningLanguage: z.enum(LOCALES as [AILanguage]),
-  translationLanguage: z.enum(LOCALES as [AILanguage]),
+  learningLanguage: z.enum(LOCALES as [Locale]),
+  translationLanguage: z.enum(LOCALES as [Locale]),
   words: z.string(),
 });
 
