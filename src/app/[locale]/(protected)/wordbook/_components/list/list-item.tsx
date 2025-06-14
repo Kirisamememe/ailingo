@@ -2,7 +2,7 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { ListItemView } from "./list-item-view";
-import type { WordListItem } from "@/types";
+import type { WordListItem } from "../../_types";
 
 type Props = {
   listItem: WordListItem;

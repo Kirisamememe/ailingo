@@ -1,9 +1,9 @@
 import type { z } from "zod";
-import { ai } from "@/lib/ai";
+import { ai } from "@/lib/ai/ai";
+import type { aiArticleRequestSchema } from "@/lib/ai/schema";
+import { aiArticleResponseSchema } from "@/lib/ai/schema";
 import { auth } from "@/auth";
 import { i18n } from "@/i18n";
-import type { aiArticleRequestSchema } from "@/types";
-import { aiArticleResponseSchema } from "@/types";
 
 /**
  * 最大実行時間

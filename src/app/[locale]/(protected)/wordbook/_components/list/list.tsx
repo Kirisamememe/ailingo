@@ -1,7 +1,7 @@
 import { FlexColumn } from "@/components/ui/flexbox";
 import { ListItem } from "./list-item";
 import { WordbookListStreaming } from "./list-streaming";
-import type { WordListItem } from "@/types";
+import type { WordListItem } from "../../_types";
 
 type Props = {
   wordList: WordListItem[];

@@ -1,2 +1,2 @@
-export * from "./schema";
+export * from "../lib/ai/types";
 export * from "./pos";

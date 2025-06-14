@@ -2,7 +2,8 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Caption } from "@/components/ui/typography";
-import { type POS, definitionsArraySchema } from "@/types";
+import { definitionsArraySchema } from "../../../_schema";
+import type { POS } from "@/types";
 
 type Props = {
   definitions: string;

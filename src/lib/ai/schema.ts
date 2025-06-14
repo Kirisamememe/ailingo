@@ -1,31 +1,13 @@
 import { z } from "zod";
-import type {
-  deepseekModelListTuple,
-  geminiModelListTuple,
-  openAIModelListTuple,
-} from "@/constants/ai";
-import { modelListTuple } from "@/constants/ai";
+import { modelListTuple } from "@/lib/ai/constants";
 import { LOCALES, type Locale } from "@/i18n";
-
-/**
- * AIモデル
- */
-export type AIModel =
-  | (typeof geminiModelListTuple)[number]
-  | (typeof openAIModelListTuple)[number]
-  | (typeof deepseekModelListTuple)[number];
-
-/**
- * AI言語
- */
-export type AILanguage = Locale;
 
 /**
  * AI記事リクエストスキーマ
  */
 export const aiArticleRequestSchema = z.object({
   model: z.enum(modelListTuple),
-  language: z.enum(LOCALES as [AILanguage]),
+  language: z.enum(LOCALES as [Locale]),
   context: z.string().optional(),
   prompt: z.string(),
 });

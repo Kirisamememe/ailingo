@@ -5,8 +5,8 @@ import { openai } from "@ai-sdk/openai";
 import type { LanguageModelV1 } from "ai";
 import { streamObject } from "ai";
 import type { z } from "zod";
-import { deepseekModelListTuple, geminiModelListTuple, openAIModelListTuple } from "@/constants";
-import { type AIModel } from "@/types";
+import type { AIModel } from "@/lib/ai/types";
+import { deepseekModelListTuple, geminiModelListTuple, openAIModelListTuple } from "./constants";
 
 type Models = Record<AIModel, LanguageModelV1>;
 

@@ -7,9 +7,9 @@ import type { DeepPartial } from "ai";
 import { type UseFormReturn, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type z from "zod";
+import { modelListTuple } from "@/lib/ai";
 import { createWordcards } from "../_actions/create";
-import { modelListTuple } from "@/constants";
-import { wordcardAISchemaArray, wordcardRequestSchema } from "@/types";
+import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
 
 /**
  * WordbookContextの型定義

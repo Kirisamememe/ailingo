@@ -1,5 +1,6 @@
 "use client";
 
+import { type AIModel, modelListTuple } from "@/lib/ai";
 import { Button, Submit } from "@/components/ui/button";
 import { FormField } from "@/components/ui/form";
 import {
@@ -19,8 +20,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useWordbook } from "../../_hooks/wordbook-provider";
-import { modelListTuple } from "@/constants";
-import type { AIModel } from "@/types";
 
 /**
  * AIリクエストフォームビュー

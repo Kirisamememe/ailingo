@@ -1,6 +1,6 @@
 import { z } from "zod";
+import { modelListTuple } from "@/lib/ai";
 import { localeToLanguage } from "@/lib/utils";
-import { modelListTuple } from "@/constants";
 import type { Language } from "@/generated/prisma";
 import type { Locale } from "@/i18n";
 import { LOCALES } from "@/i18n";
@@ -115,17 +115,3 @@ export const wordcardRequestSchema = z.object({
   translationLanguage: z.enum(LOCALES as [Locale]),
   words: z.string(),
 });
-
-/**
- * ワードブックリスト
- */
-export type WordListItem = {
-  /**
-   * ワードカードID
-   */
-  id: number;
-  /**
-   * ワード
-   */
-  word: string;
-};

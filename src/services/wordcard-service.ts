@@ -1,9 +1,9 @@
 import "server-only";
 import type z from "zod";
 import { dbExceptionHandler } from "@/lib/db";
+import type { wordcardFormSchema } from "@/app/[locale]/(protected)/wordbook/_schema/wordcard";
 import type { WordCard } from "@/generated/prisma";
 import prisma from "@/prisma";
-import type { wordcardFormSchema } from "@/types/schema/wordcard";
 
 /**
  * WordCardService
