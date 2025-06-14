@@ -1,6 +1,8 @@
 "use server";
 
+import "server-only";
 import * as sdk from "microsoft-cognitiveservices-speech-sdk";
+import { getSession } from "./auth";
 
 type Result = {
   data?: string;
@@ -13,6 +15,8 @@ type Result = {
  * @returns 音声合成結果
  */
 export async function synthesizeSpeech(text: string) {
+  await getSession();
+
   if (!process.env.SPEECH_KEY || !process.env.SPEECH_REGION) {
     throw new Error("環境変数が設定されていません");
   }
