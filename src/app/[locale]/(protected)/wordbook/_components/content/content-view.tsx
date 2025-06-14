@@ -3,6 +3,7 @@ import { FlexColumn } from "@/components/ui/flexbox";
 import { Separator } from "@/components/ui/separator";
 import { BasicInfo } from "./basic";
 import { Example } from "./example/example";
+import { Extra } from "./extra";
 import type { WordCard } from "@/generated/prisma/client";
 
 type Props = {
@@ -30,6 +31,12 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
         {wordCard.example2 && <Example example={wordCard.example2} language={language} />}
         {wordCard.example3 && <Example example={wordCard.example3} language={language} />}
       </FlexColumn>
+      <Separator />
+      <Extra
+        derivatives={wordCard.derivatives ?? ""}
+        synonyms={wordCard.synonyms ?? ""}
+        antonyms={wordCard.antonyms ?? ""}
+      />
     </FlexColumn>
   );
 };
