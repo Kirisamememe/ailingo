@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from "clsx";
+import { enUS as en, ja, zhCN, zhTW } from "date-fns/locale";
 import { twMerge } from "tailwind-merge";
 import type { Language } from "@/generated/prisma";
 import type { Locale } from "@/i18n";
@@ -26,3 +27,13 @@ export const kebabToCamelCase = (kebabCase: string): string => {
 export const localeToLanguage = (locale: Locale): Language => {
   return locale.replace("-", "_").toUpperCase() as Language;
 };
+
+/**
+ * Localeからdate-fnsのlocaleに変換する関数
+ */
+export function getLocaleForFns(locale?: string) {
+  const locales = { en, ja, zhCN, zhTW };
+  if (!locale) return locales.en;
+  const localeKey = locale.replace("-", "");
+  return locales[localeKey as keyof typeof locales];
+}
