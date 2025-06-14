@@ -66,20 +66,23 @@ const definitionsSchema = z.object({
 });
 
 /**
+ * 定義の配列スキーマ
+ */
+export const definitionsArraySchema = z
+  .array(
+    z.object({
+      pos: z.enum(POS).describe("Part of speech of the wordcard").default("OTHER"),
+      meaning: z.string().describe("Meaning of the definition."),
+    }),
+  )
+  .max(3, "definitionsIsTooMany")
+  .describe("Definitions of the wordcard. Up to 3 definitions are allowed.");
+
+/**
  * 定義のAI用スキーマ。DB保存時は文字列に変換
  */
 const definitionAISchema = z.object({
-  definitions: z
-    .array(
-      z.object({
-        definition: z.object({
-          pos: z.enum(POS).describe("Part of speech of the wordcard").default("OTHER"),
-          meaning: z.string().describe("Meaning of the definition."),
-        }),
-      }),
-    )
-    .max(3, "definitionsIsTooMany")
-    .describe("Definitions of the wordcard. Up to 3 definitions are allowed."),
+  definitions: definitionsArraySchema,
 });
 
 /**

@@ -16,9 +16,7 @@ export const createWordcards = async (data: z.infer<typeof wordcardAISchemaArray
   const wordcards = data.wordcards.map((wordcard) => ({
     ...wordcard,
     definitions: wordcard.definitions
-      .map(
-        (definition) => `[${definition.definition.pos}]${DIVIDER}${definition.definition.meaning}`,
-      )
+      .map((definition) => `[${definition.pos}]${DIVIDER}${definition.meaning}`)
       .join("\n"),
   }));
   await wordCardService.createMany(wordcards, operatorId);
