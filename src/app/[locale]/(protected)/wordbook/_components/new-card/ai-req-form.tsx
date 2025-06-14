@@ -1,5 +1,6 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import { type AIModel, modelListTuple } from "@/lib/ai";
 import { Button, Submit } from "@/components/ui/button";
 import { FlexRow, Flexbox } from "@/components/ui/flexbox";
@@ -29,6 +30,7 @@ import { i18n } from "@/i18n";
  */
 export const AiReqForm = () => {
   const { form, onSubmit, isLoading, stop } = useWordbook();
+  const t = useTranslations("wordbook.newWordAIForm");
 
   return (
     <Form {...form}>
@@ -41,19 +43,17 @@ export const AiReqForm = () => {
           name="words"
           render={({ field }) => (
             <FormItem>
-              <FormLabel hidden>Word</FormLabel>
+              <FormLabel hidden />
               <FormControl>
                 <Input
                   className="h-12 rounded-sm"
-                  placeholder="Enter the word"
+                  placeholder={t("words.placeholder")}
                   autoComplete="off"
                   disabled={isLoading}
                   {...field}
                 />
               </FormControl>
-              <FormDescription hidden>
-                Please enter the word you want to generate a wordcard for.
-              </FormDescription>
+              <FormDescription hidden>{t("words.description")}</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -77,7 +77,7 @@ export const AiReqForm = () => {
                         disabled={isLoading}
                         className="data-[placeholder]:hover:text-foreground h-16 cursor-pointer rounded-sm"
                       >
-                        <SelectValue placeholder="Select a model" />
+                        <SelectValue placeholder={t("model.placeholder")} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -88,7 +88,7 @@ export const AiReqForm = () => {
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormDescription hidden />
+                  <FormDescription hidden>{t("model.description")}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -110,7 +110,7 @@ export const AiReqForm = () => {
                         disabled={isLoading}
                         className="data-[placeholder]:hover:text-foreground h-16 cursor-pointer rounded-sm"
                       >
-                        <SelectValue placeholder="Select a model" />
+                        <SelectValue placeholder={t("learningLanguage.placeholder")} />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
@@ -121,7 +121,7 @@ export const AiReqForm = () => {
                       ))}
                     </SelectContent>
                   </Select>
-                  <FormDescription hidden />
+                  <FormDescription hidden>{t("learningLanguage.description")}</FormDescription>
                   <FormMessage />
                 </FormItem>
               )}
@@ -129,11 +129,11 @@ export const AiReqForm = () => {
           </FlexRow>
           {isLoading && (
             <Button type="button" onClick={stop} variant="destructive">
-              Stop
+              {t("stop")}
             </Button>
           )}
           <Submit type="submit" isPending={isLoading}>
-            Generate
+            {t("generate")}
           </Submit>
         </Flexbox>
       </form>
