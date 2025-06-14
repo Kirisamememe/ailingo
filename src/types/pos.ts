@@ -14,7 +14,6 @@ export const POS = [
   "INTERJECTION",
   "PHRASE",
   "DETERMINER",
-  "SENTENCE",
   "IDIOM",
   "ORDINAL",
   "OTHER",
