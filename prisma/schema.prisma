@@ -107,7 +107,7 @@ model WordCard {
   masteredAt DateTime? @map("mastered_at")
   deletedAt DateTime? @map("deleted_at")
 
-  language Language? 
+  language Language
 
   authorId String @map("author_id")
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)

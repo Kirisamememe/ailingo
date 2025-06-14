@@ -1,5 +1,7 @@
 import { z } from "zod";
+import { localeToLanguage } from "@/lib/utils";
 import { modelListTuple } from "@/constants";
+import type { Language } from "@/generated/prisma";
 import type { Locale } from "@/i18n";
 import { LOCALES } from "@/i18n";
 import { POS } from "@/types";
@@ -25,6 +27,9 @@ export const wordcardBaseSchema = z.object({
     .describe(
       "Example of the wordcard. Insert a line break (\n) after the example sentence and also write its translation.",
     ),
+  language: z
+    .enum(LOCALES.map(localeToLanguage) as [Language])
+    .describe("Language of the wordcard"),
 });
 
 const extraExampleRequiredSchema = z.object({
