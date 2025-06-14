@@ -1,6 +1,7 @@
-import { FlexRow } from "@/components/ui/flexbox";
 import { FlexColumn } from "@/components/ui/flexbox";
-import { Headline } from "@/components/ui/typography";
+import { Separator } from "@/components/ui/separator";
+import { BasicInfo } from "./basic";
+import { Example } from "./example/example";
 import type { WordCard } from "@/generated/prisma/client";
 
 type Props = {
@@ -12,18 +13,18 @@ type Props = {
  */
 export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
   return (
-    <FlexColumn className="w-full gap-4">
-      <Headline size={30}>{wordCard.word}</Headline>
-      <FlexRow>
-        <h2>{wordCard.phonetics}</h2>
-      </FlexRow>
-      <FlexRow>
-        <h2>{wordCard.definitions}</h2>
-      </FlexRow>
-      <FlexColumn gap={2}>
-        <h2>{wordCard.example1}</h2>
-        <h2>{wordCard.example2}</h2>
-        <h2>{wordCard.example3}</h2>
+    <FlexColumn gap={6} className="w-full">
+      <BasicInfo
+        createdAt={wordCard.createdAt}
+        word={wordCard.word}
+        phonetics={wordCard.phonetics}
+        definitions={wordCard.definitions}
+      />
+      <Separator />
+      <FlexColumn gap={3}>
+        <Example example={wordCard.example1} />
+        {wordCard.example2 && <Example example={wordCard.example2} />}
+        {wordCard.example3 && <Example example={wordCard.example3} />}
       </FlexColumn>
     </FlexColumn>
   );

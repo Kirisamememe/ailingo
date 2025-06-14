@@ -1,6 +1,6 @@
 "use client";
 
-import { type ReactNode, createContext, use, useState } from "react";
+import { type ReactNode, createContext, use, useEffect, useRef, useState } from "react";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { DeepPartial } from "ai";
@@ -27,6 +27,8 @@ type WordbookContextType = {
   stop: () => void;
   /** リクエスト完了状態 */
   isComplete: boolean;
+  /** 音声再生用のAudio要素 */
+  audioRef: React.RefObject<HTMLAudioElement | undefined>;
 };
 
 /**
@@ -47,6 +49,12 @@ type WordbookProviderProps = {
  */
 export const WordbookProvider = ({ children }: WordbookProviderProps) => {
   const [isComplete, setIsComplete] = useState(true);
+  const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
+
+  useEffect(() => {
+    if (audioRef.current) return;
+    audioRef.current = new Audio();
+  }, []);
 
   const form = useForm<z.infer<typeof wordcardRequestSchema>>({
     resolver: zodResolver(wordcardRequestSchema),
@@ -63,6 +71,7 @@ export const WordbookProvider = ({ children }: WordbookProviderProps) => {
    */
   const onFinish = ({ object }: { object?: z.infer<typeof wordcardAISchemaArray> }) => {
     if (!object) return;
+    // TODO: content側で個別保存を検討する
     void createWordcards(object)
       .then(() => {
         toast.success("Wordcards created successfully");
@@ -95,6 +104,7 @@ export const WordbookProvider = ({ children }: WordbookProviderProps) => {
     isLoading,
     stop,
     isComplete,
+    audioRef,
     // TODO: objectのstreamをどう表現するか考える
   };
 
