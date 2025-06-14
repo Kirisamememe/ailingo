@@ -57,6 +57,66 @@
         "description": "Please select the language you want to use to generate a wordcard."
       }
     },
+    "editForm": {
+      "word": {
+        "label": "Word",
+        "placeholder": "Enter the word",
+        "description": "Please enter the word you want to generate a wordcard for.",
+        "wordIsRequired": "Word is required",
+        "wordIsTooLong": "Please enter a word less than 100 characters."
+      },
+      "phonetics": {
+        "label": "Phonetics",
+        "placeholder": "Enter the phonetics",
+        "description": "Please enter the phonetics you want to generate a wordcard for.",
+        "phoneticsIsRequired": "Phonetics is required",
+        "phoneticsIsTooLong": "Please enter a phonetics less than 100 characters."
+      },
+      "definitions": {
+        "label": "Definitions",
+        "placeholder": "Enter the definitions",
+        "description": "Please enter the definitions you want to generate a wordcard for.",
+        "definitionsIsRequired": "Definitions is required",
+        "definitionsIsTooLong": "Please enter a definitions less than 500 characters."
+      },
+      "example": {
+        "label": "Example",
+        "placeholder": "Enter the example",
+        "description": "Please enter the example you want to generate a wordcard for.",
+        "exampleIsRequired": "Example is required",
+        "exampleIsTooLong": "Please enter a example less than 500 characters."
+      },
+      "derivatives": {
+        "label": "Derivatives",
+        "placeholder": "Enter the derivatives",
+        "description": "Please enter the derivatives you want to generate a wordcard for.",
+        "derivativesIsTooLong": "Please enter derivatives less than 150 characters."
+      },
+      "synonyms": {
+        "label": "Synonyms",
+        "placeholder": "Enter the synonyms",
+        "description": "Please enter the synonyms you want to generate a wordcard for.",
+        "synonymsIsTooLong": "Please enter synonyms less than 150 characters."
+      },
+      "antonyms": {
+        "label": "Antonyms",
+        "placeholder": "Enter the antonyms",
+        "description": "Please enter the antonyms you want to generate a wordcard for.",
+        "antonymsIsTooLong": "Please enter antonyms less than 150 characters."
+      },
+      "note": {
+        "label": "Note",
+        "placeholder": "Enter the note",
+        "description": "Please enter the note you want to generate a wordcard for.",
+        "noteIsTooLong": "Please enter a note less than 1000 characters."
+      },
+      "language": {
+        "label": "Language",
+        "placeholder": "Select a language",
+        "description": "Please select the language of the wordcard.",
+        "languageIsRequired": "Language is required"
+      }
+    },
     "extra": {
       "derivatives": "Derivatives",
       "synonyms": "Synonyms",

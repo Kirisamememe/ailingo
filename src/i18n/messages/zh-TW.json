@@ -57,6 +57,66 @@
         "description": "請選擇釋義和例句的翻譯語言。"
       }
     },
+    "editForm": {
+      "word": {
+        "label": "單字",
+        "placeholder": "輸入單字",
+        "description": "請輸入您想要生成單字卡的單字。",
+        "wordIsRequired": "單字為必填項。",
+        "wordIsTooLong": "單字不能超過100個字符。"
+      },
+      "phonetics": {
+        "label": "發音",
+        "placeholder": "輸入發音",
+        "description": "請輸入發音。",
+        "phoneticsIsRequired": "發音為必填項。",
+        "phoneticsIsTooLong": "發音不能超過100個字符。"
+      },
+      "definitions": {
+        "label": "定義",
+        "placeholder": "輸入定義",
+        "description": "請輸入您想要生成單字卡的定義。",
+        "definitionsIsRequired": "定義為必填項。",
+        "definitionsIsTooLong": "定義不能超過500個字符。"
+      },
+      "example": {
+        "label": "例句",
+        "placeholder": "輸入例句",
+        "description": "請輸入您想要生成單字卡的例句。",
+        "exampleIsRequired": "例句為必填項。",
+        "exampleIsTooLong": "例句不能超過500個字符。"
+      },
+      "derivatives": {
+        "label": "派生字",
+        "placeholder": "輸入派生字",
+        "description": "請輸入您想要生成單字卡的派生字。",
+        "derivativesIsTooLong": "派生字不能超過150個字符。"
+      },
+      "synonyms": {
+        "label": "同義字",
+        "placeholder": "輸入同義字",
+        "description": "請輸入您想要生成單字卡的同義字。",
+        "synonymsIsTooLong": "同義字不能超過150個字符。"
+      },
+      "antonyms": {
+        "label": "反義字",
+        "placeholder": "輸入反義字",
+        "description": "請輸入您想要生成單字卡的反義字。",
+        "antonymsIsTooLong": "反義字不能超過150個字符。"
+      },
+      "note": {
+        "label": "學習筆記",
+        "placeholder": "輸入學習筆記",
+        "description": "請輸入您想要生成單字卡的學習筆記。",
+        "noteIsTooLong": "學習筆記不能超過1000個字符。"
+      },
+      "language": {
+        "label": "語言",
+        "placeholder": "選擇語言",
+        "description": "請選擇單字卡的語言。",
+        "languageIsRequired": "語言為必填項。"
+      }
+    },
     "extra": {
       "derivatives": "派生字",
       "synonyms": "同義字",
