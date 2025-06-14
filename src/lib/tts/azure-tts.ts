@@ -2,7 +2,9 @@
 
 import "server-only";
 import * as sdk from "microsoft-cognitiveservices-speech-sdk";
-import { getSession } from "./auth";
+import { getSession } from "../auth";
+import { azureVoiceMap } from "./azure-voice-map";
+import type { Locale } from "@/i18n/locale";
 
 type Result = {
   data?: string;
@@ -14,7 +16,7 @@ type Result = {
  * @param text テキスト
  * @returns 音声合成結果
  */
-export async function synthesizeSpeech(text: string) {
+export async function synthesizeSpeech(text: string, language: Locale) {
   await getSession();
 
   if (!process.env.SPEECH_KEY || !process.env.SPEECH_REGION) {
@@ -27,7 +29,8 @@ export async function synthesizeSpeech(text: string) {
   );
 
   // The language of the voice that speaks.
-  speechConfig.speechSynthesisVoiceName = "en-US-JennyNeural";
+  speechConfig.speechSynthesisVoiceName = azureVoiceMap[language];
+  speechConfig.speechRecognitionLanguage = language;
 
   // Create the speech synthesizer.
   const speechSynthesizer = new sdk.SpeechSynthesizer(speechConfig);
