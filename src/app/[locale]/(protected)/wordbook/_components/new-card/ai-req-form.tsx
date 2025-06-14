@@ -28,8 +28,6 @@ import type { AIModel } from "@/types";
 export const AiReqForm = () => {
   const { form, onSubmit, isLoading, stop } = useWordbook();
 
-  console.log("rendered");
-
   return (
     <Form {...form}>
       <form
