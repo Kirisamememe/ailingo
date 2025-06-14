@@ -35,5 +35,22 @@
       "language": "Language",
       "signOut": "Sign Out"
     }
+  },
+  "POS": {
+    "NOUN": "noun",
+    "VERB": "verb",
+    "TRANSITIVE_VERB": "transitive verb",
+    "INTRANSITIVE_VERB": "intransitive verb",
+    "ADJECTIVE": "adjective",
+    "ADVERB": "adverb",
+    "PREPOSITION": "preposition",
+    "CONJUNCTION": "conjunction",
+    "PRONOUN": "pronoun",
+    "INTERJECTION": "interjection",
+    "PHRASE": "phrase",
+    "DETERMINER": "determiner",
+    "IDIOM": "idiom",
+    "ORDINAL": "ordinal",
+    "OTHER": "other"
   }
 }

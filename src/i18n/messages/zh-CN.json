@@ -35,5 +35,22 @@
       "language": "语言",
       "signOut": "登出"
     }
+  },
+  "POS": {
+    "NOUN": "名词",
+    "VERB": "动词",
+    "TRANSITIVE_VERB": "及物动词",
+    "INTRANSITIVE_VERB": "不及物动词",
+    "ADJECTIVE": "形容词",
+    "ADVERB": "副词",
+    "PREPOSITION": "介词",
+    "CONJUNCTION": "连词",
+    "PRONOUN": "代词",
+    "INTERJECTION": "感叹词",
+    "PHRASE": "短语",
+    "DETERMINER": "冠词",
+    "IDIOM": "成语",
+    "ORDINAL": "序数",
+    "OTHER": "其他"
   }
 }
