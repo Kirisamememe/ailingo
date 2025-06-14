@@ -1,3 +1,4 @@
+import { languageToLocale } from "@/lib/utils";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Separator } from "@/components/ui/separator";
 import { BasicInfo } from "./basic";
@@ -12,6 +13,8 @@ type Props = {
  * ワードブックコンテンツビュー
  */
 export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
+  const language = languageToLocale(wordCard.language);
+
   return (
     <FlexColumn gap={6} className="w-full">
       <BasicInfo
@@ -19,12 +22,13 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
         word={wordCard.word}
         phonetics={wordCard.phonetics}
         definitions={wordCard.definitions}
+        language={language}
       />
       <Separator />
-      <FlexColumn gap={3}>
-        <Example example={wordCard.example1} />
-        {wordCard.example2 && <Example example={wordCard.example2} />}
-        {wordCard.example3 && <Example example={wordCard.example3} />}
+      <FlexColumn gap={4}>
+        <Example example={wordCard.example1} language={language} />
+        {wordCard.example2 && <Example example={wordCard.example2} language={language} />}
+        {wordCard.example3 && <Example example={wordCard.example3} language={language} />}
       </FlexColumn>
     </FlexColumn>
   );

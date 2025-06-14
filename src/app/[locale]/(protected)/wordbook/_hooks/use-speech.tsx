@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { synthesizeSpeech } from "@/lib/azure-tts";
+import { synthesizeSpeech } from "@/lib/tts/azure-tts";
 import { useWordbook } from "./wordbook-provider";
+import type { Locale } from "@/i18n";
 
 /**
  * 音声再生用のフック
@@ -12,8 +13,8 @@ export const useSpeech = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const { audioRef } = useWordbook();
 
-  const generateSpeech = async (text: string) => {
-    const { data, error } = await synthesizeSpeech(text);
+  const generateSpeech = async (text: string, language: Locale) => {
+    const { data, error } = await synthesizeSpeech(text, language);
     if (error || !data) {
       toast.error(error);
       throw new Error(error);
@@ -22,8 +23,8 @@ export const useSpeech = () => {
     return data;
   };
 
-  const generateUrl = async (text: string) => {
-    const base64Data = await generateSpeech(text);
+  const generateUrl = async (text: string, language: Locale) => {
+    const base64Data = await generateSpeech(text, language);
 
     // base64文字列をバイナリデータに変換
     const binaryString = atob(base64Data);
@@ -39,10 +40,10 @@ export const useSpeech = () => {
     return url;
   };
 
-  const play = async (text: string) => {
+  const play = async (text: string, language: Locale) => {
     if (!audioRef.current) return;
 
-    const url = await generateUrl(text);
+    const url = await generateUrl(text, language);
     const audio = audioRef.current;
     audio.setAttribute("src", url);
 

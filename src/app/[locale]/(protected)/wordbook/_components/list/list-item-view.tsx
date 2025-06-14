@@ -14,6 +14,7 @@ type Props = Pick<ComponentProps<typeof ListItem>, "listItem"> & {
 export const ListItemView: React.FC<Props> = ({ listItem, selected, onClick }) => {
   return (
     <Button
+      lang={listItem.language}
       onClick={onClick}
       variant="ghost"
       className={cn(

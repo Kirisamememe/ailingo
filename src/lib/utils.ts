@@ -29,6 +29,14 @@ export const localeToLanguage = (locale: Locale): Language => {
 };
 
 /**
+ * LanguageからLocaleに変換する関数
+ */
+export const languageToLocale = (language: Language): Locale => {
+  const [languageCode, countryCode] = language.split("_");
+  return `${languageCode.toLowerCase()}-${countryCode}` as Locale;
+};
+
+/**
  * Localeからdate-fnsのlocaleに変換する関数
  */
 export function getLocaleForFns(locale?: string) {

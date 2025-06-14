@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import type { z } from "zod";
 import { getSession } from "@/lib/auth";
-import type { wordcardAISchemaArray } from "../_schema/wordcard";
+import type { wordcardAISchemaArray } from "../_schema";
 import { wordCardService } from "@/services/wordcard-service";
 
 const DIVIDER = "|";

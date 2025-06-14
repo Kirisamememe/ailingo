@@ -1,4 +1,5 @@
 import { getSession } from "@/lib/auth";
+import { languageToLocale } from "@/lib/utils";
 import { InsetLayoutWithPadding } from "@/components/layout";
 import { FlexRow } from "@/components/ui/flexbox";
 import { WordbookContent } from "./_components/content";
@@ -13,6 +14,7 @@ const WordbookPage = async () => {
   const wordList = wordCards.map((wordCard) => ({
     id: wordCard.id,
     word: wordCard.word,
+    language: languageToLocale(wordCard.language),
   }));
 
   return (

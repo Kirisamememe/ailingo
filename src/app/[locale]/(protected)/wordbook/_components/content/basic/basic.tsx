@@ -7,36 +7,44 @@ import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Caption, Headline } from "@/components/ui/typography";
 import { Definitions } from "./definitions";
 import { useSpeech } from "../../../_hooks/use-speech";
+import type { Locale } from "@/i18n";
 
 type Props = {
   createdAt: Date;
   word: string;
   phonetics: string;
   definitions: string;
+  language: Locale;
 };
 
 /**
  * 基本情報
  */
-export const BasicInfo: React.FC<Props> = ({ createdAt, word, phonetics, definitions }) => {
+export const BasicInfo: React.FC<Props> = ({
+  createdAt,
+  word,
+  phonetics,
+  definitions,
+  language,
+}) => {
   const locale = useLocale();
   const { play, stop, isPlaying } = useSpeech();
 
   const handlePlay = async () => {
-    await play(word);
+    await play(word, language);
   };
 
   return (
-    <FlexColumn gap={6}>
+    <FlexColumn gap={5}>
       <Caption>
         {formatDistanceToNow(createdAt, {
           addSuffix: true,
           locale: getLocaleForFns(locale),
         })}
       </Caption>
-      <FlexColumn gap={3}>
+      <FlexColumn gap={1}>
         <Headline size={30}>{word}</Headline>
-        <FlexRow gap={1} centerY>
+        <FlexRow centerY>
           <Button
             variant="ghost"
             size="icon"

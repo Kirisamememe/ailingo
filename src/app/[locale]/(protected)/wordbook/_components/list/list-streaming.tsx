@@ -11,5 +11,5 @@ export const WordbookListStreaming = () => {
 
   if (isComplete) return null;
 
-  return <ListItem listItem={{ word: "generating...", id: 0 }} />;
+  return <ListItem listItem={{ word: "generating...", id: 0, language: "en" }} />;
 };

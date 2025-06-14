@@ -1,3 +1,5 @@
+import type { Locale } from "@/i18n";
+
 /**
  * ワードブックリスト
  */
@@ -10,4 +12,8 @@ export type WordListItem = {
    * ワード
    */
   word: string;
+  /**
+   * 言語
+   */
+  language: Locale;
 };

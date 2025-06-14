@@ -1,15 +1,12 @@
 import { z } from "zod";
-import { modelListTuple } from "@/lib/ai";
 import { localeToLanguage } from "@/lib/utils";
 import type { Language } from "@/generated/prisma";
-import type { Locale } from "@/i18n";
 import { LOCALES } from "@/i18n";
-import { POS } from "@/types";
 
 /**
  * AIワードカードリクエストスキーマ
  */
-export const wordcardBaseSchema = z.object({
+export const wordcardBase = z.object({
   word: z
     .string()
     .min(1, "wordIsRequired")
@@ -32,29 +29,33 @@ export const wordcardBaseSchema = z.object({
     .describe("Language of the wordcard"),
 });
 
-const extraExampleRequiredSchema = z.object({
-  example2: z
-    .string()
-    .min(1, "exampleIsRequired")
-    .max(500, "exampleIsTooLong")
-    .describe(
-      "Example of the wordcard. Insert a line break (\n) after the example sentence and also write its translation.",
-    ),
-  example3: z
-    .string()
-    .min(1, "exampleIsRequired")
-    .max(500, "exampleIsTooLong")
-    .describe(
-      "Example of the wordcard. Insert a line break (\n) after the example sentence and also write its translation.",
-    ),
-});
-
 /**
  * 追加例文オプションスキーマ
  */
-const extraExampleOptionalSchema = z.object({
+const extraExampleOptional = z.object({
   example2: z.string().max(500, "exampleIsTooLong").optional(),
   example3: z.string().max(500, "exampleIsTooLong").optional(),
+});
+
+/**
+ * その他のスキーマ
+ */
+export const otherSchema = z.object({
+  derivatives: z
+    .string()
+    .max(150, "derivativesIsTooLong")
+    .optional()
+    .describe("Derivatives of the wordcard. Up to 10 words are allowed. Separate with comma."),
+  synonyms: z
+    .string()
+    .max(150, "synonymsIsTooLong")
+    .optional()
+    .describe("Synonyms of the wordcard. Up to 10 words are allowed. Separate with comma."),
+  antonyms: z
+    .string()
+    .max(150, "antonymsIsTooLong")
+    .optional()
+    .describe("Antonyms of the wordcard. Up to 10 words are allowed. Separate with comma."),
 });
 
 const definitionsSchema = z.object({
@@ -65,53 +66,15 @@ const definitionsSchema = z.object({
     .describe("Definition of the wordcard"),
 });
 
-/**
- * 定義の配列スキーマ
- */
-export const definitionsArraySchema = z
-  .array(
-    z.object({
-      pos: z.enum(POS).describe("Part of speech of the wordcard").default("OTHER"),
-      meaning: z.string().describe("Meaning of the definition."),
-    }),
-  )
-  .max(3, "definitionsIsTooMany")
-  .describe("Definitions of the wordcard. Up to 3 definitions are allowed.");
-
-/**
- * 定義のAI用スキーマ。DB保存時は文字列に変換
- */
-const definitionAISchema = z.object({
-  definitions: definitionsArraySchema,
+const noteSchema = z.object({
+  note: z.string().max(1000, "noteIsTooLong").optional(),
 });
 
 /**
  * ワードカードフォームスキーマ
  */
-export const wordcardFormSchema = wordcardBaseSchema
+export const wordcardFormSchema = wordcardBase
   .and(definitionsSchema)
-  .and(extraExampleOptionalSchema);
-
-/**
- * AIワードカードリクエストスキーマ
- */
-export const wordcardAISchema = wordcardBaseSchema
-  .and(definitionAISchema)
-  .and(extraExampleRequiredSchema);
-
-/**
- * ワードカードフォームスキーマ配列
- */
-export const wordcardAISchemaArray = z.object({
-  wordcards: z.array(wordcardAISchema).describe("Wordcards of the wordcard"),
-});
-
-/**
- * 単語カードリクエストスキーマ
- */
-export const wordcardRequestSchema = z.object({
-  model: z.enum(modelListTuple),
-  learningLanguage: z.enum(LOCALES as [Locale]),
-  translationLanguage: z.enum(LOCALES as [Locale]),
-  words: z.string(),
-});
+  .and(extraExampleOptional)
+  .and(otherSchema)
+  .and(noteSchema);

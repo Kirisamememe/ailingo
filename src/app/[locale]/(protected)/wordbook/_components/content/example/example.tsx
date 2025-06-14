@@ -4,15 +4,17 @@ import { Button } from "@/components/ui/button";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Caption, Paragraph } from "@/components/ui/typography";
 import { useSpeech } from "../../../_hooks/use-speech";
+import type { Locale } from "@/i18n";
 
 type Props = {
   example: string;
+  language: Locale;
 };
 
 /**
  * 例文
  */
-export const Example: React.FC<Props> = ({ example }) => {
+export const Example: React.FC<Props> = ({ example, language }) => {
   const [sentence, translation] = example.split("\n");
   const { play, stop, isPlaying } = useSpeech();
 
@@ -20,7 +22,7 @@ export const Example: React.FC<Props> = ({ example }) => {
     if (isPlaying) {
       stop();
     } else {
-      await play(sentence);
+      await play(sentence, language);
     }
   };
 

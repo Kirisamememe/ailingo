@@ -1,7 +1,7 @@
 import type { z } from "zod";
 import { ai } from "@/lib/ai/ai";
-import type { wordcardRequestSchema } from "@/app/[locale]/(protected)/wordbook/_schema/wordcard";
-import { wordcardAISchemaArray } from "@/app/[locale]/(protected)/wordbook/_schema/wordcard";
+import type { wordcardRequestSchema } from "@/app/[locale]/(protected)/wordbook/_schema";
+import { wordcardAISchemaArray } from "@/app/[locale]/(protected)/wordbook/_schema";
 import { auth } from "@/auth";
 import { i18n } from "@/i18n";
 
