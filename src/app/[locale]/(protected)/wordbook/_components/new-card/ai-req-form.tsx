@@ -2,6 +2,7 @@
 
 import { type AIModel, modelListTuple } from "@/lib/ai";
 import { Button, Submit } from "@/components/ui/button";
+import { FlexRow, Flexbox } from "@/components/ui/flexbox";
 import { FormField } from "@/components/ui/form";
 import {
   Form,
@@ -20,6 +21,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { useWordbook } from "../../_hooks/wordbook-provider";
+import type { Locale } from "@/i18n";
+import { i18n } from "@/i18n";
 
 /**
  * AIリクエストフォームビュー
@@ -55,40 +58,75 @@ export const AiReqForm = () => {
             </FormItem>
           )}
         />
-        <div className="flex w-full items-center gap-2">
-          <FormField
-            control={form.control}
-            name="model"
-            render={() => (
-              <FormItem className="mr-auto">
-                <FormLabel hidden />
-                <Select
-                  defaultValue={modelListTuple[1]}
-                  onValueChange={(value) => {
-                    form.setValue("model", value as AIModel);
-                  }}
-                >
-                  <FormControl>
-                    <SelectTrigger
-                      disabled={isLoading}
-                      className="data-[placeholder]:hover:text-foreground h-16 cursor-pointer rounded-sm"
-                    >
-                      <SelectValue placeholder="Select a model" />
-                    </SelectTrigger>
-                  </FormControl>
-                  <SelectContent>
-                    {modelListTuple.map((model) => (
-                      <SelectItem key={model} value={model}>
-                        {model}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-                <FormDescription hidden />
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+        <Flexbox className="w-full flex-col gap-2 @[40rem]:flex-row">
+          <FlexRow gap={3} className="@[40rem]:mr-auto">
+            <FormField
+              control={form.control}
+              name="model"
+              render={() => (
+                <FormItem>
+                  <FormLabel hidden />
+                  <Select
+                    defaultValue={form.getValues("model")}
+                    onValueChange={(value) => {
+                      form.setValue("model", value as AIModel);
+                    }}
+                  >
+                    <FormControl>
+                      <SelectTrigger
+                        disabled={isLoading}
+                        className="data-[placeholder]:hover:text-foreground h-16 cursor-pointer rounded-sm"
+                      >
+                        <SelectValue placeholder="Select a model" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {modelListTuple.map((model) => (
+                        <SelectItem key={model} value={model}>
+                          {model}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormDescription hidden />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="learningLanguage"
+              render={() => (
+                <FormItem>
+                  <FormLabel hidden />
+                  <Select
+                    defaultValue={form.getValues("learningLanguage")}
+                    onValueChange={(value) => {
+                      form.setValue("learningLanguage", value as Locale);
+                    }}
+                  >
+                    <FormControl>
+                      <SelectTrigger
+                        disabled={isLoading}
+                        className="data-[placeholder]:hover:text-foreground h-16 cursor-pointer rounded-sm"
+                      >
+                        <SelectValue placeholder="Select a model" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      {Object.entries(i18n.locales).map(([key, value]) => (
+                        <SelectItem key={key} value={key}>
+                          {value}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <FormDescription hidden />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </FlexRow>
           {isLoading && (
             <Button type="button" onClick={stop} variant="destructive">
               Stop
@@ -97,7 +135,7 @@ export const AiReqForm = () => {
           <Submit type="submit" isPending={isLoading}>
             Generate
           </Submit>
-        </div>
+        </Flexbox>
       </form>
     </Form>
   );
