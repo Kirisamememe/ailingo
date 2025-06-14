@@ -36,6 +36,33 @@
       "signOut": "Sign Out"
     }
   },
+  "wordbook": {
+    "newWordAIForm": {
+      "generate": "Generate",
+      "stop": "Stop",
+      "words": {
+        "placeholder": "Enter a word",
+        "description": "Please enter the word you want to generate a wordcard for."
+      },
+      "model": {
+        "placeholder": "Select a model",
+        "description": "Please select the model you want to use to generate a wordcard."
+      },
+      "learningLanguage": {
+        "placeholder": "Select a language",
+        "description": "Please select the language you want to use to generate a wordcard."
+      },
+      "translationLanguage": {
+        "placeholder": "Select a language",
+        "description": "Please select the language you want to use to generate a wordcard."
+      }
+    },
+    "extra": {
+      "derivatives": "Derivatives",
+      "synonyms": "Synonyms",
+      "antonyms": "Antonyms"
+    }
+  },
   "POS": {
     "NOUN": "noun",
     "VERB": "verb",

@@ -36,6 +36,33 @@
       "signOut": "ログアウト"
     }
   },
+  "wordbook": {
+    "newWordAIForm": {
+      "generate": "生成",
+      "stop": "停止",
+      "words": {
+        "placeholder": "単語を入力",
+        "description": "単語を入力してください。"
+      },
+      "model": {
+        "placeholder": "モデルを選択",
+        "description": "モデルを選択してください。"
+      },
+      "learningLanguage": {
+        "placeholder": "言語を選択",
+        "description": "ワードカードの学習言語を選択してください。"
+      },
+      "translationLanguage": {
+        "placeholder": "言語を選択",
+        "description": "ワードカードの翻訳言語を選択してください。"
+      }
+    },
+    "extra": {
+      "derivatives": "派生語",
+      "synonyms": "同義語",
+      "antonyms": "反義語"
+    }
+  },
   "POS": {
     "NOUN": "名詞",
     "VERB": "動詞",

@@ -36,6 +36,33 @@
       "signOut": "登出"
     }
   },
+  "wordbook": {
+    "newWordAIForm": {
+      "generate": "生成",
+      "stop": "停止",
+      "words": {
+        "placeholder": "输入单词",
+        "description": "请输入您想要生成单词卡的单词。"
+      },
+      "model": {
+        "placeholder": "选择模型",
+        "description": "请选择您想要使用的模型来生成单词卡。"
+      },
+      "learningLanguage": {
+        "placeholder": "选择语言",
+        "description": "请选择单词本身的语言。"
+      },
+      "translationLanguage": {
+        "placeholder": "选择语言",
+        "description": "请选择释义和例句的翻译语言。"
+      }
+    },
+    "extra": {
+      "derivatives": "派生词",
+      "synonyms": "同义词",
+      "antonyms": "反义词"
+    }
+  },
   "POS": {
     "NOUN": "名词",
     "VERB": "动词",

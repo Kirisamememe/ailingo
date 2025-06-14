@@ -23,7 +23,7 @@
       "aiBooster": "AI 助手"
     },
     "daily": "每日",
-    "wordbook": "單詞本",
+    "wordbook": "單字本",
     "preference": "設定",
     "quiz": "測驗",
     "generatedMaterial": "語料生成",
@@ -34,6 +34,33 @@
       "setting": "設定",
       "language": "語言",
       "signOut": "登出"
+    }
+  },
+  "wordbook": {
+    "newWordAIForm": {
+      "generate": "生成",
+      "stop": "終止",
+      "words": {
+        "placeholder": "輸入單字",
+        "description": "請輸入您想要生成單字卡的單字。"
+      },
+      "model": {
+        "placeholder": "選擇模型",
+        "description": "請選擇您想要使用的模型來生成單字卡。"
+      },
+      "learningLanguage": {
+        "placeholder": "選擇語言",
+        "description": "請選擇單字本身的語言。"
+      },
+      "translationLanguage": {
+        "placeholder": "選擇語言",
+        "description": "請選擇釋義和例句的翻譯語言。"
+      }
+    },
+    "extra": {
+      "derivatives": "派生字",
+      "synonyms": "同義字",
+      "antonyms": "反義字"
     }
   },
   "POS": {
