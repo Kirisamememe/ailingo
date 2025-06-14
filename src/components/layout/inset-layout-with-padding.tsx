@@ -10,7 +10,7 @@ type Props = {
  */
 export const InsetLayoutWithPadding: React.FC<Props> = ({ children, className, ...props }) => {
   return (
-    <Flexbox className={cn("h-full gap-4 p-4 @[40rem]:p-6", className)} {...props}>
+    <Flexbox className={cn("appear h-full gap-4 p-4 @[40rem]:p-6", className)} {...props}>
       {children}
     </Flexbox>
   );

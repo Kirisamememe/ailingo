@@ -1,54 +1,107 @@
 "use client";
 
-import { experimental_useObject as useObject } from "@ai-sdk/react";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import type z from "zod";
-import { AiReqFormView } from "./ai-req-form-view";
-import { createWordcards } from "../../_actions/create";
+import { Button, Submit } from "@/components/ui/button";
+import { FormField } from "@/components/ui/form";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { useWordbook } from "../../_hooks/wordbook-provider";
 import { modelListTuple } from "@/constants";
-import { wordcardAISchemaArray, wordcardRequestSchema } from "@/types";
-
-// バリデーション成功した場合はそのままDBに保存
-// バリデーション失敗した場合はFormを出してユーザーに確認
+import type { AIModel } from "@/types";
 
 /**
- * AIリクエストフォーム
+ * AIリクエストフォームビュー
  */
 export const AiReqForm = () => {
-  const form = useForm<z.infer<typeof wordcardRequestSchema>>({
-    resolver: zodResolver(wordcardRequestSchema),
-    defaultValues: {
-      model: modelListTuple[1],
-      learningLanguage: "en",
-      translationLanguage: "ja",
-      words: "",
-    },
-  });
+  const { form, onSubmit, isLoading, stop } = useWordbook();
 
-  const onFinish = ({ object }: { object?: z.infer<typeof wordcardAISchemaArray> }) => {
-    if (!object) return;
-    void createWordcards(object)
-      .then(() => {
-        toast.success("Wordcards created successfully");
-      })
-      .catch(() => {
-        toast.error("Failed to create wordcards");
-      });
-  };
+  console.log("rendered");
 
-  const { submit, isLoading, stop } = useObject({
-    api: "/api/generate-wordcards",
-    schema: wordcardAISchemaArray,
-    onFinish,
-  });
-
-  const onSubmit = () => {
-    const values = form.getValues();
-    submit(values);
-    form.reset();
-  };
-
-  return <AiReqFormView form={form} onSubmit={onSubmit} isLoading={isLoading} stop={stop} />;
+  return (
+    <Form {...form}>
+      <form
+        className="bg-card/50 flex flex-col gap-3 rounded-lg border p-4 shadow-xs"
+        onSubmit={form.handleSubmit(onSubmit)}
+      >
+        <FormField
+          control={form.control}
+          name="words"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel hidden>Word</FormLabel>
+              <FormControl>
+                <Input
+                  className="h-12 rounded-sm"
+                  placeholder="Enter the word"
+                  autoComplete="off"
+                  disabled={isLoading}
+                  {...field}
+                />
+              </FormControl>
+              <FormDescription hidden>
+                Please enter the word you want to generate a wordcard for.
+              </FormDescription>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+        <div className="flex w-full items-center gap-2">
+          <FormField
+            control={form.control}
+            name="model"
+            render={() => (
+              <FormItem className="mr-auto">
+                <FormLabel hidden />
+                <Select
+                  defaultValue={modelListTuple[1]}
+                  onValueChange={(value) => {
+                    form.setValue("model", value as AIModel);
+                  }}
+                >
+                  <FormControl>
+                    <SelectTrigger
+                      disabled={isLoading}
+                      className="data-[placeholder]:hover:text-foreground h-16 cursor-pointer rounded-sm"
+                    >
+                      <SelectValue placeholder="Select a model" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {modelListTuple.map((model) => (
+                      <SelectItem key={model} value={model}>
+                        {model}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+                <FormDescription hidden />
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          {isLoading && (
+            <Button type="button" onClick={stop} variant="destructive">
+              Stop
+            </Button>
+          )}
+          <Submit type="submit" isPending={isLoading}>
+            Generate
+          </Submit>
+        </div>
+      </form>
+    </Form>
+  );
 };

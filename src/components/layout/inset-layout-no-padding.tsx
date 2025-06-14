@@ -9,7 +9,7 @@ type Props = {
  */
 export const InsetLayoutNoPadding: React.FC<Props> = ({ children, ...props }) => {
   return (
-    <Flexbox className="h-full" {...props}>
+    <Flexbox className="appear h-full" {...props}>
       {children}
     </Flexbox>
   );
