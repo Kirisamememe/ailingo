@@ -37,6 +37,10 @@
     }
   },
   "wordbook": {
+    "list": {
+      "generating": "生成中…",
+      "new": "生成新单词"
+    },
     "newWordAIForm": {
       "generate": "生成",
       "stop": "停止",

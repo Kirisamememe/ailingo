@@ -37,6 +37,10 @@
     }
   },
   "wordbook": {
+    "list": {
+      "generating": "Generating...",
+      "new": "New Card"
+    },
     "newWordAIForm": {
       "generate": "Generate",
       "stop": "Stop",
