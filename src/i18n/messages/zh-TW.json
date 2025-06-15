@@ -42,21 +42,26 @@
       "new": "生成新單字"
     },
     "newWordAIForm": {
+      "title": "生成新單字",
       "generate": "生成",
       "stop": "終止",
       "words": {
-        "placeholder": "輸入單字",
+        "label": "單字",
+        "placeholder": "輸入多個單字，用逗號分隔",
         "description": "請輸入您想要生成單字卡的單字。"
       },
       "model": {
+        "label": "模型",
         "placeholder": "選擇模型",
         "description": "請選擇您想要使用的模型來生成單字卡。"
       },
       "learningLanguage": {
+        "label": "學習語言",
         "placeholder": "選擇語言",
         "description": "請選擇單字本身的語言。"
       },
       "translationLanguage": {
+        "label": "翻譯語言",
         "placeholder": "選擇語言",
         "description": "請選擇釋義和例句的翻譯語言。"
       }

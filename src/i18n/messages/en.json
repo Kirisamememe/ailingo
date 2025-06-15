@@ -42,23 +42,28 @@
       "new": "New Card"
     },
     "newWordAIForm": {
+      "title": "New Word",
       "generate": "Generate",
       "stop": "Stop",
       "words": {
-        "placeholder": "Enter a word",
-        "description": "Please enter the word you want to generate a wordcard for."
+        "label": "Words",
+        "placeholder": "Enter words, separated by commas.",
+        "description": "Enter the words you want to generate a wordcard for."
       },
       "model": {
+        "label": "Model",
         "placeholder": "Select a model",
-        "description": "Please select the model you want to use to generate a wordcard."
+        "description": "Select the model you want to use to generate a wordcard."
       },
       "learningLanguage": {
+        "label": "Learning Language",
         "placeholder": "Select a language",
-        "description": "Please select the language you want to use to generate a wordcard."
+        "description": "Select the language of the words."
       },
       "translationLanguage": {
+        "label": "Translation Language",
         "placeholder": "Select a language",
-        "description": "Please select the language you want to use to generate a wordcard."
+        "description": "Select the language for translating definitions and examples."
       }
     },
     "editForm": {

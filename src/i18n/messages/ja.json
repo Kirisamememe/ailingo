@@ -42,23 +42,28 @@
       "new": "新規生成"
     },
     "newWordAIForm": {
+      "title": "新規生成",
       "generate": "生成",
       "stop": "停止",
       "words": {
-        "placeholder": "単語を入力",
+        "label": "単語",
+        "placeholder": "カンマで区切って単語を入力",
         "description": "単語を入力してください。"
       },
       "model": {
+        "label": "モデル",
         "placeholder": "モデルを選択",
         "description": "モデルを選択してください。"
       },
       "learningLanguage": {
+        "label": "学習言語",
         "placeholder": "言語を選択",
-        "description": "ワードカードの学習言語を選択してください。"
+        "description": "単語の言語を選択してください。"
       },
       "translationLanguage": {
+        "label": "翻訳言語",
         "placeholder": "言語を選択",
-        "description": "ワードカードの翻訳言語を選択してください。"
+        "description": "定義と例文の翻訳言語を選択してください。"
       }
     },
     "editForm": {
