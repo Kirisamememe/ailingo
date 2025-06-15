@@ -15,14 +15,15 @@ type Props = {
  * HeaderWrapper
  */
 export const HeaderWrapper: React.FC<Props> = ({ children }) => {
-  const { atTop, isGoingUp, headerFixed } = useScrollState();
+  const { atTop, isGoingUp, headerFixed, headerStatic } = useScrollState();
 
   return (
     <FlexRow
       className={cn(
-        "sticky top-0 z-50 h-16 w-full shrink-0 items-center justify-between shadow-[0_1px_0_0_hsla(var(--foreground)/0.1)] backdrop-blur-xl transition-transform duration-300",
+        "sticky top-0 z-50 h-14 w-full shrink-0 items-center justify-between shadow-[0_1px_0_0_hsla(var(--foreground)/0.1)] backdrop-blur-xl transition-transform duration-300",
         !atTop && !isGoingUp && !headerFixed && "-translate-y-16",
         headerFixed && "translate-y-0",
+        headerStatic && "static translate-y-0",
       )}
     >
       <FlexRow p={3} gap={2} center>

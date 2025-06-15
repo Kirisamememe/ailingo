@@ -8,6 +8,7 @@ import { type UseFormReturn, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type z from "zod";
 import { modelListTuple } from "@/lib/ai";
+import { useScrollState } from "@/components/providers";
 import { createWordcards } from "../_actions/create";
 import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
 
@@ -50,6 +51,15 @@ type WordbookProviderProps = {
 export const WordbookProvider = ({ children }: WordbookProviderProps) => {
   const [isComplete, setIsComplete] = useState(true);
   const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
+
+  const { setHeaderStatic } = useScrollState();
+
+  useEffect(() => {
+    setHeaderStatic(true);
+    return () => {
+      setHeaderStatic(false);
+    };
+  }, [setHeaderStatic]);
 
   useEffect(() => {
     if (audioRef.current) return;
