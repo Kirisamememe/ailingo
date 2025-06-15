@@ -16,7 +16,9 @@ export const wordcardBase = z.object({
     .string()
     .min(1, "phoneticsIsRequired")
     .max(100, "phoneticsIsTooLong")
-    .describe("Phonetics of the wordcard, like /ˈmɒdərət/."),
+    .describe(
+      "The pronunciation of this word. For example, in English, it would be something like /ˈmɒdərət/; for Simplified Chinese, use pinyin; for Traditional Chinese, use Zhuyin.",
+    ),
   example1: z
     .string()
     .min(1, "exampleIsRequired")
