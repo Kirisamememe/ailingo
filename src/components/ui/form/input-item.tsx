@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "./form";
+import { FormControl, FormDescription, FormItem, FormLabel } from "./form";
+import { FormMsg } from "./form-msg";
 import { Input } from "./input";
 
 type Props = {
@@ -7,6 +8,7 @@ type Props = {
   hiddenLabel?: boolean;
   description: string;
   hiddenDescription?: boolean;
+  i18nNameSpace: string;
 } & React.ComponentProps<typeof Input>;
 
 export const InputItem: React.FC<Props> = ({
@@ -15,6 +17,7 @@ export const InputItem: React.FC<Props> = ({
   description,
   hiddenDescription = true,
   className,
+  i18nNameSpace,
   ...props
 }) => {
   return (
@@ -26,7 +29,7 @@ export const InputItem: React.FC<Props> = ({
         <Input className={cn("h-10 rounded-sm", className)} {...props} />
       </FormControl>
       <FormDescription hidden={hiddenDescription}>{description}</FormDescription>
-      <FormMessage />
+      <FormMsg i18nNameSpace={i18nNameSpace} />
     </FormItem>
   );
 };

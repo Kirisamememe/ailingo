@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
-import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "./form";
+import { FormControl, FormDescription, FormItem, FormLabel } from "./form";
+import { FormMsg } from "./form-msg";
 import { Textarea } from "./textarea";
 
 type Props = {
@@ -8,6 +9,7 @@ type Props = {
   description: string;
   hiddenDescription?: boolean;
   parentClass?: string;
+  i18nNameSpace: string;
 } & React.ComponentProps<typeof Textarea>;
 
 export const TextareaItem: React.FC<Props> = ({
@@ -17,6 +19,7 @@ export const TextareaItem: React.FC<Props> = ({
   hiddenDescription = true,
   className,
   parentClass,
+  i18nNameSpace,
   ...props
 }) => {
   return (
@@ -28,7 +31,7 @@ export const TextareaItem: React.FC<Props> = ({
         <Textarea className={cn("resize-none rounded-sm", className)} {...props} />
       </FormControl>
       <FormDescription hidden={hiddenDescription}>{description}</FormDescription>
-      <FormMessage />
+      <FormMsg i18nNameSpace={i18nNameSpace} />
     </FormItem>
   );
 };

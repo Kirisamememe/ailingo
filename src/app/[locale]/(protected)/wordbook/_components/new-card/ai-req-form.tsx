@@ -53,6 +53,7 @@ export const AiReqForm = () => {
                 description={t("words.description")}
                 placeholder={t("words.placeholder")}
                 className="mb-1 h-32"
+                i18nNameSpace="wordbook.newWordAIForm.words"
                 {...field}
               />
             )}
