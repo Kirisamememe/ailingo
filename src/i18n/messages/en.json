@@ -8,6 +8,7 @@
     "save": "Save",
     "continue": "Continue",
     "delete": "Delete",
+    "deleteDescription": "This action cannot be undone. Are you sure you want to delete this?",
     "ok": "OK",
     "no": "NO",
     "close": "Close",
@@ -15,6 +16,9 @@
     "editor": {
       "createdBy": "Created By {name}",
       "lastEdit": "Last Edit {name}"
+    },
+    "error": {
+      "database": "Database Error"
     }
   },
   "sidebar": {
@@ -48,7 +52,9 @@
       "words": {
         "label": "Words",
         "placeholder": "Enter words, separated by commas.",
-        "description": "Enter the words you want to generate a wordcard for."
+        "description": "Enter the words you want to generate a wordcard for.",
+        "wordsIsRequired": "Words are required",
+        "wordsIsTooLong": "Please enter words less than 500 characters."
       },
       "model": {
         "label": "Model",
@@ -67,6 +73,12 @@
       }
     },
     "editForm": {
+      "title": "Edit Wordcard",
+      "save": {
+        "success": "Wordcard updated successfully",
+        "error": "Failed to update wordcard",
+        "invalidForm": "Invalid form"
+      },
       "word": {
         "label": "Word",
         "placeholder": "Enter the word",

@@ -8,6 +8,7 @@
     "save": "保存",
     "continue": "続ける",
     "delete": "削除",
+    "deleteDescription": "この操作は元に戻せません。本当に削除しますか？",
     "ok": "はい",
     "no": "いいえ",
     "close": "閉じる",
@@ -15,6 +16,9 @@
     "editor": {
       "createdBy": "作者 {name}",
       "lastEdit": "最終編集 {name}"
+    },
+    "error": {
+      "database": "データベースエラー"
     }
   },
   "sidebar": {
@@ -48,7 +52,9 @@
       "words": {
         "label": "単語",
         "placeholder": "カンマで区切って単語を入力",
-        "description": "単語を入力してください。"
+        "description": "単語を入力してください。",
+        "wordsIsRequired": "単語は必須です",
+        "wordsIsTooLong": "単語は500文字以内で入力してください。"
       },
       "model": {
         "label": "モデル",
@@ -67,6 +73,12 @@
       }
     },
     "editForm": {
+      "title": "単語カード編集",
+      "save": {
+        "success": "単語カードを更新しました",
+        "error": "単語カードの更新に失敗しました",
+        "invalidForm": "無効なフォーム"
+      },
       "word": {
         "label": "単語",
         "placeholder": "単語を入力",

@@ -8,6 +8,7 @@
     "save": "保存",
     "continue": "继续",
     "delete": "删除",
+    "deleteDescription": "此操作无法撤销。确定要删除吗？",
     "ok": "是",
     "no": "否",
     "close": "关闭",
@@ -15,6 +16,9 @@
     "editor": {
       "createdBy": "作者 {name}",
       "lastEdit": "最后编辑 {name}"
+    },
+    "error": {
+      "database": "数据库错误"
     }
   },
   "sidebar": {
@@ -48,7 +52,9 @@
       "words": {
         "label": "单词",
         "placeholder": "输入多个单词，用逗号分隔",
-        "description": "请输入您想要生成单词卡的单词。"
+        "description": "请输入您想要生成单词卡的单词。",
+        "wordsIsRequired": "单词为必填项。",
+        "wordsIsTooLong": "单词不能超过500个字符。"
       },
       "model": {
         "label": "模型",
@@ -67,6 +73,12 @@
       }
     },
     "editForm": {
+      "title": "编辑单词卡",
+      "save": {
+        "success": "单词卡更新成功",
+        "error": "单词卡更新失败",
+        "invalidForm": "无效的表单"
+      },
       "word": {
         "label": "单词",
         "placeholder": "输入单词",
