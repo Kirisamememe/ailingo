@@ -19,7 +19,9 @@ export const InputItem: React.FC<Props> = ({
 }) => {
   return (
     <FormItem className="w-full">
-      <FormLabel hidden={hiddenLabel}>{label}</FormLabel>
+      <FormLabel hidden={hiddenLabel} className="px-1 font-semibold">
+        {label}
+      </FormLabel>
       <FormControl>
         <Input className={cn("h-10 rounded-sm", className)} {...props} />
       </FormControl>
