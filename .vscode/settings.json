@@ -14,7 +14,8 @@
     "teamlab",
     "tsconfigs",
     "Wordcards",
-    "Xiaoxiao"
+    "Xiaoxiao",
+    "Zhuyin"
   ],
   "files.autoSave": "onFocusChange",
   "typescript.tsdk": "node_modules/typescript/lib",
