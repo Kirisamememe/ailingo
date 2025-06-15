@@ -1,15 +1,15 @@
 import { cn } from "@/lib/utils";
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "./form";
-import { Input } from "./input";
+import { Textarea } from "./textarea";
 
 type Props = {
   label?: string;
   hiddenLabel?: boolean;
   description: string;
   hiddenDescription?: boolean;
-} & React.ComponentProps<typeof Input>;
+} & React.ComponentProps<typeof Textarea>;
 
-export const InputItem: React.FC<Props> = ({
+export const TextareaItem: React.FC<Props> = ({
   label,
   hiddenLabel = false,
   description,
@@ -18,10 +18,10 @@ export const InputItem: React.FC<Props> = ({
   ...props
 }) => {
   return (
-    <FormItem className="w-full">
+    <FormItem>
       <FormLabel hidden={hiddenLabel}>{label}</FormLabel>
       <FormControl>
-        <Input className={cn("h-10 rounded-sm", className)} {...props} />
+        <Textarea className={cn("h-10 resize-none rounded-sm", className)} {...props} />
       </FormControl>
       <FormDescription hidden={hiddenDescription}>{description}</FormDescription>
       <FormMessage />

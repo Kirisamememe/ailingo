@@ -28,7 +28,7 @@ export const SelectFormItem: React.FC<Props> = ({
         <FormControl>
           <SelectTrigger
             className={cn(
-              "data-[placeholder]:hover:text-foreground h-16 cursor-pointer rounded-sm",
+              "data-[placeholder]:hover:text-foreground h-16 w-full cursor-pointer rounded-sm",
               className,
             )}
           >
