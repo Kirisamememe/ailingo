@@ -8,7 +8,7 @@ import { i18n } from "@/i18n";
 /**
  * 最大実行時間
  */
-export const maxDuration = 59;
+export const maxDuration = 300;
 
 /**
  * 記事生成API
