@@ -2,10 +2,11 @@
 
 import { usePathname, useSearchParams } from "next/navigation";
 import { useEffect } from "react";
-import { FlexColumn } from "@/components/ui/flexbox";
-import { Paragraph } from "@/components/ui/typography";
+import { SquarePen } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { WordbookContentView } from "./content-view";
 import { EditForm } from "./edit-form";
+import { AiReqForm } from "../new-card";
 import type { WordCard } from "@/generated/prisma/client";
 
 type Props = {
@@ -27,6 +28,13 @@ export const WordbookContent: React.FC<Props> = ({ wordCards }) => {
 
   const isEditing = searchParams.get("edit") === "true";
 
+  const handleEdit = () => {
+    const currentSearchParams = new URLSearchParams(searchParams);
+    currentSearchParams.set("edit", "true");
+    const newUrl = `${pathname}?${currentSearchParams.toString()}`;
+    window.history.pushState(null, "", newUrl);
+  };
+
   useEffect(() => {
     if (!wordCards.length) return;
     if (idParam) return; // 既に選択されている場合は何もしない
@@ -38,14 +46,32 @@ export const WordbookContent: React.FC<Props> = ({ wordCards }) => {
     window.history.replaceState(null, "", newUrl);
   }, [idParam, pathname, searchParams, wordCards]);
 
+  // 新規生成
+  if (wordCardId === 0) {
+    return <AiReqForm />;
+  }
+
+  if (!wordCard) {
+    return null;
+  }
+
+  // 編集
+  if (isEditing) {
+    return <EditForm wordCard={wordCard} />;
+  }
+
   return (
-    <FlexColumn
-      lang={wordCard?.language ?? "en"}
-      className="bg-card/50 sticky top-12 h-fit min-h-[calc(100vh-8rem)] w-full rounded-md border p-6"
-    >
-      {wordCard && !isEditing && <WordbookContentView wordCard={wordCard} />}
-      {wordCard && isEditing && <EditForm wordCard={wordCard} />}
-      {wordCardId <= 0 && <Paragraph>generating...</Paragraph>}
-    </FlexColumn>
+    <>
+      <WordbookContentView wordCard={wordCard} />
+      <Button
+        type="button"
+        variant="outline"
+        size="icon"
+        className="absolute top-5 right-5"
+        onClick={handleEdit}
+      >
+        <SquarePen className="size-5" />
+      </Button>
+    </>
   );
 };

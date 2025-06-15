@@ -1,10 +1,9 @@
 import { getSession } from "@/lib/auth";
 import { languageToLocale } from "@/lib/utils";
 import { InsetLayoutWithPadding } from "@/components/layout";
-import { FlexRow } from "@/components/ui/flexbox";
+import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { WordbookContent } from "./_components/content";
 import { WordbookList } from "./_components/list";
-import { AiReqForm } from "./_components/new-card";
 import { WordbookProvider } from "./_hooks/wordbook-provider";
 import { wordCardService } from "@/services";
 
@@ -20,10 +19,11 @@ const WordbookPage = async () => {
   return (
     <WordbookProvider>
       <InsetLayoutWithPadding>
-        <AiReqForm />
-        <FlexRow className="bg-card/50 sticky top-72 w-full gap-4 rounded-lg border p-4">
+        <FlexRow className="bg-card/50 max-h-[calc(100vh-13.125rem)] w-full gap-4 rounded-lg border p-4 @[40rem]:max-h-[calc(100vh-4.5rem)]">
           <WordbookList wordList={wordList} />
-          <WordbookContent wordCards={wordCards} />
+          <FlexColumn className="bg-card/50 relative h-full w-full overflow-y-scroll rounded-md border p-6">
+            <WordbookContent wordCards={wordCards} />
+          </FlexColumn>
         </FlexRow>
       </InsetLayoutWithPadding>
     </WordbookProvider>
