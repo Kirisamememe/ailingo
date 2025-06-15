@@ -27,7 +27,9 @@ export const BasicInfo: React.FC<Props> = ({ word, phonetics, definitions, langu
   return (
     <FlexColumn gap={5}>
       <FlexColumn gap={1}>
-        <Headline size={30}>{word}</Headline>
+        <Headline size={30} lang={language}>
+          {word}
+        </Headline>
         <FlexRow centerY>
           <Button
             variant="ghost"
@@ -42,10 +44,12 @@ export const BasicInfo: React.FC<Props> = ({ word, phonetics, definitions, langu
           >
             <Volume2 size={20} />
           </Button>
-          <Caption size={14}>{phonetics}</Caption>
+          <Caption size={14} lang={language}>
+            {phonetics}
+          </Caption>
         </FlexRow>
       </FlexColumn>
-      <Definitions definitions={definitions} />
+      <Definitions language={language} definitions={definitions} />
     </FlexColumn>
   );
 };

@@ -29,6 +29,7 @@ export const Example: React.FC<Props> = ({ example, language }) => {
   return (
     <FlexColumn className="relative pl-3">
       <Paragraph
+        lang={language}
         size={18}
         weight={500}
         className={cn(
