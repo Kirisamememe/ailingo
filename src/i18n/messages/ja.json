@@ -1,0 +1,164 @@
+{
+  "common": {
+    "confirm": "確認",
+    "cancel": "キャンセル",
+    "stop": "停止",
+    "submit": "送信",
+    "generate": "生成",
+    "save": "保存",
+    "continue": "続ける",
+    "delete": "削除",
+    "deleteDescription": "この操作は元に戻せません。本当に削除しますか？",
+    "ok": "はい",
+    "no": "いいえ",
+    "close": "閉じる",
+    "publish": "公開",
+    "editor": {
+      "createdBy": "作者 {name}",
+      "lastEdit": "最終編集 {name}"
+    },
+    "error": {
+      "database": "データベースエラー"
+    }
+  },
+  "sidebar": {
+    "titles": {
+      "general": "共通",
+      "aiBooster": "AIブースター"
+    },
+    "daily": "デイリー",
+    "wordbook": "単語帳",
+    "preference": "設定",
+    "quiz": "小テスト",
+    "generatedMaterial": "生成マテリアル",
+    "compositionCorrection": "作文添削",
+    "footer": {
+      "theme": "テーマ",
+      "profile": "プロフィール",
+      "setting": "設定",
+      "language": "言語",
+      "signOut": "ログアウト"
+    }
+  },
+  "wordbook": {
+    "list": {
+      "generating": "生成中...",
+      "new": "新規生成"
+    },
+    "newWordAIForm": {
+      "title": "新規生成",
+      "generate": "生成",
+      "stop": "停止",
+      "words": {
+        "label": "単語",
+        "placeholder": "カンマで区切って単語を入力",
+        "description": "単語を入力してください。",
+        "wordsIsRequired": "単語は必須です",
+        "wordsIsTooLong": "単語は500文字以内で入力してください。"
+      },
+      "model": {
+        "label": "モデル",
+        "placeholder": "モデルを選択",
+        "description": "モデルを選択してください。"
+      },
+      "learningLanguage": {
+        "label": "学習言語",
+        "placeholder": "言語を選択",
+        "description": "単語の言語を選択してください。"
+      },
+      "translationLanguage": {
+        "label": "翻訳言語",
+        "placeholder": "言語を選択",
+        "description": "定義と例文の翻訳言語を選択してください。"
+      }
+    },
+    "editForm": {
+      "title": "単語カード編集",
+      "save": {
+        "success": "単語カードを更新しました",
+        "error": "単語カードの更新に失敗しました",
+        "invalidForm": "無効なフォーム"
+      },
+      "word": {
+        "label": "単語",
+        "placeholder": "単語を入力",
+        "description": "単語を入力してください。",
+        "wordIsRequired": "単語は必須です",
+        "wordIsTooLong": "単語は100文字以内で入力してください。"
+      },
+      "phonetics": {
+        "label": "発音",
+        "placeholder": "発音を入力",
+        "description": "発音を入力してください。",
+        "phoneticsIsRequired": "発音は必須です",
+        "phoneticsIsTooLong": "発音は100文字以内で入力してください。"
+      },
+      "definitions": {
+        "label": "定義",
+        "placeholder": "定義を入力",
+        "description": "定義を入力してください。",
+        "definitionsIsRequired": "定義は必須です",
+        "definitionsIsTooLong": "定義は500文字以内で入力してください。"
+      },
+      "example": {
+        "label": "例文",
+        "placeholder": "例文を入力",
+        "description": "例文を入力してください。",
+        "exampleIsRequired": "例文は必須です",
+        "exampleIsTooLong": "例文は500文字以内で入力してください。"
+      },
+      "derivatives": {
+        "label": "派生語",
+        "placeholder": "派生語を入力",
+        "description": "派生語を入力してください。",
+        "derivativesIsTooLong": "派生語は150文字以内で入力してください。"
+      },
+      "synonyms": {
+        "label": "同義語",
+        "placeholder": "同義語を入力",
+        "description": "同義語を入力してください。",
+        "synonymsIsTooLong": "同義語は150文字以内で入力してください。"
+      },
+      "antonyms": {
+        "label": "反義語",
+        "placeholder": "反義語を入力",
+        "description": "反義語を入力してください。",
+        "antonymsIsTooLong": "反義語は150文字以内で入力してください。"
+      },
+      "note": {
+        "label": "メモ",
+        "placeholder": "メモを入力",
+        "description": "メモを入力してください。",
+        "noteIsTooLong": "メモは1000文字以内で入力してください。"
+      },
+      "language": {
+        "label": "言語",
+        "placeholder": "言語を選択",
+        "description": "ワードカードの言語を選択してください。",
+        "languageIsRequired": "言語は必須です"
+      }
+    },
+    "extra": {
+      "derivatives": "派生語",
+      "synonyms": "同義語",
+      "antonyms": "反義語"
+    }
+  },
+  "POS": {
+    "NOUN": "名詞",
+    "VERB": "動詞",
+    "TRANSITIVE_VERB": "他動詞",
+    "INTRANSITIVE_VERB": "自動詞",
+    "ADJECTIVE": "形容詞",
+    "ADVERB": "副詞",
+    "PREPOSITION": "前置詞",
+    "CONJUNCTION": "接続詞",
+    "PRONOUN": "代名詞",
+    "INTERJECTION": "感動詞",
+    "PHRASE": "熟語",
+    "DETERMINER": "冠詞",
+    "IDIOM": "慣用句",
+    "ORDINAL": "序数",
+    "OTHER": "その他"
+  }
+}

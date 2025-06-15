@@ -1,14 +1,21 @@
 {
   "cSpell.words": [
+    "ˈmɒdərət",
     "commitlint",
+    "gridbox",
     "groupwork",
+    "Hsiao",
+    "Nanami",
     "oklch",
     "PBKDF",
     "shinsotsu",
     "sonner",
     "tailwindcss",
     "teamlab",
-    "tsconfigs"
+    "tsconfigs",
+    "Wordcards",
+    "Xiaoxiao",
+    "Zhuyin"
   ],
   "files.autoSave": "onFocusChange",
   "typescript.tsdk": "node_modules/typescript/lib",
@@ -22,5 +29,6 @@
     "source.fixAll.eslint": "explicit"
   },
   "tailwindCSS.emmetCompletions": true,
-  "tailwindCSS.validate": true
+  "tailwindCSS.validate": true,
+  "i18n-ally.localesPaths": ["src/i18n/messages"]
 }

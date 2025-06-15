@@ -1,0 +1,164 @@
+{
+  "common": {
+    "confirm": "確認",
+    "cancel": "取消",
+    "stop": "終止",
+    "submit": "發送",
+    "generate": "生成",
+    "save": "存儲",
+    "continue": "繼續",
+    "delete": "刪除",
+    "deleteDescription": "此操作無法撤銷。確定要刪除嗎？",
+    "ok": "是",
+    "no": "否",
+    "close": "關閉",
+    "publish": "發佈",
+    "editor": {
+      "createdBy": "作者 {name}",
+      "lastEdit": "最後編輯 {name}"
+    },
+    "error": {
+      "database": "資料庫錯誤"
+    }
+  },
+  "sidebar": {
+    "titles": {
+      "general": "通用",
+      "aiBooster": "AI 助手"
+    },
+    "daily": "每日",
+    "wordbook": "單字本",
+    "preference": "設定",
+    "quiz": "測驗",
+    "generatedMaterial": "語料生成",
+    "compositionCorrection": "作文批改",
+    "footer": {
+      "theme": "主題",
+      "profile": "個人資料",
+      "setting": "設定",
+      "language": "語言",
+      "signOut": "登出"
+    }
+  },
+  "wordbook": {
+    "list": {
+      "generating": "生成中…",
+      "new": "生成新單字"
+    },
+    "newWordAIForm": {
+      "title": "生成新單字",
+      "generate": "生成",
+      "stop": "終止",
+      "words": {
+        "label": "單字",
+        "placeholder": "輸入多個單字，用逗號分隔",
+        "description": "請輸入您想要生成單字卡的單字。",
+        "wordsIsRequired": "單字為必填項。",
+        "wordsIsTooLong": "單字不能超過500個字符。"
+      },
+      "model": {
+        "label": "模型",
+        "placeholder": "選擇模型",
+        "description": "請選擇您想要使用的模型來生成單字卡。"
+      },
+      "learningLanguage": {
+        "label": "學習語言",
+        "placeholder": "選擇語言",
+        "description": "請選擇單字本身的語言。"
+      },
+      "translationLanguage": {
+        "label": "翻譯語言",
+        "placeholder": "選擇語言",
+        "description": "請選擇釋義和例句的翻譯語言。"
+      }
+    },
+    "editForm": {
+      "title": "編輯單字卡",
+      "save": {
+        "success": "單字卡更新成功",
+        "error": "單字卡更新失敗",
+        "invalidForm": "無效的表單"
+      },
+      "word": {
+        "label": "單字",
+        "placeholder": "輸入單字",
+        "description": "請輸入您想要生成單字卡的單字。",
+        "wordIsRequired": "單字為必填項。",
+        "wordIsTooLong": "單字不能超過100個字符。"
+      },
+      "phonetics": {
+        "label": "發音",
+        "placeholder": "輸入發音",
+        "description": "請輸入發音。",
+        "phoneticsIsRequired": "發音為必填項。",
+        "phoneticsIsTooLong": "發音不能超過100個字符。"
+      },
+      "definitions": {
+        "label": "定義",
+        "placeholder": "輸入定義",
+        "description": "請輸入您想要生成單字卡的定義。",
+        "definitionsIsRequired": "定義為必填項。",
+        "definitionsIsTooLong": "定義不能超過500個字符。"
+      },
+      "example": {
+        "label": "例句",
+        "placeholder": "輸入例句",
+        "description": "請輸入您想要生成單字卡的例句。",
+        "exampleIsRequired": "例句為必填項。",
+        "exampleIsTooLong": "例句不能超過500個字符。"
+      },
+      "derivatives": {
+        "label": "派生字",
+        "placeholder": "輸入派生字",
+        "description": "請輸入您想要生成單字卡的派生字。",
+        "derivativesIsTooLong": "派生字不能超過150個字符。"
+      },
+      "synonyms": {
+        "label": "同義字",
+        "placeholder": "輸入同義字",
+        "description": "請輸入您想要生成單字卡的同義字。",
+        "synonymsIsTooLong": "同義字不能超過150個字符。"
+      },
+      "antonyms": {
+        "label": "反義字",
+        "placeholder": "輸入反義字",
+        "description": "請輸入您想要生成單字卡的反義字。",
+        "antonymsIsTooLong": "反義字不能超過150個字符。"
+      },
+      "note": {
+        "label": "學習筆記",
+        "placeholder": "輸入學習筆記",
+        "description": "請輸入您想要生成單字卡的學習筆記。",
+        "noteIsTooLong": "學習筆記不能超過1000個字符。"
+      },
+      "language": {
+        "label": "語言",
+        "placeholder": "選擇語言",
+        "description": "請選擇單字卡的語言。",
+        "languageIsRequired": "語言為必填項。"
+      }
+    },
+    "extra": {
+      "derivatives": "派生字",
+      "synonyms": "同義字",
+      "antonyms": "反義字"
+    }
+  },
+  "POS": {
+    "NOUN": "名詞",
+    "VERB": "動詞",
+    "TRANSITIVE_VERB": "及物動詞",
+    "INTRANSITIVE_VERB": "不及物動詞",
+    "ADJECTIVE": "形容詞",
+    "ADVERB": "副詞",
+    "PREPOSITION": "介詞",
+    "CONJUNCTION": "連詞",
+    "PRONOUN": "代詞",
+    "INTERJECTION": "感嘆詞",
+    "PHRASE": "短語",
+    "DETERMINER": "冠詞",
+    "IDIOM": "成語",
+    "ORDINAL": "序數",
+    "OTHER": "其他"
+  }
+}

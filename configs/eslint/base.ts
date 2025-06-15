@@ -61,6 +61,12 @@ export const baseConfig = [
       // 型定義をtypeに統一
       "@typescript-eslint/consistent-type-definitions": ["error", "type"],
       "@typescript-eslint/no-misused-promises": ["error", { checksVoidReturn: false }],
+      "@typescript-eslint/no-unsafe-assignment": "off",
+      "@typescript-eslint/no-unsafe-member-access": "off",
+      "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unsafe-return": "off",
+      "@typescript-eslint/no-unsafe-argument": "off",
+      "@typescript-eslint/restrict-template-expressions": "off",
     },
   },
   {
@@ -90,7 +96,7 @@ export const baseConfig = [
               position: "before",
             },
             {
-              pattern: "@/libs/**",
+              pattern: "@/lib/**",
               group: "internal",
               position: "before",
             },
@@ -128,7 +134,12 @@ export const baseConfig = [
   },
   {
     name: "jsdoc",
-    ignores: ["src/app/*page.tsx", "src/app/*layout.tsx"],
+    ignores: [
+      "src/app/**/page.tsx",
+      "src/app/**/layout.tsx",
+      "src/middleware.ts",
+      "src/components/ui/**/*.tsx",
+    ],
     plugins: {
       jsdoc: eslintJsdocPlugin,
     },
@@ -168,6 +179,7 @@ export const baseConfig = [
       "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/no-redundant-type-constituents": "off",
       "@typescript-eslint/no-unsafe-call": "off",
+      "@typescript-eslint/no-unnecessary-condition": "off",
     },
   },
 ];

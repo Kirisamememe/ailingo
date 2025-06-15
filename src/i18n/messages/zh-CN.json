@@ -1,0 +1,164 @@
+{
+  "common": {
+    "confirm": "确认",
+    "cancel": "取消",
+    "stop": "终止",
+    "submit": "提交",
+    "generate": "生成",
+    "save": "保存",
+    "continue": "继续",
+    "delete": "删除",
+    "deleteDescription": "此操作无法撤销。确定要删除吗？",
+    "ok": "是",
+    "no": "否",
+    "close": "关闭",
+    "publish": "发布",
+    "editor": {
+      "createdBy": "作者 {name}",
+      "lastEdit": "最后编辑 {name}"
+    },
+    "error": {
+      "database": "数据库错误"
+    }
+  },
+  "sidebar": {
+    "titles": {
+      "general": "通用",
+      "aiBooster": "AI 助手"
+    },
+    "daily": "每日",
+    "wordbook": "单词本",
+    "preference": "设置",
+    "quiz": "测验",
+    "generatedMaterial": "语料生成",
+    "compositionCorrection": "作文批改",
+    "footer": {
+      "theme": "主题",
+      "profile": "个人资料",
+      "setting": "设置",
+      "language": "语言",
+      "signOut": "登出"
+    }
+  },
+  "wordbook": {
+    "list": {
+      "generating": "生成中…",
+      "new": "生成新单词"
+    },
+    "newWordAIForm": {
+      "title": "生成新单词",
+      "generate": "生成",
+      "stop": "停止",
+      "words": {
+        "label": "单词",
+        "placeholder": "输入多个单词，用逗号分隔",
+        "description": "请输入您想要生成单词卡的单词。",
+        "wordsIsRequired": "单词为必填项。",
+        "wordsIsTooLong": "单词不能超过500个字符。"
+      },
+      "model": {
+        "label": "模型",
+        "placeholder": "选择模型",
+        "description": "请选择您想要使用的模型来生成单词卡。"
+      },
+      "learningLanguage": {
+        "label": "学习语言",
+        "placeholder": "选择语言",
+        "description": "请选择单词本身的语言。"
+      },
+      "translationLanguage": {
+        "label": "翻译语言",
+        "placeholder": "选择语言",
+        "description": "请选择释义和例句的翻译语言。"
+      }
+    },
+    "editForm": {
+      "title": "编辑单词卡",
+      "save": {
+        "success": "单词卡更新成功",
+        "error": "单词卡更新失败",
+        "invalidForm": "无效的表单"
+      },
+      "word": {
+        "label": "单词",
+        "placeholder": "输入单词",
+        "description": "请输入单词。",
+        "wordIsRequired": "单词为必填项。",
+        "wordIsTooLong": "单词不能超过100个字符。"
+      },
+      "phonetics": {
+        "label": "发音",
+        "placeholder": "输入发音",
+        "description": "请输入发音。",
+        "phoneticsIsRequired": "发音为必填项。",
+        "phoneticsIsTooLong": "发音不能超过100个字符。"
+      },
+      "definitions": {
+        "label": "定义",
+        "placeholder": "输入定义",
+        "description": "请输入定义。",
+        "definitionsIsRequired": "定义为必填项。",
+        "definitionsIsTooLong": "定义不能超过500个字符。"
+      },
+      "example": {
+        "label": "例句",
+        "placeholder": "输入例句",
+        "description": "请输入例句。",
+        "exampleIsRequired": "例句为必填项。",
+        "exampleIsTooLong": "例句不能超过500个字符。"
+      },
+      "derivatives": {
+        "label": "派生词",
+        "placeholder": "输入派生词",
+        "description": "请输入派生词。",
+        "derivativesIsTooLong": "派生词不能超过150个字符。"
+      },
+      "synonyms": {
+        "label": "同义词",
+        "placeholder": "输入同义词",
+        "description": "请输入同义词。",
+        "synonymsIsTooLong": "同义词不能超过150个字符。"
+      },
+      "antonyms": {
+        "label": "反义词",
+        "placeholder": "输入反义词",
+        "description": "请输入反义词。",
+        "antonymsIsTooLong": "反义词不能超过150个字符。"
+      },
+      "note": {
+        "label": "学习笔记",
+        "placeholder": "输入学习笔记",
+        "description": "请输入学习笔记。",
+        "noteIsTooLong": "学习笔记不能超过1000个字符。"
+      },
+      "language": {
+        "label": "语言",
+        "placeholder": "选择语言",
+        "description": "请选择单词卡的语言。",
+        "languageIsRequired": "语言为必填项。"
+      }
+    },
+    "extra": {
+      "derivatives": "派生词",
+      "synonyms": "同义词",
+      "antonyms": "反义词"
+    }
+  },
+  "POS": {
+    "NOUN": "名词",
+    "VERB": "动词",
+    "TRANSITIVE_VERB": "及物动词",
+    "INTRANSITIVE_VERB": "不及物动词",
+    "ADJECTIVE": "形容词",
+    "ADVERB": "副词",
+    "PREPOSITION": "介词",
+    "CONJUNCTION": "连词",
+    "PRONOUN": "代词",
+    "INTERJECTION": "感叹词",
+    "PHRASE": "短语",
+    "DETERMINER": "冠词",
+    "IDIOM": "成语",
+    "ORDINAL": "序数",
+    "OTHER": "其他"
+  }
+}

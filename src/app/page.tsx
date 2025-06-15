@@ -1,5 +1,7 @@
-const Home = () => {
-  return <div>home</div>;
+import { redirect } from "@/i18n";
+
+const LocaleWrapperPage = () => {
+  redirect({ href: "/", locale: "en" });
 };
 
-export default Home;
+export default LocaleWrapperPage;

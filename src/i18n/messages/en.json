@@ -1,0 +1,164 @@
+{
+  "common": {
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "stop": "Stop",
+    "submit": "Submit",
+    "generate": "Generate",
+    "save": "Save",
+    "continue": "Continue",
+    "delete": "Delete",
+    "deleteDescription": "This action cannot be undone. Are you sure you want to delete this?",
+    "ok": "OK",
+    "no": "NO",
+    "close": "Close",
+    "publish": "Publish",
+    "editor": {
+      "createdBy": "Created By {name}",
+      "lastEdit": "Last Edit {name}"
+    },
+    "error": {
+      "database": "Database Error"
+    }
+  },
+  "sidebar": {
+    "titles": {
+      "general": "General",
+      "aiBooster": "AI Booster"
+    },
+    "daily": "Daily",
+    "wordbook": "Wordbook",
+    "preference": "Preference",
+    "quiz": "Quiz",
+    "generatedMaterial": "Generated Material",
+    "compositionCorrection": "Composition Correction",
+    "footer": {
+      "theme": "Theme",
+      "profile": "Profile",
+      "setting": "Setting",
+      "language": "Language",
+      "signOut": "Sign Out"
+    }
+  },
+  "wordbook": {
+    "list": {
+      "generating": "Generating...",
+      "new": "New Card"
+    },
+    "newWordAIForm": {
+      "title": "New Word",
+      "generate": "Generate",
+      "stop": "Stop",
+      "words": {
+        "label": "Words",
+        "placeholder": "Enter words, separated by commas.",
+        "description": "Enter the words you want to generate a wordcard for.",
+        "wordsIsRequired": "Words are required",
+        "wordsIsTooLong": "Please enter words less than 500 characters."
+      },
+      "model": {
+        "label": "Model",
+        "placeholder": "Select a model",
+        "description": "Select the model you want to use to generate a wordcard."
+      },
+      "learningLanguage": {
+        "label": "Learning Language",
+        "placeholder": "Select a language",
+        "description": "Select the language of the words."
+      },
+      "translationLanguage": {
+        "label": "Translation Language",
+        "placeholder": "Select a language",
+        "description": "Select the language for translating definitions and examples."
+      }
+    },
+    "editForm": {
+      "title": "Edit Wordcard",
+      "save": {
+        "success": "Wordcard updated successfully",
+        "error": "Failed to update wordcard",
+        "invalidForm": "Invalid form"
+      },
+      "word": {
+        "label": "Word",
+        "placeholder": "Enter the word",
+        "description": "Please enter the word you want to generate a wordcard for.",
+        "wordIsRequired": "Word is required",
+        "wordIsTooLong": "Please enter a word less than 100 characters."
+      },
+      "phonetics": {
+        "label": "Phonetics",
+        "placeholder": "Enter the phonetics",
+        "description": "Please enter the phonetics you want to generate a wordcard for.",
+        "phoneticsIsRequired": "Phonetics is required",
+        "phoneticsIsTooLong": "Please enter a phonetics less than 100 characters."
+      },
+      "definitions": {
+        "label": "Definitions",
+        "placeholder": "Enter the definitions",
+        "description": "Please enter the definitions you want to generate a wordcard for.",
+        "definitionsIsRequired": "Definitions is required",
+        "definitionsIsTooLong": "Please enter a definitions less than 500 characters."
+      },
+      "example": {
+        "label": "Example",
+        "placeholder": "Enter the example",
+        "description": "Please enter the example you want to generate a wordcard for.",
+        "exampleIsRequired": "Example is required",
+        "exampleIsTooLong": "Please enter a example less than 500 characters."
+      },
+      "derivatives": {
+        "label": "Derivatives",
+        "placeholder": "Enter the derivatives",
+        "description": "Please enter the derivatives you want to generate a wordcard for.",
+        "derivativesIsTooLong": "Please enter derivatives less than 150 characters."
+      },
+      "synonyms": {
+        "label": "Synonyms",
+        "placeholder": "Enter the synonyms",
+        "description": "Please enter the synonyms you want to generate a wordcard for.",
+        "synonymsIsTooLong": "Please enter synonyms less than 150 characters."
+      },
+      "antonyms": {
+        "label": "Antonyms",
+        "placeholder": "Enter the antonyms",
+        "description": "Please enter the antonyms you want to generate a wordcard for.",
+        "antonymsIsTooLong": "Please enter antonyms less than 150 characters."
+      },
+      "note": {
+        "label": "Note",
+        "placeholder": "Enter the note",
+        "description": "Please enter the note you want to generate a wordcard for.",
+        "noteIsTooLong": "Please enter a note less than 1000 characters."
+      },
+      "language": {
+        "label": "Language",
+        "placeholder": "Select a language",
+        "description": "Please select the language of the wordcard.",
+        "languageIsRequired": "Language is required"
+      }
+    },
+    "extra": {
+      "derivatives": "Derivatives",
+      "synonyms": "Synonyms",
+      "antonyms": "Antonyms"
+    }
+  },
+  "POS": {
+    "NOUN": "noun",
+    "VERB": "verb",
+    "TRANSITIVE_VERB": "transitive verb",
+    "INTRANSITIVE_VERB": "intransitive verb",
+    "ADJECTIVE": "adjective",
+    "ADVERB": "adverb",
+    "PREPOSITION": "preposition",
+    "CONJUNCTION": "conjunction",
+    "PRONOUN": "pronoun",
+    "INTERJECTION": "interjection",
+    "PHRASE": "phrase",
+    "DETERMINER": "determiner",
+    "IDIOM": "idiom",
+    "ORDINAL": "ordinal",
+    "OTHER": "other"
+  }
+}

@@ -1,0 +1,35 @@
+import { cn } from "@/lib/utils";
+import { FormControl, FormDescription, FormItem, FormLabel } from "./form";
+import { FormMsg } from "./form-msg";
+import { Input } from "./input";
+
+type Props = {
+  label?: string;
+  hiddenLabel?: boolean;
+  description: string;
+  hiddenDescription?: boolean;
+  i18nNameSpace: string;
+} & React.ComponentProps<typeof Input>;
+
+export const InputItem: React.FC<Props> = ({
+  label,
+  hiddenLabel = false,
+  description,
+  hiddenDescription = true,
+  className,
+  i18nNameSpace,
+  ...props
+}) => {
+  return (
+    <FormItem className="w-full">
+      <FormLabel hidden={hiddenLabel} className="px-1 font-semibold">
+        {label}
+      </FormLabel>
+      <FormControl>
+        <Input className={cn("h-10 rounded-sm", className)} {...props} />
+      </FormControl>
+      <FormDescription hidden={hiddenDescription}>{description}</FormDescription>
+      <FormMsg i18nNameSpace={i18nNameSpace} />
+    </FormItem>
+  );
+};
