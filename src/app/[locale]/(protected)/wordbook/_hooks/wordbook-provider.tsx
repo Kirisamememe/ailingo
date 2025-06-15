@@ -65,6 +65,7 @@ export const WordbookProvider = ({ model, children }: WordbookProviderProps) => 
       translationLanguage: "ja",
       words: "",
     },
+    mode: "onChange",
   });
 
   useEffect(() => {
@@ -113,8 +114,10 @@ export const WordbookProvider = ({ model, children }: WordbookProviderProps) => 
    * フォーム送信処理
    */
   const onSubmit = () => {
-    setIsComplete(false);
     const values = form.getValues();
+    if (!values.words) return;
+
+    setIsComplete(false);
     submit(values);
   };
 
