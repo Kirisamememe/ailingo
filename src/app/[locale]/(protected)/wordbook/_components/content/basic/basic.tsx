@@ -1,7 +1,5 @@
-import { formatDistanceToNow } from "date-fns";
 import { Volume2 } from "lucide-react";
-import { useLocale } from "next-intl";
-import { cn, getLocaleForFns } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Caption, Headline } from "@/components/ui/typography";
@@ -10,7 +8,6 @@ import { useSpeech } from "../../../_hooks/use-speech";
 import type { Locale } from "@/i18n";
 
 type Props = {
-  createdAt: Date;
   word: string;
   phonetics: string;
   definitions: string;
@@ -20,14 +17,7 @@ type Props = {
 /**
  * 基本情報
  */
-export const BasicInfo: React.FC<Props> = ({
-  createdAt,
-  word,
-  phonetics,
-  definitions,
-  language,
-}) => {
-  const locale = useLocale();
+export const BasicInfo: React.FC<Props> = ({ word, phonetics, definitions, language }) => {
   const { play, stop, isPlaying } = useSpeech();
 
   const handlePlay = async () => {
@@ -36,12 +26,6 @@ export const BasicInfo: React.FC<Props> = ({
 
   return (
     <FlexColumn gap={5}>
-      <Caption>
-        {formatDistanceToNow(createdAt, {
-          addSuffix: true,
-          locale: getLocaleForFns(locale),
-        })}
-      </Caption>
       <FlexColumn gap={1}>
         <Headline size={30}>{word}</Headline>
         <FlexRow centerY>
