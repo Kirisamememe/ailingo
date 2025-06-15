@@ -10,6 +10,7 @@ import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Form, FormField, SelectFormItem, TextareaItem } from "@/components/ui/form";
 import { SelectItem } from "@/components/ui/select";
 import { Headline } from "@/components/ui/typography";
+import { setCookie } from "../../../_actions/cookies";
 import { useWordbook } from "../../_hooks/wordbook-provider";
 import type { Locale } from "@/i18n";
 import { i18n } from "@/i18n";
@@ -63,9 +64,10 @@ export const AiReqForm = () => {
               <SelectFormItem
                 label={t("model.label")}
                 hiddenLabel
-                defaultValue={form.getValues("model")}
+                value={form.getValues("model")}
                 onValueChange={(value) => {
                   form.setValue("model", value as AIModel);
+                  void setCookie("WORDCARD_MODEL", value);
                 }}
                 description={t("model.description")}
                 placeholder={t("model.placeholder")}

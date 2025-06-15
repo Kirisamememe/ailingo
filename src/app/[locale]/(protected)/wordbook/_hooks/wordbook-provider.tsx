@@ -7,7 +7,7 @@ import type { DeepPartial } from "ai";
 import { type UseFormReturn, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type z from "zod";
-import { modelListTuple } from "@/lib/ai";
+import type { AIModel } from "@/lib/ai";
 import { useScrollState } from "@/components/providers";
 import { getOperatorId } from "../../_actions/get-operator";
 import { createWordcard } from "../_actions/create";
@@ -42,6 +42,8 @@ const WordbookContext = createContext<WordbookContextType | undefined>(undefined
  * WordbookProviderのプロパティ型
  */
 type WordbookProviderProps = {
+  /** モデル */
+  model: AIModel;
   /** 子要素 */
   children: ReactNode;
 };
@@ -49,11 +51,21 @@ type WordbookProviderProps = {
 /**
  * WordbookProvider - 単語帳関連のロジックを提供
  */
-export const WordbookProvider = ({ children }: WordbookProviderProps) => {
+export const WordbookProvider = ({ model, children }: WordbookProviderProps) => {
   const [isComplete, setIsComplete] = useState(true);
   const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
 
   const { setHeaderStatic } = useScrollState();
+
+  const form = useForm<z.infer<typeof wordcardRequestSchema>>({
+    resolver: zodResolver(wordcardRequestSchema),
+    defaultValues: {
+      model,
+      learningLanguage: "en",
+      translationLanguage: "ja",
+      words: "",
+    },
+  });
 
   useEffect(() => {
     setHeaderStatic(true);
@@ -66,16 +78,6 @@ export const WordbookProvider = ({ children }: WordbookProviderProps) => {
     if (audioRef.current) return;
     audioRef.current = new Audio();
   }, []);
-
-  const form = useForm<z.infer<typeof wordcardRequestSchema>>({
-    resolver: zodResolver(wordcardRequestSchema),
-    defaultValues: {
-      model: modelListTuple[1],
-      learningLanguage: "en",
-      translationLanguage: "ja",
-      words: "",
-    },
-  });
 
   /**
    * AI生成完了時の処理
