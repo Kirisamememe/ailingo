@@ -1,6 +1,5 @@
 import { cookies } from "next/headers";
 import type { Locale } from "next-intl";
-import { getSession } from "@/lib/auth";
 import { BaseLayout } from "@/components/layout";
 import { ScrollStateProvider } from "@/components/providers";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
@@ -14,7 +13,6 @@ type Props = {
 
 const RootLayout: React.FC<Props> = async ({ children, params }) => {
   const { locale } = await params;
-  await getSession();
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
 

@@ -19,6 +19,8 @@ class UserService {
    * ユーザーをメールアドレスで取得する
    */
   async getUserByEmail(email: string) {
+    // eslint-disable-next-line no-console
+    console.log("getUserByEmail", email);
     const user = await prisma.user.findUnique({
       where: { email },
     });
