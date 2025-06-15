@@ -32,6 +32,8 @@ export const POST = auth(async function POST(req) {
     You are a great wordcard generator. 
     Please generate an appropriate wordcards array object following the prompt and the schema. 
     The translation of the examples should be in ${i18n.locales[translationLanguage]}.
+    If there are any nonexistent words mixed in, please ignore those words.
+    If all the words sent by the user are nonexistent, return an empty object.
   `;
 
   const prompt = `
