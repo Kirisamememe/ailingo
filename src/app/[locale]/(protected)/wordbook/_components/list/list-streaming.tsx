@@ -15,8 +15,10 @@ export const WordbookListStreaming = () => {
   if (isComplete) return null;
 
   return (
-    <FlexRow className="h-13 w-full items-center justify-center">
-      <Caption>{t("list.generating")}</Caption>
+    <FlexRow className="bg-accent my-2 h-12 w-full shrink-0 animate-pulse items-center justify-start rounded-sm p-4">
+      <Caption size={14} weight={600}>
+        {t("list.generating")}
+      </Caption>
     </FlexRow>
   );
 };
