@@ -47,7 +47,9 @@ export const otherSchema = z.object({
     .string()
     .max(150, "derivativesIsTooLong")
     .optional()
-    .describe("Derivatives of the wordcard. Up to 10 words are allowed. Separate with comma."),
+    .describe(
+      "Words related to this word. For example, 'integral' and 'integrate,' or 'objection' and 'object.' They are very important for language learning, so please fill in as many as possible. Up to 10 words are allowed. Separate with comma.",
+    ),
   synonyms: z
     .string()
     .max(150, "synonymsIsTooLong")
