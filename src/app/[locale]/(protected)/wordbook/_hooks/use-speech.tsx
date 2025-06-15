@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { toast } from "sonner";
-import { synthesizeSpeech } from "@/lib/tts/azure-tts";
+import { synthesizeSpeech } from "@/lib/tts";
 import { useWordbook } from "./wordbook-provider";
 import type { Locale } from "@/i18n";
 
