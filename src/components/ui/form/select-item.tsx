@@ -9,21 +9,25 @@ type Props = {
   hiddenDescription?: boolean;
   placeholder: string;
   className?: string;
+  parentClass?: string;
 } & React.ComponentProps<typeof Select>;
 
 export const SelectFormItem: React.FC<Props> = ({
   label,
-  hiddenLabel = true,
+  hiddenLabel = false,
   description,
   hiddenDescription = true,
   children,
   placeholder,
   className,
+  parentClass,
   ...props
 }) => {
   return (
-    <FormItem>
-      <FormLabel hidden={hiddenLabel}>{label}</FormLabel>
+    <FormItem className={cn("h-fit w-full", parentClass)}>
+      <FormLabel hidden={hiddenLabel} className="shrink-0">
+        {label}
+      </FormLabel>
       <Select {...props}>
         <FormControl>
           <SelectTrigger
@@ -37,7 +41,9 @@ export const SelectFormItem: React.FC<Props> = ({
         </FormControl>
         <SelectContent>{children}</SelectContent>
       </Select>
-      <FormDescription hidden={hiddenDescription}>{description}</FormDescription>
+      <FormDescription hidden={hiddenDescription} className="shrink-0">
+        {description}
+      </FormDescription>
       <FormMessage />
     </FormItem>
   );

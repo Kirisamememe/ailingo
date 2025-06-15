@@ -7,6 +7,7 @@ type Props = {
   hiddenLabel?: boolean;
   description: string;
   hiddenDescription?: boolean;
+  parentClass?: string;
 } & React.ComponentProps<typeof Textarea>;
 
 export const TextareaItem: React.FC<Props> = ({
@@ -15,13 +16,14 @@ export const TextareaItem: React.FC<Props> = ({
   description,
   hiddenDescription = true,
   className,
+  parentClass,
   ...props
 }) => {
   return (
-    <FormItem>
+    <FormItem className={cn("h-fit", parentClass)}>
       <FormLabel hidden={hiddenLabel}>{label}</FormLabel>
       <FormControl>
-        <Textarea className={cn("h-10 resize-none rounded-sm", className)} {...props} />
+        <Textarea className={cn("resize-none rounded-sm", className)} {...props} />
       </FormControl>
       <FormDescription hidden={hiddenDescription}>{description}</FormDescription>
       <FormMessage />
