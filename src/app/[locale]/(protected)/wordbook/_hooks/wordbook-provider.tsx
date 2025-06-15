@@ -9,7 +9,8 @@ import { toast } from "sonner";
 import type z from "zod";
 import { modelListTuple } from "@/lib/ai";
 import { useScrollState } from "@/components/providers";
-import { createWordcards } from "../_actions/create";
+import { getOperatorId } from "../../_actions/get-operator";
+import { createWordcard } from "../_actions/create";
 import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
 
 /**
@@ -79,21 +80,28 @@ export const WordbookProvider = ({ children }: WordbookProviderProps) => {
   /**
    * AI生成完了時の処理
    */
-  const onFinish = ({ object }: { object?: z.infer<typeof wordcardAISchemaArray> }) => {
+  const onFinish = async ({ object }: { object?: z.infer<typeof wordcardAISchemaArray> }) => {
     if (!object) return;
-    // TODO: content側で個別保存を検討する
-    void createWordcards(object)
-      .then(() => {
+
+    const operatorId = await getOperatorId();
+
+    // 全てのwordcardを同時に作成
+    const promises = object.wordcards.map(async (wordcard) => {
+      return createWordcard(operatorId, wordcard).then(() => {
         toast.success("Wordcards created successfully");
-        form.reset();
-        setIsComplete(true);
-      })
-      .catch(() => {
-        toast.error("Failed to create wordcards");
       });
+    });
+
+    try {
+      await Promise.all(promises);
+      form.reset();
+      setIsComplete(true);
+    } catch {
+      toast.error("Failed to create wordcards");
+    }
   };
 
-  const { submit, isLoading, stop } = useObject({
+  const { submit, isLoading, stop, object } = useObject({
     api: "/api/generate-wordcards",
     schema: wordcardAISchemaArray,
     onFinish,
@@ -115,7 +123,7 @@ export const WordbookProvider = ({ children }: WordbookProviderProps) => {
     stop,
     isComplete,
     audioRef,
-    // TODO: objectのstreamをどう表現するか考える
+    object,
   };
 
   return <WordbookContext value={value}>{children}</WordbookContext>;
