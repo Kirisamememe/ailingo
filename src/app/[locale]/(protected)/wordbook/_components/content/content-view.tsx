@@ -18,7 +18,7 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
   const language = languageToLocale(wordCard.language);
 
   return (
-    <FlexColumn gap={6} className="w-full shrink-0">
+    <FlexColumn gap={6} className="appear w-full shrink-0">
       <BasicInfo
         word={wordCard.word}
         phonetics={wordCard.phonetics}
