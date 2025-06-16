@@ -27,14 +27,13 @@ export const Example: React.FC<Props> = ({ example, language }) => {
   };
 
   return (
-    <FlexColumn className="relative pl-3">
+    <FlexColumn className="relative @[36rem]:pl-3">
       <Paragraph
         lang={language}
-        size={18}
         weight={500}
         className={cn(
-          "align-baseline",
-          "before:bg-primary before:absolute before:top-3 before:left-0 before:size-1 before:rounded-full before:content-['']",
+          "align-baseline text-sm @[36rem]:text-lg",
+          "@[36rem]:before:bg-primary @[36rem]:before:absolute @[36rem]:before:top-3 @[36rem]:before:left-0 @[36rem]:before:size-1 @[36rem]:before:rounded-full @[36rem]:before:content-['']",
         )}
       >
         {sentence}
@@ -47,7 +46,7 @@ export const Example: React.FC<Props> = ({ example, language }) => {
           <Volume2 className="size-4" />
         </Button>
       </Paragraph>
-      {translation && <Caption size={12}>{translation}</Caption>}
+      {translation && <Caption className="text-[0.625rem] @[36rem]:text-xs">{translation}</Caption>}
     </FlexColumn>
   );
 };

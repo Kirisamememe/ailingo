@@ -25,12 +25,14 @@ export const WordbookContentFooter: React.FC<Props> = ({
 }) => {
   const locale = useLocale();
 
+  const titleClassName = "text-[0.625rem] @[36rem]:text-xs";
+
   return (
     <>
       <Separator />
       <FlexRow gap={8}>
         <FlexColumn gap={1}>
-          <Caption size={12} weight={700}>
+          <Caption weight={700} className={titleClassName}>
             {"Created At"}
           </Caption>
           <Caption color="foreground">
@@ -41,7 +43,7 @@ export const WordbookContentFooter: React.FC<Props> = ({
           </Caption>
         </FlexColumn>
         <FlexColumn gap={1}>
-          <Caption size={12} weight={700}>
+          <Caption weight={700} className={titleClassName}>
             {"Updated At"}
           </Caption>
           <Caption color="foreground">
@@ -53,7 +55,7 @@ export const WordbookContentFooter: React.FC<Props> = ({
         </FlexColumn>
         {!masteredAt && (
           <FlexColumn gap={1}>
-            <Caption size={12} weight={700}>
+            <Caption weight={700} className={titleClassName}>
               {"Last Reviewed At"}
             </Caption>
             <Caption color="foreground">
@@ -66,7 +68,7 @@ export const WordbookContentFooter: React.FC<Props> = ({
         )}
         {nextReviewAt && !masteredAt && (
           <FlexColumn gap={1}>
-            <Caption size={12} weight={700}>
+            <Caption weight={700} className={titleClassName}>
               {"Next Review At"}
             </Caption>
             <Caption color="foreground">
@@ -79,7 +81,7 @@ export const WordbookContentFooter: React.FC<Props> = ({
         )}
         {masteredAt && (
           <FlexColumn gap={1}>
-            <Caption size={12} weight={700}>
+            <Caption weight={700} className={titleClassName}>
               {"Mastered At"}
             </Caption>
             <Caption color="foreground">

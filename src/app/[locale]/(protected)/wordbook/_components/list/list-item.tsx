@@ -15,7 +15,6 @@ type Props = {
 export const ListItem: React.FC<Props> = ({ listItem, selectedId, onClick }) => {
   return (
     <ListItemView
-      id={listItem.id}
       word={listItem.word}
       language={listItem.language}
       isSelected={selectedId === listItem.id}

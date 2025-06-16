@@ -47,7 +47,12 @@ export const Definitions: React.FC<Props> = ({ definitions, language }) => {
           >
             {t(definition.pos as POS)}
           </Badge>
-          <Caption lang={language} size={16} weight={400} color="foreground" className="pl-2">
+          <Caption
+            lang={language}
+            weight={400}
+            color="foreground"
+            className="text-sm @[36rem]:pl-2 @[36rem]:text-base"
+          >
             {definition.meaning}
           </Caption>
         </FlexColumn>

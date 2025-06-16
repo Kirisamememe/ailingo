@@ -28,7 +28,7 @@ export const WordbookList: React.FC<Props> = ({ wordList }) => {
   };
 
   return (
-    <FlexColumn className="w-64 shrink-0 overflow-y-scroll">
+    <FlexColumn className="w-20 shrink-0 overflow-y-scroll @[36rem]:w-48 @[40rem]:w-64">
       <WordbookListNew selectedId={wordCardId} onClick={onClick} />
       <WordbookListStreaming />
       {wordList.map((word) => (
