@@ -64,7 +64,8 @@
       "learningLanguage": {
         "label": "Learning Language",
         "placeholder": "Select a language",
-        "description": "Select the language of the words."
+        "description": "Select the language of the words.",
+        "auto": "Auto Detect"
       },
       "translationLanguage": {
         "label": "Translation Language",

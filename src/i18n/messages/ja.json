@@ -64,7 +64,8 @@
       "learningLanguage": {
         "label": "学習言語",
         "placeholder": "言語を選択",
-        "description": "単語の言語を選択してください。"
+        "description": "単語の言語を選択してください。",
+        "auto": "自動検出"
       },
       "translationLanguage": {
         "label": "翻訳言語",
