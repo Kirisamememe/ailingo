@@ -25,7 +25,7 @@ const WordbookPage = async () => {
   return (
     <WordbookProvider model={model}>
       <InsetLayoutWithPadding>
-        <FlexRow className="@[36rem]:bg-card/50 max-h-[calc(100vh-3.5rem)] w-full flex-row-reverse gap-0 border-t sm:flex-row @[36rem]:gap-4 @[36rem]:rounded-lg @[36rem]:border @[36rem]:p-4 @[40rem]:max-h-[calc(100vh-4.5rem)]">
+        <FlexRow className="@[36rem]:bg-card/50 max-h-[calc(100dvh-3.5rem)] w-full flex-row-reverse gap-0 border-t sm:flex-row @[36rem]:gap-4 @[36rem]:rounded-lg @[36rem]:border @[36rem]:p-4 @[40rem]:max-h-[calc(100dvh-4.5rem)]">
           <WordbookList wordList={wordList} />
           <FlexColumn className="@[36rem]:bg-card/50 relative h-full w-full overflow-y-scroll border-r p-3 @[36rem]:rounded-md @[36rem]:border @[36rem]:p-6">
             <WordbookContent wordCards={wordCards} />
