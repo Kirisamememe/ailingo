@@ -12,6 +12,7 @@ import { useScrollState } from "@/components/providers";
 import { getOperatorId } from "../../_actions/get-operator";
 import { createWordcard } from "../_actions/create";
 import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
+import type { Locale } from "@/i18n";
 
 /**
  * WordbookContextの型定義
@@ -44,6 +45,8 @@ const WordbookContext = createContext<WordbookContextType | undefined>(undefined
 type WordbookProviderProps = {
   /** モデル */
   model: AIModel;
+  /** 翻訳言語 */
+  translationLanguage: Locale;
   /** 子要素 */
   children: ReactNode;
 };
@@ -51,7 +54,11 @@ type WordbookProviderProps = {
 /**
  * WordbookProvider - 単語帳関連のロジックを提供
  */
-export const WordbookProvider = ({ model, children }: WordbookProviderProps) => {
+export const WordbookProvider = ({
+  model,
+  translationLanguage,
+  children,
+}: WordbookProviderProps) => {
   const [isComplete, setIsComplete] = useState(true);
   const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
 
@@ -62,7 +69,7 @@ export const WordbookProvider = ({ model, children }: WordbookProviderProps) => 
     defaultValues: {
       model,
       learningLanguage: undefined,
-      translationLanguage: "ja",
+      translationLanguage,
       words: "",
     },
     mode: "onChange",

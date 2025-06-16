@@ -120,6 +120,7 @@ export const AiReqForm = () => {
                 defaultValue={form.getValues("translationLanguage")}
                 onValueChange={(value) => {
                   form.setValue("translationLanguage", value as Locale);
+                  void setCookie("WORDCARD_TRANSLATION_LANGUAGE", value);
                 }}
                 description={t("translationLanguage.description")}
                 placeholder={t("translationLanguage.placeholder")}
