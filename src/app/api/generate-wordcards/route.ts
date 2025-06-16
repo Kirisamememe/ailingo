@@ -31,13 +31,16 @@ export const POST = auth(async function POST(req) {
   const system = `
     You are a great wordcard generator. 
     Please generate an appropriate wordcards array object following the prompt and the schema. 
-    The translation of the examples should be in ${i18n.locales[translationLanguage]}.
-    If there are any nonexistent words mixed in, please ignore those words.
-    If all the words sent by the user are nonexistent, return an empty object.
+    The translation of the definitions and examples should be in ${i18n.locales[translationLanguage]}.
+    If the language of the word (for example, whether it's Chinese or English) is not specified, please guess it.
+    Currently, the only supported languages are EN, JA, ZH_CN, and ZH_TW.
+    If there are words that do not exist in these four languages, first analyze whether they are misspellings, and if so, generate them with the correct spelling.
+    If they are not misspellings and are definitely non-existent words, please ignore them.
+    If all the words sent by the user are non-existent, return an empty object.
   `;
 
   const prompt = `
-    Please generate an appropriate wordcards array object about the words "${words}" in ${i18n.locales[learningLanguage]}
+    Please generate an appropriate wordcards array object about the ${learningLanguage ? i18n.locales[learningLanguage] : ""} words "${words}".
   `;
 
   return ai.generate(model, prompt, system, wordcardAISchemaArray).toTextStreamResponse();

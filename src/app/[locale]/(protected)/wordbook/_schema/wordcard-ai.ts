@@ -62,7 +62,7 @@ export const wordcardAISchemaArray = z.object({
  */
 export const wordcardRequestSchema = z.object({
   model: z.enum(modelListTuple),
-  learningLanguage: z.enum(LOCALES as [Locale]),
+  learningLanguage: z.enum(LOCALES as [Locale]).optional(),
   translationLanguage: z.enum(LOCALES as [Locale]),
   words: z.string().max(500, "wordsIsTooLong"),
 });
