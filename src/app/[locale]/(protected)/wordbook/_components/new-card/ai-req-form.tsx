@@ -91,13 +91,17 @@ export const AiReqForm = () => {
               <SelectFormItem
                 label={t("learningLanguage.label")}
                 hiddenDescription={false}
-                defaultValue={form.getValues("learningLanguage")}
+                value={form.getValues("learningLanguage") ?? "auto"}
                 onValueChange={(value) => {
-                  form.setValue("learningLanguage", value as Locale);
+                  form.setValue(
+                    "learningLanguage",
+                    value === "auto" ? undefined : (value as Locale),
+                  );
                 }}
                 description={t("learningLanguage.description")}
                 placeholder={t("learningLanguage.placeholder")}
               >
+                <SelectItem value="auto">{t("learningLanguage.auto")}</SelectItem>
                 {Object.entries(i18n.locales).map(([key, value]) => (
                   <SelectItem key={key} value={key}>
                     {value}

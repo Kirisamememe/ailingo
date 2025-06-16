@@ -61,7 +61,7 @@ export const WordbookProvider = ({ model, children }: WordbookProviderProps) => 
     resolver: zodResolver(wordcardRequestSchema),
     defaultValues: {
       model,
-      learningLanguage: "en",
+      learningLanguage: undefined,
       translationLanguage: "ja",
       words: "",
     },
