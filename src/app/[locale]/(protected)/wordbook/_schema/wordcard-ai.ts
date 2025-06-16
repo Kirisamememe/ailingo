@@ -29,7 +29,15 @@ export const definitionsArraySchema = z
   .array(
     z.object({
       pos: z.enum(POS).describe("Part of speech of the wordcard").default("OTHER"),
-      meaning: z.string().describe("Meaning of the definition."),
+      meaning: z
+        .string()
+        .describe("Meaning of the definition. Generate in the same language as the word."),
+      translation: z
+        .string()
+        .optional()
+        .describe(
+          "Translation of the definition. It is optional, but unless the user explicitly indicates that it is unnecessary, please always generate it.",
+        ),
     }),
   )
   .max(3, "definitionsIsTooMany")

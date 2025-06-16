@@ -33,7 +33,10 @@ export const createWordcard = async (
   const wordcard = {
     ...data,
     definitions: data.definitions
-      .map((definition) => `[${definition.pos}]${DIVIDER}${definition.meaning}`)
+      .map(
+        (definition) =>
+          `[${definition.pos}]${DIVIDER}${definition.meaning}${DIVIDER}${definition.translation}`,
+      )
       .join("\n"),
   };
   await wordCardService.create(wordcard, operatorId);
