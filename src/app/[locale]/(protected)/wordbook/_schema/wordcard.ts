@@ -11,7 +11,9 @@ export const wordcardBase = z.object({
     .string()
     .min(1, "wordIsRequired")
     .max(100, "wordIsTooLong")
-    .describe("Word of the wordcard"),
+    .describe(
+      "Word of the wordcard. If it's an alphabetical word, its all letters should be lowercase.",
+    ),
   phonetics: z
     .string()
     .min(1, "phoneticsIsRequired")

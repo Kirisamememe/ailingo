@@ -32,11 +32,15 @@ export const POST = auth(async function POST(req) {
     You are a great wordcard generator. 
     Please generate an appropriate wordcards array object following the prompt and the schema. 
     The translation of the definitions and examples should be in ${i18n.locales[translationLanguage]}.
-    If the language of the word (for example, whether it's Chinese or English) is not specified, please guess it.
+    If the languages of the words (for example, whether they're Chinese or English) are not specified, please guess them.
     Currently, the only supported languages are EN, JA, ZH_CN, and ZH_TW.
     If there are words that do not exist in these four languages, first analyze whether they are misspellings, and if so, generate them with the correct spelling.
     If they are not misspellings and are definitely non-existent words, please ignore them.
     If all the words sent by the user are non-existent, return an empty object.
+    If there are words in plural form, please change them to singular form.
+    If there are words in past tense, please return them to their base form.
+    If there are words in participle form and those participles have no special meaning or are not widely recognized as independent words, please return them to their base form.
+    If there are alphabetical words, all letters of them should be lowercase.
   `;
 
   const prompt = `
