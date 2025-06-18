@@ -21,12 +21,14 @@ export const Definitions: React.FC<Props> = ({ definitions, language }) => {
     .split("\n")
     .filter((definition) => !!definition)
     .map((definition) => {
-      const [posString, meaning] = definition.split("|");
+      const parts = definition.split("|");
+      const [posString, meaning, translation = ""] = parts;
       const pos = posString.replace(/^\[|\]$/g, "");
 
       return {
         pos,
         meaning,
+        translation,
       };
     });
 
@@ -47,9 +49,24 @@ export const Definitions: React.FC<Props> = ({ definitions, language }) => {
           >
             {t(definition.pos as POS)}
           </Badge>
-          <Caption lang={language} size={16} weight={400} color="foreground" className="pl-2">
+          <Caption
+            lang={language}
+            weight={400}
+            color="foreground"
+            className="text-sm @[36rem]:pl-1 @[36rem]:text-base"
+          >
             {definition.meaning}
           </Caption>
+          {definition.translation && (
+            <Caption
+              lang={language}
+              weight={400}
+              color="muted"
+              className="text-[0.625rem] @[36rem]:pl-1 @[36rem]:text-xs"
+            >
+              {definition.translation}
+            </Caption>
+          )}
         </FlexColumn>
       ))}
     </FlexColumn>

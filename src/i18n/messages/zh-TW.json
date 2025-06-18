@@ -64,7 +64,8 @@
       "learningLanguage": {
         "label": "學習語言",
         "placeholder": "選擇語言",
-        "description": "請選擇單字本身的語言。"
+        "description": "請選擇單字本身的語言。",
+        "auto": "自動檢測"
       },
       "translationLanguage": {
         "label": "翻譯語言",
@@ -140,7 +141,7 @@
     },
     "extra": {
       "derivatives": "派生字",
-      "synonyms": "同義字",
+      "synonyms": "近義字",
       "antonyms": "反義字"
     }
   },

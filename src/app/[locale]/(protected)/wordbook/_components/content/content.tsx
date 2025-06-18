@@ -67,7 +67,7 @@ export const WordbookContent: React.FC<Props> = ({ wordCards }) => {
         type="button"
         variant="outline"
         size="icon"
-        className="absolute top-6 right-6"
+        className="absolute top-3 right-3 @[36rem]:top-6 @[36rem]:right-6"
         onClick={handleEdit}
       >
         <SquarePen className="size-5" />

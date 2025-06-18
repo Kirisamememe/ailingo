@@ -79,7 +79,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
             {t("title")}
           </Headline>
           <Button variant="outline">{tCommon("save")}</Button>
-          <Button variant="outline" onClick={handleEndEditing}>
+          <Button variant="outline" onClick={handleEndEditing} type="button">
             {tCommon("cancel")}
           </Button>
         </FlexRow>
@@ -226,7 +226,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
         <Separator />
         <FlexRow className="items-center gap-3">
           <DeleteBtn onDelete={handleDelete} />
-          <Button variant="outline" onClick={handleEndEditing}>
+          <Button variant="outline" onClick={handleEndEditing} type="button">
             {tCommon("cancel")}
           </Button>
           <Submit isPending={isPending}>{tCommon("save")}</Submit>

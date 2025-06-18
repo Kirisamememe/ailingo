@@ -27,7 +27,7 @@ export const BasicInfo: React.FC<Props> = ({ word, phonetics, definitions, langu
   return (
     <FlexColumn gap={5}>
       <FlexColumn gap={1}>
-        <Headline size={30} lang={language}>
+        <Headline lang={language} className="text-2xl @[36rem]:text-3xl">
           {word}
         </Headline>
         <FlexRow centerY>

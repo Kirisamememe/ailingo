@@ -35,7 +35,7 @@ export const AiReqForm = () => {
   return (
     <Form {...form}>
       <form
-        className="flex h-full w-full flex-col gap-6 rounded-lg shadow-xs"
+        className="appear flex h-full w-full flex-col gap-6 rounded-lg shadow-xs"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FlexColumn className="shrink-0">
@@ -91,13 +91,17 @@ export const AiReqForm = () => {
               <SelectFormItem
                 label={t("learningLanguage.label")}
                 hiddenDescription={false}
-                defaultValue={form.getValues("learningLanguage")}
+                value={form.getValues("learningLanguage") ?? "auto"}
                 onValueChange={(value) => {
-                  form.setValue("learningLanguage", value as Locale);
+                  form.setValue(
+                    "learningLanguage",
+                    value === "auto" ? undefined : (value as Locale),
+                  );
                 }}
                 description={t("learningLanguage.description")}
                 placeholder={t("learningLanguage.placeholder")}
               >
+                <SelectItem value="auto">{t("learningLanguage.auto")}</SelectItem>
                 {Object.entries(i18n.locales).map(([key, value]) => (
                   <SelectItem key={key} value={key}>
                     {value}
@@ -116,6 +120,7 @@ export const AiReqForm = () => {
                 defaultValue={form.getValues("translationLanguage")}
                 onValueChange={(value) => {
                   form.setValue("translationLanguage", value as Locale);
+                  void setCookie("WORDCARD_TRANSLATION_LANGUAGE", value);
                 }}
                 description={t("translationLanguage.description")}
                 placeholder={t("translationLanguage.placeholder")}

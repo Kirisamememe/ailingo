@@ -64,7 +64,8 @@
       "learningLanguage": {
         "label": "学习语言",
         "placeholder": "选择语言",
-        "description": "请选择单词本身的语言。"
+        "description": "请选择单词本身的语言。",
+        "auto": "自动检测"
       },
       "translationLanguage": {
         "label": "翻译语言",
@@ -140,7 +141,7 @@
     },
     "extra": {
       "derivatives": "派生词",
-      "synonyms": "同义词",
+      "synonyms": "近义词",
       "antonyms": "反义词"
     }
   },

@@ -17,7 +17,7 @@ export const Extra: React.FC<Props> = ({ derivatives, synonyms, antonyms }) => {
 
   if (!derivatives && !synonyms && !antonyms) return null;
   const beforeClassName =
-    "before:bg-muted-foreground before:absolute before:top-1.5 before:left-0 before:h-2 before:w-0.75 before:content-['']";
+    "before:bg-muted-foreground before:absolute before:top-1 @[36rem]:before:top-1.5 before:left-0 before:h-2 before:w-0.75 before:content-[''] text-xs @[36rem]:text-sm";
 
   return (
     <>
@@ -25,30 +25,30 @@ export const Extra: React.FC<Props> = ({ derivatives, synonyms, antonyms }) => {
       <FlexColumn gap={5}>
         {derivatives && (
           <FlexColumn gap={1} className="relative pl-3">
-            <Headline size={14} color="muted" className={beforeClassName}>
+            <Headline color="muted" className={beforeClassName}>
               {t("derivatives")}
             </Headline>
-            <Caption size={16} color="foreground">
+            <Caption color="foreground" className="text-sm @[36rem]:text-base">
               {derivatives}
             </Caption>
           </FlexColumn>
         )}
         {synonyms && (
           <FlexColumn gap={1} className="relative pl-3">
-            <Headline size={14} color="muted" className={beforeClassName}>
+            <Headline color="muted" className={beforeClassName}>
               {t("synonyms")}
             </Headline>
-            <Caption size={16} color="foreground">
+            <Caption color="foreground" className="text-sm @[36rem]:text-base">
               {synonyms}
             </Caption>
           </FlexColumn>
         )}
         {antonyms && (
           <FlexColumn gap={1} className="relative pl-3">
-            <Headline size={14} color="muted" className={beforeClassName}>
+            <Headline color="muted" className={beforeClassName}>
               {t("antonyms")}
             </Headline>
-            <Caption size={16} color="foreground">
+            <Caption color="foreground" className="text-sm @[36rem]:text-base">
               {antonyms}
             </Caption>
           </FlexColumn>
