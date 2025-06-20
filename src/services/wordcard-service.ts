@@ -28,7 +28,7 @@ class WordCardService {
     const wordCards = await prisma.wordCard
       .findMany({
         where: { deletedAt: null, authorId: operatorId },
-        orderBy: { updatedAt: "desc" },
+        orderBy: { createdAt: "desc" },
       })
       .catch(dbExceptionHandler);
     return wordCards;
