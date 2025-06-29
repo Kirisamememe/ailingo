@@ -147,6 +147,9 @@
   },
   "POS": {
     "NOUN": "名詞",
+    "MASCULINE_NOUN": "名詞[陽性]",
+    "FEMININE_NOUN": "名詞[陰性]",
+    "NEUTER_NOUN": "名詞[中性]",
     "VERB": "動詞",
     "TRANSITIVE_VERB": "及物動詞",
     "INTRANSITIVE_VERB": "不及物動詞",

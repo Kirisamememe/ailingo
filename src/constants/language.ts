@@ -26,3 +26,27 @@ export const LANGUAGES = {
 
 /** 単語帳対応の言語のコード */
 export const LANGUAGE_CODES = Object.keys(LANGUAGES) as [LanguageCode];
+
+/**
+ * 品詞
+ */
+export const POS = [
+  "NOUN",
+  "MASCULINE_NOUN",
+  "FEMININE_NOUN",
+  "NEUTER_NOUN",
+  "VERB",
+  "TRANSITIVE_VERB",
+  "INTRANSITIVE_VERB",
+  "ADJECTIVE",
+  "ADVERB",
+  "PREPOSITION",
+  "CONJUNCTION",
+  "PRONOUN",
+  "INTERJECTION",
+  "PHRASE",
+  "DETERMINER",
+  "IDIOM",
+  "ORDINAL",
+  "OTHER",
+] as const;
