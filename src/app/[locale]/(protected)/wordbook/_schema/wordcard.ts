@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { localeToLanguage } from "@/lib/utils";
+import { LANGUAGE_CODES } from "@/constants";
 import type { Language } from "@/generated/prisma";
-import { LOCALES } from "@/i18n";
 
 /**
  * AIワードカードリクエストスキーマ
@@ -29,7 +29,7 @@ export const wordcardBase = z.object({
       "Example of the wordcard. Insert a line break (\n) after the example sentence and also write its translation.",
     ),
   language: z
-    .enum(LOCALES.map(localeToLanguage) as [Language])
+    .enum(LANGUAGE_CODES.map(localeToLanguage) as [Language])
     .describe("Language of the wordcard"),
 });
 

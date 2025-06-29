@@ -1,6 +1,3 @@
-import type { Locale } from "@/i18n";
-import { LOCALES } from "@/i18n";
-
 /**
  * モデルリスト
  */
@@ -27,8 +24,3 @@ export const modelListTuple = [
   ...openAIModelListTuple,
   ...deepseekModelListTuple,
 ] as const;
-
-/**
- * AI言語プロンプト
- */
-export const languagePrompt = [...LOCALES] as const as Locale[];

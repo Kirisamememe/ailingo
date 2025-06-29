@@ -1,8 +1,7 @@
 import { z } from "zod";
 import { modelListTuple } from "@/lib/ai";
 import { otherSchema, wordcardBase } from "./wordcard";
-import type { Locale } from "@/i18n";
-import { LOCALES } from "@/i18n";
+import { LANGUAGE_CODES } from "@/constants";
 import { POS } from "@/types";
 
 const extraExampleRequiredSchema = z.object({
@@ -70,7 +69,7 @@ export const wordcardAISchemaArray = z.object({
  */
 export const wordcardRequestSchema = z.object({
   model: z.enum(modelListTuple),
-  learningLanguage: z.enum(LOCALES as [Locale]).optional(),
-  translationLanguage: z.enum(LOCALES as [Locale]),
+  learningLanguage: z.enum(LANGUAGE_CODES).optional(),
+  translationLanguage: z.enum(LANGUAGE_CODES),
   words: z.string().max(500, "wordsIsTooLong"),
 });

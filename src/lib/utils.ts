@@ -2,7 +2,7 @@ import { type ClassValue, clsx } from "clsx";
 import { enUS as en, ja, zhCN, zhTW } from "date-fns/locale";
 import { twMerge } from "tailwind-merge";
 import type { Language } from "@/generated/prisma";
-import type { Locale } from "@/i18n";
+import type { LanguageCode } from "@/types";
 
 /**
  * Utility function to merge class names
@@ -22,18 +22,18 @@ export const kebabToCamelCase = (kebabCase: string): string => {
 };
 
 /**
- * LocaleからLanguageに変換する関数
+ * LanguageCodeからLanguageEnumに変換する関数
  */
-export const localeToLanguage = (locale: Locale): Language => {
-  return locale.replace("-", "_").toUpperCase() as Language;
+export const localeToLanguage = (languageCode: LanguageCode): Language => {
+  return languageCode.replace("-", "_").toUpperCase() as Language;
 };
 
 /**
- * LanguageからLocaleに変換する関数
+ * LanguageEnumからLanguageCodeに変換する関数
  */
-export const languageToLocale = (language: Language): Locale => {
-  const [languageCode, countryCode] = language.split("_");
-  return `${languageCode.toLowerCase()}-${countryCode}` as Locale;
+export const languageToLocale = (languageEnum: Language): LanguageCode => {
+  const [languageCode, countryCode] = languageEnum.split("_");
+  return `${languageCode.toLowerCase()}-${countryCode}` as LanguageCode;
 };
 
 /**

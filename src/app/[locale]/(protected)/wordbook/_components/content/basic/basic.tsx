@@ -5,13 +5,13 @@ import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Caption, Headline } from "@/components/ui/typography";
 import { Definitions } from "./definitions";
 import { useSpeech } from "../../../_hooks/use-speech";
-import type { Locale } from "@/i18n";
+import type { LanguageCode } from "@/types";
 
 type Props = {
   word: string;
   phonetics: string;
   definitions: string;
-  language: Locale;
+  language: LanguageCode;
 };
 
 /**

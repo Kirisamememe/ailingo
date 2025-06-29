@@ -3,7 +3,7 @@ import { ai } from "@/lib/ai/ai";
 import type { wordcardRequestSchema } from "@/app/[locale]/(protected)/wordbook/_schema";
 import { wordcardAISchemaArray } from "@/app/[locale]/(protected)/wordbook/_schema";
 import { auth } from "@/auth";
-import { i18n } from "@/i18n";
+import { LANGUAGES } from "@/constants";
 
 /**
  * 最大実行時間
@@ -31,7 +31,7 @@ export const POST = auth(async function POST(req) {
   const system = `
     You are a great wordcard generator. 
     Please generate an appropriate wordcards array object following the prompt and the schema. 
-    The translation of the definitions and examples should be in ${i18n.locales[translationLanguage]}.
+    The translation of the definitions and examples should be in ${LANGUAGES[translationLanguage]}.
     If the languages of the words (for example, whether they're Chinese or English) are not specified, please guess them.
     Currently, the only supported languages are EN, JA, ZH_CN, and ZH_TW.
     If there are words that do not exist in these four languages, first analyze whether they are misspellings, and if so, generate them with the correct spelling.
@@ -44,7 +44,7 @@ export const POST = auth(async function POST(req) {
   `;
 
   const prompt = `
-    Please generate an appropriate wordcards array object about the ${learningLanguage ? i18n.locales[learningLanguage] : ""} words "${words}".
+    Please generate an appropriate wordcards array object about the ${learningLanguage ? LANGUAGES[learningLanguage] : ""} words "${words}".
   `;
 
   return ai.generate(model, prompt, system, wordcardAISchemaArray).toTextStreamResponse();

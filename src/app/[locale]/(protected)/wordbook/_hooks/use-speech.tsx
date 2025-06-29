@@ -4,7 +4,7 @@ import { useState } from "react";
 import { toast } from "sonner";
 import { synthesizeSpeech } from "@/lib/tts";
 import { useWordbook } from "./wordbook-provider";
-import type { Locale } from "@/i18n";
+import type { LanguageCode } from "@/types";
 
 /**
  * 音声再生用のフック
@@ -13,7 +13,7 @@ export const useSpeech = () => {
   const [isPlaying, setIsPlaying] = useState(false);
   const { audioRef } = useWordbook();
 
-  const generateSpeech = async (text: string, language: Locale) => {
+  const generateSpeech = async (text: string, language: LanguageCode) => {
     const { data, error } = await synthesizeSpeech(text, language);
     if (error || !data) {
       toast.error(error);
@@ -23,7 +23,7 @@ export const useSpeech = () => {
     return data;
   };
 
-  const generateUrl = async (text: string, language: Locale) => {
+  const generateUrl = async (text: string, language: LanguageCode) => {
     const base64Data = await generateSpeech(text, language);
 
     // base64文字列をバイナリデータに変換
@@ -40,7 +40,7 @@ export const useSpeech = () => {
     return url;
   };
 
-  const play = async (text: string, language: Locale) => {
+  const play = async (text: string, language: LanguageCode) => {
     if (!audioRef.current) return;
 
     const url = await generateUrl(text, language);

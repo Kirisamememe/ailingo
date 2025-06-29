@@ -3,12 +3,11 @@ import { Badge } from "@/components/ui/badge";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Caption } from "@/components/ui/typography";
 import { definitionsArraySchema } from "../../../_schema";
-import type { Locale } from "@/i18n";
-import type { POS } from "@/types";
+import type { LanguageCode, POS } from "@/types";
 
 type Props = {
   definitions: string;
-  language: Locale;
+  language: LanguageCode;
 };
 
 /**
