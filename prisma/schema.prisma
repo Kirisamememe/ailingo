@@ -27,14 +27,11 @@ enum Language {
   JA
   ZH_CN
   ZH_TW
-  KO
-  FR
-  DE
-  ES
-  PT
-  IT
-  RU
-  VI
+  KO_KR
+  FR_FR
+  DE_DE
+  ES_ES
+  IT_IT
 
   @@map("language")
 }
