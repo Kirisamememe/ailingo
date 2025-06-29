@@ -54,6 +54,7 @@ model User {
   nativeLanguage Language? @map("native_language")
   accounts       Account[]
   wordCards         WordCard[]
+  compositions      Composition[]
 
   @@map("user")
 }
@@ -113,4 +114,21 @@ model WordCard {
   author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
 
   @@map("word_card")
+}
+
+model Composition {
+  id Int @id @default(autoincrement())
+  original String
+  corrected String
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  deletedAt DateTime? @map("deleted_at")
+
+  language Language
+
+  authorId String @map("author_id")
+  author User @relation(fields: [authorId], references: [id], onDelete: Cascade)
+
+  @@map("composition")
 }
