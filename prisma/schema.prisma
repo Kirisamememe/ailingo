@@ -22,7 +22,6 @@ enum Role {
 }
 
 enum Language {
-  EN
   EN_GB
   EN_US
   JA
