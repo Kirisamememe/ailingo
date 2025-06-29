@@ -1,4 +1,4 @@
-import type { Locale } from "@/i18n";
+import type { LanguageCode } from "@/types";
 
 /**
  * ワードブックリスト
@@ -15,5 +15,5 @@ export type WordListItem = {
   /**
    * 言語
    */
-  language: Locale;
+  language: LanguageCode;
 };

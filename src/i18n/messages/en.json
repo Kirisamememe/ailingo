@@ -147,6 +147,9 @@
   },
   "POS": {
     "NOUN": "noun",
+    "MASCULINE_NOUN": "noun[masculine]",
+    "FEMININE_NOUN": "noun[feminine]",
+    "NEUTER_NOUN": "noun[neuter]",
     "VERB": "verb",
     "TRANSITIVE_VERB": "transitive verb",
     "INTRANSITIVE_VERB": "intransitive verb",

@@ -1,13 +1,13 @@
 import { z } from "zod";
 import { modelListTuple } from "@/lib/ai/constants";
-import { LOCALES, type Locale } from "@/i18n";
+import { LANGUAGE_CODES } from "@/constants";
 
 /**
  * AI記事リクエストスキーマ
  */
 export const aiArticleRequestSchema = z.object({
   model: z.enum(modelListTuple),
-  language: z.enum(LOCALES as [Locale]),
+  language: z.enum(LANGUAGE_CODES),
   context: z.string().optional(),
   prompt: z.string(),
 });
