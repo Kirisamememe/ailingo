@@ -23,7 +23,7 @@ const WordbookPage = async () => {
   const modelCookie = await getCookie("WORDCARD_MODEL");
   const model = (modelCookie ?? modelListTuple[5]) as AIModel;
   const translationLanguageCookie = await getCookie("WORDCARD_TRANSLATION_LANGUAGE");
-  const translationLanguage = (translationLanguageCookie ?? "en") as LanguageCode;
+  const translationLanguage = (translationLanguageCookie ?? "en-US") as LanguageCode;
 
   return (
     <WordbookProvider model={model} translationLanguage={translationLanguage}>
