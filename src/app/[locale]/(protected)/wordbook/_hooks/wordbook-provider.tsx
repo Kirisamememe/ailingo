@@ -12,7 +12,7 @@ import { useScrollState } from "@/components/providers";
 import { getOperatorId } from "../../_actions/get-operator";
 import { createWordcard } from "../_actions/create";
 import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
-import type { Locale } from "@/i18n";
+import type { LanguageCode } from "@/types";
 
 /**
  * WordbookContextの型定義
@@ -46,7 +46,7 @@ type WordbookProviderProps = {
   /** モデル */
   model: AIModel;
   /** 翻訳言語 */
-  translationLanguage: Locale;
+  translationLanguage: LanguageCode;
   /** 子要素 */
   children: ReactNode;
 };

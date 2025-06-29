@@ -17,6 +17,6 @@ export const getWordCardFormData = (wordCard?: WordCard) => {
     synonyms: wordCard?.synonyms ?? "",
     antonyms: wordCard?.antonyms ?? "",
     note: wordCard?.note ?? "",
-    language: wordCard?.language ?? "EN",
+    language: wordCard?.language ?? "EN_US",
   };
 };

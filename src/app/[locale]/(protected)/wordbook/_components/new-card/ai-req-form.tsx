@@ -12,8 +12,8 @@ import { SelectItem } from "@/components/ui/select";
 import { Headline } from "@/components/ui/typography";
 import { setCookie } from "../../../_actions/cookies";
 import { useWordbook } from "../../_hooks/wordbook-provider";
-import type { Locale } from "@/i18n";
-import { i18n } from "@/i18n";
+import { LANGUAGES } from "@/constants";
+import type { LanguageCode } from "@/types";
 
 /**
  * AIリクエストフォームビュー
@@ -95,14 +95,14 @@ export const AiReqForm = () => {
                 onValueChange={(value) => {
                   form.setValue(
                     "learningLanguage",
-                    value === "auto" ? undefined : (value as Locale),
+                    value === "auto" ? undefined : (value as LanguageCode),
                   );
                 }}
                 description={t("learningLanguage.description")}
                 placeholder={t("learningLanguage.placeholder")}
               >
                 <SelectItem value="auto">{t("learningLanguage.auto")}</SelectItem>
-                {Object.entries(i18n.locales).map(([key, value]) => (
+                {Object.entries(LANGUAGES).map(([key, value]) => (
                   <SelectItem key={key} value={key}>
                     {value}
                   </SelectItem>
@@ -119,13 +119,13 @@ export const AiReqForm = () => {
                 hiddenDescription={false}
                 defaultValue={form.getValues("translationLanguage")}
                 onValueChange={(value) => {
-                  form.setValue("translationLanguage", value as Locale);
+                  form.setValue("translationLanguage", value as LanguageCode);
                   void setCookie("WORDCARD_TRANSLATION_LANGUAGE", value);
                 }}
                 description={t("translationLanguage.description")}
                 placeholder={t("translationLanguage.placeholder")}
               >
-                {Object.entries(i18n.locales).map(([key, value]) => (
+                {Object.entries(LANGUAGES).map(([key, value]) => (
                   <SelectItem key={key} value={key}>
                     {value}
                   </SelectItem>

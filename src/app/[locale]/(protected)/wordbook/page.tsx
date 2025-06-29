@@ -8,8 +8,8 @@ import { WordbookContent } from "./_components/content";
 import { WordbookList } from "./_components/list";
 import { WordbookProvider } from "./_hooks/wordbook-provider";
 import { getCookie } from "../_actions/cookies";
-import type { Locale } from "@/i18n";
 import { wordCardService } from "@/services";
+import type { LanguageCode } from "@/types";
 
 const WordbookPage = async () => {
   const { operatorId } = await getSession();
@@ -23,7 +23,7 @@ const WordbookPage = async () => {
   const modelCookie = await getCookie("WORDCARD_MODEL");
   const model = (modelCookie ?? modelListTuple[5]) as AIModel;
   const translationLanguageCookie = await getCookie("WORDCARD_TRANSLATION_LANGUAGE");
-  const translationLanguage = (translationLanguageCookie ?? "en") as Locale;
+  const translationLanguage = (translationLanguageCookie ?? "en-US") as LanguageCode;
 
   return (
     <WordbookProvider model={model} translationLanguage={translationLanguage}>

@@ -142,11 +142,14 @@
     "extra": {
       "derivatives": "派生語",
       "synonyms": "類義語",
-      "antonyms": "反義語"
+      "antonyms": "対義語"
     }
   },
   "POS": {
     "NOUN": "名詞",
+    "MASCULINE_NOUN": "名詞[男性]",
+    "FEMININE_NOUN": "名詞[女性]",
+    "NEUTER_NOUN": "名詞[中性]",
     "VERB": "動詞",
     "TRANSITIVE_VERB": "他動詞",
     "INTRANSITIVE_VERB": "自動詞",

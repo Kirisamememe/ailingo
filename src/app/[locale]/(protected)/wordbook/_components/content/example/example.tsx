@@ -4,11 +4,11 @@ import { Button } from "@/components/ui/button";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Caption, Paragraph } from "@/components/ui/typography";
 import { useSpeech } from "../../../_hooks/use-speech";
-import type { Locale } from "@/i18n";
+import type { LanguageCode } from "@/types";
 
 type Props = {
   example: string;
-  language: Locale;
+  language: LanguageCode;
 };
 
 /**
