@@ -1,7 +1,7 @@
 "use client";
 
 import { usePathname, useSearchParams } from "next/navigation";
-import { FlexColumn } from "@/components/ui/flexbox";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { ListItem } from "./list-item";
 import { WordbookListNew } from "./list-new";
 import { WordbookListStreaming } from "./list-streaming";
@@ -28,12 +28,12 @@ export const WordbookList: React.FC<Props> = ({ wordList }) => {
   };
 
   return (
-    <FlexColumn className="w-20 shrink-0 overflow-x-hidden overflow-y-scroll @[36rem]:w-48 @[40rem]:w-64">
+    <ScrollArea className="w-20 shrink-0 @[36rem]:w-48 @[40rem]:w-64 [&_[data-slot='scroll-area-scrollbar']]:pt-16">
       <WordbookListNew selectedId={wordCardId} onClick={onClick} />
       <WordbookListStreaming />
       {wordList.map((word) => (
         <ListItem key={word.id} listItem={word} selectedId={wordCardId} onClick={onClick} />
       ))}
-    </FlexColumn>
+    </ScrollArea>
   );
 };
