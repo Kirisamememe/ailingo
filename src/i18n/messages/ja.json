@@ -121,7 +121,7 @@
         "synonymsIsTooLong": "同義語は150文字以内で入力してください。"
       },
       "antonyms": {
-        "label": "反義語",
+        "label": "対義語",
         "placeholder": "反義語を入力",
         "description": "反義語を入力してください。",
         "antonymsIsTooLong": "反義語は150文字以内で入力してください。"
