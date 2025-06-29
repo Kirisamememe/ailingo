@@ -9,10 +9,10 @@ import { useWordbook } from "../../_hooks/wordbook-provider";
  * ワードブックリスト
  */
 export const WordbookListStreaming = () => {
-  const { isComplete } = useWordbook();
+  const { isSaving, isLoading } = useWordbook();
   const t = useTranslations("wordbook");
 
-  if (isComplete) return null;
+  if (!isSaving && !isLoading) return null;
 
   return (
     <FlexRow className="bg-accent my-2 h-12 w-full shrink-0 animate-pulse items-center justify-start rounded-sm p-4">
