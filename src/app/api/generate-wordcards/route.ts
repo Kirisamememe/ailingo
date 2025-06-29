@@ -42,7 +42,6 @@ export const POST = auth(async function POST(req) {
     If there are words in participle form and those participles have no special meaning or are not widely recognized as independent words, please return them to their base form.
     If there are alphabetical words, all letters of them should be lowercase.
     If there are English words among them and no specific region is indicated, use en-US.  
-    If there are Chinese words among them, and no specific region is indicated, and traditional characters are not used, use zh-CN.
   `;
 
   const prompt = `
