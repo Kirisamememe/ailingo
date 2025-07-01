@@ -42,13 +42,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         return { ...session, user: { role: "BLOCKED", email: "" } };
       }
 
-      const { user } = session;
-
-      session = {
+      return {
         ...session,
         operatorId: data.id,
         user: {
-          ...user,
+          id: data.id,
           email: data.email,
           name: data.name,
           role: data.role,
@@ -56,8 +54,6 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           emailVerified: data.emailVerified ?? null,
         },
       };
-
-      return session;
     },
   },
 });
