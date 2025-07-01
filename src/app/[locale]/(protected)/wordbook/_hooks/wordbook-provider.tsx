@@ -1,6 +1,15 @@
 "use client";
 
-import { type ReactNode, createContext, use, useEffect, useRef, useState } from "react";
+import {
+  type ReactNode,
+  createContext,
+  use,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { DeepPartial } from "ai";
@@ -28,8 +37,8 @@ type WordbookContextType = {
   isLoading: boolean;
   /** リクエスト停止ハンドラー */
   stop: () => void;
-  /** リクエスト完了状態 */
-  isComplete: boolean;
+  /** 保存中かどうか */
+  isSaving: boolean;
   /** 音声再生用のAudio要素 */
   audioRef: React.RefObject<HTMLAudioElement | undefined>;
 };
@@ -59,7 +68,7 @@ export const WordbookProvider = ({
   translationLanguage,
   children,
 }: WordbookProviderProps) => {
-  const [isComplete, setIsComplete] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
 
   const { setHeaderStatic } = useScrollState();
@@ -103,11 +112,13 @@ export const WordbookProvider = ({
     });
 
     try {
+      setIsSaving(true);
       await Promise.all(promises);
       form.reset();
-      setIsComplete(true);
     } catch {
       toast.error("Failed to create wordcards");
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -115,28 +126,33 @@ export const WordbookProvider = ({
     api: "/api/generate-wordcards",
     schema: wordcardAISchemaArray,
     onFinish,
+    onError: () => {
+      setIsSaving(false);
+    },
   });
 
   /**
    * フォーム送信処理
    */
-  const onSubmit = () => {
+  const onSubmit = useCallback(() => {
     const values = form.getValues();
     if (!values.words) return;
 
-    setIsComplete(false);
     submit(values);
-  };
+  }, [form, submit]);
 
-  const value = {
-    form,
-    onSubmit,
-    isLoading,
-    stop,
-    isComplete,
-    audioRef,
-    object,
-  };
+  const value = useMemo(
+    () => ({
+      form,
+      onSubmit,
+      isLoading,
+      stop,
+      isSaving,
+      audioRef,
+      object,
+    }),
+    [form, onSubmit, isLoading, stop, isSaving, audioRef, object],
+  );
 
   return <WordbookContext value={value}>{children}</WordbookContext>;
 };

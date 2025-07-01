@@ -20,13 +20,14 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
   return (
     <FlexColumn gap={6} className="appear w-full shrink-0">
       <BasicInfo
+        key={`${wordCard.id}-${wordCard.word}-basic-info`}
         word={wordCard.word}
         phonetics={wordCard.phonetics}
         definitions={wordCard.definitions}
         language={language}
       />
       <Separator />
-      <FlexColumn gap={4}>
+      <FlexColumn key={`${wordCard.id}-${wordCard.word}-examples`} gap={4}>
         <Example example={wordCard.example1} language={language} />
         {wordCard.example2 && <Example example={wordCard.example2} language={language} />}
         {wordCard.example3 && <Example example={wordCard.example3} language={language} />}
