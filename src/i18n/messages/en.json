@@ -145,6 +145,42 @@
       "antonyms": "Antonyms"
     }
   },
+  "compositionCorrection": {
+    "requestForm": {
+      "title": "Input Original",
+      "submit": "Submit",
+      "original": {
+        "label": "Original",
+        "placeholder": "Enter the original composition",
+        "description": "Please enter the original composition you want to correct.",
+        "originalIsRequired": "Original is required"
+      },
+      "context": {
+        "label": "Context",
+        "placeholder": "Enter the context",
+        "description": "Please enter the context you want to correct.",
+        "contextIsTooLong": "Context must be less than 500 characters."
+      },
+      "model": {
+        "label": "Model",
+        "placeholder": "Select a model",
+        "description": "Select the model you want to use to correct the composition."
+      },
+      "targetLanguage": {
+        "label": "Target Language",
+        "placeholder": "Select a language",
+        "description": "Select the language you want to correct the composition to."
+      },
+      "feedbackLanguage": {
+        "label": "Feedback Language",
+        "placeholder": "Select a language",
+        "description": "Select the language you want to receive feedback in."
+      },
+      "corrected": {
+        "title": "Corrected"
+      }
+    }
+  },
   "POS": {
     "NOUN": "noun",
     "MASCULINE_NOUN": "noun[masculine]",

@@ -145,6 +145,42 @@
       "antonyms": "対義語"
     }
   },
+  "compositionCorrection": {
+    "requestForm": {
+      "title": "原文を入力",
+      "submit": "送信",
+      "original": {
+        "label": "作文",
+        "placeholder": "作文を入力",
+        "description": "作文を入力してください。",
+        "originalIsRequired": "作文は必須です"
+      },
+      "context": {
+        "label": "コンテキスト",
+        "placeholder": "コンテキストを入力",
+        "description": "コンテキストを入力してください。",
+        "contextIsTooLong": "コンテキストは500文字以内で入力してください。"
+      },
+      "model": {
+        "label": "モデル",
+        "placeholder": "モデルを選択",
+        "description": "作文を添削するためのモデルを選択してください。"
+      },
+      "targetLanguage": {
+        "label": "対象言語",
+        "placeholder": "言語を選択",
+        "description": "作文を添削するための言語を選択してください。"
+      },
+      "feedbackLanguage": {
+        "label": "フィードバック言語",
+        "placeholder": "言語を選択",
+        "description": "作文のフィードバックの言語を選択してください。"
+      },
+      "corrected": {
+        "title": "添削結果"
+      }
+    }
+  },
   "POS": {
     "NOUN": "名詞",
     "MASCULINE_NOUN": "名詞[男性]",
