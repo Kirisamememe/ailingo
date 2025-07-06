@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { getSession } from "@/lib/auth";
 import type { WritingCorrectionDBRequestSchema } from "../_schema";
-import { writingService } from "@/services/writing-service";
+import { writingService } from "@/services";
 
 /**
  * 作文添削を作成

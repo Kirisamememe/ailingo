@@ -146,6 +146,12 @@
     }
   },
   "writingCorrection": {
+    "corrected": {
+      "title": "添削結果",
+      "original": "オリジナル",
+      "corrected": "添削結果",
+      "feedback": "フィードバック"
+    },
     "requestForm": {
       "title": "原文を入力",
       "submit": "送信",
@@ -162,7 +168,7 @@
         "contextIsTooLong": "コンテキストは500文字以内で入力してください。"
       },
       "model": {
-        "label": "モデル",
+        "label": "AIモデル",
         "placeholder": "モデルを選択",
         "description": "作文を添削するためのモデルを選択してください。"
       },
@@ -175,9 +181,6 @@
         "label": "フィードバック言語",
         "placeholder": "言語を選択",
         "description": "作文のフィードバックの言語を選択してください。"
-      },
-      "corrected": {
-        "title": "添削結果"
       }
     }
   },
