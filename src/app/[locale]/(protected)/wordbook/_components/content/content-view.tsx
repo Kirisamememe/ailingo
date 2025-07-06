@@ -1,11 +1,10 @@
-import { languageToLocale } from "@/lib/utils";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Separator } from "@/components/ui/separator";
 import { BasicInfo } from "./basic";
 import { Example } from "./example/example";
 import { Extra } from "./extra";
 import { WordbookContentFooter } from "./footer/footer";
-import type { WordCard } from "@/generated/prisma/client";
+import type { WordCard } from "@/app/[locale]/(protected)/wordbook/_types";
 
 type Props = {
   wordCard: WordCard;
@@ -15,8 +14,6 @@ type Props = {
  * ワードブックコンテンツビュー
  */
 export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
-  const language = languageToLocale(wordCard.language);
-
   return (
     <FlexColumn gap={6} className="appear w-full shrink-0">
       <BasicInfo
@@ -24,13 +21,13 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
         word={wordCard.word}
         phonetics={wordCard.phonetics}
         definitions={wordCard.definitions}
-        language={language}
+        language={wordCard.language}
       />
       <Separator />
       <FlexColumn key={`${wordCard.id}-${wordCard.word}-examples`} gap={4}>
-        <Example example={wordCard.example1} language={language} />
-        {wordCard.example2 && <Example example={wordCard.example2} language={language} />}
-        {wordCard.example3 && <Example example={wordCard.example3} language={language} />}
+        <Example example={wordCard.example1} language={wordCard.language} />
+        {wordCard.example2 && <Example example={wordCard.example2} language={wordCard.language} />}
+        {wordCard.example3 && <Example example={wordCard.example3} language={wordCard.language} />}
       </FlexColumn>
       <Extra
         derivatives={wordCard.derivatives ?? ""}
