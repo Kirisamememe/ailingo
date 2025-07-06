@@ -4,7 +4,6 @@ import type z from "zod";
 import { db, dbExceptionHandler } from "@/lib/db";
 import type { wordcardFormSchema } from "@/app/[locale]/(protected)/wordbook/_schema/wordcard";
 import { wordCard } from "@/drizzle/schema";
-import type { WordCard } from "@/types";
 
 /**
  * WordCardService
@@ -19,7 +18,7 @@ class WordCardService {
       .from(wordCard)
       .where(eq(wordCard.id, id))
       .catch(dbExceptionHandler);
-    return result.length ? (result[0] as WordCard) : null;
+    return result.length ? result[0] : null;
   }
 
   /**
@@ -32,7 +31,7 @@ class WordCardService {
       .where(and(eq(wordCard.authorId, operatorId), isNull(wordCard.deletedAt)))
       .orderBy(desc(wordCard.createdAt))
       .catch(dbExceptionHandler);
-    return wordCards as WordCard[];
+    return wordCards;
   }
 
   /**
