@@ -4,7 +4,7 @@ import { BasicInfo } from "./basic";
 import { Example } from "./example/example";
 import { Extra } from "./extra";
 import { WordbookContentFooter } from "./footer/footer";
-import type { WordCard } from "@/app/[locale]/(protected)/wordbook/_types";
+import type { WordCard } from "@/types";
 
 type Props = {
   wordCard: WordCard;

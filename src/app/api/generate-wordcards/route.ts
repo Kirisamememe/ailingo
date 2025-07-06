@@ -3,7 +3,7 @@ import { ai } from "@/lib/ai/ai";
 import type { wordcardRequestSchema } from "@/app/[locale]/(protected)/wordbook/_schema";
 import { wordcardAISchemaArray } from "@/app/[locale]/(protected)/wordbook/_schema";
 import { auth } from "@/auth";
-import { LANGUAGES, LANGUAGE_CODES } from "@/constants";
+import { LANGUAGES, LANGUAGE_CODES } from "@/drizzle/schema";
 
 /**
  * 最大実行時間

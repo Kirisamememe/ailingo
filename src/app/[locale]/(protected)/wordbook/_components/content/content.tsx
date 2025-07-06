@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import { WordbookContentView } from "./content-view";
 import { EditForm } from "./edit-form";
 import { AiReqForm } from "../new-card";
-import type { WordCard } from "@/app/[locale]/(protected)/wordbook/_types";
+import type { WordCard } from "@/types";
 
 type Props = {
   wordCards: WordCard[];

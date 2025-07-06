@@ -10,10 +10,10 @@ import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Form, FormField, SelectFormItem, TextareaItem } from "@/components/ui/form";
 import { SelectItem } from "@/components/ui/select";
 import { Headline } from "@/components/ui/typography";
-import { LANGUAGES } from "@/constants/language";
 import { setCookie } from "../../../_actions/cookies";
 import { type CompositionCorrectionAIRequestSchema } from "../../_schema";
-import type { LanguageCode } from "@/types/language";
+import { LANGUAGES } from "@/drizzle/schema";
+import { type LanguageCode } from "@/types";
 
 type Props = {
   form: UseFormReturn<CompositionCorrectionAIRequestSchema>;

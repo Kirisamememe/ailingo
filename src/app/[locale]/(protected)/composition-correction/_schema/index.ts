@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { modelListTuple } from "@/lib/ai";
-import { LANGUAGE_CODES } from "@/constants";
+import { LANGUAGE_CODES } from "@/drizzle/schema";
 
 const compositionCorrectionBaseSchema = z.object({
   original: z

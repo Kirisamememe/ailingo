@@ -5,7 +5,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { ListItem } from "./list-item";
 import { WordbookListNew } from "./list-new";
 import { WordbookListStreaming } from "./list-streaming";
-import type { WordListItem } from "../../_types";
+import type { WordListItem } from "@/types";
 
 type Props = {
   wordList: WordListItem[];

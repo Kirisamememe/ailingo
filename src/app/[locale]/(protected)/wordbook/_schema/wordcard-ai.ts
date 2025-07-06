@@ -1,8 +1,8 @@
 import { z } from "zod";
 import { modelListTuple } from "@/lib/ai";
 import { otherSchema, wordcardBase } from "./wordcard";
-import { LANGUAGE_CODES } from "@/constants";
 import { POS } from "@/constants";
+import { LANGUAGE_CODES } from "@/drizzle/schema";
 
 const extraExampleRequiredSchema = z.object({
   example2: z
