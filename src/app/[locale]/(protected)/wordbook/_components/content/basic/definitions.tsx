@@ -3,7 +3,8 @@ import { Badge } from "@/components/ui/badge";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Caption } from "@/components/ui/typography";
 import { definitionsArraySchema } from "../../../_schema";
-import type { LanguageCode, POS } from "@/types";
+import type { LanguageCode } from "@/types";
+import type { POS } from "@/types";
 
 type Props = {
   definitions: string;

@@ -12,7 +12,7 @@ import { SelectItem } from "@/components/ui/select";
 import { Headline } from "@/components/ui/typography";
 import { setCookie } from "../../../_actions/cookies";
 import { useWordbook } from "../../_hooks/wordbook-provider";
-import { LANGUAGES } from "@/constants";
+import { LANGUAGES } from "@/drizzle/schema";
 import type { LanguageCode } from "@/types";
 
 /**

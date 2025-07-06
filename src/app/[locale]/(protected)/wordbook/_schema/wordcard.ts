@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { LANGUAGE_CODES } from "@/constants";
+import { LANGUAGE_CODES } from "@/drizzle/schema";
 
 /**
  * AIワードカードリクエストスキーマ

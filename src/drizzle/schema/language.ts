@@ -1,4 +1,4 @@
-import type { LanguageCode } from "@/types";
+import { pgEnum } from "drizzle-orm/pg-core";
 
 /** 単語帳対応の言語 */
 export const LANGUAGES = {
@@ -25,28 +25,9 @@ export const LANGUAGES = {
 } as const;
 
 /** 単語帳対応の言語のコード */
-export const LANGUAGE_CODES = Object.keys(LANGUAGES) as [LanguageCode];
+export const LANGUAGE_CODES = Object.keys(LANGUAGES) as [keyof typeof LANGUAGES];
 
 /**
- * 品詞
+ * 単語帳対応の言語のコード
  */
-export const POS = [
-  "NOUN",
-  "MASCULINE_NOUN",
-  "FEMININE_NOUN",
-  "NEUTER_NOUN",
-  "VERB",
-  "TRANSITIVE_VERB",
-  "INTRANSITIVE_VERB",
-  "ADJECTIVE",
-  "ADVERB",
-  "PREPOSITION",
-  "CONJUNCTION",
-  "PRONOUN",
-  "INTERJECTION",
-  "PHRASE",
-  "DETERMINER",
-  "IDIOM",
-  "ORDINAL",
-  "OTHER",
-] as const;
+export const language = pgEnum("Language", LANGUAGE_CODES);

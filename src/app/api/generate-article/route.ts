@@ -3,7 +3,7 @@ import { ai } from "@/lib/ai/ai";
 import type { aiArticleRequestSchema } from "@/lib/ai/schema";
 import { aiArticleResponseSchema } from "@/lib/ai/schema";
 import { auth } from "@/auth";
-import { LANGUAGES } from "@/constants";
+import { LANGUAGES } from "@/drizzle/schema";
 
 /**
  * 最大実行時間

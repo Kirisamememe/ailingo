@@ -16,8 +16,8 @@ import { deleteWordCard } from "../../../_actions/delete";
 import { updateWordCard } from "../../../_actions/update";
 import { wordcardFormSchema } from "../../../_schema";
 import { getWordCardFormData } from "../../../_utils";
-import type { WordCard } from "@/generated/prisma";
 import { useRouter } from "@/i18n";
+import type { WordCard } from "@/types";
 
 type Props = {
   wordCard: WordCard;

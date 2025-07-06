@@ -1,5 +1,7 @@
 import "server-only";
-import { prisma } from "@/lib/db";
+import { eq } from "drizzle-orm";
+import { db } from "@/lib/db";
+import { users } from "@/drizzle/schema";
 
 /**
  * UserService
@@ -9,10 +11,8 @@ class UserService {
    * ユーザーを取得する
    */
   async getUser(id: string) {
-    const user = await prisma.user.findUnique({
-      where: { id },
-    });
-    return user;
+    const result = await db.select().from(users).where(eq(users.id, id));
+    return result.length ? result[0] : undefined;
   }
 
   /**
@@ -21,10 +21,8 @@ class UserService {
   async getUserByEmail(email: string) {
     // eslint-disable-next-line no-console
     console.log("getUserByEmail", email);
-    const user = await prisma.user.findUnique({
-      where: { email },
-    });
-    return user;
+    const result = await db.select().from(users).where(eq(users.email, email));
+    return result.length ? result[0] : undefined;
   }
 }
 

@@ -1,4 +1,4 @@
-import type { WordCard as WordCardDB } from "@/generated/prisma";
+import type { wordCard } from "@/drizzle/schema";
 import type { LanguageCode } from "@/types";
 
 /**
@@ -20,6 +20,6 @@ export type WordListItem = {
 };
 
 /**
- * ワードカードクライアント
+ * 単語カード
  */
-export type WordCard = Omit<WordCardDB, "language"> & { language: LanguageCode };
+export type WordCard = typeof wordCard.$inferSelect;

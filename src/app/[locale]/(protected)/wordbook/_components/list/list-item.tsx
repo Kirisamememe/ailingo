@@ -1,7 +1,7 @@
 "use client";
 
 import { ListItemView } from "./list-item-view";
-import type { WordListItem } from "../../_types";
+import type { WordListItem } from "@/types";
 
 type Props = {
   listItem: WordListItem;

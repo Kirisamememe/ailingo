@@ -2,7 +2,7 @@ import { ai } from "@/lib/ai/ai";
 import type { CompositionCorrectionAIRequestSchema } from "@/app/[locale]/(protected)/composition-correction/_schema";
 import { compositionCorrectionAIGeneratedContentSchema } from "@/app/[locale]/(protected)/composition-correction/_schema";
 import { auth } from "@/auth";
-import { LANGUAGES } from "@/constants";
+import { LANGUAGES } from "@/drizzle/schema";
 
 /**
  * 最大実行時間

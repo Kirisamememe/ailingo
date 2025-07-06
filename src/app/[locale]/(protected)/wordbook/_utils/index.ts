@@ -1,5 +1,4 @@
-import type { WordCard } from "@/generated/prisma";
-import type { LanguageCode } from "@/types";
+import type { WordCard } from "@/types";
 
 /**
  * 単語カードフォームデータを取得
@@ -18,6 +17,6 @@ export const getWordCardFormData = (wordCard?: WordCard) => {
     synonyms: wordCard?.synonyms ?? "",
     antonyms: wordCard?.antonyms ?? "",
     note: wordCard?.note ?? "",
-    language: (wordCard?.language ?? "en-US") as LanguageCode,
+    language: wordCard?.language ?? "en-US",
   };
 };

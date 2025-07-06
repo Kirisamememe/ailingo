@@ -1,2 +1,2 @@
 export * from "./exception-handler-db";
-export * from "./prisma";
+export * from "./drizzle";

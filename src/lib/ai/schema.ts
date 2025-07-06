@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { modelListTuple } from "@/lib/ai/constants";
-import { LANGUAGE_CODES } from "@/constants";
+import { LANGUAGE_CODES } from "@/drizzle/schema";
 
 /**
  * AI記事リクエストスキーマ

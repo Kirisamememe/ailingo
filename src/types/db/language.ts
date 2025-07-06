@@ -1,5 +1,5 @@
-import type { LANGUAGES } from "@/constants";
 import type { POS } from "@/constants";
+import type { LANGUAGES } from "@/drizzle/schema";
 
 /**
  * 品詞
