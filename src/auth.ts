@@ -1,10 +1,10 @@
-import { PrismaAdapter } from "@auth/prisma-adapter";
+import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
-import { prisma } from "@/lib/db/prisma";
 import { authConfig } from "./auth.config";
-import type { Role } from "@/generated/prisma";
+import { db } from "./lib/db/drizzle";
 import { userService } from "@/services";
+import type { Role } from "@/types";
 
 declare module "next-auth" {
   // eslint-disable-next-line @typescript-eslint/consistent-type-definitions
@@ -28,7 +28,7 @@ declare module "next-auth" {
  */
 export const { handlers, signIn, signOut, auth } = NextAuth({
   ...authConfig,
-  adapter: PrismaAdapter(prisma),
+  adapter: DrizzleAdapter(db),
   providers: [Google],
   callbacks: {
     async session({ session, token }) {

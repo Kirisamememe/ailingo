@@ -6,7 +6,6 @@ const loginPath = "/login";
 
 /**
  * ミドルウェア(edge runtime)用のNextAuthオブジェクト
- * 通常のPrismaClientはここでは使えない
  */
 export const authConfig = {
   pages: {
