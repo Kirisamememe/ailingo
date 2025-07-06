@@ -36,6 +36,13 @@
       "when": 1751801643530,
       "tag": "0004_needy_scarlet_witch",
       "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "7",
+      "when": 1751803989157,
+      "tag": "0005_rename_composition_sequence",
+      "breakpoints": true
     }
   ]
 }
