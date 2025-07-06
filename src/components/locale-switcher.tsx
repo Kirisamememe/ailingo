@@ -61,7 +61,7 @@ export const LocaleSwitcher = ({
         </DropdownMenuTrigger>
         <DropdownMenuContent align={align} side={side} sideOffset={sideOffset}>
           {LOCALES.map((locale, index) => (
-            <DropdownMenuItem key={index} asChild>
+            <DropdownMenuItem key={index} asChild lang={locale}>
               <Link href={pathname} locale={locale}>
                 <Check
                   size={16}
