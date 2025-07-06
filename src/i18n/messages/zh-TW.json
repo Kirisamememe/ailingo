@@ -31,7 +31,7 @@
     "preference": "設定",
     "quiz": "測驗",
     "generatedMaterial": "語料生成",
-    "compositionCorrection": "作文批改",
+    "writingCorrection": "作文批改",
     "footer": {
       "theme": "主題",
       "profile": "個人資料",
@@ -145,7 +145,7 @@
       "antonyms": "反義字"
     }
   },
-  "compositionCorrection": {
+  "writingCorrection": {
     "requestForm": {
       "title": "輸入原文",
       "submit": "提交",

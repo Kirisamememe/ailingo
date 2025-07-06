@@ -31,7 +31,7 @@
     "preference": "设置",
     "quiz": "测验",
     "generatedMaterial": "语料生成",
-    "compositionCorrection": "作文批改",
+    "writingCorrection": "作文批改",
     "footer": {
       "theme": "主题",
       "profile": "个人资料",
@@ -145,7 +145,7 @@
       "antonyms": "反义词"
     }
   },
-  "compositionCorrection": {
+  "writingCorrection": {
     "requestForm": {
       "title": "输入原文",
       "submit": "提交",

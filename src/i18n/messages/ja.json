@@ -31,7 +31,7 @@
     "preference": "設定",
     "quiz": "小テスト",
     "generatedMaterial": "生成マテリアル",
-    "compositionCorrection": "作文添削",
+    "writingCorrection": "作文添削",
     "footer": {
       "theme": "テーマ",
       "profile": "プロフィール",
@@ -145,7 +145,7 @@
       "antonyms": "対義語"
     }
   },
-  "compositionCorrection": {
+  "writingCorrection": {
     "requestForm": {
       "title": "原文を入力",
       "submit": "送信",

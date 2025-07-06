@@ -2,20 +2,20 @@ import type { DeepPartial } from "ai";
 import { useTranslations } from "next-intl";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Headline, Paragraph } from "@/components/ui/typography";
-import type { CompositionCorrectionDBRequestSchema } from "../../_schema";
+import type { WritingCorrectionDBRequestSchema } from "../../_schema";
 
 /**
  * 作文修正結果
  */
 type Props = {
-  object?: DeepPartial<CompositionCorrectionDBRequestSchema>;
+  object?: DeepPartial<WritingCorrectionDBRequestSchema>;
 };
 
 /**
  * 作文修正結果
  */
 export const Corrected: React.FC<Props> = ({ object }) => {
-  const t = useTranslations("compositionCorrection.requestForm.corrected");
+  const t = useTranslations("writingCorrection.requestForm.corrected");
   return (
     <FlexColumn className="bg-card/50 w-full rounded-lg border p-4">
       <Headline size={20} mx={1}>

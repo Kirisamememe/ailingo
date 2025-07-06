@@ -1,7 +1,7 @@
 import { InsetLayoutWithPadding } from "@/components/layout";
 import { FormContainer } from "./_components/form/container";
 
-const CompositionCorrection = () => {
+const WritingCorrection = () => {
   return (
     <InsetLayoutWithPadding className="relative">
       <FormContainer />
@@ -9,4 +9,4 @@ const CompositionCorrection = () => {
   );
 };
 
-export default CompositionCorrection;
+export default WritingCorrection;

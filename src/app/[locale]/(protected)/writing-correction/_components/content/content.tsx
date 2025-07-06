@@ -3,7 +3,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 /**
  * 作文修正メインコンポーネント
  */
-export const CompositionCorrectionContent = () => {
+export const WritingCorrectionContent = () => {
   return (
     <Card className="w-full rounded-lg">
       <CardHeader>

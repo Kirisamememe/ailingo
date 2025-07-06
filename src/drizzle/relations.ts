@@ -1,5 +1,5 @@
 import { relations } from "drizzle-orm/relations";
-import { accounts, composition, users, wordCard } from "./schema";
+import { accounts, users, wordCard, writing } from "./schema";
 
 /**
  * アカウントのリレーション
@@ -16,16 +16,16 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
  */
 export const userRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
-  compositions: many(composition),
+  writings: many(writing),
   wordCards: many(wordCard),
 }));
 
 /**
  * 作文のリレーション
  */
-export const compositionRelations = relations(composition, ({ one }) => ({
+export const writingRelations = relations(writing, ({ one }) => ({
   user: one(users, {
-    fields: [composition.authorId],
+    fields: [writing.authorId],
     references: [users.id],
   }),
 }));

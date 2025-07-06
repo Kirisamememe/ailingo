@@ -31,7 +31,7 @@
     "preference": "Preference",
     "quiz": "Quiz",
     "generatedMaterial": "Generated Material",
-    "compositionCorrection": "Composition Correction",
+    "writingCorrection": "Writing Correction",
     "footer": {
       "theme": "Theme",
       "profile": "Profile",
@@ -145,14 +145,14 @@
       "antonyms": "Antonyms"
     }
   },
-  "compositionCorrection": {
+  "writingCorrection": {
     "requestForm": {
       "title": "Input Original",
       "submit": "Submit",
       "original": {
         "label": "Original",
-        "placeholder": "Enter the original composition",
-        "description": "Please enter the original composition you want to correct.",
+        "placeholder": "Enter the original writing",
+        "description": "Please enter the original writing you want to correct.",
         "originalIsRequired": "Original is required"
       },
       "context": {
@@ -164,12 +164,12 @@
       "model": {
         "label": "Model",
         "placeholder": "Select a model",
-        "description": "Select the model you want to use to correct the composition."
+        "description": "Select the model you want to use to correct the writing."
       },
       "targetLanguage": {
         "label": "Target Language",
         "placeholder": "Select a language",
-        "description": "Select the language you want to correct the composition to."
+        "description": "Select the language you want to correct the writing to."
       },
       "feedbackLanguage": {
         "label": "Feedback Language",

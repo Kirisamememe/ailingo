@@ -11,13 +11,13 @@ import { Form, FormField, SelectFormItem, TextareaItem } from "@/components/ui/f
 import { SelectItem } from "@/components/ui/select";
 import { Headline } from "@/components/ui/typography";
 import { setCookie } from "../../../_actions/cookies";
-import { type CompositionCorrectionAIRequestSchema } from "../../_schema";
+import { type WritingCorrectionAIRequestSchema } from "../../_schema";
 import { LANGUAGES } from "@/drizzle/schema";
 import { type LanguageCode } from "@/types";
 
 type Props = {
-  form: UseFormReturn<CompositionCorrectionAIRequestSchema>;
-  submit: (data: CompositionCorrectionAIRequestSchema) => void;
+  form: UseFormReturn<WritingCorrectionAIRequestSchema>;
+  submit: (data: WritingCorrectionAIRequestSchema) => void;
   isLoading: boolean;
 };
 
@@ -25,7 +25,7 @@ type Props = {
  * 作文修正リクエストフォーム
  */
 export const RequestForm: React.FC<Props> = ({ form, submit, isLoading }) => {
-  const t = useTranslations("compositionCorrection.requestForm");
+  const t = useTranslations("writingCorrection.requestForm");
 
   return (
     <Form {...form}>
@@ -48,7 +48,7 @@ export const RequestForm: React.FC<Props> = ({ form, submit, isLoading }) => {
                 description={t("original.description")}
                 placeholder={t("original.placeholder")}
                 className="[&[lang='en-US'],&[lang='en-GB']]:font-english-writing mb-1 h-[55vh] text-base leading-relaxed tracking-wide md:text-lg"
-                i18nNameSpace="compositionCorrection.requestForm.original"
+                i18nNameSpace="writingCorrection.requestForm.original"
                 {...field}
               />
             )}
@@ -64,7 +64,7 @@ export const RequestForm: React.FC<Props> = ({ form, submit, isLoading }) => {
                   value={form.getValues("model")}
                   onValueChange={(value) => {
                     form.setValue("model", value as AIModel);
-                    void setCookie("COMPOSITION_CORRECTION_MODEL", value);
+                    void setCookie("WRITING_CORRECTION_MODEL", value);
                   }}
                   description={t("model.description")}
                   placeholder={t("model.placeholder")}
@@ -138,7 +138,7 @@ export const RequestForm: React.FC<Props> = ({ form, submit, isLoading }) => {
               description={t("context.description")}
               placeholder={t("context.placeholder")}
               className="mb-1 h-24"
-              i18nNameSpace="compositionCorrection.requestForm.context"
+              i18nNameSpace="writingCorrection.requestForm.context"
               {...field}
             />
           )}

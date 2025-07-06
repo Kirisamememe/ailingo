@@ -36,8 +36,8 @@ export const aiBoosterItems = [
     icon: Book,
   },
   {
-    title: "compositionCorrection",
-    url: "/composition-correction",
+    title: "writingCorrection",
+    url: "/writing-correction",
     icon: Book,
   },
 ] as const;

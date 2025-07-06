@@ -7,19 +7,19 @@ import { toast } from "sonner";
 import { GridColumn } from "@/components/ui/gridbox";
 import { Corrected } from "./corrected";
 import { RequestForm } from "./request-form";
-import { createCompositionCorrection } from "../../_actions/create";
+import { createWritingCorrection } from "../../_actions/create";
 import {
-  type CompositionCorrectionAIRequestSchema,
-  compositionCorrectionAIGeneratedContentSchema,
-  compositionCorrectionAIRequestSchema,
+  type WritingCorrectionAIRequestSchema,
+  writingCorrectionAIGeneratedContentSchema,
+  writingCorrectionAIRequestSchema,
 } from "../../_schema";
 
 /**
  * 作文修正フォームコンテナ
  */
 export const FormContainer = () => {
-  const form = useForm<CompositionCorrectionAIRequestSchema>({
-    resolver: zodResolver(compositionCorrectionAIRequestSchema),
+  const form = useForm<WritingCorrectionAIRequestSchema>({
+    resolver: zodResolver(writingCorrectionAIRequestSchema),
     defaultValues: {
       original: "",
       targetLanguage: "en-US",
@@ -30,8 +30,8 @@ export const FormContainer = () => {
   });
 
   const { object, submit, isLoading } = useObject({
-    api: "/api/composition-correction",
-    schema: compositionCorrectionAIGeneratedContentSchema,
+    api: "/api/writing-correction",
+    schema: writingCorrectionAIGeneratedContentSchema,
     onFinish: async ({ object }) => {
       if (!object) return;
 
@@ -42,11 +42,11 @@ export const FormContainer = () => {
           context,
           ...object,
         };
-        await createCompositionCorrection(payload);
+        await createWritingCorrection(payload);
         form.reset();
-        toast.success("Composition correction created successfully");
+        toast.success("Writing correction created successfully");
       } catch {
-        toast.error("Failed to create composition correction");
+        toast.error("Failed to create writing correction");
       }
     },
   });

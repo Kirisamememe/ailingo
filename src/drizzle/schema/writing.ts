@@ -6,8 +6,8 @@ import { users } from "./users";
 /**
  * 作文
  */
-export const composition = pgTable(
-  "composition",
+export const writing = pgTable(
+  "writing",
   {
     id: serial().primaryKey().notNull(),
     original: text().notNull(),
@@ -27,7 +27,7 @@ export const composition = pgTable(
     foreignKey({
       columns: [table.authorId],
       foreignColumns: [users.id],
-      name: "composition_author_id_fkey",
+      name: "writing_author_id_fkey",
     })
       .onUpdate("cascade")
       .onDelete("cascade"),
