@@ -1,9 +1,10 @@
 import "server-only";
+import { and, desc, eq, isNull } from "drizzle-orm";
 import type z from "zod";
-import { dbExceptionHandler } from "@/lib/db";
-import { prisma } from "@/lib/db";
+import { db, dbExceptionHandler } from "@/lib/db";
 import type { wordcardFormSchema } from "@/app/[locale]/(protected)/wordbook/_schema/wordcard";
-import type { WordCard } from "@/app/[locale]/(protected)/wordbook/_types";
+import { wordCard } from "@/drizzle/schema";
+import type { WordCard } from "@/types";
 
 /**
  * WordCardService
@@ -13,23 +14,23 @@ class WordCardService {
    * 単語カードを取得する
    */
   async getUnique(id: number) {
-    const wordCard = await prisma.wordCard
-      .findUnique({
-        where: { id },
-      })
+    const result = await db
+      .select()
+      .from(wordCard)
+      .where(eq(wordCard.id, id))
       .catch(dbExceptionHandler);
-    return wordCard as WordCard;
+    return result.length ? (result[0] as WordCard) : null;
   }
 
   /**
    * 単語カードを複数件取得する
    */
   async getMany(operatorId: string) {
-    const wordCards = await prisma.wordCard
-      .findMany({
-        where: { deletedAt: null, authorId: operatorId },
-        orderBy: { createdAt: "desc" },
-      })
+    const wordCards = await db
+      .select()
+      .from(wordCard)
+      .where(and(eq(wordCard.authorId, operatorId), isNull(wordCard.deletedAt)))
+      .orderBy(desc(wordCard.createdAt))
       .catch(dbExceptionHandler);
     return wordCards as WordCard[];
   }
@@ -37,9 +38,10 @@ class WordCardService {
   /**
    * 単語カードを作成する
    */
-  async create(wordCard: z.infer<typeof wordcardFormSchema>, operatorId: string) {
-    await prisma.wordCard
-      .create({ data: { ...wordCard, authorId: operatorId } })
+  async create(wordCardData: z.infer<typeof wordcardFormSchema>, operatorId: string) {
+    await db
+      .insert(wordCard)
+      .values({ ...wordCardData, authorId: operatorId, updatedAt: new Date() })
       .catch(dbExceptionHandler);
   }
 
@@ -47,24 +49,37 @@ class WordCardService {
    * 単語カードを複数件作成する
    */
   async createMany(wordcards: z.infer<typeof wordcardFormSchema>[], operatorId: string) {
-    await prisma.wordCard
-      .createMany({ data: wordcards.map((wordcard) => ({ ...wordcard, authorId: operatorId })) })
+    await db
+      .insert(wordCard)
+      .values(
+        wordcards.map((wordcard) => ({
+          ...wordcard,
+          authorId: operatorId,
+          updatedAt: new Date(),
+        })),
+      )
       .catch(dbExceptionHandler);
   }
 
   /**
    * 単語カードを更新する
    */
-  async update(id: number, wordCard: z.infer<typeof wordcardFormSchema>) {
-    await prisma.wordCard.update({ where: { id }, data: wordCard }).catch(dbExceptionHandler);
+  async update(id: number, wordCardData: z.infer<typeof wordcardFormSchema>) {
+    await db
+      .update(wordCard)
+      .set({ ...wordCardData, updatedAt: new Date() })
+      .where(eq(wordCard.id, id))
+      .catch(dbExceptionHandler);
   }
 
   /**
    * 単語カードを削除する
    */
   async delete(id: number): Promise<void> {
-    await prisma.wordCard
-      .update({ where: { id }, data: { deletedAt: new Date() } })
+    await db
+      .update(wordCard)
+      .set({ deletedAt: new Date() })
+      .where(eq(wordCard.id, id))
       .catch(dbExceptionHandler);
   }
 }
