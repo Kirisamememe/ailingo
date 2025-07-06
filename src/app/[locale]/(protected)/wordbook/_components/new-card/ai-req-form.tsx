@@ -72,7 +72,7 @@ export const AiReqForm = () => {
                 }}
                 description={t("model.description")}
                 placeholder={t("model.placeholder")}
-                className="text-muted-foreground hover:text-foreground w-fit border-none bg-transparent px-1 hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent"
+                variant="ghost"
               >
                 {modelListTuple.map((model) => (
                   <SelectItem key={model} value={model}>

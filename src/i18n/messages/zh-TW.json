@@ -145,6 +145,42 @@
       "antonyms": "反義字"
     }
   },
+  "compositionCorrection": {
+    "requestForm": {
+      "title": "輸入原文",
+      "submit": "提交",
+      "original": {
+        "label": "作文",
+        "placeholder": "輸入作文",
+        "description": "請輸入作文。",
+        "originalIsRequired": "作文為必填項"
+      },
+      "context": {
+        "label": "語境",
+        "placeholder": "輸入語境",
+        "description": "請輸入語境。",
+        "contextIsTooLong": "語境不能超過500個字符。"
+      },
+      "model": {
+        "label": "模型",
+        "placeholder": "選擇模型",
+        "description": "請選擇您想要使用的模型來修改作文。"
+      },
+      "targetLanguage": {
+        "label": "目標語言",
+        "placeholder": "選擇語言",
+        "description": "請選擇您想要修改作文的目標語言。"
+      },
+      "feedbackLanguage": {
+        "label": "反饋語言",
+        "placeholder": "選擇語言",
+        "description": "請選擇您想要接收反饋的語言。"
+      },
+      "corrected": {
+        "title": "修改結果"
+      }
+    }
+  },
   "POS": {
     "NOUN": "名詞",
     "MASCULINE_NOUN": "名詞[陽性]",

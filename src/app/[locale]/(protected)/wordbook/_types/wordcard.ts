@@ -1,3 +1,4 @@
+import type { WordCard as WordCardDB } from "@/generated/prisma";
 import type { LanguageCode } from "@/types";
 
 /**
@@ -17,3 +18,8 @@ export type WordListItem = {
    */
   language: LanguageCode;
 };
+
+/**
+ * ワードカードクライアント
+ */
+export type WordCard = Omit<WordCardDB, "language"> & { language: LanguageCode };

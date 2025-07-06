@@ -1,7 +1,6 @@
 import type { AIModel } from "@/lib/ai";
 import { modelListTuple } from "@/lib/ai";
 import { getSession } from "@/lib/auth";
-import { languageToLocale } from "@/lib/utils";
 import { InsetLayoutWithPadding } from "@/components/layout";
 import { FlexRow } from "@/components/ui/flexbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -18,7 +17,7 @@ const WordbookPage = async () => {
   const wordList = wordCards.map((wordCard) => ({
     id: wordCard.id,
     word: wordCard.word,
-    language: languageToLocale(wordCard.language),
+    language: wordCard.language,
   }));
 
   const modelCookie = await getCookie("WORDCARD_MODEL");
