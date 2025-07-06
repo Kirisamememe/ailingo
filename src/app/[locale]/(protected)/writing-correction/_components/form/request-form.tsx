@@ -74,9 +74,10 @@ export const RequestForm = () => {
                   }}
                   description={t("targetLanguage.description")}
                   placeholder={t("targetLanguage.placeholder")}
+                  lang={form.getValues("targetLanguage")}
                 >
                   {Object.entries(LANGUAGES).map(([key, value]) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key} value={key} lang={key}>
                       {value}
                     </SelectItem>
                   ))}
@@ -96,9 +97,10 @@ export const RequestForm = () => {
                   }}
                   description={t("feedbackLanguage.description")}
                   placeholder={t("feedbackLanguage.placeholder")}
+                  lang={form.getValues("feedbackLanguage")}
                 >
                   {Object.entries(LANGUAGES).map(([key, value]) => (
-                    <SelectItem key={key} value={key}>
+                    <SelectItem key={key} value={key} lang={key}>
                       {value}
                     </SelectItem>
                   ))}

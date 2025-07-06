@@ -2,6 +2,7 @@ import { useMemo } from "react";
 import { cn } from "@/lib/utils";
 import { Select, SelectContent, SelectTrigger, SelectValue } from "../select";
 import { FormControl, FormDescription, FormItem, FormLabel, FormMessage } from "./form";
+import type { LanguageCode } from "@/types";
 
 type Props = {
   label?: string;
@@ -12,6 +13,7 @@ type Props = {
   className?: string;
   parentClass?: string;
   variant?: "default" | "ghost";
+  lang?: LanguageCode;
 } & React.ComponentProps<typeof Select>;
 
 export const SelectFormItem: React.FC<Props> = ({
@@ -24,6 +26,7 @@ export const SelectFormItem: React.FC<Props> = ({
   className,
   parentClass,
   variant = "default",
+  lang,
   ...props
 }) => {
   const variantClass = useMemo(() => {
@@ -49,7 +52,7 @@ export const SelectFormItem: React.FC<Props> = ({
               className,
             )}
           >
-            <SelectValue placeholder={placeholder} />
+            <SelectValue placeholder={placeholder} lang={lang} />
           </SelectTrigger>
         </FormControl>
         <SelectContent>{children}</SelectContent>
