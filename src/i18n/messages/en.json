@@ -146,6 +146,12 @@
     }
   },
   "writingCorrection": {
+    "corrected": {
+      "title": "Corrected",
+      "original": "Original",
+      "corrected": "Corrected",
+      "feedback": "Feedback"
+    },
     "requestForm": {
       "title": "Input Original",
       "submit": "Submit",
@@ -162,7 +168,7 @@
         "contextIsTooLong": "Context must be less than 500 characters."
       },
       "model": {
-        "label": "Model",
+        "label": "AI Model",
         "placeholder": "Select a model",
         "description": "Select the model you want to use to correct the writing."
       },
@@ -175,9 +181,6 @@
         "label": "Feedback Language",
         "placeholder": "Select a language",
         "description": "Select the language you want to receive feedback in."
-      },
-      "corrected": {
-        "title": "Corrected"
       }
     }
   },
