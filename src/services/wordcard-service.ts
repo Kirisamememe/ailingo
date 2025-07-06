@@ -3,7 +3,7 @@ import type z from "zod";
 import { dbExceptionHandler } from "@/lib/db";
 import { prisma } from "@/lib/db";
 import type { wordcardFormSchema } from "@/app/[locale]/(protected)/wordbook/_schema/wordcard";
-import type { WordCard } from "@/generated/prisma";
+import type { WordCard } from "@/app/[locale]/(protected)/wordbook/_types";
 
 /**
  * WordCardService
@@ -12,59 +12,51 @@ class WordCardService {
   /**
    * 単語カードを取得する
    */
-  async getUnique(id: number): Promise<WordCard | null> {
+  async getUnique(id: number) {
     const wordCard = await prisma.wordCard
       .findUnique({
         where: { id },
       })
       .catch(dbExceptionHandler);
-    return wordCard;
+    return wordCard as WordCard;
   }
 
   /**
    * 単語カードを複数件取得する
    */
-  async getMany(operatorId: string): Promise<WordCard[]> {
+  async getMany(operatorId: string) {
     const wordCards = await prisma.wordCard
       .findMany({
         where: { deletedAt: null, authorId: operatorId },
         orderBy: { createdAt: "desc" },
       })
       .catch(dbExceptionHandler);
-    return wordCards;
+    return wordCards as WordCard[];
   }
 
   /**
    * 単語カードを作成する
    */
-  async create(
-    wordCard: z.infer<typeof wordcardFormSchema>,
-    operatorId: string,
-  ): Promise<WordCard> {
-    const newWordCard = await prisma.wordCard
+  async create(wordCard: z.infer<typeof wordcardFormSchema>, operatorId: string) {
+    await prisma.wordCard
       .create({ data: { ...wordCard, authorId: operatorId } })
       .catch(dbExceptionHandler);
-    return newWordCard;
   }
 
   /**
    * 単語カードを複数件作成する
    */
   async createMany(wordcards: z.infer<typeof wordcardFormSchema>[], operatorId: string) {
-    const newWordCards = await prisma.wordCard
+    await prisma.wordCard
       .createMany({ data: wordcards.map((wordcard) => ({ ...wordcard, authorId: operatorId })) })
       .catch(dbExceptionHandler);
-    return newWordCards;
   }
 
   /**
    * 単語カードを更新する
    */
-  async update(id: number, wordCard: z.infer<typeof wordcardFormSchema>): Promise<WordCard> {
-    const updatedWordCard = await prisma.wordCard
-      .update({ where: { id }, data: wordCard })
-      .catch(dbExceptionHandler);
-    return updatedWordCard;
+  async update(id: number, wordCard: z.infer<typeof wordcardFormSchema>) {
+    await prisma.wordCard.update({ where: { id }, data: wordCard }).catch(dbExceptionHandler);
   }
 
   /**
