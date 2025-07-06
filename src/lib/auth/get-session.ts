@@ -8,7 +8,11 @@ import { auth } from "@/auth";
 export async function getSession() {
   const session = await auth();
   // FIXME: リダイレクトのロジックを見直す
-  if (!session?.user || session.user.role === "BLOCKED") {
+  if (!session) {
+    return redirect("/login");
+  }
+
+  if (session.user.role === "BLOCKED") {
     return redirect("http://localhost:9999");
   }
 
