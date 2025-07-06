@@ -1,16 +1,15 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { MessageSquareOff } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { type AIModel, modelListTuple } from "@/lib/ai";
-import { cn } from "@/lib/utils";
-import { Button, Submit } from "@/components/ui/button";
+import { Submit } from "@/components/ui/button";
 import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Form, FormField, SelectFormItem, TextareaItem } from "@/components/ui/form";
 import { SelectItem } from "@/components/ui/select";
 import { Headline } from "@/components/ui/typography";
 import { setCookie } from "../../../_actions/cookies";
+import { StopButton } from "../../../_components/stop-btn";
 import { useWordbook } from "../../_hooks/wordbook-provider";
 import { LANGUAGES } from "@/drizzle/schema";
 import type { LanguageCode } from "@/types";
@@ -153,22 +152,7 @@ export const AiReqForm = () => {
           >
             {t("generate")}
           </Submit>
-          {isLoading && (
-            <Button
-              type="button"
-              onClick={stop}
-              variant="destructive"
-              size="icon"
-              aria-label={t("stop")}
-              className={cn(
-                "absolute right-4",
-                "border-destructive text-destructive hover:bg-destructive/10 size-10 rounded-full border bg-transparent font-semibold",
-                "dark:border-destructive dark:text-destructive dark:hover:bg-destructive/10 dark:bg-transparent",
-              )}
-            >
-              <MessageSquareOff className="size-5" />
-            </Button>
-          )}
+          {isLoading && <StopButton stop={stop} />}
         </FlexRow>
       </form>
     </Form>
