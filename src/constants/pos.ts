@@ -1,0 +1,23 @@
+/**
+ * 品詞
+ */
+export const POS = [
+  "NOUN",
+  "MASCULINE_NOUN",
+  "FEMININE_NOUN",
+  "NEUTER_NOUN",
+  "VERB",
+  "TRANSITIVE_VERB",
+  "INTRANSITIVE_VERB",
+  "ADJECTIVE",
+  "ADVERB",
+  "PREPOSITION",
+  "CONJUNCTION",
+  "PRONOUN",
+  "INTERJECTION",
+  "PHRASE",
+  "DETERMINER",
+  "IDIOM",
+  "ORDINAL",
+  "OTHER",
+] as const;
