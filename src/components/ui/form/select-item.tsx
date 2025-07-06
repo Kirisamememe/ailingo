@@ -37,7 +37,7 @@ export const SelectFormItem: React.FC<Props> = ({
 
   return (
     <FormItem className={cn("h-fit w-full", parentClass)}>
-      <FormLabel hidden={hiddenLabel} className="shrink-0">
+      <FormLabel hidden={hiddenLabel} className="shrink-0 px-1 font-semibold">
         {label}
       </FormLabel>
       <Select {...props}>
