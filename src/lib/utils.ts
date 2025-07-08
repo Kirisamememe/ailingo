@@ -28,3 +28,26 @@ export function getLocaleForFns(locale?: string) {
   const localeKey = locale.replace("-", "");
   return locales[localeKey as keyof typeof locales];
 }
+
+/**
+ * 現在の日付を取得する（現在のタイムゾーンに基づく）
+ */
+export const getCurrentDate = () => {
+  const now = new Date();
+  const hour = now.getHours();
+
+  if (hour < 4) {
+    // 朝4時より前は前日扱い
+    const yesterday = new Date(now);
+    yesterday.setDate(yesterday.getDate() - 1);
+    const year = yesterday.getFullYear();
+    const month = String(yesterday.getMonth() + 1).padStart(2, "0");
+    const day = String(yesterday.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
+  }
+
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, "0");
+  const day = String(now.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+};
