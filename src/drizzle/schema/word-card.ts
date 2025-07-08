@@ -1,5 +1,5 @@
 import { sql } from "drizzle-orm";
-import { foreignKey, pgTable, serial, smallint, text, timestamp } from "drizzle-orm/pg-core";
+import { date, foreignKey, pgTable, serial, smallint, text, timestamp } from "drizzle-orm/pg-core";
 import { language } from "./language";
 import { users } from "./users";
 
@@ -30,7 +30,7 @@ export const wordCard = pgTable(
     lastReviewedAt: timestamp("last_reviewed_at", { precision: 3 })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    nextReviewAt: timestamp("next_review_at", { precision: 3 }),
+    nextReviewAt: date("next_review_at", { mode: "string" }),
     synonyms: text(),
     language: language().notNull(),
   },
