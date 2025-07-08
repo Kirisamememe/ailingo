@@ -43,6 +43,41 @@
       "when": 1751803989157,
       "tag": "0005_rename_composition_sequence",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1751989735939,
+      "tag": "0006_lumpy_the_executioner",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "7",
+      "when": 1751990037090,
+      "tag": "0007_pretty_pandemic",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "7",
+      "when": 1751991944243,
+      "tag": "0008_lumpy_betty_brant",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "7",
+      "when": 1751994809809,
+      "tag": "0009_warm_starfox",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "7",
+      "when": 1751997101859,
+      "tag": "0010_daffy_gertrude_yorkes",
+      "breakpoints": true
     }
   ]
 }

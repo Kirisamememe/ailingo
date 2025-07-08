@@ -1,0 +1,1 @@
+ALTER TABLE "word_card" ALTER COLUMN "next_review_at" SET DATA TYPE date;
