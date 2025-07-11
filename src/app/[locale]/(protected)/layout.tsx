@@ -6,6 +6,7 @@ import { ScrollStateProvider } from "@/components/providers";
 import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
 import { Header } from "./_components/nav/header/header";
 import { AppSidebar } from "./_components/nav/sidebar";
+import { planDailyLearning } from "./_utils";
 
 type Props = {
   children: React.ReactNode;
@@ -13,10 +14,12 @@ type Props = {
 };
 
 const RootLayout: React.FC<Props> = async ({ children, params }) => {
-  await getSession();
+  const { operatorId } = await getSession();
   const { locale } = await params;
   const cookieStore = await cookies();
   const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
+
+  await planDailyLearning(operatorId);
 
   return (
     <BaseLayout locale={locale}>
