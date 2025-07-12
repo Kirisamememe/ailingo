@@ -1,25 +1,45 @@
 import type { wordCard } from "@/drizzle/schema";
-import type { LanguageCode } from "@/types";
+import type { LanguageCode, POS } from "@/types";
 
 /**
  * ワードブックリスト
  */
 export type WordListItem = {
-  /**
-   * ワードカードID
-   */
+  /** ワードカードID */
   id: number;
-  /**
-   * ワード
-   */
+  /** ワード */
   word: string;
-  /**
-   * 言語
-   */
+  /** 言語 */
   language: LanguageCode;
+  /** 発音 */
+  phonetics: string;
+  /** 定義 */
+  definitions: string;
+  /** 例文 */
+  example: string;
 };
 
 /**
  * 単語カード
  */
 export type WordCard = typeof wordCard.$inferSelect;
+
+/**
+ * 単語カードクライアント
+ */
+export type WordCardClient = Omit<
+  WordCard,
+  "definitions" | "example1" | "example2" | "example3"
+> & {
+  /** 定義 */
+  definitions: {
+    pos: POS;
+    meaning: string;
+    translation?: string;
+  }[];
+  /** 例文 */
+  examples: {
+    sentence: string;
+    translation?: string;
+  }[];
+};

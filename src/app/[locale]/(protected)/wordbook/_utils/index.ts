@@ -1,4 +1,4 @@
-import type { WordCard } from "@/types";
+import type { POS, WordCard, WordCardClient } from "@/types";
 
 /**
  * 単語カードフォームデータを取得
@@ -18,5 +18,46 @@ export const getWordCardFormData = (wordCard?: WordCard) => {
     antonyms: wordCard?.antonyms ?? "",
     note: wordCard?.note ?? "",
     language: wordCard?.language ?? "en-US",
+  };
+};
+
+/**
+ * 単語カードデータをクライアント用に変換
+ * @param wordCards 単語カード
+ * @returns クライアント用の単語カードデータ
+ */
+export const convertWordCardData = (wordCard: WordCard): WordCardClient => {
+  const { definitions, example1, example2, example3, ...rest } = wordCard;
+
+  const definitionsArray = definitions
+    .split("\n")
+    .filter((definition) => !!definition)
+    .map((definition) => {
+      const parts = definition.split("|");
+      const [posString, meaning, translation = ""] = parts;
+      const pos = posString.replace(/^\[|\]$/g, "");
+
+      return {
+        pos: pos as POS,
+        meaning,
+        translation,
+      };
+    });
+
+  const exampleArray = [example1, example2, example3]
+    .filter((example) => example !== null)
+    .map((example) => {
+      const parts = example.split("\n");
+      const [sentence, translation] = parts;
+      return {
+        sentence,
+        ...(translation && { translation }),
+      };
+    });
+
+  return {
+    ...rest,
+    definitions: definitionsArray,
+    examples: exampleArray,
   };
 };
