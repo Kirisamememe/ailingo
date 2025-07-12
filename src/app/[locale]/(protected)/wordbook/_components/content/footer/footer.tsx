@@ -9,7 +9,7 @@ type Props = {
   createdAt: Date;
   updatedAt: Date;
   lastReviewedAt: Date;
-  nextReviewAt: Date | null;
+  nextReviewAt: string | null;
   masteredAt: Date | null;
 };
 
