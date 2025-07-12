@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { POS } from "@/constants";
 import { LANGUAGE_CODES } from "@/drizzle/schema";
 
 /**
@@ -35,6 +36,40 @@ export const wordcardBase = z.object({
 const extraExampleOptional = z.object({
   example2: z.string().max(500, "exampleIsTooLong").optional(),
   example3: z.string().max(500, "exampleIsTooLong").optional(),
+});
+
+const exampleClientSchema = z.object({
+  examples: z
+    .array(
+      z.object({
+        sentence: z.string().min(1, "exampleIsRequired").max(500, "exampleIsTooLong"),
+        translation: z.string().max(500, "phoneticsIsTooLong").optional(),
+      }),
+    )
+    .max(3, "exampleIsTooMany"),
+});
+
+/**
+ * 定義のAI用スキーマ。DB保存時は文字列に変換
+ */
+export const definitionsArraySchema = z.object({
+  definitions: z
+    .array(
+      z.object({
+        pos: z.enum(POS).describe("Part of speech of the wordcard").default("OTHER"),
+        meaning: z
+          .string()
+          .describe("Meaning of the definition. Generate in the same language as the word."),
+        translation: z
+          .string()
+          .optional()
+          .describe(
+            "Translation of the definition. It is optional, but unless the user explicitly indicates that it is unnecessary, please always generate it.",
+          ),
+      }),
+    )
+    .max(3, "definitionsIsTooMany")
+    .describe("Definitions of the wordcard. Up to 3 definitions are allowed."),
 });
 
 /**
@@ -78,5 +113,15 @@ const noteSchema = z.object({
 export const wordcardFormSchema = wordcardBase
   .and(definitionsSchema)
   .and(extraExampleOptional)
+  .and(otherSchema)
+  .and(noteSchema);
+
+/**
+ * ワードカードクライアントスキーマ
+ */
+export const wordcardClientSchema = wordcardBase
+  .omit({ example1: true })
+  .and(definitionsArraySchema)
+  .and(exampleClientSchema)
   .and(otherSchema)
   .and(noteSchema);
