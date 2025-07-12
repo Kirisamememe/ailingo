@@ -6,6 +6,7 @@ import { SquarePen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { WordbookContentView } from "./content-view";
 import { EditForm } from "./edit-form";
+import { convertWordCardData } from "../../_utils";
 import { AiReqForm } from "../new-card";
 import type { WordCard } from "@/types";
 
@@ -62,7 +63,7 @@ export const WordbookContent: React.FC<Props> = ({ wordCards }) => {
 
   return (
     <>
-      <WordbookContentView wordCard={wordCard} />
+      <WordbookContentView wordCard={convertWordCardData(wordCard)} />
       <Button
         type="button"
         variant="outline"

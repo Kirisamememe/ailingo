@@ -2,14 +2,9 @@ import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Caption, Headline } from "@/components/ui/typography";
 import { Definitions } from "./definitions";
 import { SpeechBtn } from "@/app/[locale]/(protected)/_components/speech-btn";
-import type { LanguageCode } from "@/types";
+import type { WordCardClient } from "@/types";
 
-type Props = {
-  word: string;
-  phonetics: string;
-  definitions: string;
-  language: LanguageCode;
-};
+type Props = Pick<WordCardClient, "word" | "phonetics" | "definitions" | "language">;
 
 /**
  * 基本情報

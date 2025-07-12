@@ -3,13 +3,9 @@ import { Badge } from "@/components/ui/badge";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Caption } from "@/components/ui/typography";
 import { definitionsArraySchema } from "../../../_schema";
-import type { LanguageCode } from "@/types";
-import type { POS } from "@/types";
+import type { WordCardClient } from "@/types";
 
-type Props = {
-  definitions: string;
-  language: LanguageCode;
-};
+type Props = Pick<WordCardClient, "definitions" | "language">;
 
 /**
  * 定義
@@ -17,37 +13,22 @@ type Props = {
 export const Definitions: React.FC<Props> = ({ definitions, language }) => {
   const t = useTranslations("POS");
 
-  const definitionsArray = definitions
-    .split("\n")
-    .filter((definition) => !!definition)
-    .map((definition) => {
-      const parts = definition.split("|");
-      const [posString, meaning, translation = ""] = parts;
-      const pos = posString.replace(/^\[|\]$/g, "");
-
-      return {
-        pos,
-        meaning,
-        translation,
-      };
-    });
-
-  const parsedDefinitionsArray = definitionsArraySchema.safeParse(definitionsArray);
+  const parsedDefinitionsArray = definitionsArraySchema.safeParse(definitions);
 
   if (!parsedDefinitionsArray.success) {
-    return <Caption>{definitions}</Caption>;
+    return <Caption>{definitions.map((definition) => definition.meaning).join("\n")}</Caption>;
   }
 
   return (
     <FlexColumn gap={3}>
-      {definitionsArray.map((definition) => (
+      {definitions.map((definition) => (
         <FlexColumn gap={1} key={definition.meaning}>
           <Badge
             lang={language}
             variant="secondary"
             className="bg-primary/10 text-primary text-xs font-semibold"
           >
-            {t(definition.pos as POS)}
+            {t(definition.pos)}
           </Badge>
           <Caption
             lang={language}
