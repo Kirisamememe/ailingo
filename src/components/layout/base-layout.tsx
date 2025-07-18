@@ -6,6 +6,7 @@ import { NextIntlClientProvider } from "next-intl";
 import { getMessages } from "next-intl/server";
 import { ThemeProvider } from "@/components/providers";
 import { Toaster } from "@/components/ui/sonner";
+import { Nav } from "@/app/[locale]/(protected)/_components/nav/nav";
 import type { Locale } from "@/i18n";
 
 const geistSans = Geist({
@@ -50,7 +51,8 @@ export const BaseLayout: React.FC<Props> = async ({ children, locale }) => {
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <main className="flex min-h-dvh flex-col">{children}</main>
+            <Nav />
+            <main className="grid min-h-dvh place-content-center pt-1">{children}</main>
             <Toaster />
           </NextIntlClientProvider>
         </ThemeProvider>
