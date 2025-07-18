@@ -95,6 +95,8 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
 
 /**
  * キーボード操作で次の単語を選択
+ * @param e キーボードイベント
+ * @returns 単語帳の状態
  */
 const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
   const currentElement = state.selectedElement;
@@ -133,6 +135,8 @@ const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
 
 /**
  * キーボード操作で前の単語を選択
+ * @param e キーボードイベント
+ * @returns 単語帳の状態
  */
 const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
   const currentElement = state.selectedElement;
@@ -172,6 +176,9 @@ const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
 
 /**
  * 単語カードが選択されたときの処理
+ * @param index 選択された単語カードのID
+ * @param ref 選択された単語カードのリファレンス
+ * @returns 単語帳の状態
  */
 const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButtonElement) => {
   if (
@@ -183,6 +190,9 @@ const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButton
     return { isDrawerOpen: false, selectedElement: null };
   }
 
+  if (state.selectedElement) {
+    state.selectedElement.dataset.selected = "false";
+  }
   ref.dataset.selected = "true";
 
   return {
