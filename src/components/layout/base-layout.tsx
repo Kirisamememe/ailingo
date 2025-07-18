@@ -52,7 +52,7 @@ export const BaseLayout: React.FC<Props> = async ({ children, locale }) => {
         >
           <NextIntlClientProvider messages={messages}>
             <Nav />
-            <main className="grid min-h-dvh place-content-center pt-1">{children}</main>
+            <main className="grid min-h-dvh place-content-center">{children}</main>
             <Toaster />
           </NextIntlClientProvider>
         </ThemeProvider>
