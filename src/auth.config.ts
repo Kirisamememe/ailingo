@@ -26,7 +26,7 @@ export const authConfig = {
       }
 
       if (isLoggedIn && isOnAuthPage) {
-        return Response.redirect(new URL(`/daily`, request.nextUrl));
+        return Response.redirect(new URL(`/home`, request.nextUrl));
       }
       if (isOnProtected) {
         if (isLoggedIn) return true;
