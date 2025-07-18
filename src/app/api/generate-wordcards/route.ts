@@ -31,7 +31,9 @@ export const POST = auth(async function POST(req) {
   const system = `
     You are a great wordcard generator. 
     Please generate an appropriate wordcards array object following the prompt and the schema. 
+    You must strictly follow the schema, especially the 'describe' of the schema.
     The translation of the definitions and examples should be in ${LANGUAGES[translationLanguage]}.
+    You must generate at least 3 examples.
     If the languages of the words (for example, whether they're Chinese or English) are not specified, please guess them.
     Currently, the only supported languages are ${LANGUAGE_CODES.join(", ")}.
     If there are words that do not exist in these languages, first analyze whether they are misspellings, and if so, generate them with the correct spelling.
