@@ -1,6 +1,7 @@
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
 import { FlexRow } from "@/components/ui/flexbox";
+import { NavAvatar } from "./nav-avatar";
 import { NavItem } from "./nav-item";
 import { navItems } from "./nav-items";
 import { LogoText } from "./sidebar/logo-text";
@@ -17,7 +18,8 @@ export const Nav = () => {
       className={cn(
         "z-10 w-full gap-8",
         "fixed bottom-2 left-0 justify-center px-0 py-0 backdrop-blur-none",
-        "sm:bg-background/70 sm:sticky sm:top-0 sm:justify-start sm:rounded-none sm:px-8 sm:py-4 sm:backdrop-blur-sm",
+        "sm:bg-background/70 sm:sticky sm:top-0 sm:bottom-auto sm:justify-start sm:rounded-none sm:px-8 sm:py-4 sm:backdrop-blur-sm",
+        "sm:outline] sm:outline-foreground/5 sm:outline-1",
       )}
     >
       <Link href="/home" className="hidden sm:block">
@@ -35,6 +37,7 @@ export const Nav = () => {
           <NavItem key={item.title} href={item.url} text={t(item.title)} icon={<item.icon />} />
         ))}
       </FlexRow>
+      <NavAvatar />
     </FlexRow>
   );
 };
