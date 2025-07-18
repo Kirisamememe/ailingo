@@ -8,13 +8,15 @@ export type WordbookState = {
   /** 単語カード */
   wordCards: WordCard[];
   /** 選択された単語カードのID */
-  selectedWordCardIndex: number;
+  selectedIndex: number;
   /** 選択された単語カードのリファレンス */
   selectedElement: HTMLButtonElement | null;
   /** ドロワーの開閉 */
   isDrawerOpen: boolean;
   /** 保存中かどうか */
   isSaving: boolean;
+  /** 編集モードかどうか */
+  isEditing: boolean;
 };
 
 /**
@@ -24,7 +26,7 @@ export type WordbookActions = {
   /** 単語カードを設定する */
   setWordCards: (wordCards: WordCard[]) => void;
   /** 選択された単語カードのIDを設定する */
-  setSelectedWordCardIndex: (index: number, ref: HTMLButtonElement) => void;
+  setSelectedIndex: (index: number, ref: HTMLButtonElement) => void;
   /** ドロワーの開閉を設定する */
   setIsDrawerOpen: (isOpen: boolean) => void;
   /** 保存中かどうかを設定する */
@@ -35,6 +37,8 @@ export type WordbookActions = {
   prevWord: (e: KeyboardEvent) => void;
   /** ドロワーを閉じる */
   closeDrawer: () => void;
+  /** 編集モードを設定する */
+  setIsEditing: (isEditing: boolean) => void;
 };
 
 /**
@@ -47,10 +51,11 @@ export type WordbookStore = WordbookState & WordbookActions;
  */
 export const defaultInitState: WordbookState = {
   wordCards: [],
-  selectedWordCardIndex: -1,
+  selectedIndex: -1,
   selectedElement: null,
   isDrawerOpen: false,
   isSaving: false,
+  isEditing: false,
 };
 
 /**
@@ -72,7 +77,7 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
     setWordCards: (wordCards: WordCard[]) => {
       set(() => ({ wordCards }));
     },
-    setSelectedWordCardIndex: (index: number, ref: HTMLButtonElement) => {
+    setSelectedIndex: (index: number, ref: HTMLButtonElement) => {
       set((state) => onWordCardSelected(state, index, ref));
     },
     setIsDrawerOpen: (isOpen: boolean) => {
@@ -90,6 +95,9 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
     closeDrawer: () => {
       set((state) => onDrawerClose(state));
     },
+    setIsEditing: (isEditing: boolean) => {
+      set(() => ({ isEditing }));
+    },
   }));
 };
 
@@ -100,7 +108,7 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
  */
 const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
   const currentElement = state.selectedElement;
-  if (state.selectedWordCardIndex >= state.wordCards.length - 1) {
+  if (state.selectedIndex >= state.wordCards.length - 1) {
     if (e.key === "ArrowDown") {
       return state;
     }
@@ -128,7 +136,7 @@ const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
   }
 
   return {
-    selectedWordCardIndex: Math.min(state.selectedWordCardIndex + 1, state.wordCards.length - 1),
+    selectedIndex: Math.min(state.selectedIndex + 1, state.wordCards.length - 1),
     selectedElement: nextElement ?? null,
   };
 };
@@ -141,7 +149,7 @@ const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
 const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
   const currentElement = state.selectedElement;
 
-  if (state.selectedWordCardIndex <= 0) {
+  if (state.selectedIndex <= 0) {
     if (e.key === "ArrowUp") {
       return state;
     }
@@ -169,7 +177,7 @@ const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
   }
 
   return {
-    selectedWordCardIndex: Math.max(state.selectedWordCardIndex - 1, 0),
+    selectedIndex: Math.max(state.selectedIndex - 1, 0),
     selectedElement: prevElement ?? null,
   };
 };
@@ -181,11 +189,7 @@ const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
  * @returns 単語帳の状態
  */
 const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButtonElement) => {
-  if (
-    state.selectedWordCardIndex === index &&
-    state.isDrawerOpen &&
-    state.selectedElement === ref
-  ) {
+  if (state.selectedIndex === index && state.isDrawerOpen && state.selectedElement === ref) {
     state.selectedElement.dataset.selected = "false";
     return { isDrawerOpen: false, selectedElement: null };
   }
@@ -196,7 +200,7 @@ const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButton
   ref.dataset.selected = "true";
 
   return {
-    selectedWordCardIndex: index,
+    selectedIndex: index,
     isDrawerOpen: true,
     selectedElement: ref,
   };

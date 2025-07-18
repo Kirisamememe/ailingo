@@ -15,12 +15,12 @@ type Props = {
  */
 export const ListItem: React.FC<Props> = ({ index, listItem }) => {
   const ref = useRef<HTMLButtonElement>(null);
-  const setSelectedWordCardIndex = useWordbookStore((state) => state.setSelectedWordCardIndex);
+  const setSelectedIndex = useWordbookStore((state) => state.setSelectedIndex);
 
   const onClick = () => {
     if (!ref.current) return;
 
-    setSelectedWordCardIndex(index, ref.current);
+    setSelectedIndex(index, ref.current);
   };
 
   return <ListItemView ref={ref} listItem={listItem} onClick={onClick} />;
