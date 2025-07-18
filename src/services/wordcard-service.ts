@@ -87,7 +87,7 @@ class WordCardService {
    */
   async getDailyNewWords(userId: string, number: number) {
     const result = await db
-      .select({ id: wordCard.id, word: wordCard.word })
+      .select({ id: wordCard.id, entry: wordCard.entry })
       .from(wordCard)
       .where(
         and(
@@ -101,7 +101,7 @@ class WordCardService {
         asc(wordCard.createdAt),
         asc(wordCard.id),
         asc(wordCard.updatedAt),
-        asc(wordCard.word),
+        asc(wordCard.entry),
       )
       .limit(number)
       .catch(dbExceptionHandler);
@@ -113,7 +113,7 @@ class WordCardService {
    */
   async getDailyReviewWords(userId: string, date: string) {
     const result = await db
-      .select({ id: wordCard.id, word: wordCard.word })
+      .select({ id: wordCard.id, entry: wordCard.entry })
       .from(wordCard)
       .where(
         and(
