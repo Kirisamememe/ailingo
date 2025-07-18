@@ -25,7 +25,7 @@ export const WordbookContentFooter: React.FC<Props> = ({
 }) => {
   const locale = useLocale();
 
-  const titleClassName = "text-[0.625rem] @[36rem]:text-xs";
+  const titleClassName = "text-[0.625rem] sm:text-xs";
 
   return (
     <>

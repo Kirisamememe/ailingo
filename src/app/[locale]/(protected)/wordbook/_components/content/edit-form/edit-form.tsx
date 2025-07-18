@@ -73,7 +73,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
 
   return (
     <Form {...wordCardForm}>
-      <form className="appear flex flex-col gap-6" action={formAction}>
+      <form className="appear flex flex-col gap-6 p-4" action={formAction}>
         <FlexRow className="items-center gap-3">
           <Headline size={20} mx={1} className="mr-auto">
             {t("title")}
@@ -122,7 +122,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               label={t("definitions.label")}
               description={t("definitions.description")}
               placeholder={t("definitions.placeholder")}
-              className="h-20"
+              className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.definitions"
               {...field}
             />
@@ -136,7 +136,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               label={`${t("example.label")}-1`}
               description={t("example.description")}
               placeholder={t("example.placeholder")}
-              className="h-20"
+              className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
               {...field}
             />
@@ -150,7 +150,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               label={`${t("example.label")}-2`}
               description={t("example.description")}
               placeholder={t("example.placeholder")}
-              className="h-20"
+              className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
               {...field}
             />
@@ -164,7 +164,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               label={`${t("example.label")}-3`}
               description={t("example.description")}
               placeholder={t("example.placeholder")}
-              className="h-20"
+              className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
               {...field}
             />

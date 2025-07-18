@@ -18,7 +18,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
 
   if (!collocations && !derivatives && !synonyms && !antonyms) return null;
   const beforeClassName =
-    "before:bg-muted-foreground before:absolute before:top-1 @[36rem]:before:top-1.5 before:left-0 before:h-2 before:w-0.75 before:content-[''] text-xs @[36rem]:text-sm";
+    "before:bg-muted-foreground before:absolute before:top-1 sm:before:top-1.5 before:left-0 before:h-2 before:w-0.75 before:content-[''] text-xs sm:text-sm";
 
   return (
     <>
@@ -29,7 +29,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
             <Headline color="muted" className={beforeClassName}>
               {t("collocations")}
             </Headline>
-            <Caption color="foreground" className="text-sm @[36rem]:text-base">
+            <Caption color="foreground" className="text-sm sm:text-base">
               {collocations}
             </Caption>
           </FlexColumn>
@@ -39,7 +39,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
             <Headline color="muted" className={beforeClassName}>
               {t("derivatives")}
             </Headline>
-            <Caption color="foreground" className="text-sm @[36rem]:text-base">
+            <Caption color="foreground" className="text-sm sm:text-base">
               {derivatives}
             </Caption>
           </FlexColumn>
@@ -49,7 +49,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
             <Headline color="muted" className={beforeClassName}>
               {t("synonyms")}
             </Headline>
-            <Caption color="foreground" className="text-sm @[36rem]:text-base">
+            <Caption color="foreground" className="text-sm sm:text-base">
               {synonyms}
             </Caption>
           </FlexColumn>
@@ -59,7 +59,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
             <Headline color="muted" className={beforeClassName}>
               {t("antonyms")}
             </Headline>
-            <Caption color="foreground" className="text-sm @[36rem]:text-base">
+            <Caption color="foreground" className="text-sm sm:text-base">
               {antonyms}
             </Caption>
           </FlexColumn>
