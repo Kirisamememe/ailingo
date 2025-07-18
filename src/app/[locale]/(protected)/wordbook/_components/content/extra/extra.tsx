@@ -4,6 +4,7 @@ import { Separator } from "@/components/ui/separator";
 import { Caption, Headline } from "@/components/ui/typography";
 
 type Props = {
+  collocations: string;
   derivatives: string;
   synonyms: string;
   antonyms: string;
@@ -12,10 +13,10 @@ type Props = {
 /**
  * 追加情報
  */
-export const Extra: React.FC<Props> = ({ derivatives, synonyms, antonyms }) => {
+export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, antonyms }) => {
   const t = useTranslations("wordbook.extra");
 
-  if (!derivatives && !synonyms && !antonyms) return null;
+  if (!collocations && !derivatives && !synonyms && !antonyms) return null;
   const beforeClassName =
     "before:bg-muted-foreground before:absolute before:top-1 @[36rem]:before:top-1.5 before:left-0 before:h-2 before:w-0.75 before:content-[''] text-xs @[36rem]:text-sm";
 
@@ -23,6 +24,16 @@ export const Extra: React.FC<Props> = ({ derivatives, synonyms, antonyms }) => {
     <>
       <Separator />
       <FlexColumn gap={5}>
+        {collocations && (
+          <FlexColumn gap={1} className="relative pl-3">
+            <Headline color="muted" className={beforeClassName}>
+              {t("collocations")}
+            </Headline>
+            <Caption color="foreground" className="text-sm @[36rem]:text-base">
+              {collocations}
+            </Caption>
+          </FlexColumn>
+        )}
         {derivatives && (
           <FlexColumn gap={1} className="relative pl-3">
             <Headline color="muted" className={beforeClassName}>

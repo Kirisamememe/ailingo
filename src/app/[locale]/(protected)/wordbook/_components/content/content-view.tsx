@@ -17,17 +17,16 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
   return (
     <FlexColumn gap={6} className="appear w-full shrink-0">
       <BasicInfo
-        key={`${wordCard.id}-${wordCard.word}-basic-info`}
-        word={wordCard.word}
+        entry={wordCard.entry}
         phonetics={wordCard.phonetics}
         definitions={wordCard.definitions}
         language={wordCard.language}
       />
       <Separator />
-      <FlexColumn key={`${wordCard.id}-${wordCard.word}-examples`} gap={4}>
+      <FlexColumn gap={4}>
         {wordCard.examples.map((example) => (
           <Example
-            key={`${wordCard.id}-${wordCard.word}-example-${example.sentence}`}
+            key={`${wordCard.id}-${wordCard.entry}-example-${example.sentence}`}
             sentence={example.sentence}
             translation={example.translation}
             language={wordCard.language}
@@ -35,6 +34,7 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
         ))}
       </FlexColumn>
       <Extra
+        collocations={wordCard.collocations ?? ""}
         derivatives={wordCard.derivatives ?? ""}
         synonyms={wordCard.synonyms ?? ""}
         antonyms={wordCard.antonyms ?? ""}

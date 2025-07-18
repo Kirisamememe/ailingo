@@ -7,6 +7,7 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { WordbookContent } from "./_components/content";
 import { WordbookList } from "./_components/list";
 import { WordbookProvider } from "./_hooks/wordbook-provider";
+import { convertWordCardData } from "./_utils";
 import { getCookie } from "../_actions/cookies";
 import { wordCardService } from "@/services";
 import type { LanguageCode } from "@/types";
@@ -14,11 +15,18 @@ import type { LanguageCode } from "@/types";
 const WordbookPage = async () => {
   const { operatorId } = await getSession();
   const wordCards = await wordCardService.getMany(operatorId);
-  const wordList = wordCards.map((wordCard) => ({
-    id: wordCard.id,
-    word: wordCard.word,
-    language: wordCard.language,
-  }));
+  const wordCardsClient = wordCards.map(convertWordCardData);
+  const wordList = wordCardsClient.map((wordCard) => {
+    const { id, entry, language, phonetics, definitions, examples } = wordCard;
+    return {
+      id,
+      entry,
+      language,
+      phonetics,
+      definitions,
+      examples,
+    };
+  });
 
   const modelCookie = await getCookie("WORDCARD_MODEL");
   const model = (modelCookie ?? modelListTuple[5]) as AIModel;

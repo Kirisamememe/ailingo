@@ -19,8 +19,8 @@ export const planDailyLearning = async (userId: string) => {
       return;
     }
 
-    const newWordsString = newWords.map((word) => `${word.id}|${word.word}`).join(",");
-    const reviewWordsString = reviewWords.map((word) => `${word.id}|${word.word}`).join(",");
+    const newWordsString = newWords.map((word) => `${word.id}|${word.entry}`).join(",");
+    const reviewWordsString = reviewWords.map((word) => `${word.id}|${word.entry}`).join(",");
 
     if (
       newWordsString === lastLearning?.newWords &&

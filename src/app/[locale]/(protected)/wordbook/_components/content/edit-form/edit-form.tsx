@@ -86,15 +86,15 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
         <Separator />
         <FormField
           control={wordCardForm.control}
-          name="word"
+          name="entry"
           render={({ field }) => (
             <InputItem
-              label={t("word.label")}
-              description={t("word.description")}
-              placeholder={t("word.placeholder")}
+              label={t("entry.label")}
+              description={t("entry.description")}
+              placeholder={t("entry.placeholder")}
               autoComplete="off"
               hiddenDescription
-              i18nNameSpace="wordbook.editForm.word"
+              i18nNameSpace="wordbook.editForm.entry"
               {...field}
             />
           )}
@@ -166,6 +166,19 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               placeholder={t("example.placeholder")}
               className="h-20"
               i18nNameSpace="wordbook.editForm.example"
+              {...field}
+            />
+          )}
+        />
+        <FormField
+          control={wordCardForm.control}
+          name="collocations"
+          render={({ field }) => (
+            <InputItem
+              label={t("collocations.label")}
+              description={t("collocations.description")}
+              placeholder={t("collocations.placeholder")}
+              i18nNameSpace="wordbook.editForm.collocations"
               {...field}
             />
           )}
