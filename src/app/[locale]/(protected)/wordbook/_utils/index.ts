@@ -7,12 +7,13 @@ import type { POS, WordCard, WordCardClient } from "@/types";
  */
 export const getWordCardFormData = (wordCard?: WordCard) => {
   return {
-    word: wordCard?.word ?? "",
+    entry: wordCard?.entry ?? "",
     phonetics: wordCard?.phonetics ?? "",
     definitions: wordCard?.definitions ?? "",
     example1: wordCard?.example1 ?? "",
     example2: wordCard?.example2 ?? "",
     example3: wordCard?.example3 ?? "",
+    collocations: wordCard?.collocations ?? "",
     derivatives: wordCard?.derivatives ?? "",
     synonyms: wordCard?.synonyms ?? "",
     antonyms: wordCard?.antonyms ?? "",
