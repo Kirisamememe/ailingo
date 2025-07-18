@@ -191,6 +191,7 @@ const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
 const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButtonElement) => {
   if (state.selectedIndex === index && state.isDrawerOpen && state.selectedElement === ref) {
     state.selectedElement.dataset.selected = "false";
+    ref.blur();
     return { isDrawerOpen: false, selectedElement: null };
   }
 
