@@ -14,7 +14,8 @@ type Props = {
   parentClass?: string;
   variant?: "default" | "ghost";
   lang?: LanguageCode;
-} & React.ComponentProps<typeof Select>;
+} & React.ComponentProps<typeof Select> &
+  React.ComponentProps<typeof SelectContent>;
 
 export const SelectFormItem: React.FC<Props> = ({
   label,
@@ -38,10 +39,32 @@ export const SelectFormItem: React.FC<Props> = ({
     }
   }, [variant]);
 
+  const variantParentClass = useMemo(() => {
+    switch (variant) {
+      case "ghost":
+        return "flex gap-2";
+      default:
+        return "";
+    }
+  }, [variant]);
+
+  const variantLabelClass = useMemo(() => {
+    switch (variant) {
+      case "ghost":
+        return "font-normal text-muted-foreground";
+      default:
+        return "";
+    }
+  }, [variant]);
+
   return (
-    <FormItem className={cn("h-fit w-full", parentClass)}>
-      <FormLabel hidden={hiddenLabel} className="shrink-0 px-1 font-semibold">
+    <FormItem className={cn("h-fit w-full", variantParentClass, parentClass)}>
+      <FormLabel
+        hidden={hiddenLabel}
+        className={cn("shrink-0 px-1 font-semibold", variantLabelClass)}
+      >
         {label}
+        {variant === "ghost" && " : "}
       </FormLabel>
       <Select {...props}>
         <FormControl>
@@ -55,7 +78,14 @@ export const SelectFormItem: React.FC<Props> = ({
             <SelectValue placeholder={placeholder} lang={lang} />
           </SelectTrigger>
         </FormControl>
-        <SelectContent>{children}</SelectContent>
+        <SelectContent
+          align={props.align}
+          alignOffset={props.alignOffset}
+          side={props.side}
+          sideOffset={props.sideOffset}
+        >
+          {children}
+        </SelectContent>
       </Select>
       <FormDescription hidden={hiddenDescription} className="shrink-0">
         {description}
