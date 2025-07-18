@@ -22,7 +22,7 @@ export const POST = auth(async function POST(req) {
     model,
     learningLanguage,
     translationLanguage,
-    words,
+    entries,
   }: z.infer<typeof wordcardRequestSchema> = await req.json();
 
   /**
@@ -47,7 +47,7 @@ export const POST = auth(async function POST(req) {
   `;
 
   const prompt = `
-    Please generate an appropriate wordcards array object about the ${learningLanguage ? LANGUAGES[learningLanguage] : ""} words "${words}".
+    Please generate an appropriate wordcards array object about the ${learningLanguage ? LANGUAGES[learningLanguage] : ""} words "${entries}".
   `;
 
   return ai.generate(model, prompt, system, wordcardAISchemaArray).toTextStreamResponse();

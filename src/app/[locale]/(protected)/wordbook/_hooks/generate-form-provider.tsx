@@ -66,7 +66,7 @@ export const GenerateFormProvider = ({
       model,
       learningLanguage: undefined,
       translationLanguage,
-      words: "",
+      entries: "",
     },
     mode: "onChange",
   });
@@ -119,7 +119,7 @@ export const GenerateFormProvider = ({
    */
   const onSubmit = useCallback(() => {
     const values = form.getValues();
-    if (!values.words) return;
+    if (!values.entries) return;
 
     submit(values);
   }, [form, submit]);

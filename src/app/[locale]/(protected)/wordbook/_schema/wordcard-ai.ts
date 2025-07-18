@@ -42,5 +42,5 @@ export const wordcardRequestSchema = z.object({
   model: z.enum(modelListTuple),
   learningLanguage: z.enum(LANGUAGE_CODES).optional(),
   translationLanguage: z.enum(LANGUAGE_CODES),
-  words: z.string().max(500, "wordsIsTooLong"),
+  entries: z.string().max(500, "wordsIsTooLong"),
 });

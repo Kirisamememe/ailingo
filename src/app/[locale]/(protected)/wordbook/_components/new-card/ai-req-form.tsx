@@ -43,7 +43,7 @@ export const AiReqForm = () => {
           </Headline>
           <FormField
             control={form.control}
-            name="words"
+            name="entries"
             render={({ field }) => (
               <TextareaItem
                 label={t("words.label")}
