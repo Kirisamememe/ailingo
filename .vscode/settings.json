@@ -25,7 +25,7 @@
   "eslint.useFlatConfig": true,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
-  "editor.formatOnPaste": true,
+  "editor.formatOnPaste": false,
   "editor.formatOnType": false,
   "editor.codeActionsOnSave": {
     // prettierとの競合を防ぐ (明示的にeslintを実行しない限り、eslintの修正は適用されない)
