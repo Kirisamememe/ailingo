@@ -6,12 +6,12 @@ import { LANGUAGE_CODES } from "@/drizzle/schema";
  * AIワードカードリクエストスキーマ
  */
 export const wordcardBase = z.object({
-  word: z
+  entry: z
     .string()
-    .min(1, "wordIsRequired")
-    .max(100, "wordIsTooLong")
+    .min(1, "entryIsRequired")
+    .max(100, "entryIsTooLong")
     .describe(
-      "Word of the wordcard. If it's an alphabetical word, its all letters should be lowercase.",
+      "Entry of the wordcard. It could be a word or a phrase. If there are alphabetical words, all letters should be lowercase. ",
     ),
   phonetics: z
     .string()
@@ -76,6 +76,11 @@ export const definitionsArraySchema = z.object({
  * その他のスキーマ
  */
 export const otherSchema = z.object({
+  collocations: z
+    .string()
+    .max(500, "collocationsIsTooLong")
+    .optional()
+    .describe("Collocations of the wordcard. Up to 10 items are allowed. Separate with comma."),
   derivatives: z
     .string()
     .max(150, "derivativesIsTooLong")
