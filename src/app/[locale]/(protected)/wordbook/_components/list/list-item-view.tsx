@@ -18,7 +18,7 @@ type Props = {
 export const ListItemView: React.FC<Props> = ({ ref, listItem, onClick }) => {
   const t = useTranslations("POS");
 
-  const { entry: word, language, phonetics, definitions, examples } = listItem;
+  const { entry, language, phonetics, definitions, examples } = listItem;
 
   return (
     <button
@@ -40,7 +40,7 @@ export const ListItemView: React.FC<Props> = ({ ref, listItem, onClick }) => {
     >
       <Flexbox className="shr ink-0 w-full flex-row items-center gap-2 whitespace-break-spaces sm:w-40 sm:flex-col sm:items-start sm:gap-0">
         <Headline lang={language} height={1.5} className="h-6">
-          {word}
+          {entry}
         </Headline>
         <Caption lang={language} className="" height={1.5}>
           {phonetics}
