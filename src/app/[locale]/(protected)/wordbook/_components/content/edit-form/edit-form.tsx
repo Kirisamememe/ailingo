@@ -1,4 +1,3 @@
-import { usePathname, useSearchParams } from "next/navigation";
 import { useActionState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
@@ -14,9 +13,9 @@ import { Headline } from "@/components/ui/typography";
 import { DeleteBtn } from "./delete-btn";
 import { deleteWordCard } from "../../../_actions/delete";
 import { updateWordCard } from "../../../_actions/update";
+import { useWordbookStore } from "../../../_hooks/store-provider";
 import { wordcardFormSchema } from "../../../_schema";
 import { getWordCardFormData } from "../../../_utils";
-import { useRouter } from "@/i18n";
 import type { WordCard } from "@/types";
 
 type Props = {
@@ -29,9 +28,9 @@ type Props = {
 export const EditForm: React.FC<Props> = ({ wordCard }) => {
   const t = useTranslations("wordbook.editForm");
   const tCommon = useTranslations("common");
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
+
+  const setIsEditing = useWordbookStore((state) => state.setIsEditing);
+  const closeDrawer = useWordbookStore((state) => state.closeDrawer);
 
   const wordCardForm = useForm<z.infer<typeof wordcardFormSchema>>({
     resolver: zodResolver(wordcardFormSchema),
@@ -59,22 +58,19 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
 
   const handleDelete = async () => {
     await deleteWordCard(wordCard.id).then(() => {
-      router.push("/wordbook");
+      closeDrawer();
+      handleEndEditing();
     });
   };
 
   const handleEndEditing = () => {
-    const currentSearchParams = new URLSearchParams(searchParams);
-    currentSearchParams.delete("edit");
-
-    const newUrl = `${pathname}?${currentSearchParams.toString()}`;
-    window.history.replaceState(null, "", newUrl);
+    setIsEditing(false);
   };
 
   return (
     <Form {...wordCardForm}>
       <form className="appear flex flex-col gap-6 p-4" action={formAction}>
-        <FlexRow className="items-center gap-3">
+        <FlexRow className="items-center gap-3 pt-4">
           <Headline size={20} mx={1} className="mr-auto">
             {t("title")}
           </Headline>
