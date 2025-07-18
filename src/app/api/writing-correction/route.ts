@@ -1,6 +1,6 @@
 import { ai } from "@/lib/ai/ai";
-import type { WritingCorrectionAIRequestSchema } from "@/app/[locale]/(protected)/writing-correction/_schema";
-import { writingCorrectionAIGeneratedContentSchema } from "@/app/[locale]/(protected)/writing-correction/_schema";
+import type { WritingCorrectionAIRequestSchema } from "@/app/[locale]/(protected)/output/_schema";
+import { writingCorrectionAIGeneratedContentSchema } from "@/app/[locale]/(protected)/output/_schema";
 import { auth } from "@/auth";
 import { LANGUAGES } from "@/drizzle/schema";
 
