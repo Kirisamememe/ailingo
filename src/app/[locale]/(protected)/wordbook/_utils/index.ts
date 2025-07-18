@@ -35,7 +35,9 @@ export const convertWordCardData = (wordCard: WordCard): WordCardClient => {
     .filter((definition) => !!definition)
     .map((definition) => {
       const parts = definition.split("|");
-      const [posString, meaning, translation = ""] = parts;
+      const [posString, meaning, translation = undefined] = parts;
+      if (!posString || !meaning) return undefined;
+
       const pos = posString.replace(/^\[|\]$/g, "");
 
       return {
@@ -43,7 +45,8 @@ export const convertWordCardData = (wordCard: WordCard): WordCardClient => {
         meaning,
         translation,
       };
-    });
+    })
+    .filter((definition) => definition !== undefined);
 
   const exampleArray = [example1, example2, example3]
     .filter((example) => example !== null)
