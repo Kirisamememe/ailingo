@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  type ReactNode,
-  createContext,
-  use,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { type ReactNode, createContext, use, useCallback, useEffect, useMemo, useRef } from "react";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { DeepPartial } from "ai";
@@ -17,10 +8,10 @@ import { type UseFormReturn, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type z from "zod";
 import type { AIModel } from "@/lib/ai";
-import { useScrollState } from "@/components/providers";
 import { getOperatorId } from "../../_actions/get-operator";
 import { createWordcard } from "../_actions/create";
 import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
+import { useWordbookStore } from "./store-provider";
 import type { LanguageCode } from "@/types";
 
 /**
@@ -37,8 +28,6 @@ type WordbookContextType = {
   isLoading: boolean;
   /** リクエスト停止ハンドラー */
   stop: () => void;
-  /** 保存中かどうか */
-  isSaving: boolean;
   /** 音声再生用のAudio要素 */
   audioRef: React.RefObject<HTMLAudioElement | undefined>;
 };
@@ -68,10 +57,8 @@ export const WordbookProvider = ({
   translationLanguage,
   children,
 }: WordbookProviderProps) => {
-  const [isSaving, setIsSaving] = useState(false);
   const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
-
-  const { setHeaderStatic } = useScrollState();
+  const setIsSaving = useWordbookStore((state) => state.setIsSaving);
 
   const form = useForm<z.infer<typeof wordcardRequestSchema>>({
     resolver: zodResolver(wordcardRequestSchema),
@@ -85,13 +72,6 @@ export const WordbookProvider = ({
   });
 
   useEffect(() => {
-    setHeaderStatic(true);
-    return () => {
-      setHeaderStatic(false);
-    };
-  }, [setHeaderStatic]);
-
-  useEffect(() => {
     if (audioRef.current) return;
     audioRef.current = new Audio();
   }, []);
@@ -100,7 +80,10 @@ export const WordbookProvider = ({
    * AI生成完了時の処理
    */
   const onFinish = async ({ object }: { object?: z.infer<typeof wordcardAISchemaArray> }) => {
-    if (!object) return;
+    if (!object) {
+      toast.error("object is undefined");
+      return;
+    }
 
     const operatorId = await getOperatorId();
 
@@ -147,11 +130,10 @@ export const WordbookProvider = ({
       onSubmit,
       isLoading,
       stop,
-      isSaving,
       audioRef,
       object,
     }),
-    [form, onSubmit, isLoading, stop, isSaving, audioRef, object],
+    [object, form, onSubmit, isLoading, stop, audioRef],
   );
 
   return <WordbookContext value={value}>{children}</WordbookContext>;
