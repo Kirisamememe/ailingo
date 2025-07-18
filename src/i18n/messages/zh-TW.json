@@ -25,7 +25,9 @@
     "home": "首頁",
     "wordbook": "單字本",
     "output": "輸出訓練",
-    "input": "輸入訓練"
+    "input": "輸入訓練",
+    "profile": "個人資料",
+    "signOut": "登出"
   },
   "sidebar": {
     "titles": {

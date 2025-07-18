@@ -25,7 +25,9 @@
     "home": "ホーム",
     "wordbook": "単語帳",
     "output": "アウトプット",
-    "input": "インプット"
+    "input": "インプット",
+    "profile": "プロフィール",
+    "signOut": "ログアウト"
   },
   "sidebar": {
     "titles": {

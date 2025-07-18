@@ -25,7 +25,9 @@
     "home": "Home",
     "wordbook": "Wordbook",
     "output": "Output",
-    "input": "Input"
+    "input": "Input",
+    "profile": "Profile",
+    "signOut": "Sign Out"
   },
   "sidebar": {
     "titles": {
