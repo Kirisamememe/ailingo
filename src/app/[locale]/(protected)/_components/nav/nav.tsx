@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { HideWhenMobile } from "@/components/hide-when-mobile";
+import { HideWhenMobile } from "@/components/media-query-wrapper";
 import { FlexRow } from "@/components/ui/flexbox";
 import { NavAvatar } from "./nav-avatar";
 import { NavItem } from "./nav-item";

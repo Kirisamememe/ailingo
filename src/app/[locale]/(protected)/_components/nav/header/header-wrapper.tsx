@@ -12,7 +12,7 @@ type Props = {
  */
 export const HeaderWrapper: React.FC<Props> = ({ children }) => {
   return (
-    <FlexRow className="w-full shrink-0 items-center justify-between px-4 pt-6 pb-1 sm:hidden">
+    <FlexRow className="w-full shrink-0 items-center justify-between px-4 pt-6">
       <FlexRow p={3} gap={2} center>
         <Headline size={24}>{children}</Headline>
       </FlexRow>
