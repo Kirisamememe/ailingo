@@ -21,6 +21,12 @@
       "database": "データベースエラー"
     }
   },
+  "nav": {
+    "home": "ホーム",
+    "wordbook": "単語帳",
+    "output": "アウトプット",
+    "input": "インプット"
+  },
   "sidebar": {
     "titles": {
       "general": "共通",

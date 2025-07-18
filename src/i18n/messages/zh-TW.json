@@ -21,6 +21,12 @@
       "database": "資料庫錯誤"
     }
   },
+  "nav": {
+    "home": "首頁",
+    "wordbook": "單字本",
+    "output": "輸出訓練",
+    "input": "輸入訓練"
+  },
   "sidebar": {
     "titles": {
       "general": "通用",

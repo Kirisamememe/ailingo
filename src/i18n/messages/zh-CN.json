@@ -21,6 +21,12 @@
       "database": "数据库错误"
     }
   },
+  "nav": {
+    "home": "首页",
+    "wordbook": "单词本",
+    "output": "输出训练",
+    "input": "输入训练"
+  },
   "sidebar": {
     "titles": {
       "general": "通用",

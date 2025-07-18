@@ -21,6 +21,12 @@
       "database": "Database Error"
     }
   },
+  "nav": {
+    "home": "Home",
+    "wordbook": "Wordbook",
+    "output": "Output",
+    "input": "Input"
+  },
   "sidebar": {
     "titles": {
       "general": "General",
