@@ -15,9 +15,9 @@ import { useWordbookStore } from "./store-provider";
 import type { LanguageCode } from "@/types";
 
 /**
- * WordbookContextの型定義
+ * GenerateFormContextの型定義
  */
-type WordbookContextType = {
+type GenerateFormContextType = {
   /** ワードリスト */
   object?: DeepPartial<z.infer<typeof wordcardAISchemaArray>> | undefined;
   /** フォームのインスタンス */
@@ -33,14 +33,14 @@ type WordbookContextType = {
 };
 
 /**
- * WordbookContext
+ * GenerateFormContext
  */
-const WordbookContext = createContext<WordbookContextType | undefined>(undefined);
+const GenerateFormContext = createContext<GenerateFormContextType | undefined>(undefined);
 
 /**
  * WordbookProviderのプロパティ型
  */
-type WordbookProviderProps = {
+type GenerateFormProviderProps = {
   /** モデル */
   model: AIModel;
   /** 翻訳言語 */
@@ -50,13 +50,13 @@ type WordbookProviderProps = {
 };
 
 /**
- * WordbookProvider - 単語帳関連のロジックを提供
+ * GenerateFormProvider - 単語帳関連のロジックを提供
  */
-export const WordbookProvider = ({
+export const GenerateFormProvider = ({
   model,
   translationLanguage,
   children,
-}: WordbookProviderProps) => {
+}: GenerateFormProviderProps) => {
   const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
   const setIsSaving = useWordbookStore((state) => state.setIsSaving);
 
@@ -136,16 +136,16 @@ export const WordbookProvider = ({
     [object, form, onSubmit, isLoading, stop, audioRef],
   );
 
-  return <WordbookContext value={value}>{children}</WordbookContext>;
+  return <GenerateFormContext value={value}>{children}</GenerateFormContext>;
 };
 
 /**
- * WordbookContextを使用するためのフック
+ * GenerateFormContextを使用するためのフック
  */
-export const useWordbook = () => {
-  const context = use(WordbookContext);
+export const useGenerateForm = () => {
+  const context = use(GenerateFormContext);
   if (!context) {
-    throw new Error("useWordbook must be used within WordbookProvider");
+    throw new Error("useGenerateForm must be used within GenerateFormProvider");
   }
   return context;
 };

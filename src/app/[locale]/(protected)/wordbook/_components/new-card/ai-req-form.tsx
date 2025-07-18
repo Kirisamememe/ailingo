@@ -10,7 +10,7 @@ import { SelectItem } from "@/components/ui/select";
 import { Headline } from "@/components/ui/typography";
 import { setCookie } from "../../../_actions/cookies";
 import { StopButton } from "../../../_components/stop-btn";
-import { useWordbook } from "../../_hooks/wordbook-provider";
+import { useGenerateForm } from "../../_hooks/generate-form-provider";
 import { LANGUAGES } from "@/drizzle/schema";
 import type { LanguageCode } from "@/types";
 
@@ -18,7 +18,7 @@ import type { LanguageCode } from "@/types";
  * AIリクエストフォームビュー
  */
 export const AiReqForm = () => {
-  const { object, form, onSubmit, isLoading, stop } = useWordbook();
+  const { object, form, onSubmit, isLoading, stop } = useGenerateForm();
   const t = useTranslations("wordbook.newWordAIForm");
   const scrollRef = useRef<HTMLDivElement>(null);
 
