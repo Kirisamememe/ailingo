@@ -15,7 +15,7 @@ type Props = {
  */
 export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
   return (
-    <FlexColumn gap={6} className="w-full shrink-0 p-4">
+    <FlexColumn gap={6} className="w-full shrink-0 p-4 sm:p-6">
       <BasicInfo
         entry={wordCard.entry}
         phonetics={wordCard.phonetics}

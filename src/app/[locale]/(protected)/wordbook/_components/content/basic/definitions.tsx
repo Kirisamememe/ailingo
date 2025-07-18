@@ -27,7 +27,7 @@ export const Definitions: React.FC<Props> = ({ definitions, language }) => {
             lang={language}
             weight={400}
             color="foreground"
-            className="text-sm @[36rem]:pl-1 @[36rem]:text-base"
+            className="text-sm sm:pl-1 sm:text-base"
           >
             {definition.meaning}
           </Caption>
@@ -36,7 +36,7 @@ export const Definitions: React.FC<Props> = ({ definitions, language }) => {
               lang={language}
               weight={400}
               color="muted"
-              className="text-[0.625rem] @[36rem]:pl-1 @[36rem]:text-xs"
+              className="text-[0.625rem] sm:pl-1 sm:text-xs"
             >
               {definition.translation}
             </Caption>

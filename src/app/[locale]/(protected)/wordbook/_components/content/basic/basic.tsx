@@ -12,15 +12,15 @@ type Props = Pick<WordCardClient, "entry" | "phonetics" | "definitions" | "langu
 export const BasicInfo: React.FC<Props> = ({ entry, phonetics, definitions, language }) => {
   return (
     <FlexColumn gap={5}>
-      <FlexColumn gap={1}>
-        <Headline lang={language} className="text-2xl @[36rem]:text-3xl">
+      <FlexColumn gap={2}>
+        <Headline lang={language} className="text-2xl sm:text-3xl">
           {entry}
         </Headline>
-        <FlexRow centerY>
+        <FlexRow centerY className="-ml-1">
+          <SpeechBtn text={entry} language={language} variant="ghost" />
           <Caption size={14} lang={language}>
             {phonetics}
           </Caption>
-          <SpeechBtn text={entry} language={language} className="ml-1" variant="ghost" />
         </FlexRow>
       </FlexColumn>
       <Definitions language={language} definitions={definitions} />
