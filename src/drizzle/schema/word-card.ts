@@ -10,12 +10,17 @@ export const wordCard = pgTable(
   "word_card",
   {
     id: serial().primaryKey().notNull(),
-    word: text().notNull(),
+    entry: text().notNull(),
     phonetics: text().notNull(),
+    definitions: text().notNull(),
     example1: text("example_1").notNull(),
     example2: text("example_2"),
     example3: text("example_3"),
     note: text(),
+    collocations: text(),
+    antonyms: text(),
+    synonyms: text(),
+    derivatives: text(),
     retentionRate: smallint("retention_rate").default(1).notNull(),
     createdAt: timestamp("created_at", { precision: 3 })
       .default(sql`CURRENT_TIMESTAMP`)
@@ -24,14 +29,10 @@ export const wordCard = pgTable(
     masteredAt: timestamp("mastered_at", { precision: 3 }),
     deletedAt: timestamp("deleted_at", { precision: 3 }),
     authorId: text("author_id").notNull(),
-    antonyms: text(),
-    definitions: text().notNull(),
-    derivatives: text(),
     lastReviewedAt: timestamp("last_reviewed_at", { precision: 3 })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
     nextReviewAt: date("next_review_at", { mode: "string" }),
-    synonyms: text(),
     language: language().notNull(),
   },
   (table) => [
