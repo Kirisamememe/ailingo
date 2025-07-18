@@ -38,7 +38,7 @@ export const WordbookList = () => {
   }, [prevWord, nextWord, closeDrawer]);
 
   return (
-    <FlexColumn className="w-full">
+    <FlexColumn className="mb-24 w-full">
       <WordbookListNew />
       <WordbookListStreaming />
       {wordCards.map((wordCard, index) => (

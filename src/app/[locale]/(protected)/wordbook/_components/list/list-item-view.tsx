@@ -24,10 +24,9 @@ export const ListItemView: React.FC<Props> = ({ ref, listItem, onClick }) => {
     <button
       ref={ref}
       type="button"
-      lang={language}
       onClick={onClick}
       className={cn(
-        "relative flex h-fit w-full cursor-pointer flex-col items-start gap-4 rounded-sm px-4 py-3 text-left font-semibold sm:flex-row sm:justify-start",
+        "relative flex h-fit w-full cursor-pointer flex-col items-start gap-1 rounded-sm px-4 py-3 text-left font-semibold sm:flex-row sm:justify-start sm:gap-4",
         "hover:bg-accent",
         "after:bg-accent after:absolute after:-bottom-0.25 after:h-0.25 after:content-[''] last:after:hidden",
         "after:left-0 after:w-full sm:after:left-3 sm:after:w-[calc(100%-1.5rem)]",
@@ -46,7 +45,7 @@ export const ListItemView: React.FC<Props> = ({ ref, listItem, onClick }) => {
         </Caption>
       </Flexbox>
       <FlexColumn gap={1}>
-        <Paragraph lang={language} clamp={1} className="pt-1 leading-none">
+        <Paragraph lang={language} clamp={1} className="pt-1 align-baseline leading-none">
           {definitions.map((definition) => (
             <Fragment key={`${listItem.id}-${definition.meaning}`}>
               <Badge
@@ -55,13 +54,17 @@ export const ListItemView: React.FC<Props> = ({ ref, listItem, onClick }) => {
               >
                 {t(definition.pos)}
               </Badge>
-              <Caption className="mr-4 text-sm" color="foreground">
+              <Caption size={14} className="mr-4" color="foreground">
                 {definition.translation ?? definition.meaning}
               </Caption>
             </Fragment>
           ))}
         </Paragraph>
-        <Paragraph lang={language} color="muted" clamp={1}>
+        <Paragraph
+          lang={language}
+          color="muted"
+          className="line-clamp-3 overflow-ellipsis sm:line-clamp-1"
+        >
           {examples.map((example) => (
             <Fragment key={`${listItem.id}-${example.sentence}`}>
               <Caption

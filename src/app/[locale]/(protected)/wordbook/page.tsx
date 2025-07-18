@@ -23,7 +23,7 @@ const WordbookPage = async () => {
   return (
     <StoreProvider wordCards={wordCards}>
       <GenerateFormProvider model={model} translationLanguage={translationLanguage}>
-        <InsetLayoutWithPadding className="w-full max-w-360 flex-row gap-0 pt-5 sm:gap-4">
+        <InsetLayoutWithPadding className="w-full max-w-360 flex-row gap-0 sm:gap-4 sm:pt-5">
           <WordbookList />
           <WordbookContent />
         </InsetLayoutWithPadding>

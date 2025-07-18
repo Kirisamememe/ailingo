@@ -36,7 +36,7 @@ export const Definitions: React.FC<Props> = ({ definitions, language }) => {
               lang={language}
               weight={400}
               color="muted"
-              className="text-[0.625rem] sm:pl-1 sm:text-xs"
+              className="text-[0.625rem] leading-[1.8] sm:pl-1 sm:text-xs"
             >
               {definition.translation}
             </Caption>
