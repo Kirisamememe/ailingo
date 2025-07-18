@@ -25,7 +25,7 @@ const RootLayout: React.FC<Props> = async ({ children, params }) => {
     <BaseLayout locale={locale}>
       <SidebarProvider defaultOpen={defaultOpen}>
         <AppSidebar />
-        <SidebarInset className="@container">
+        <SidebarInset className="@container items-center">
           <ScrollStateProvider>
             <Header />
             {children}

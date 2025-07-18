@@ -34,7 +34,7 @@ export const AiReqForm = () => {
   return (
     <Form {...form}>
       <form
-        className="appear flex h-full w-full flex-col gap-6 rounded-lg shadow-xs"
+        className="appear flex h-full w-full flex-col gap-6 rounded-lg p-4 shadow-xs"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <FlexColumn className="shrink-0">
