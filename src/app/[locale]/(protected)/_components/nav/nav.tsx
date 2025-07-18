@@ -1,6 +1,6 @@
 import { useTranslations } from "next-intl";
 import { cn } from "@/lib/utils";
-import { HiddenWhenMobile } from "@/components/hidden-when-mobile";
+import { HideWhenMobile } from "@/components/hide-when-mobile";
 import { FlexRow } from "@/components/ui/flexbox";
 import { NavAvatar } from "./nav-avatar";
 import { NavItem } from "./nav-item";
@@ -38,9 +38,9 @@ export const Nav = () => {
           <NavItem key={item.title} href={item.url} text={t(item.title)} icon={<item.icon />} />
         ))}
       </FlexRow>
-      <HiddenWhenMobile>
+      <HideWhenMobile>
         <NavAvatar />
-      </HiddenWhenMobile>
+      </HideWhenMobile>
     </FlexRow>
   );
 };

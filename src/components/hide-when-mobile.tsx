@@ -10,7 +10,7 @@ type Props = {
 /**
  * モバイルのみ非表示
  */
-export const HiddenWhenMobile: React.FC<Props> = ({ children }) => {
+export const HideWhenMobile: React.FC<Props> = ({ children }) => {
   const isMobile = useIsMobile();
 
   return isMobile ? null : children;
