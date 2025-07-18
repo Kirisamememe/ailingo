@@ -8,7 +8,7 @@ export type WordListItem = {
   /** ワードカードID */
   id: number;
   /** ワード */
-  word: string;
+  entry: string;
   /** 言語 */
   language: LanguageCode;
   /** 発音 */
