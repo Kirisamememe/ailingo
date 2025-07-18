@@ -80,12 +80,12 @@
         "error": "Failed to update wordcard",
         "invalidForm": "Invalid form"
       },
-      "word": {
-        "label": "Word",
-        "placeholder": "Enter the word",
-        "description": "Please enter the word you want to generate a wordcard for.",
-        "wordIsRequired": "Word is required",
-        "wordIsTooLong": "Please enter a word less than 100 characters."
+      "entry": {
+        "label": "Entry",
+        "placeholder": "Enter the entry",
+        "description": "Please enter the entry you want to generate a wordcard for.",
+        "entryIsRequired": "Entry is required",
+        "entryIsTooLong": "Please enter a entry less than 100 characters."
       },
       "phonetics": {
         "label": "Phonetics",
@@ -107,6 +107,12 @@
         "description": "Please enter the example you want to generate a wordcard for.",
         "exampleIsRequired": "Example is required",
         "exampleIsTooLong": "Please enter a example less than 500 characters."
+      },
+      "collocations": {
+        "label": "Collocations",
+        "placeholder": "Enter the collocations",
+        "description": "Please enter the collocations you want to generate a wordcard for.",
+        "collocationsIsTooLong": "Please enter collocations less than 500 characters."
       },
       "derivatives": {
         "label": "Derivatives",
@@ -140,6 +146,7 @@
       }
     },
     "extra": {
+      "collocations": "Collocations",
       "derivatives": "Derivatives",
       "synonyms": "Synonyms",
       "antonyms": "Antonyms"

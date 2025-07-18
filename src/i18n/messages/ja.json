@@ -80,12 +80,12 @@
         "error": "単語カードの更新に失敗しました",
         "invalidForm": "無効なフォーム"
       },
-      "word": {
-        "label": "単語",
-        "placeholder": "単語を入力",
-        "description": "単語を入力してください。",
-        "wordIsRequired": "単語は必須です",
-        "wordIsTooLong": "単語は100文字以内で入力してください。"
+      "entry": {
+        "label": "見出し",
+        "placeholder": "見出しを入力",
+        "description": "単語カードの見出しを入力してください。",
+        "entryIsRequired": "見出しは必須です",
+        "entryIsTooLong": "見出しは100文字以内で入力してください。"
       },
       "phonetics": {
         "label": "発音",
@@ -107,6 +107,12 @@
         "description": "例文を入力してください。",
         "exampleIsRequired": "例文は必須です",
         "exampleIsTooLong": "例文は500文字以内で入力してください。"
+      },
+      "collocations": {
+        "label": "共起語",
+        "placeholder": "共起語を入力",
+        "description": "共起語を入力してください。",
+        "collocationsIsTooLong": "共起語は500文字以内で入力してください。"
       },
       "derivatives": {
         "label": "派生語",
@@ -140,6 +146,7 @@
       }
     },
     "extra": {
+      "collocations": "共起語",
       "derivatives": "派生語",
       "synonyms": "類義語",
       "antonyms": "対義語"

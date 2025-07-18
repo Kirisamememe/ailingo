@@ -80,12 +80,12 @@
         "error": "單字卡更新失敗",
         "invalidForm": "無效的表單"
       },
-      "word": {
-        "label": "單字",
-        "placeholder": "輸入單字",
-        "description": "請輸入您想要生成單字卡的單字。",
-        "wordIsRequired": "單字為必填項。",
-        "wordIsTooLong": "單字不能超過100個字符。"
+      "entry": {
+        "label": "標題",
+        "placeholder": "輸入標題",
+        "description": "請輸入您想要生成單字卡的標題。",
+        "entryIsRequired": "標題為必填項。",
+        "entryIsTooLong": "標題不能超過100個字符。"
       },
       "phonetics": {
         "label": "發音",
@@ -107,6 +107,12 @@
         "description": "請輸入您想要生成單字卡的例句。",
         "exampleIsRequired": "例句為必填項。",
         "exampleIsTooLong": "例句不能超過500個字符。"
+      },
+      "collocations": {
+        "label": "共起語",
+        "placeholder": "輸入共起語",
+        "description": "請輸入共起語。",
+        "collocationsIsTooLong": "共起語不能超過500個字符。"
       },
       "derivatives": {
         "label": "派生字",
@@ -140,6 +146,7 @@
       }
     },
     "extra": {
+      "collocations": "共起語",
       "derivatives": "派生字",
       "synonyms": "近義字",
       "antonyms": "反義字"
