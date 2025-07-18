@@ -33,6 +33,8 @@ export type WordbookActions = {
   nextWord: (e: KeyboardEvent) => void;
   /** 選択された単語カードのIDを減らす */
   prevWord: (e: KeyboardEvent) => void;
+  /** ドロワーを閉じる */
+  closeDrawer: () => void;
 };
 
 /**
@@ -84,6 +86,9 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
     },
     prevWord: (e: KeyboardEvent) => {
       set((state) => onPrevWord(state, e));
+    },
+    closeDrawer: () => {
+      set((state) => onDrawerClose(state));
     },
   }));
 };
@@ -169,11 +174,12 @@ const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
  * 単語カードが選択されたときの処理
  */
 const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButtonElement) => {
-  if (state.selectedElement) {
+  if (
+    state.selectedWordCardIndex === index &&
+    state.isDrawerOpen &&
+    state.selectedElement === ref
+  ) {
     state.selectedElement.dataset.selected = "false";
-  }
-
-  if (state.selectedWordCardIndex === index && state.isDrawerOpen) {
     return { isDrawerOpen: false, selectedElement: null };
   }
 
@@ -184,4 +190,16 @@ const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButton
     isDrawerOpen: true,
     selectedElement: ref,
   };
+};
+
+/**
+ * ドロワーが閉じたときの処理
+ */
+const onDrawerClose = (state: WordbookState) => {
+  if (state.selectedElement) {
+    state.selectedElement.dataset.selected = "false";
+    state.selectedElement.focus();
+  }
+
+  return { isDrawerOpen: false, selectedElement: null };
 };
