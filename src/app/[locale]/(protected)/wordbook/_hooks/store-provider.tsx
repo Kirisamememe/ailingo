@@ -4,6 +4,7 @@ import { type ReactNode, createContext, use, useRef } from "react";
 import { useStore } from "zustand";
 import type { WordbookStore } from "../_store";
 import { createWordbookStore, initStore } from "../_store";
+import { convertWordCardDBToClient } from "../_utils";
 import type { WordCard } from "@/types";
 
 /**
@@ -32,7 +33,7 @@ export type WordbookStoreApi = ReturnType<typeof createWordbookStore>;
 export const StoreProvider = ({ children, wordCards }: WordbookProviderProps) => {
   const _wordCards = use(wordCards);
   const storeRef = useRef<WordbookStoreApi | undefined>(undefined);
-  storeRef.current ??= createWordbookStore(initStore(_wordCards));
+  storeRef.current ??= createWordbookStore(initStore(_wordCards.map(convertWordCardDBToClient)));
 
   return <StoreContext value={storeRef.current}>{children}</StoreContext>;
 };

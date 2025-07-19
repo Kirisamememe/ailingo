@@ -1,12 +1,12 @@
 import { createStore } from "zustand/vanilla";
-import type { WordCard } from "@/types";
+import type { WordCardClient } from "@/types";
 
 /**
  * 単語帳の状態
  */
 export type WordbookState = {
   /** 単語カード */
-  wordCards: WordCard[];
+  wordCards: WordCardClient[];
   /** 選択された単語カードのID */
   selectedIndex: number;
   /** 選択された単語カードのリファレンス */
@@ -24,7 +24,7 @@ export type WordbookState = {
  */
 export type WordbookActions = {
   /** 単語カードを設定する */
-  setWordCards: (wordCards: WordCard[]) => void;
+  setWordCards: (wordCards: WordCardClient[]) => void;
   /** 選択された単語カードのIDを設定する */
   setSelectedIndex: (index: number, ref: HTMLButtonElement) => void;
   /** ドロワーの開閉を設定する */
@@ -61,7 +61,7 @@ export const defaultInitState: WordbookState = {
 /**
  * 単語帳のストアを初期化する
  */
-export const initStore = (wordCards: WordCard[]): WordbookState => {
+export const initStore = (wordCards: WordCardClient[]): WordbookState => {
   return {
     ...defaultInitState,
     wordCards,
@@ -74,7 +74,7 @@ export const initStore = (wordCards: WordCard[]): WordbookState => {
 export const createWordbookStore = (initState: WordbookState = defaultInitState) => {
   return createStore<WordbookStore>()((set) => ({
     ...initState,
-    setWordCards: (wordCards: WordCard[]) => {
+    setWordCards: (wordCards: WordCardClient[]) => {
       set(() => ({ wordCards }));
     },
     setSelectedIndex: (index: number, ref: HTMLButtonElement) => {
@@ -199,6 +199,7 @@ const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButton
     state.selectedElement.dataset.selected = "false";
   }
   ref.dataset.selected = "true";
+  ref.focus();
 
   return {
     selectedIndex: index,
@@ -216,5 +217,5 @@ const onDrawerClose = (state: WordbookState) => {
     state.selectedElement.focus();
   }
 
-  return { isDrawerOpen: false, selectedElement: null };
+  return { isDrawerOpen: false, selectedElement: null, isEditing: false };
 };
