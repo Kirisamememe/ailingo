@@ -83,6 +83,10 @@
     },
     "editForm": {
       "title": "编辑单词卡",
+      "regenerate": {
+        "label": "再生成",
+        "description": "再生成单词卡。"
+      },
       "save": {
         "success": "单词卡更新成功",
         "error": "单词卡更新失败",

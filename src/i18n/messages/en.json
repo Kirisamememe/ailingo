@@ -83,6 +83,10 @@
     },
     "editForm": {
       "title": "Edit Wordcard",
+      "regenerate": {
+        "label": "Regenerate",
+        "description": "Regenerate the wordcard."
+      },
       "save": {
         "success": "Wordcard updated successfully",
         "error": "Failed to update wordcard",

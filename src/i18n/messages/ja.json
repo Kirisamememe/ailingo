@@ -83,6 +83,10 @@
     },
     "editForm": {
       "title": "単語カード編集",
+      "regenerate": {
+        "label": "再生成",
+        "description": "単語カードを再生成します。"
+      },
       "save": {
         "success": "単語カードを更新しました",
         "error": "単語カードの更新に失敗しました",
