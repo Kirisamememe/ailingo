@@ -25,6 +25,8 @@ export type WordbookState = {
 export type WordbookActions = {
   /** 単語カードを設定する */
   setWordCards: (wordCards: WordCardClient[]) => void;
+  /** 単語カードを追加する */
+  addWordCards: (wordCards: WordCardClient[]) => void;
   /** 選択された単語カードのIDを設定する */
   setSelectedIndex: (index: number, ref: HTMLButtonElement) => void;
   /** ドロワーの開閉を設定する */
@@ -76,6 +78,9 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
     ...initState,
     setWordCards: (wordCards: WordCardClient[]) => {
       set(() => ({ wordCards }));
+    },
+    addWordCards: (wordCards: WordCardClient[]) => {
+      set((state) => ({ wordCards: [...wordCards, ...state.wordCards] }));
     },
     setSelectedIndex: (index: number, ref: HTMLButtonElement) => {
       set((state) => onWordCardSelected(state, index, ref));

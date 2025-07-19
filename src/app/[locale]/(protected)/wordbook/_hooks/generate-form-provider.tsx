@@ -8,10 +8,10 @@ import { type UseFormReturn, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type z from "zod";
 import type { AIModel } from "@/lib/ai";
-import { getOperatorId } from "../../_actions/get-operator";
-import { createWordcard } from "../_actions/create";
+import { createWordcards } from "../_actions/create";
 import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
 import { useWordbookStore } from "./store-provider";
+import { convertWordCardDBToClient } from "../_utils";
 import type { LanguageCode } from "@/types";
 
 /**
@@ -59,6 +59,7 @@ export const GenerateFormProvider = ({
 }: GenerateFormProviderProps) => {
   const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
   const setIsSaving = useWordbookStore((state) => state.setIsSaving);
+  const addWordCards = useWordbookStore((state) => state.addWordCards);
 
   const form = useForm<z.infer<typeof wordcardRequestSchema>>({
     resolver: zodResolver(wordcardRequestSchema),
@@ -85,18 +86,11 @@ export const GenerateFormProvider = ({
       return;
     }
 
-    const operatorId = await getOperatorId();
-
-    // 全てのwordcardを同時に作成
-    const promises = object.wordcards.map(async (wordcard) => {
-      return createWordcard(operatorId, wordcard).then(() => {
-        toast.success("Wordcards created successfully");
-      });
-    });
-
     try {
       setIsSaving(true);
-      await Promise.all(promises);
+      const result = await createWordcards({ wordcards: object.wordcards });
+      addWordCards(result.map(convertWordCardDBToClient));
+      toast.success("Wordcards created successfully");
       form.reset();
     } catch {
       toast.error("Failed to create wordcards");
