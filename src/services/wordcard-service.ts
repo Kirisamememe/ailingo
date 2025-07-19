@@ -38,7 +38,7 @@ class WordCardService {
    * 単語カードを作成する
    */
   async create(wordCardData: z.infer<typeof wordcardFormSchema>, operatorId: string) {
-    await db
+    return await db
       .insert(wordCard)
       .values({ ...wordCardData, authorId: operatorId, updatedAt: new Date() })
       .catch(dbExceptionHandler);

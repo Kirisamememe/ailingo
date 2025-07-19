@@ -39,5 +39,5 @@ export const createWordcard = async (
       )
       .join("\n"),
   };
-  await wordCardService.create(wordcard, operatorId);
+  return await wordCardService.create(wordcard, operatorId);
 };
