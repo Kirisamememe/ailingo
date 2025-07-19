@@ -46,7 +46,7 @@ export const AiReqForm = () => {
             <FlexColumn
               ref={scrollRef}
               lang="en"
-              className="bg-card h-full max-h-32 min-h-36 w-full overflow-y-scroll rounded-sm p-4 font-mono"
+              className="bg-card h-full max-h-20 w-full overflow-y-scroll rounded-sm p-4 font-mono"
             >
               <pre className="text-muted-foreground text-xs whitespace-pre-wrap">
                 {JSON.stringify(object.wordcards, null, 2)}
