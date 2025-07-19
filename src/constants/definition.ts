@@ -21,3 +21,6 @@ export const POS = [
   "ORDINAL",
   "OTHER",
 ] as const;
+
+/** データベースの定義の区切り文字 */
+export const DB_DEFINITION_DIVIDER = "|" as const;
