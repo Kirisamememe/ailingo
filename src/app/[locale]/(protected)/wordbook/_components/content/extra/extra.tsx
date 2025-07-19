@@ -1,7 +1,7 @@
 import { useTranslations } from "next-intl";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Separator } from "@/components/ui/separator";
-import { Caption, Headline } from "@/components/ui/typography";
+import { Headline, Paragraph } from "@/components/ui/typography";
 
 type Props = {
   collocations: string;
@@ -29,9 +29,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
             <Headline color="muted" className={beforeClassName}>
               {t("collocations")}
             </Headline>
-            <Caption color="foreground" className="text-sm sm:text-base">
-              {collocations}
-            </Caption>
+            <Paragraph className="text-sm break-all sm:text-base">{collocations}</Paragraph>
           </FlexColumn>
         )}
         {derivatives && (
@@ -39,9 +37,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
             <Headline color="muted" className={beforeClassName}>
               {t("derivatives")}
             </Headline>
-            <Caption color="foreground" className="text-sm sm:text-base">
-              {derivatives}
-            </Caption>
+            <Paragraph className="text-sm break-all sm:text-base">{derivatives}</Paragraph>
           </FlexColumn>
         )}
         {synonyms && (
@@ -49,9 +45,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
             <Headline color="muted" className={beforeClassName}>
               {t("synonyms")}
             </Headline>
-            <Caption color="foreground" className="text-sm sm:text-base">
-              {synonyms}
-            </Caption>
+            <Paragraph className="text-sm break-all sm:text-base">{synonyms}</Paragraph>
           </FlexColumn>
         )}
         {antonyms && (
@@ -59,9 +53,7 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
             <Headline color="muted" className={beforeClassName}>
               {t("antonyms")}
             </Headline>
-            <Caption color="foreground" className="text-sm sm:text-base">
-              {antonyms}
-            </Caption>
+            <Paragraph className="text-sm break-all sm:text-base">{antonyms}</Paragraph>
           </FlexColumn>
         )}
       </FlexColumn>
