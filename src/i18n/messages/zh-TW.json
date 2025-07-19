@@ -153,6 +153,10 @@
         "languageIsRequired": "語言為必填項。"
       }
     },
+    "contentSheet": {
+      "title": "單字卡",
+      "description": "單字卡的詳細。"
+    },
     "extra": {
       "collocations": "共起語",
       "derivatives": "派生字",

@@ -153,6 +153,10 @@
         "languageIsRequired": "Language is required"
       }
     },
+    "contentSheet": {
+      "title": "Wordcard",
+      "description": "The detail of the wordcard."
+    },
     "extra": {
       "collocations": "Collocations",
       "derivatives": "Derivatives",

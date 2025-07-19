@@ -153,6 +153,10 @@
         "languageIsRequired": "言語は必須です"
       }
     },
+    "contentSheet": {
+      "title": "単語カード",
+      "description": "単語カードの詳細です。"
+    },
     "extra": {
       "collocations": "共起語",
       "derivatives": "派生語",
