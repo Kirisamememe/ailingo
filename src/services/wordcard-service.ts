@@ -48,7 +48,7 @@ class WordCardService {
    * 単語カードを複数件作成する
    */
   async createMany(wordcards: z.infer<typeof wordcardFormSchema>[], operatorId: string) {
-    await db
+    return await db
       .insert(wordCard)
       .values(
         wordcards.map((wordcard) => ({
@@ -57,6 +57,7 @@ class WordCardService {
           updatedAt: new Date(),
         })),
       )
+      .returning()
       .catch(dbExceptionHandler);
   }
 

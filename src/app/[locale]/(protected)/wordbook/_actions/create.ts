@@ -1,6 +1,5 @@
 "use server";
 
-import { revalidatePath } from "next/cache";
 import type { z } from "zod";
 import { getSession } from "@/lib/auth";
 import type { wordcardAISchema, wordcardAISchemaArray } from "../_schema";
@@ -15,11 +14,13 @@ export const createWordcards = async (data: z.infer<typeof wordcardAISchemaArray
   const wordcards = data.wordcards.map((wordcard) => ({
     ...wordcard,
     definitions: wordcard.definitions
-      .map((definition) => `[${definition.pos}]${DB_DEFINITION_DIVIDER}${definition.meaning}`)
+      .map(
+        (definition) =>
+          `[${definition.pos}]${DB_DEFINITION_DIVIDER}${definition.meaning}${DB_DEFINITION_DIVIDER}${definition.translation}`,
+      )
       .join("\n"),
   }));
-  await wordCardService.createMany(wordcards, operatorId);
-  revalidatePath("/wordbook");
+  return await wordCardService.createMany(wordcards, operatorId);
 };
 
 /**
@@ -39,5 +40,4 @@ export const createWordcard = async (
       .join("\n"),
   };
   await wordCardService.create(wordcard, operatorId);
-  revalidatePath("/wordbook");
 };
