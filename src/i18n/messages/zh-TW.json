@@ -21,6 +21,14 @@
       "database": "資料庫錯誤"
     }
   },
+  "nav": {
+    "home": "首頁",
+    "wordbook": "單字本",
+    "output": "輸出訓練",
+    "input": "輸入訓練",
+    "profile": "個人資料",
+    "signOut": "登出"
+  },
   "sidebar": {
     "titles": {
       "general": "通用",
@@ -49,12 +57,12 @@
       "title": "生成新單字",
       "generate": "生成",
       "stop": "終止",
-      "words": {
-        "label": "單字",
-        "placeholder": "輸入多個單字，用逗號分隔",
-        "description": "請輸入您想要生成單字卡的單字。",
-        "wordsIsRequired": "單字為必填項。",
-        "wordsIsTooLong": "單字不能超過500個字符。"
+      "entries": {
+        "label": "詞條",
+        "placeholder": "輸入多個詞條，用逗號分隔。Command / Ctrl + Enter 發送。",
+        "description": "請輸入您想要生成單字卡的詞條。",
+        "entriesIsRequired": "詞條為必填項。",
+        "entriesIsTooLong": "詞條不能超過500個字符。"
       },
       "model": {
         "label": "模型",
@@ -75,17 +83,21 @@
     },
     "editForm": {
       "title": "編輯單字卡",
+      "regenerate": {
+        "label": "再生成",
+        "description": "再生成單字卡。"
+      },
       "save": {
         "success": "單字卡更新成功",
         "error": "單字卡更新失敗",
         "invalidForm": "無效的表單"
       },
-      "word": {
-        "label": "單字",
-        "placeholder": "輸入單字",
-        "description": "請輸入您想要生成單字卡的單字。",
-        "wordIsRequired": "單字為必填項。",
-        "wordIsTooLong": "單字不能超過100個字符。"
+      "entry": {
+        "label": "詞條",
+        "placeholder": "輸入詞條",
+        "description": "請輸入您想要生成單字卡的詞條。",
+        "entryIsRequired": "詞條為必填項。",
+        "entryIsTooLong": "詞條不能超過100個字符。"
       },
       "phonetics": {
         "label": "發音",
@@ -107,6 +119,12 @@
         "description": "請輸入您想要生成單字卡的例句。",
         "exampleIsRequired": "例句為必填項。",
         "exampleIsTooLong": "例句不能超過500個字符。"
+      },
+      "collocations": {
+        "label": "共起語",
+        "placeholder": "輸入共起語",
+        "description": "請輸入共起語。",
+        "collocationsIsTooLong": "共起語不能超過500個字符。"
       },
       "derivatives": {
         "label": "派生字",
@@ -139,7 +157,12 @@
         "languageIsRequired": "語言為必填項。"
       }
     },
+    "contentSheet": {
+      "title": "單字卡",
+      "description": "單字卡的詳細。"
+    },
     "extra": {
+      "collocations": "共起語",
       "derivatives": "派生字",
       "synonyms": "近義字",
       "antonyms": "反義字"

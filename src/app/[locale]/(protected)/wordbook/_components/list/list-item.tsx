@@ -1,26 +1,38 @@
 "use client";
 
+import { memo, useRef } from "react";
 import { ListItemView } from "./list-item-view";
-import type { WordListItem } from "@/types";
+import { useWordbookStore } from "../../_hooks/store-provider";
+import { convertWordCardDBToListItem } from "../../_utils";
+import type { WordCard } from "@/types";
 
 type Props = {
-  listItem: WordListItem;
-  selectedId: number;
-  onClick: (id: number) => void;
+  wordCard: WordCard;
+};
+
+const _isEqual = (prevProps: Props, nextProps: Props) => {
+  return (
+    prevProps.wordCard.id === nextProps.wordCard.id &&
+    prevProps.wordCard.updatedAt === nextProps.wordCard.updatedAt
+  );
 };
 
 /**
  * ワードブックリストアイテム
  */
-export const ListItem: React.FC<Props> = ({ listItem, selectedId, onClick }) => {
+export const ListItem: React.FC<Props> = memo(({ wordCard }) => {
+  const ref = useRef<HTMLButtonElement>(null);
+  const setSelectedIndex = useWordbookStore((state) => state.setSelectedCard);
+
+  const onClick = () => {
+    if (!ref.current) return;
+
+    setSelectedIndex(wordCard.id, ref.current);
+  };
+
   return (
-    <ListItemView
-      word={listItem.word}
-      language={listItem.language}
-      isSelected={selectedId === listItem.id}
-      onClick={() => {
-        onClick(listItem.id);
-      }}
-    />
+    <ListItemView ref={ref} onClick={onClick} listItem={convertWordCardDBToListItem(wordCard)} />
   );
-};
+}, _isEqual);
+
+ListItem.displayName = "ListItem";

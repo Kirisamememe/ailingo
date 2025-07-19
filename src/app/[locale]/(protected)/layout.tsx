@@ -1,11 +1,9 @@
-import { cookies } from "next/headers";
 import type { Locale } from "next-intl";
 import { getSession } from "@/lib/auth";
 import { BaseLayout } from "@/components/layout";
+import { DisplayWhenMobile } from "@/components/media-query-wrapper";
 import { ScrollStateProvider } from "@/components/providers";
-import { SidebarInset, SidebarProvider } from "@/components/ui/sidebar";
-import { Header } from "./_components/nav/header/header";
-import { AppSidebar } from "./_components/nav/sidebar";
+import { Header } from "./_components/nav/header";
 import { planDailyLearning } from "./_utils";
 
 type Props = {
@@ -16,22 +14,17 @@ type Props = {
 const RootLayout: React.FC<Props> = async ({ children, params }) => {
   const { operatorId } = await getSession();
   const { locale } = await params;
-  const cookieStore = await cookies();
-  const defaultOpen = cookieStore.get("sidebar_state")?.value === "true";
 
   await planDailyLearning(operatorId);
 
   return (
     <BaseLayout locale={locale}>
-      <SidebarProvider defaultOpen={defaultOpen}>
-        <AppSidebar />
-        <SidebarInset className="@container">
-          <ScrollStateProvider>
-            <Header />
-            {children}
-          </ScrollStateProvider>
-        </SidebarInset>
-      </SidebarProvider>
+      <ScrollStateProvider>
+        <DisplayWhenMobile>
+          <Header />
+        </DisplayWhenMobile>
+        {children}
+      </ScrollStateProvider>
     </BaseLayout>
   );
 };

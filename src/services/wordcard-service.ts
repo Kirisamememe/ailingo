@@ -38,7 +38,7 @@ class WordCardService {
    * 単語カードを作成する
    */
   async create(wordCardData: z.infer<typeof wordcardFormSchema>, operatorId: string) {
-    await db
+    return await db
       .insert(wordCard)
       .values({ ...wordCardData, authorId: operatorId, updatedAt: new Date() })
       .catch(dbExceptionHandler);
@@ -48,7 +48,7 @@ class WordCardService {
    * 単語カードを複数件作成する
    */
   async createMany(wordcards: z.infer<typeof wordcardFormSchema>[], operatorId: string) {
-    await db
+    return await db
       .insert(wordCard)
       .values(
         wordcards.map((wordcard) => ({
@@ -57,6 +57,7 @@ class WordCardService {
           updatedAt: new Date(),
         })),
       )
+      .returning()
       .catch(dbExceptionHandler);
   }
 
@@ -64,11 +65,13 @@ class WordCardService {
    * 単語カードを更新する
    */
   async update(id: number, wordCardData: z.infer<typeof wordcardFormSchema>) {
-    await db
+    const result = await db
       .update(wordCard)
       .set({ ...wordCardData, updatedAt: new Date() })
       .where(eq(wordCard.id, id))
+      .returning()
       .catch(dbExceptionHandler);
+    return result.length ? result[0] : null;
   }
 
   /**
@@ -87,7 +90,7 @@ class WordCardService {
    */
   async getDailyNewWords(userId: string, number: number) {
     const result = await db
-      .select({ id: wordCard.id, word: wordCard.word })
+      .select({ id: wordCard.id, entry: wordCard.entry })
       .from(wordCard)
       .where(
         and(
@@ -101,7 +104,7 @@ class WordCardService {
         asc(wordCard.createdAt),
         asc(wordCard.id),
         asc(wordCard.updatedAt),
-        asc(wordCard.word),
+        asc(wordCard.entry),
       )
       .limit(number)
       .catch(dbExceptionHandler);
@@ -113,7 +116,7 @@ class WordCardService {
    */
   async getDailyReviewWords(userId: string, date: string) {
     const result = await db
-      .select({ id: wordCard.id, word: wordCard.word })
+      .select({ id: wordCard.id, entry: wordCard.entry })
       .from(wordCard)
       .where(
         and(

@@ -1,24 +1,27 @@
 "use client";
 
-import { useTranslations } from "next-intl";
-import { FlexRow } from "@/components/ui/flexbox";
-import { Caption } from "@/components/ui/typography";
-import { useWordbook } from "../../_hooks/wordbook-provider";
+import { useId } from "react";
+import { ListItemView } from "./list-item-view";
+import { useGenerateForm } from "../../_hooks/generate-form-provider";
+import { useWordbookStore } from "../../_hooks/store-provider";
 
 /**
- * ワードブックリスト
+ * 単語カードリストのストリーミング
  */
 export const WordbookListStreaming = () => {
-  const { isSaving, isLoading } = useWordbook();
-  const t = useTranslations("wordbook");
+  const { object, isLoading } = useGenerateForm();
+  const isSaving = useWordbookStore((state) => state.isSaving);
+  const id = useId();
 
-  if (!isSaving && !isLoading) return null;
+  if (!isLoading && !isSaving) return null;
+  if (!object?.wordcards?.length) return null;
 
   return (
-    <FlexRow className="bg-accent my-2 h-12 w-full shrink-0 animate-pulse items-center justify-start rounded-sm p-4">
-      <Caption size={14} weight={600}>
-        {t("list.generating")}
-      </Caption>
-    </FlexRow>
+    <>
+      {object.wordcards.map(
+        (wordcard, index) =>
+          wordcard && <ListItemView key={`${id}-${index}`} listItem={wordcard} isStreaming />,
+      )}
+    </>
   );
 };

@@ -28,7 +28,7 @@ const WritingCorrection = async () => {
         targetLanguage={targetLanguage}
         feedbackLanguage={feedbackLanguage}
       >
-        <FlexRow className="h-full @[40rem]:max-h-[calc(100dvh-4.5rem)]" gap={4}>
+        <FlexRow className="h-full sm:max-h-[calc(100dvh-4.5rem)]" gap={4}>
           <ScrollArea className="bg-card/50 h-full w-full rounded-lg border">
             <Corrected writings={writingCorrections} />
           </ScrollArea>

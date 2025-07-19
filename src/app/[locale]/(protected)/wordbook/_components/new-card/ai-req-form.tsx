@@ -1,24 +1,24 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { BookPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { type AIModel, modelListTuple } from "@/lib/ai";
+import { cn } from "@/lib/utils";
 import { Submit } from "@/components/ui/button";
 import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Form, FormField, SelectFormItem, TextareaItem } from "@/components/ui/form";
 import { SelectItem } from "@/components/ui/select";
-import { Headline } from "@/components/ui/typography";
+import { LanguageSetting } from "./language-setting";
 import { setCookie } from "../../../_actions/cookies";
 import { StopButton } from "../../../_components/stop-btn";
-import { useWordbook } from "../../_hooks/wordbook-provider";
-import { LANGUAGES } from "@/drizzle/schema";
-import type { LanguageCode } from "@/types";
+import { useGenerateForm } from "../../_hooks/generate-form-provider";
 
 /**
  * AIリクエストフォームビュー
  */
 export const AiReqForm = () => {
-  const { object, form, onSubmit, isLoading, stop } = useWordbook();
+  const { object, form, onSubmit, isLoading, stop } = useGenerateForm();
   const t = useTranslations("wordbook.newWordAIForm");
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -31,32 +31,46 @@ export const AiReqForm = () => {
     });
   }, [object?.wordcards, isLoading]);
 
+  const handleSubmitByEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      void form.handleSubmit(onSubmit)();
+    }
+  };
+
   return (
     <Form {...form}>
-      <form
-        className="appear flex h-full w-full flex-col gap-6 rounded-lg shadow-xs"
-        onSubmit={form.handleSubmit(onSubmit)}
-      >
-        <FlexColumn className="shrink-0">
-          <Headline size={20} mx={1} mb={3}>
-            {t("title")}
-          </Headline>
-          <FormField
-            control={form.control}
-            name="words"
-            render={({ field }) => (
-              <TextareaItem
-                label={t("words.label")}
-                hiddenLabel
-                disabled={isLoading}
-                description={t("words.description")}
-                placeholder={t("words.placeholder")}
-                className="mb-1 h-32"
-                i18nNameSpace="wordbook.newWordAIForm.words"
-                {...field}
-              />
-            )}
-          />
+      <form className="flex h-full w-full gap-3 rounded-lg" onSubmit={form.handleSubmit(onSubmit)}>
+        <div className="relative h-fit w-full">
+          {isLoading && object?.wordcards ? (
+            <FlexColumn
+              ref={scrollRef}
+              lang="en"
+              className="bg-card h-full max-h-20 w-full overflow-y-scroll rounded-sm p-4 font-mono"
+            >
+              <pre className="text-muted-foreground text-xs whitespace-pre-wrap">
+                {JSON.stringify(object.wordcards, null, 2)}
+              </pre>
+            </FlexColumn>
+          ) : (
+            <FormField
+              control={form.control}
+              name="entries"
+              render={({ field }) => (
+                <TextareaItem
+                  label={t("entries.label")}
+                  hiddenLabel
+                  disabled={isLoading}
+                  description={t("entries.description")}
+                  placeholder={t("entries.placeholder")}
+                  className="bg-background dark:border-border/70 field-sizing-content min-h-20 px-4 py-3"
+                  i18nNameSpace="wordbook.newWordAIForm.entries"
+                  {...field}
+                  onKeyDown={handleSubmitByEnter}
+                />
+              )}
+            />
+          )}
           <FormField
             control={form.control}
             name="model"
@@ -72,6 +86,9 @@ export const AiReqForm = () => {
                 description={t("model.description")}
                 placeholder={t("model.placeholder")}
                 variant="ghost"
+                align="end"
+                alignOffset={-8}
+                parentClass="h-fit [&>button]:text-xs [&>button>svg]:size-3 w-fit absolute bottom-0 right-2 "
               >
                 {modelListTuple.map((model) => (
                   <SelectItem key={model} value={model}>
@@ -81,79 +98,22 @@ export const AiReqForm = () => {
               </SelectFormItem>
             )}
           />
+        </div>
+        <FlexColumn className="shrink-0 gap-2">
+          {isLoading ? <StopButton stop={stop} /> : <LanguageSetting />}
+          <FlexRow className={cn("items-center justify-center gap-6")}>
+            <Submit
+              type="submit"
+              size="icon"
+              isPending={isLoading}
+              hideChildrenWhenPending
+              className="font-semibold"
+              aria-label={t("generate")}
+            >
+              <BookPlus />
+            </Submit>
+          </FlexRow>
         </FlexColumn>
-        <FlexRow className="w-full shrink-0 gap-4">
-          <FormField
-            control={form.control}
-            name="learningLanguage"
-            render={() => (
-              <SelectFormItem
-                label={t("learningLanguage.label")}
-                hiddenDescription={false}
-                value={form.getValues("learningLanguage") ?? "auto"}
-                onValueChange={(value) => {
-                  form.setValue(
-                    "learningLanguage",
-                    value === "auto" ? undefined : (value as LanguageCode),
-                  );
-                }}
-                description={t("learningLanguage.description")}
-                placeholder={t("learningLanguage.placeholder")}
-              >
-                <SelectItem value="auto">{t("learningLanguage.auto")}</SelectItem>
-                {Object.entries(LANGUAGES).map(([key, value]) => (
-                  <SelectItem key={key} value={key}>
-                    {value}
-                  </SelectItem>
-                ))}
-              </SelectFormItem>
-            )}
-          />
-          <FormField
-            control={form.control}
-            name="translationLanguage"
-            render={() => (
-              <SelectFormItem
-                label={t("translationLanguage.label")}
-                hiddenDescription={false}
-                defaultValue={form.getValues("translationLanguage")}
-                onValueChange={(value) => {
-                  form.setValue("translationLanguage", value as LanguageCode);
-                  void setCookie("WORDCARD_TRANSLATION_LANGUAGE", value);
-                }}
-                description={t("translationLanguage.description")}
-                placeholder={t("translationLanguage.placeholder")}
-              >
-                {Object.entries(LANGUAGES).map(([key, value]) => (
-                  <SelectItem key={key} value={key}>
-                    {value}
-                  </SelectItem>
-                ))}
-              </SelectFormItem>
-            )}
-          />
-        </FlexRow>
-        {object?.wordcards && (
-          <FlexColumn
-            ref={scrollRef}
-            className="bg-card h-full max-h-96 min-h-36 w-full overflow-y-scroll rounded-sm p-4"
-          >
-            <pre className="text-muted-foreground text-xs whitespace-pre-wrap">
-              {JSON.stringify(object.wordcards, null, 2)}
-            </pre>
-          </FlexColumn>
-        )}
-        <FlexRow className="sticky bottom-4 mx-auto mt-auto mb-4 w-full shrink-0 items-center justify-center gap-6">
-          <Submit
-            type="submit"
-            isPending={isLoading}
-            size="lg"
-            className="h-12 w-48 rounded-full text-base font-semibold"
-          >
-            {t("generate")}
-          </Submit>
-          {isLoading && <StopButton stop={stop} />}
-        </FlexRow>
       </form>
     </Form>
   );

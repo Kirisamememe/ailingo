@@ -1,7 +1,7 @@
 import "server-only";
 import { desc } from "drizzle-orm";
 import { db, dbExceptionHandler } from "@/lib/db";
-import type { WritingCorrectionDBRequestSchema } from "@/app/[locale]/(protected)/writing-correction/_schema";
+import type { WritingCorrectionDBRequestSchema } from "@/app/[locale]/(protected)/output/_schema";
 import { writing } from "@/drizzle/schema";
 
 class WritingService {

@@ -6,7 +6,7 @@ const RootPage = async () => {
   await getSession();
   const locale = await getLocale();
 
-  redirect({ href: "/daily", locale });
+  redirect({ href: "/home", locale });
 };
 
 export default RootPage;

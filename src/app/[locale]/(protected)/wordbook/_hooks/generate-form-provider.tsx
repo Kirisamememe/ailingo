@@ -1,15 +1,6 @@
 "use client";
 
-import {
-  type ReactNode,
-  createContext,
-  use,
-  useCallback,
-  useEffect,
-  useMemo,
-  useRef,
-  useState,
-} from "react";
+import { type ReactNode, createContext, use, useCallback, useEffect, useMemo, useRef } from "react";
 import { experimental_useObject as useObject } from "@ai-sdk/react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import type { DeepPartial } from "ai";
@@ -17,16 +8,15 @@ import { type UseFormReturn, useForm } from "react-hook-form";
 import { toast } from "sonner";
 import type z from "zod";
 import type { AIModel } from "@/lib/ai";
-import { useScrollState } from "@/components/providers";
-import { getOperatorId } from "../../_actions/get-operator";
-import { createWordcard } from "../_actions/create";
+import { createWordcards } from "../_actions/create";
 import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
+import { useWordbookStore } from "./store-provider";
 import type { LanguageCode } from "@/types";
 
 /**
- * WordbookContextの型定義
+ * GenerateFormContextの型定義
  */
-type WordbookContextType = {
+type GenerateFormContextType = {
   /** ワードリスト */
   object?: DeepPartial<z.infer<typeof wordcardAISchemaArray>> | undefined;
   /** フォームのインスタンス */
@@ -37,21 +27,19 @@ type WordbookContextType = {
   isLoading: boolean;
   /** リクエスト停止ハンドラー */
   stop: () => void;
-  /** 保存中かどうか */
-  isSaving: boolean;
   /** 音声再生用のAudio要素 */
   audioRef: React.RefObject<HTMLAudioElement | undefined>;
 };
 
 /**
- * WordbookContext
+ * GenerateFormContext
  */
-const WordbookContext = createContext<WordbookContextType | undefined>(undefined);
+const GenerateFormContext = createContext<GenerateFormContextType | undefined>(undefined);
 
 /**
  * WordbookProviderのプロパティ型
  */
-type WordbookProviderProps = {
+type GenerateFormProviderProps = {
   /** モデル */
   model: AIModel;
   /** 翻訳言語 */
@@ -61,17 +49,16 @@ type WordbookProviderProps = {
 };
 
 /**
- * WordbookProvider - 単語帳関連のロジックを提供
+ * GenerateFormProvider - 単語帳関連のロジックを提供
  */
-export const WordbookProvider = ({
+export const GenerateFormProvider = ({
   model,
   translationLanguage,
   children,
-}: WordbookProviderProps) => {
-  const [isSaving, setIsSaving] = useState(false);
+}: GenerateFormProviderProps) => {
   const audioRef = useRef<HTMLAudioElement | undefined>(undefined);
-
-  const { setHeaderStatic } = useScrollState();
+  const setIsSaving = useWordbookStore((state) => state.setIsSaving);
+  const addWordCards = useWordbookStore((state) => state.addWordCards);
 
   const form = useForm<z.infer<typeof wordcardRequestSchema>>({
     resolver: zodResolver(wordcardRequestSchema),
@@ -79,17 +66,10 @@ export const WordbookProvider = ({
       model,
       learningLanguage: undefined,
       translationLanguage,
-      words: "",
+      entries: "",
     },
     mode: "onChange",
   });
-
-  useEffect(() => {
-    setHeaderStatic(true);
-    return () => {
-      setHeaderStatic(false);
-    };
-  }, [setHeaderStatic]);
 
   useEffect(() => {
     if (audioRef.current) return;
@@ -100,20 +80,16 @@ export const WordbookProvider = ({
    * AI生成完了時の処理
    */
   const onFinish = async ({ object }: { object?: z.infer<typeof wordcardAISchemaArray> }) => {
-    if (!object) return;
-
-    const operatorId = await getOperatorId();
-
-    // 全てのwordcardを同時に作成
-    const promises = object.wordcards.map(async (wordcard) => {
-      return createWordcard(operatorId, wordcard).then(() => {
-        toast.success("Wordcards created successfully");
-      });
-    });
+    if (!object) {
+      toast.error("object is undefined");
+      return;
+    }
 
     try {
       setIsSaving(true);
-      await Promise.all(promises);
+      const result = await createWordcards({ wordcards: object.wordcards });
+      addWordCards(result);
+      toast.success("Wordcards created successfully");
       form.reset();
     } catch {
       toast.error("Failed to create wordcards");
@@ -136,7 +112,7 @@ export const WordbookProvider = ({
    */
   const onSubmit = useCallback(() => {
     const values = form.getValues();
-    if (!values.words) return;
+    if (!values.entries) return;
 
     submit(values);
   }, [form, submit]);
@@ -147,23 +123,22 @@ export const WordbookProvider = ({
       onSubmit,
       isLoading,
       stop,
-      isSaving,
       audioRef,
       object,
     }),
-    [form, onSubmit, isLoading, stop, isSaving, audioRef, object],
+    [object, form, onSubmit, isLoading, stop, audioRef],
   );
 
-  return <WordbookContext value={value}>{children}</WordbookContext>;
+  return <GenerateFormContext value={value}>{children}</GenerateFormContext>;
 };
 
 /**
- * WordbookContextを使用するためのフック
+ * GenerateFormContextを使用するためのフック
  */
-export const useWordbook = () => {
-  const context = use(WordbookContext);
+export const useGenerateForm = () => {
+  const context = use(GenerateFormContext);
   if (!context) {
-    throw new Error("useWordbook must be used within WordbookProvider");
+    throw new Error("useGenerateForm must be used within GenerateFormProvider");
   }
   return context;
 };

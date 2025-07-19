@@ -1,7 +1,7 @@
+import "server-only";
 import { getCurrentDate } from "@/lib/utils";
 import { wordCardService } from "@/services";
 import { dailyService } from "@/services/daily-service";
-import "server-only";
 
 /**
  * 日々の学習計画を作成する
@@ -15,8 +15,12 @@ export const planDailyLearning = async (userId: string) => {
     const newWords = await wordCardService.getDailyNewWords(userId, 10);
     const reviewWords = await wordCardService.getDailyReviewWords(userId, date);
 
-    const newWordsString = newWords.map((word) => `${word.id}|${word.word}`).join(",");
-    const reviewWordsString = reviewWords.map((word) => `${word.id}|${word.word}`).join(",");
+    if (!newWords.length && !reviewWords.length) {
+      return;
+    }
+
+    const newWordsString = newWords.map((word) => `${word.id}|${word.entry}`).join(",");
+    const reviewWordsString = reviewWords.map((word) => `${word.id}|${word.entry}`).join(",");
 
     if (
       newWordsString === lastLearning?.newWords &&

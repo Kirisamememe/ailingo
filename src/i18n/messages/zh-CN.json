@@ -21,6 +21,14 @@
       "database": "数据库错误"
     }
   },
+  "nav": {
+    "home": "首页",
+    "wordbook": "单词本",
+    "output": "输出训练",
+    "input": "输入训练",
+    "profile": "个人资料",
+    "signOut": "登出"
+  },
   "sidebar": {
     "titles": {
       "general": "通用",
@@ -49,12 +57,12 @@
       "title": "生成新单词",
       "generate": "生成",
       "stop": "停止",
-      "words": {
-        "label": "单词",
-        "placeholder": "输入多个单词，用逗号分隔",
-        "description": "请输入您想要生成单词卡的单词。",
-        "wordsIsRequired": "单词为必填项。",
-        "wordsIsTooLong": "单词不能超过500个字符。"
+      "entries": {
+        "label": "词条",
+        "placeholder": "输入多个词条，用逗号分隔。Command / Ctrl + Enter 发送。",
+        "description": "请输入您想要生成单词卡的词条。",
+        "entriesIsRequired": "词条为必填项。",
+        "entriesIsTooLong": "词条不能超过500个字符。"
       },
       "model": {
         "label": "模型",
@@ -75,17 +83,21 @@
     },
     "editForm": {
       "title": "编辑单词卡",
+      "regenerate": {
+        "label": "再生成",
+        "description": "再生成单词卡。"
+      },
       "save": {
         "success": "单词卡更新成功",
         "error": "单词卡更新失败",
         "invalidForm": "无效的表单"
       },
-      "word": {
-        "label": "单词",
-        "placeholder": "输入单词",
-        "description": "请输入单词。",
-        "wordIsRequired": "单词为必填项。",
-        "wordIsTooLong": "单词不能超过100个字符。"
+      "entry": {
+        "label": "词条",
+        "placeholder": "输入词条",
+        "description": "请输入单词卡的词条。",
+        "entryIsRequired": "词条为必填项。",
+        "entryIsTooLong": "词条不能超过100个字符。"
       },
       "phonetics": {
         "label": "发音",
@@ -107,6 +119,12 @@
         "description": "请输入例句。",
         "exampleIsRequired": "例句为必填项。",
         "exampleIsTooLong": "例句不能超过500个字符。"
+      },
+      "collocations": {
+        "label": "共起词",
+        "placeholder": "输入共起词",
+        "description": "请输入共起词。",
+        "collocationsIsTooLong": "共起词不能超过500个字符。"
       },
       "derivatives": {
         "label": "派生词",
@@ -139,7 +157,12 @@
         "languageIsRequired": "语言为必填项。"
       }
     },
+    "contentSheet": {
+      "title": "单词卡",
+      "description": "单词卡的详细。"
+    },
     "extra": {
+      "collocations": "共起词",
       "derivatives": "派生词",
       "synonyms": "近义词",
       "antonyms": "反义词"

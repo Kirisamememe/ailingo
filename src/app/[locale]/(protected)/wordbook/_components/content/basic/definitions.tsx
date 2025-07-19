@@ -3,36 +3,21 @@ import { Badge } from "@/components/ui/badge";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Caption } from "@/components/ui/typography";
 import { definitionsArraySchema } from "../../../_schema";
-import type { LanguageCode } from "@/types";
-import type { POS } from "@/types";
+import { splitDefinitions } from "../../../_utils";
+import type { WordCard } from "@/types";
 
-type Props = {
-  definitions: string;
-  language: LanguageCode;
-};
+type Props = Pick<WordCard, "definitions" | "language">;
 
 /**
  * 定義
  */
 export const Definitions: React.FC<Props> = ({ definitions, language }) => {
   const t = useTranslations("POS");
+  const definitionsArray = splitDefinitions(definitions);
 
-  const definitionsArray = definitions
-    .split("\n")
-    .filter((definition) => !!definition)
-    .map((definition) => {
-      const parts = definition.split("|");
-      const [posString, meaning, translation = ""] = parts;
-      const pos = posString.replace(/^\[|\]$/g, "");
-
-      return {
-        pos,
-        meaning,
-        translation,
-      };
-    });
-
-  const parsedDefinitionsArray = definitionsArraySchema.safeParse(definitionsArray);
+  const parsedDefinitionsArray = definitionsArraySchema.safeParse({
+    definitions: definitionsArray,
+  });
 
   if (!parsedDefinitionsArray.success) {
     return <Caption>{definitions}</Caption>;
@@ -47,13 +32,13 @@ export const Definitions: React.FC<Props> = ({ definitions, language }) => {
             variant="secondary"
             className="bg-primary/10 text-primary text-xs font-semibold"
           >
-            {t(definition.pos as POS)}
+            {t(definition.pos)}
           </Badge>
           <Caption
             lang={language}
             weight={400}
             color="foreground"
-            className="text-sm @[36rem]:pl-1 @[36rem]:text-base"
+            className="text-sm sm:pl-1 sm:text-base"
           >
             {definition.meaning}
           </Caption>
@@ -62,7 +47,7 @@ export const Definitions: React.FC<Props> = ({ definitions, language }) => {
               lang={language}
               weight={400}
               color="muted"
-              className="text-[0.625rem] @[36rem]:pl-1 @[36rem]:text-xs"
+              className="text-[0.625rem] leading-[1.8] sm:pl-1 sm:text-xs"
             >
               {definition.translation}
             </Caption>

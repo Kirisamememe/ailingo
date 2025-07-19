@@ -54,12 +54,12 @@ const paragraphVariants = cva("", {
       6: "mb-6",
     },
     clamp: {
-      1: "line-clamp-1",
-      2: "line-clamp-2",
-      3: "line-clamp-3",
-      4: "line-clamp-4",
-      5: "line-clamp-5",
-      6: "line-clamp-6",
+      1: "line-clamp-1 overflow-ellipsis",
+      2: "line-clamp-2 overflow-ellipsis",
+      3: "line-clamp-3 overflow-ellipsis",
+      4: "line-clamp-4 overflow-ellipsis",
+      5: "line-clamp-5 overflow-ellipsis",
+      6: "line-clamp-6 overflow-ellipsis",
     },
   },
   defaultVariants: {

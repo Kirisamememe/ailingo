@@ -15,21 +15,37 @@ type Props = {
  */
 export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
   return (
-    <FlexColumn gap={6} className="appear w-full shrink-0">
+    <FlexColumn gap={6} className="w-full shrink-0 p-4 sm:p-6">
       <BasicInfo
-        key={`${wordCard.id}-${wordCard.word}-basic-info`}
-        word={wordCard.word}
+        entry={wordCard.entry}
         phonetics={wordCard.phonetics}
         definitions={wordCard.definitions}
         language={wordCard.language}
       />
       <Separator />
-      <FlexColumn key={`${wordCard.id}-${wordCard.word}-examples`} gap={4}>
-        <Example example={wordCard.example1} language={wordCard.language} />
-        {wordCard.example2 && <Example example={wordCard.example2} language={wordCard.language} />}
-        {wordCard.example3 && <Example example={wordCard.example3} language={wordCard.language} />}
+      <FlexColumn gap={4}>
+        <Example
+          key={`${wordCard.id}-${wordCard.entry}-example-${wordCard.example1}`}
+          example={wordCard.example1}
+          language={wordCard.language}
+        />
+        {wordCard.example2 && (
+          <Example
+            key={`${wordCard.id}-${wordCard.entry}-example-${wordCard.example2}`}
+            example={wordCard.example2}
+            language={wordCard.language}
+          />
+        )}
+        {wordCard.example3 && (
+          <Example
+            key={`${wordCard.id}-${wordCard.entry}-example-${wordCard.example3}`}
+            example={wordCard.example3}
+            language={wordCard.language}
+          />
+        )}
       </FlexColumn>
       <Extra
+        collocations={wordCard.collocations ?? ""}
         derivatives={wordCard.derivatives ?? ""}
         synonyms={wordCard.synonyms ?? ""}
         antonyms={wordCard.antonyms ?? ""}

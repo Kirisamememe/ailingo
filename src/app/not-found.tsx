@@ -7,7 +7,7 @@ import { NotFound } from "@/components/not-found";
 const NotFoundPage = () => {
   return (
     <BaseLayout locale={"en"}>
-      <NotFound href="/daily" />
+      <NotFound href="/home" />
     </BaseLayout>
   );
 };

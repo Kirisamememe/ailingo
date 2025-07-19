@@ -18,7 +18,9 @@ export const users = pgTable(
     createdAt: timestamp("created_at", { precision: 3 })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),
-    updatedAt: timestamp("updated_at", { precision: 3 }).notNull(),
+    updatedAt: timestamp("updated_at", { precision: 3 })
+      .default(sql`CURRENT_TIMESTAMP`)
+      .notNull(),
     masteredWords: text("mastered_words").default("I, you, he, she, it, we, they").notNull(),
     learningLanguage: language("learning_language"),
     nativeLanguage: language("native_language"),

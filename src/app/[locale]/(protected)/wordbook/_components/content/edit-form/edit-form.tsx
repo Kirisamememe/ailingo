@@ -1,5 +1,4 @@
-import { usePathname, useSearchParams } from "next/navigation";
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -12,11 +11,12 @@ import { Form, FormField } from "@/components/ui/form/form";
 import { Separator } from "@/components/ui/separator";
 import { Headline } from "@/components/ui/typography";
 import { DeleteBtn } from "./delete-btn";
+import { Regenerate } from "./regenerate";
 import { deleteWordCard } from "../../../_actions/delete";
 import { updateWordCard } from "../../../_actions/update";
+import { useWordbookStore } from "../../../_hooks/store-provider";
 import { wordcardFormSchema } from "../../../_schema";
 import { getWordCardFormData } from "../../../_utils";
-import { useRouter } from "@/i18n";
 import type { WordCard } from "@/types";
 
 type Props = {
@@ -29,52 +29,49 @@ type Props = {
 export const EditForm: React.FC<Props> = ({ wordCard }) => {
   const t = useTranslations("wordbook.editForm");
   const tCommon = useTranslations("common");
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const router = useRouter();
+
+  const setIsEditing = useWordbookStore((state) => state.setIsEditing);
+  const closeDrawer = useWordbookStore((state) => state.closeDrawer);
+  const removeWordCard = useWordbookStore((state) => state.removeWordCard);
+  const upsertWordCard = useWordbookStore((state) => state.upsertWordCard);
 
   const wordCardForm = useForm<z.infer<typeof wordcardFormSchema>>({
     resolver: zodResolver(wordcardFormSchema),
-    defaultValues: getWordCardFormData(),
+    defaultValues: getWordCardFormData(wordCard),
     mode: "onChange",
   });
-
-  useEffect(() => {
-    wordCardForm.reset(getWordCardFormData(wordCard));
-  }, [wordCard, wordCardForm]);
 
   const [, formAction, isPending] = useActionState(async () => {
     const validation = await wordCardForm.trigger();
     if (!validation) return { isSuccess: false, error: { message: t("save.invalidForm") } };
 
     const values = wordCardForm.getValues();
-    await updateWordCard(wordCard.id, values).catch((err: unknown) => {
+    const result = await updateWordCard(wordCard.id, values).catch((err: unknown) => {
       toast.error(t("save.error"), {
         description: err instanceof Error ? err.message : tCommon("error.database"),
       });
     });
+    if (!result) return;
+    upsertWordCard(result);
     toast.success(t("save.success"));
     handleEndEditing();
   }, null);
 
   const handleDelete = async () => {
-    await deleteWordCard(wordCard.id).then(() => {
-      router.push("/wordbook");
-    });
+    await deleteWordCard(wordCard.id);
+    closeDrawer();
+    handleEndEditing();
+    removeWordCard(wordCard.id);
   };
 
   const handleEndEditing = () => {
-    const currentSearchParams = new URLSearchParams(searchParams);
-    currentSearchParams.delete("edit");
-
-    const newUrl = `${pathname}?${currentSearchParams.toString()}`;
-    window.history.replaceState(null, "", newUrl);
+    setIsEditing(false);
   };
 
   return (
     <Form {...wordCardForm}>
-      <form className="appear flex flex-col gap-6" action={formAction}>
-        <FlexRow className="items-center gap-3">
+      <form className="appear flex flex-col gap-6 p-4" action={formAction}>
+        <FlexRow className="items-center gap-3 pt-4">
           <Headline size={20} mx={1} className="mr-auto">
             {t("title")}
           </Headline>
@@ -84,17 +81,18 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           </Button>
         </FlexRow>
         <Separator />
+        <Regenerate id={wordCard.id} form={wordCardForm} />
         <FormField
           control={wordCardForm.control}
-          name="word"
+          name="entry"
           render={({ field }) => (
             <InputItem
-              label={t("word.label")}
-              description={t("word.description")}
-              placeholder={t("word.placeholder")}
+              label={t("entry.label")}
+              description={t("entry.description")}
+              placeholder={t("entry.placeholder")}
               autoComplete="off"
               hiddenDescription
-              i18nNameSpace="wordbook.editForm.word"
+              i18nNameSpace="wordbook.editForm.entry"
               {...field}
             />
           )}
@@ -122,7 +120,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               label={t("definitions.label")}
               description={t("definitions.description")}
               placeholder={t("definitions.placeholder")}
-              className="h-20"
+              className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.definitions"
               {...field}
             />
@@ -136,7 +134,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               label={`${t("example.label")}-1`}
               description={t("example.description")}
               placeholder={t("example.placeholder")}
-              className="h-20"
+              className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
               {...field}
             />
@@ -150,7 +148,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               label={`${t("example.label")}-2`}
               description={t("example.description")}
               placeholder={t("example.placeholder")}
-              className="h-20"
+              className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
               {...field}
             />
@@ -164,8 +162,21 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
               label={`${t("example.label")}-3`}
               description={t("example.description")}
               placeholder={t("example.placeholder")}
-              className="h-20"
+              className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
+              {...field}
+            />
+          )}
+        />
+        <FormField
+          control={wordCardForm.control}
+          name="collocations"
+          render={({ field }) => (
+            <InputItem
+              label={t("collocations.label")}
+              description={t("collocations.description")}
+              placeholder={t("collocations.placeholder")}
+              i18nNameSpace="wordbook.editForm.collocations"
               {...field}
             />
           )}

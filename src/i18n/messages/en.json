@@ -21,6 +21,14 @@
       "database": "Database Error"
     }
   },
+  "nav": {
+    "home": "Home",
+    "wordbook": "Wordbook",
+    "output": "Output",
+    "input": "Input",
+    "profile": "Profile",
+    "signOut": "Sign Out"
+  },
   "sidebar": {
     "titles": {
       "general": "General",
@@ -49,12 +57,12 @@
       "title": "New Word",
       "generate": "Generate",
       "stop": "Stop",
-      "words": {
-        "label": "Words",
-        "placeholder": "Enter words, separated by commas.",
-        "description": "Enter the words you want to generate a wordcard for.",
-        "wordsIsRequired": "Words are required",
-        "wordsIsTooLong": "Please enter words less than 500 characters."
+      "entries": {
+        "label": "Entries",
+        "placeholder": "Enter entries, separated by commas. Command / Ctrl + Enter to submit.",
+        "description": "Enter the entries you want to generate a wordcard for.",
+        "entriesIsRequired": "Entries are required",
+        "entriesIsTooLong": "Please enter entries less than 500 characters."
       },
       "model": {
         "label": "Model",
@@ -75,17 +83,21 @@
     },
     "editForm": {
       "title": "Edit Wordcard",
+      "regenerate": {
+        "label": "Regenerate",
+        "description": "Regenerate the wordcard."
+      },
       "save": {
         "success": "Wordcard updated successfully",
         "error": "Failed to update wordcard",
         "invalidForm": "Invalid form"
       },
-      "word": {
-        "label": "Word",
-        "placeholder": "Enter the word",
-        "description": "Please enter the word you want to generate a wordcard for.",
-        "wordIsRequired": "Word is required",
-        "wordIsTooLong": "Please enter a word less than 100 characters."
+      "entry": {
+        "label": "Entry",
+        "placeholder": "Enter the entry",
+        "description": "Please enter the entry you want to generate a wordcard for.",
+        "entryIsRequired": "Entry is required",
+        "entryIsTooLong": "Please enter a entry less than 100 characters."
       },
       "phonetics": {
         "label": "Phonetics",
@@ -107,6 +119,12 @@
         "description": "Please enter the example you want to generate a wordcard for.",
         "exampleIsRequired": "Example is required",
         "exampleIsTooLong": "Please enter a example less than 500 characters."
+      },
+      "collocations": {
+        "label": "Collocations",
+        "placeholder": "Enter the collocations",
+        "description": "Please enter the collocations you want to generate a wordcard for.",
+        "collocationsIsTooLong": "Please enter collocations less than 500 characters."
       },
       "derivatives": {
         "label": "Derivatives",
@@ -139,7 +157,12 @@
         "languageIsRequired": "Language is required"
       }
     },
+    "contentSheet": {
+      "title": "Wordcard",
+      "description": "The detail of the wordcard."
+    },
     "extra": {
+      "collocations": "Collocations",
       "derivatives": "Derivatives",
       "synonyms": "Synonyms",
       "antonyms": "Antonyms"

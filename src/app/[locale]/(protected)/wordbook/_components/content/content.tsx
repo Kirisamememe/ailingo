@@ -1,77 +1,59 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { useEffect } from "react";
 import { SquarePen } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { WordbookContentView } from "./content-view";
 import { EditForm } from "./edit-form";
-import { AiReqForm } from "../new-card";
-import type { WordCard } from "@/types";
-
-type Props = {
-  wordCards: WordCard[];
-};
+import { useWordbookStore } from "../../_hooks/store-provider";
 
 /**
  * ワードブックコンテンツ
  */
-export const WordbookContent: React.FC<Props> = ({ wordCards }) => {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
+export const WordbookContent = () => {
+  const t = useTranslations("wordbook");
 
-  const idParam = searchParams.get("wordCardId");
-  const wordCardId = Number(idParam);
+  const wordCards = useWordbookStore((state) => state.wordCards);
+  const selectedId = useWordbookStore((state) => state.selectedId);
+  const isDrawerOpen = useWordbookStore((state) => state.isDrawerOpen);
+  const isEditing = useWordbookStore((state) => state.isEditing);
+  const setIsDrawerOpen = useWordbookStore((state) => state.setIsDrawerOpen);
+  const setIsEditing = useWordbookStore((state) => state.setIsEditing);
 
-  const wordCard =
-    wordCardId > 0 ? wordCards.find((wordCard) => wordCard.id === wordCardId) : undefined;
-
-  const isEditing = searchParams.get("edit") === "true";
-
-  const handleEdit = () => {
-    const currentSearchParams = new URLSearchParams(searchParams);
-    currentSearchParams.set("edit", "true");
-    const newUrl = `${pathname}?${currentSearchParams.toString()}`;
-    window.history.pushState(null, "", newUrl);
-  };
-
-  useEffect(() => {
-    if (!wordCards.length) return;
-    if (idParam) return; // 既に選択されている場合は何もしない
-
-    const currentSearchParams = new URLSearchParams(searchParams);
-    currentSearchParams.set("wordCardId", wordCards[0].id.toString());
-
-    const newUrl = `${pathname}?${currentSearchParams.toString()}`;
-    window.history.replaceState(null, "", newUrl);
-  }, [idParam, pathname, searchParams, wordCards]);
-
-  // 新規生成
-  if (wordCardId === 0) {
-    return <AiReqForm />;
-  }
-
-  if (!wordCard) {
-    return null;
-  }
-
-  // 編集
-  if (isEditing) {
-    return <EditForm wordCard={wordCard} />;
-  }
+  const wordCard = wordCards.find((wordCard) => wordCard.id === selectedId);
 
   return (
-    <>
-      <WordbookContentView wordCard={wordCard} />
-      <Button
-        type="button"
-        variant="outline"
-        size="icon"
-        className="absolute top-3 right-3 @[36rem]:top-6 @[36rem]:right-6"
-        onClick={handleEdit}
+    <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen} modal={isEditing}>
+      <SheetContent
+        className="sm:max-w-114"
+        onInteractOutside={(e) => {
+          e.preventDefault();
+        }}
       >
-        <SquarePen className="size-5" />
-      </Button>
-    </>
+        <ScrollArea className="h-full">
+          <SheetTitle hidden>{t("contentSheet.title")}</SheetTitle>
+          <SheetDescription hidden>{t("contentSheet.description")}</SheetDescription>
+          {isEditing && wordCard && <EditForm wordCard={wordCard} />}
+          {!isEditing && wordCard && (
+            <>
+              <WordbookContentView wordCard={wordCard} />
+              <Button
+                type="button"
+                variant="outline"
+                size="icon"
+                className="absolute top-6 right-6"
+                onClick={() => {
+                  setIsEditing(true);
+                }}
+              >
+                <SquarePen className="size-5" />
+              </Button>
+            </>
+          )}
+        </ScrollArea>
+      </SheetContent>
+    </Sheet>
   );
 };

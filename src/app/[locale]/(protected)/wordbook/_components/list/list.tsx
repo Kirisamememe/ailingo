@@ -1,39 +1,48 @@
 "use client";
 
-import { usePathname, useSearchParams } from "next/navigation";
-import { ScrollArea } from "@/components/ui/scroll-area";
+import { useEffect } from "react";
+import { FlexColumn } from "@/components/ui/flexbox";
 import { ListItem } from "./list-item";
 import { WordbookListNew } from "./list-new";
 import { WordbookListStreaming } from "./list-streaming";
-import type { WordListItem } from "@/types";
-
-type Props = {
-  wordList: WordListItem[];
-};
+import { useWordbookStore } from "../../_hooks/store-provider";
 
 /**
  * ワードブックリスト
  */
-export const WordbookList: React.FC<Props> = ({ wordList }) => {
-  const searchParams = useSearchParams();
-  const pathname = usePathname();
-  const wordCardId = Number(searchParams.get("wordCardId"));
+export const WordbookList = () => {
+  const wordCards = useWordbookStore((state) => state.wordCards);
+  const nextWord = useWordbookStore((state) => state.nextWord);
+  const prevWord = useWordbookStore((state) => state.prevWord);
+  const closeDrawer = useWordbookStore((state) => state.closeDrawer);
 
-  const onClick = (id: number) => {
-    const currentSearchParams = new URLSearchParams(searchParams);
-    currentSearchParams.set("wordCardId", id.toString());
+  useEffect(() => {
+    const onFocusChange = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        closeDrawer();
+        return;
+      }
 
-    const newUrl = `${pathname}?${currentSearchParams.toString()}`;
-    window.history.replaceState(null, "", newUrl);
-  };
+      if (e.key === "ArrowDown" || (e.key === "Tab" && !e.shiftKey)) {
+        nextWord(e);
+      } else if (e.key === "ArrowUp" || (e.key === "Tab" && e.shiftKey)) {
+        prevWord(e);
+      }
+    };
+
+    window.addEventListener("keydown", onFocusChange);
+    return () => {
+      window.removeEventListener("keydown", onFocusChange);
+    };
+  }, [prevWord, nextWord, closeDrawer]);
 
   return (
-    <ScrollArea className="w-20 shrink-0 @[36rem]:w-48 @[40rem]:w-64 [&_[data-slot='scroll-area-scrollbar']]:pt-16">
-      <WordbookListNew selectedId={wordCardId} onClick={onClick} />
+    <FlexColumn className="mb-24 w-full">
+      <WordbookListNew />
       <WordbookListStreaming />
-      {wordList.map((word) => (
-        <ListItem key={word.id} listItem={word} selectedId={wordCardId} onClick={onClick} />
+      {wordCards.map((wordCard) => (
+        <ListItem key={wordCard.id} wordCard={wordCard} />
       ))}
-    </ScrollArea>
+    </FlexColumn>
   );
 };

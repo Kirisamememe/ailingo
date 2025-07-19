@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { toast } from "sonner";
 import { synthesizeSpeech } from "@/lib/tts";
-import { useWordbook } from "./wordbook-provider";
+import { useGenerateForm } from "./generate-form-provider";
 import type { LanguageCode } from "@/types";
 
 /**
@@ -11,7 +11,7 @@ import type { LanguageCode } from "@/types";
  */
 export const useSpeech = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const { audioRef } = useWordbook();
+  const { audioRef } = useGenerateForm();
 
   const generateSpeech = async (text: string, language: LanguageCode) => {
     const { data, error } = await synthesizeSpeech(text, language);
