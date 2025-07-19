@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { BookPlus } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { type AIModel, modelListTuple } from "@/lib/ai";
 import { cn } from "@/lib/utils";
@@ -30,26 +31,46 @@ export const AiReqForm = () => {
     });
   }, [object?.wordcards, isLoading]);
 
+  const handleSubmitByEnter = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+      e.preventDefault();
+      void form.handleSubmit(onSubmit)();
+    }
+  };
+
   return (
     <Form {...form}>
       <form className="flex h-full w-full gap-3 rounded-lg" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="relative h-fit w-full">
-          <FormField
-            control={form.control}
-            name="entries"
-            render={({ field }) => (
-              <TextareaItem
-                label={t("words.label")}
-                hiddenLabel
-                disabled={isLoading}
-                description={t("words.description")}
-                placeholder={t("words.placeholder")}
-                className="bg-background dark:border-border/70 field-sizing-content min-h-20 px-4 py-3"
-                i18nNameSpace="wordbook.newWordAIForm.words"
-                {...field}
-              />
-            )}
-          />
+          {isLoading && object?.wordcards ? (
+            <FlexColumn
+              ref={scrollRef}
+              lang="en"
+              className="bg-card h-full max-h-32 min-h-36 w-full overflow-y-scroll rounded-sm p-4 font-mono"
+            >
+              <pre className="text-muted-foreground text-xs whitespace-pre-wrap">
+                {JSON.stringify(object.wordcards, null, 2)}
+              </pre>
+            </FlexColumn>
+          ) : (
+            <FormField
+              control={form.control}
+              name="entries"
+              render={({ field }) => (
+                <TextareaItem
+                  label={t("entries.label")}
+                  hiddenLabel
+                  disabled={isLoading}
+                  description={t("entries.description")}
+                  placeholder={t("entries.placeholder")}
+                  className="bg-background dark:border-border/70 field-sizing-content min-h-20 px-4 py-3"
+                  i18nNameSpace="wordbook.newWordAIForm.entries"
+                  {...field}
+                  onKeyDown={handleSubmitByEnter}
+                />
+              )}
+            />
+          )}
           <FormField
             control={form.control}
             name="model"
@@ -79,24 +100,20 @@ export const AiReqForm = () => {
           />
         </div>
         <FlexColumn className="shrink-0 gap-2">
-          <LanguageSetting />
+          {isLoading ? <StopButton stop={stop} /> : <LanguageSetting />}
           <FlexRow className={cn("items-center justify-center gap-6")}>
-            <Submit type="submit" isPending={isLoading} className="font-semibold">
-              {t("generate")}
+            <Submit
+              type="submit"
+              size="icon"
+              isPending={isLoading}
+              hideChildrenWhenPending
+              className="font-semibold"
+              aria-label={t("generate")}
+            >
+              <BookPlus />
             </Submit>
-            {isLoading && <StopButton stop={stop} />}
           </FlexRow>
         </FlexColumn>
-        {object?.wordcards && (
-          <FlexColumn
-            ref={scrollRef}
-            className="bg-card h-full max-h-96 min-h-36 w-full overflow-y-scroll rounded-sm p-4"
-          >
-            <pre className="text-muted-foreground text-xs whitespace-pre-wrap">
-              {JSON.stringify(object.wordcards, null, 2)}
-            </pre>
-          </FlexColumn>
-        )}
       </form>
     </Form>
   );
