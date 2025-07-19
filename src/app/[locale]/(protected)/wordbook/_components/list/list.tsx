@@ -38,8 +38,8 @@ export const WordbookList = () => {
   return (
     <FlexColumn className="mb-24 w-full">
       <WordbookListNew />
-      {wordCards.map((wordCard, index) => (
-        <ListItem key={wordCard.id} index={index} />
+      {wordCards.map((wordCard) => (
+        <ListItem key={wordCard.id} wordCard={wordCard} />
       ))}
     </FlexColumn>
   );
