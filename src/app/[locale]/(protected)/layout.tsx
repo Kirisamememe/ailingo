@@ -4,6 +4,7 @@ import { BaseLayout } from "@/components/layout";
 import { DisplayWhenMobile } from "@/components/media-query-wrapper";
 import { ScrollStateProvider } from "@/components/providers";
 import { Header } from "./_components/nav/header";
+import { Nav } from "./_components/nav/nav";
 import { planDailyLearning } from "./_utils";
 
 type Props = {
@@ -20,10 +21,11 @@ const RootLayout: React.FC<Props> = async ({ children, params }) => {
   return (
     <BaseLayout locale={locale}>
       <ScrollStateProvider>
+        <Nav />
         <DisplayWhenMobile>
           <Header />
         </DisplayWhenMobile>
-        {children}
+        <main className="grid min-h-dvh place-content-center">{children}</main>
       </ScrollStateProvider>
     </BaseLayout>
   );
