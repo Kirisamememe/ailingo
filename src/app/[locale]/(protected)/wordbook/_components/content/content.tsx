@@ -16,13 +16,13 @@ export const WordbookContent = () => {
   const t = useTranslations("wordbook");
 
   const wordCards = useWordbookStore((state) => state.wordCards);
-  const selectedIndex = useWordbookStore((state) => state.selectedIndex);
+  const selectedId = useWordbookStore((state) => state.selectedId);
   const isDrawerOpen = useWordbookStore((state) => state.isDrawerOpen);
   const isEditing = useWordbookStore((state) => state.isEditing);
   const setIsDrawerOpen = useWordbookStore((state) => state.setIsDrawerOpen);
   const setIsEditing = useWordbookStore((state) => state.setIsEditing);
 
-  const wordCard = selectedIndex >= 0 ? wordCards[selectedIndex] : undefined;
+  const wordCard = wordCards.find((wordCard) => wordCard.id === selectedId);
 
   return (
     <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen} modal={isEditing}>
