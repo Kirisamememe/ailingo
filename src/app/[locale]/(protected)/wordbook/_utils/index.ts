@@ -21,6 +21,7 @@ export const getWordCardFormData = (wordCard?: WordCardClient) => {
     antonyms: wordCard?.antonyms ?? "",
     note: wordCard?.note ?? "",
     language: wordCard?.language ?? "en-US",
+    translationLanguage: wordCard?.translationLanguage ?? "ja",
   };
 };
 
