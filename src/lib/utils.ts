@@ -1,3 +1,4 @@
+import type { DeepPartial } from "ai";
 import { type ClassValue, clsx } from "clsx";
 import { enUS as en, ja, zhCN, zhTW } from "date-fns/locale";
 import { twMerge } from "tailwind-merge";
@@ -59,9 +60,15 @@ export const getCurrentDate = () => {
  * @param definitions 定義
  * @returns マージされた定義
  */
-export const mergeDefinitions = (definitions: Definition[]) => {
+export const mergeDefinitions = (
+  definitions: DeepPartial<Definition | undefined>[] | undefined,
+) => {
+  if (!definitions?.length) return "";
   return definitions
-    .map((definition) => `[${definition.pos}]${DB_DEFINITION_DIVIDER}${definition.meaning}`)
+    .map(
+      (definition) =>
+        `[${definition?.pos ?? ""}]${DB_DEFINITION_DIVIDER}${definition?.meaning ?? ""}${DB_DEFINITION_DIVIDER}${definition?.translation ?? ""}`,
+    )
     .join("\n");
 };
 
