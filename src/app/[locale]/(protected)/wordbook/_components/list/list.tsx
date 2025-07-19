@@ -6,7 +6,6 @@ import { ListItem } from "./list-item";
 import { WordbookListNew } from "./list-new";
 import { WordbookListStreaming } from "./list-streaming";
 import { useWordbookStore } from "../../_hooks/store-provider";
-import { convertWordCardData } from "../../_utils";
 
 /**
  * ワードブックリスト
@@ -42,7 +41,7 @@ export const WordbookList = () => {
       <WordbookListNew />
       <WordbookListStreaming />
       {wordCards.map((wordCard, index) => (
-        <ListItem key={wordCard.id} index={index} listItem={convertWordCardData(wordCard)} />
+        <ListItem key={wordCard.id} index={index} />
       ))}
     </FlexColumn>
   );

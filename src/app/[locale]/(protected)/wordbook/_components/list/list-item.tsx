@@ -3,17 +3,15 @@
 import { useRef } from "react";
 import { ListItemView } from "./list-item-view";
 import { useWordbookStore } from "../../_hooks/store-provider";
-import type { WordListItem } from "@/types";
 
 type Props = {
   index: number;
-  listItem: WordListItem;
 };
 
 /**
  * ワードブックリストアイテム
  */
-export const ListItem: React.FC<Props> = ({ index, listItem }) => {
+export const ListItem: React.FC<Props> = ({ index }) => {
   const ref = useRef<HTMLButtonElement>(null);
   const setSelectedIndex = useWordbookStore((state) => state.setSelectedIndex);
 
@@ -23,5 +21,5 @@ export const ListItem: React.FC<Props> = ({ index, listItem }) => {
     setSelectedIndex(index, ref.current);
   };
 
-  return <ListItemView ref={ref} listItem={listItem} onClick={onClick} />;
+  return <ListItemView ref={ref} index={index} onClick={onClick} />;
 };
