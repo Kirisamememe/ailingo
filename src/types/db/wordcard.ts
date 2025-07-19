@@ -14,19 +14,30 @@ export type WordListItem = {
   /** 発音 */
   phonetics: string;
   /** 定義 */
-  definitions: Definitions[];
+  definitions: Definition[];
   /** 例文 */
-  examples: Examples[];
+  examples: Example[];
 };
 
-type Definitions = {
+/**
+ * 定義
+ */
+export type Definition = {
+  /** 品詞 */
   pos: POS;
+  /** 意味 */
   meaning: string;
+  /** 翻訳 */
   translation?: string;
 };
 
-type Examples = {
+/**
+ * 例文
+ */
+export type Example = {
+  /** 例文 */
   sentence: string;
+  /** 翻訳 */
   translation?: string;
 };
 
@@ -43,7 +54,7 @@ export type WordCardClient = Omit<
   "definitions" | "example1" | "example2" | "example3"
 > & {
   /** 定義 */
-  definitions: Definitions[];
+  definitions: Definition[];
   /** 例文 */
-  examples: Examples[];
+  examples: Example[];
 };
