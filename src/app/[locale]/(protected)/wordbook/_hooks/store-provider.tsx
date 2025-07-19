@@ -4,7 +4,7 @@ import { type ReactNode, createContext, use, useRef } from "react";
 import { useStore } from "zustand";
 import type { WordbookStore } from "../_store";
 import { createWordbookStore, initStore } from "../_store";
-import type { WordCardClient } from "@/types";
+import type { WordCard } from "@/types";
 
 /**
  * ストアコンテキスト
@@ -18,7 +18,7 @@ type WordbookProviderProps = {
   /** 子要素 */
   children: ReactNode;
   /** 単語カード */
-  wordCards: WordCardClient[];
+  wordCards: WordCard[];
 };
 
 /**

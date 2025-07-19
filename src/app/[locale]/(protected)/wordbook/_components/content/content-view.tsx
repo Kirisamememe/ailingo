@@ -4,10 +4,10 @@ import { BasicInfo } from "./basic";
 import { Example } from "./example/example";
 import { Extra } from "./extra";
 import { WordbookContentFooter } from "./footer/footer";
-import type { WordCardClient } from "@/types";
+import type { WordCard } from "@/types";
 
 type Props = {
-  wordCard: WordCardClient;
+  wordCard: WordCard;
 };
 
 /**
@@ -24,14 +24,25 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
       />
       <Separator />
       <FlexColumn gap={4}>
-        {wordCard.examples.map((example) => (
+        <Example
+          key={`${wordCard.id}-${wordCard.entry}-example-${wordCard.example1}`}
+          example={wordCard.example1}
+          language={wordCard.language}
+        />
+        {wordCard.example2 && (
           <Example
-            key={`${wordCard.id}-${wordCard.entry}-example-${example.sentence}`}
-            sentence={example.sentence}
-            translation={example.translation}
+            key={`${wordCard.id}-${wordCard.entry}-example-${wordCard.example2}`}
+            example={wordCard.example2}
             language={wordCard.language}
           />
-        ))}
+        )}
+        {wordCard.example3 && (
+          <Example
+            key={`${wordCard.id}-${wordCard.entry}-example-${wordCard.example3}`}
+            example={wordCard.example3}
+            language={wordCard.language}
+          />
+        )}
       </FlexColumn>
       <Extra
         collocations={wordCard.collocations ?? ""}

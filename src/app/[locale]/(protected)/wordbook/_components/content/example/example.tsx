@@ -5,15 +5,16 @@ import { SpeechBtn } from "@/app/[locale]/(protected)/_components/speech-btn";
 import type { LanguageCode } from "@/types";
 
 type Props = {
-  sentence: string;
-  translation?: string;
+  example: string;
   language: LanguageCode;
 };
 
 /**
  * 例文
  */
-export const Example: React.FC<Props> = ({ sentence, translation, language }) => {
+export const Example: React.FC<Props> = ({ example, language }) => {
+  const [sentence, translation] = example.split("\n");
+
   return (
     <FlexRow className="gap-2 px-1">
       <FlexColumn className="relative mr-auto gap-1 pt-0.5">

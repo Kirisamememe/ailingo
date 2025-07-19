@@ -16,11 +16,11 @@ import { deleteWordCard } from "../../../_actions/delete";
 import { updateWordCard } from "../../../_actions/update";
 import { useWordbookStore } from "../../../_hooks/store-provider";
 import { wordcardFormSchema } from "../../../_schema";
-import { convertWordCardDBToClient, getWordCardFormData } from "../../../_utils";
-import type { WordCardClient } from "@/types";
+import { getWordCardFormData } from "../../../_utils";
+import type { WordCard } from "@/types";
 
 type Props = {
-  wordCard: WordCardClient;
+  wordCard: WordCard;
 };
 
 /**
@@ -52,7 +52,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
       });
     });
     if (!result) return;
-    upsertWordCard(convertWordCardDBToClient(result));
+    upsertWordCard(result);
     toast.success(t("save.success"));
     handleEndEditing();
   }, null);

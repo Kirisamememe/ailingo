@@ -2,19 +2,30 @@ import { useTranslations } from "next-intl";
 import { Badge } from "@/components/ui/badge";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { Caption } from "@/components/ui/typography";
-import type { WordCardClient } from "@/types";
+import { definitionsArraySchema } from "../../../_schema";
+import { splitDefinitions } from "../../../_utils";
+import type { WordCard } from "@/types";
 
-type Props = Pick<WordCardClient, "definitions" | "language">;
+type Props = Pick<WordCard, "definitions" | "language">;
 
 /**
  * 定義
  */
 export const Definitions: React.FC<Props> = ({ definitions, language }) => {
   const t = useTranslations("POS");
+  const definitionsArray = splitDefinitions(definitions);
+
+  const parsedDefinitionsArray = definitionsArraySchema.safeParse({
+    definitions: definitionsArray,
+  });
+
+  if (!parsedDefinitionsArray.success) {
+    return <Caption>{definitions}</Caption>;
+  }
 
   return (
     <FlexColumn gap={3}>
-      {definitions.map((definition) => (
+      {definitionsArray.map((definition) => (
         <FlexColumn gap={1} key={definition.meaning}>
           <Badge
             lang={language}

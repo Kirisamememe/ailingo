@@ -11,7 +11,6 @@ import type { AIModel } from "@/lib/ai";
 import { createWordcards } from "../_actions/create";
 import { wordcardAISchemaArray, wordcardRequestSchema } from "../_schema";
 import { useWordbookStore } from "./store-provider";
-import { convertWordCardDBToClient } from "../_utils";
 import type { LanguageCode } from "@/types";
 
 /**
@@ -89,7 +88,7 @@ export const GenerateFormProvider = ({
     try {
       setIsSaving(true);
       const result = await createWordcards({ wordcards: object.wordcards });
-      addWordCards(result.map(convertWordCardDBToClient));
+      addWordCards(result);
       toast.success("Wordcards created successfully");
       form.reset();
     } catch {

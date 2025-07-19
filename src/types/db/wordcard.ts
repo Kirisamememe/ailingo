@@ -49,12 +49,7 @@ export type WordCard = typeof wordCard.$inferSelect;
 /**
  * 単語カードクライアント
  */
-export type WordCardClient = Omit<
-  WordCard,
-  "definitions" | "example1" | "example2" | "example3"
-> & {
+export type WordCardListItem = Omit<WordCard, "definitions"> & {
   /** 定義 */
   definitions: Definition[];
-  /** 例文 */
-  examples: Example[];
 };
