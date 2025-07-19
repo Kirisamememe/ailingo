@@ -65,11 +65,13 @@ class WordCardService {
    * 単語カードを更新する
    */
   async update(id: number, wordCardData: z.infer<typeof wordcardFormSchema>) {
-    await db
+    const result = await db
       .update(wordCard)
       .set({ ...wordCardData, updatedAt: new Date() })
       .where(eq(wordCard.id, id))
+      .returning()
       .catch(dbExceptionHandler);
+    return result.length ? result[0] : null;
   }
 
   /**
