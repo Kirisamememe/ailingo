@@ -6,6 +6,7 @@ import { WordbookContent } from "./_components/content";
 import { WordbookList } from "./_components/list";
 import { GenerateFormProvider } from "./_hooks/generate-form-provider";
 import { StoreProvider } from "./_hooks/store-provider";
+import { convertWordCardDBToClient } from "./_utils";
 import { getCookie } from "../_actions/cookies";
 import { wordCardService } from "@/services";
 import type { LanguageCode } from "@/types";
@@ -18,10 +19,11 @@ const WordbookPage = async () => {
   const translationLanguageCookie = await getCookie("WORDCARD_TRANSLATION_LANGUAGE");
   const translationLanguage = (translationLanguageCookie ?? "en-US") as LanguageCode;
 
-  const wordCards = wordCardService.getMany(operatorId);
+  const wordCards = await wordCardService.getMany(operatorId);
+  const wordCardsClient = wordCards.map(convertWordCardDBToClient);
 
   return (
-    <StoreProvider wordCards={wordCards}>
+    <StoreProvider wordCards={wordCardsClient}>
       <GenerateFormProvider model={model} translationLanguage={translationLanguage}>
         <InsetLayoutWithPadding className="w-full max-w-360 flex-row gap-0 sm:gap-4 sm:pt-5">
           <WordbookList />

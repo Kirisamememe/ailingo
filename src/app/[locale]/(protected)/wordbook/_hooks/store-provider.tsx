@@ -4,8 +4,7 @@ import { type ReactNode, createContext, use, useRef } from "react";
 import { useStore } from "zustand";
 import type { WordbookStore } from "../_store";
 import { createWordbookStore, initStore } from "../_store";
-import { convertWordCardDBToClient } from "../_utils";
-import type { WordCard } from "@/types";
+import type { WordCardClient } from "@/types";
 
 /**
  * ストアコンテキスト
@@ -19,7 +18,7 @@ type WordbookProviderProps = {
   /** 子要素 */
   children: ReactNode;
   /** 単語カード */
-  wordCards: Promise<WordCard[]>;
+  wordCards: WordCardClient[];
 };
 
 /**
@@ -31,9 +30,8 @@ export type WordbookStoreApi = ReturnType<typeof createWordbookStore>;
  * WordbookProvider - 単語帳関連のロジックを提供
  */
 export const StoreProvider = ({ children, wordCards }: WordbookProviderProps) => {
-  const _wordCards = use(wordCards);
   const storeRef = useRef<WordbookStoreApi | undefined>(undefined);
-  storeRef.current ??= createWordbookStore(initStore(_wordCards.map(convertWordCardDBToClient)));
+  storeRef.current ??= createWordbookStore(initStore(wordCards));
 
   return <StoreContext value={storeRef.current}>{children}</StoreContext>;
 };
