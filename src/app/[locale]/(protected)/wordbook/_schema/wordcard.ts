@@ -51,13 +51,18 @@ const exampleClientSchema = z.object({
 });
 
 /**
+ * 品詞スキーマ
+ */
+export const posSchema = z.enum(POS).describe("Part of speech of the wordcard").default("OTHER");
+
+/**
  * 定義のAI用スキーマ。DB保存時は文字列に変換
  */
 export const definitionsArraySchema = z.object({
   definitions: z
     .array(
       z.object({
-        pos: z.enum(POS).describe("Part of speech of the wordcard").default("OTHER"),
+        pos: posSchema,
         meaning: z
           .string()
           .describe("Meaning of the definition. Generate in the same language as the word."),
