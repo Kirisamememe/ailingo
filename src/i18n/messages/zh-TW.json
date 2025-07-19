@@ -57,12 +57,12 @@
       "title": "生成新單字",
       "generate": "生成",
       "stop": "終止",
-      "words": {
-        "label": "單字",
-        "placeholder": "輸入多個單字，用逗號分隔",
-        "description": "請輸入您想要生成單字卡的單字。",
-        "wordsIsRequired": "單字為必填項。",
-        "wordsIsTooLong": "單字不能超過500個字符。"
+      "entries": {
+        "label": "詞條",
+        "placeholder": "輸入多個詞條，用逗號分隔。Command / Ctrl + Enter 發送。",
+        "description": "請輸入您想要生成單字卡的詞條。",
+        "entriesIsRequired": "詞條為必填項。",
+        "entriesIsTooLong": "詞條不能超過500個字符。"
       },
       "model": {
         "label": "模型",
@@ -89,11 +89,11 @@
         "invalidForm": "無效的表單"
       },
       "entry": {
-        "label": "標題",
-        "placeholder": "輸入標題",
-        "description": "請輸入您想要生成單字卡的標題。",
-        "entryIsRequired": "標題為必填項。",
-        "entryIsTooLong": "標題不能超過100個字符。"
+        "label": "詞條",
+        "placeholder": "輸入詞條",
+        "description": "請輸入您想要生成單字卡的詞條。",
+        "entryIsRequired": "詞條為必填項。",
+        "entryIsTooLong": "詞條不能超過100個字符。"
       },
       "phonetics": {
         "label": "發音",

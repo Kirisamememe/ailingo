@@ -57,12 +57,12 @@
       "title": "新規生成",
       "generate": "生成",
       "stop": "停止",
-      "words": {
+      "entries": {
         "label": "単語",
-        "placeholder": "カンマで区切って単語を入力",
+        "placeholder": "カンマで区切って単語を入力。Command / Ctrl + Enterで送信。",
         "description": "単語を入力してください。",
-        "wordsIsRequired": "単語は必須です",
-        "wordsIsTooLong": "単語は500文字以内で入力してください。"
+        "entriesIsRequired": "単語は必須です",
+        "entriesIsTooLong": "単語は500文字以内で入力してください。"
       },
       "model": {
         "label": "モデル",

@@ -57,12 +57,12 @@
       "title": "New Word",
       "generate": "Generate",
       "stop": "Stop",
-      "words": {
-        "label": "Words",
-        "placeholder": "Enter words, separated by commas.",
-        "description": "Enter the words you want to generate a wordcard for.",
-        "wordsIsRequired": "Words are required",
-        "wordsIsTooLong": "Please enter words less than 500 characters."
+      "entries": {
+        "label": "Entries",
+        "placeholder": "Enter entries, separated by commas. Command / Ctrl + Enter to submit.",
+        "description": "Enter the entries you want to generate a wordcard for.",
+        "entriesIsRequired": "Entries are required",
+        "entriesIsTooLong": "Please enter entries less than 500 characters."
       },
       "model": {
         "label": "Model",
