@@ -6,25 +6,24 @@ import { Badge } from "@/components/ui/badge";
 import { FlexColumn, Flexbox } from "@/components/ui/flexbox";
 import { Caption, Headline, Paragraph } from "@/components/ui/typography";
 import type { ListItem } from "./list-item";
-import { useWordbookStore } from "../../_hooks/store-provider";
 
 type Props = {
   onClick: () => void;
 } & ComponentPropsWithRef<"button"> &
-  Pick<ComponentPropsWithRef<typeof ListItem>, "index">;
+  Pick<ComponentPropsWithRef<typeof ListItem>, "wordCard">;
 
 /**
  * ワードブックリストアイテムビュー
  */
-export const ListItemView: React.FC<Props> = ({ ref, index, onClick }) => {
+export const ListItemView: React.FC<Props> = ({ ref, onClick, wordCard }) => {
   const t = useTranslations("POS");
 
-  const wordCards = useWordbookStore((state) => state.wordCards);
-  const selectedWordCard = wordCards[index];
+  const { id, language, entry, phonetics, definitions, examples } = wordCard;
 
   return (
     <button
       ref={ref}
+      data-word-card-id={id}
       type="button"
       onClick={onClick}
       className={cn(
@@ -41,21 +40,17 @@ export const ListItemView: React.FC<Props> = ({ ref, index, onClick }) => {
       )}
     >
       <Flexbox className="w-full shrink-0 flex-row items-center gap-2 whitespace-break-spaces sm:w-48 sm:flex-col sm:items-start sm:gap-1">
-        <Headline lang={selectedWordCard.language} height={1.5} className="min-h-6">
-          {selectedWordCard.entry}
+        <Headline lang={language} height={1.5} className="min-h-6">
+          {entry}
         </Headline>
-        <Caption lang={selectedWordCard.language} className="" height={1.5}>
-          {selectedWordCard.phonetics}
+        <Caption lang={language} className="" height={1.5}>
+          {phonetics}
         </Caption>
       </Flexbox>
       <FlexColumn gap={1}>
-        <Paragraph
-          lang={selectedWordCard.language}
-          clamp={1}
-          className="pt-1 align-baseline leading-none"
-        >
-          {selectedWordCard.definitions.map((definition) => (
-            <Fragment key={`${selectedWordCard.id}-${definition.meaning}`}>
+        <Paragraph lang={language} clamp={1} className="pt-1 align-baseline leading-none">
+          {definitions.map((definition) => (
+            <Fragment key={`${id}-${definition.meaning}`}>
               <Badge
                 variant={"secondary"}
                 className="bg-foreground/15 mr-1 rounded-[0.25rem] px-1 py-0.5 text-xs leading-none font-bold"
@@ -69,14 +64,14 @@ export const ListItemView: React.FC<Props> = ({ ref, index, onClick }) => {
           ))}
         </Paragraph>
         <Paragraph
-          lang={selectedWordCard.language}
+          lang={language}
           color="muted"
           className="line-clamp-3 overflow-ellipsis sm:line-clamp-1"
         >
-          {selectedWordCard.examples.map((example) => (
-            <Fragment key={`${selectedWordCard.id}-${example.sentence}`}>
+          {examples.map((example) => (
+            <Fragment key={`${id}-${example.sentence}`}>
               <Caption
-                lang={selectedWordCard.language}
+                lang={language}
                 color="muted"
                 className={cn(
                   "after:bg-foreground/15 relative mr-4 ml-2.5 after:absolute after:top-0.5 after:-left-2.5 after:h-2.5 after:w-1 after:rounded-xs after:content-['']",
