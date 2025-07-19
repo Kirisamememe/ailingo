@@ -1,3 +1,5 @@
+import { mergeDefinitions, mergeExamples } from "@/lib/utils";
+import { DB_DEFINITION_DIVIDER } from "@/constants";
 import type { POS, WordCard, WordCardClient } from "@/types";
 
 /**
@@ -5,14 +7,14 @@ import type { POS, WordCard, WordCardClient } from "@/types";
  * @param wordCard 単語カード
  * @returns 単語カードフォームデータ
  */
-export const getWordCardFormData = (wordCard?: WordCard) => {
+export const getWordCardFormData = (wordCard?: WordCardClient) => {
   return {
     entry: wordCard?.entry ?? "",
     phonetics: wordCard?.phonetics ?? "",
-    definitions: wordCard?.definitions ?? "",
-    example1: wordCard?.example1 ?? "",
-    example2: wordCard?.example2 ?? "",
-    example3: wordCard?.example3 ?? "",
+    definitions: wordCard ? mergeDefinitions(wordCard.definitions) : "",
+    example1: wordCard ? mergeExamples(wordCard.examples[0]) : "",
+    example2: wordCard ? mergeExamples(wordCard.examples[1]) : "",
+    example3: wordCard ? mergeExamples(wordCard.examples[2]) : "",
     collocations: wordCard?.collocations ?? "",
     derivatives: wordCard?.derivatives ?? "",
     synonyms: wordCard?.synonyms ?? "",
@@ -27,14 +29,14 @@ export const getWordCardFormData = (wordCard?: WordCard) => {
  * @param wordCards 単語カード
  * @returns クライアント用の単語カードデータ
  */
-export const convertWordCardData = (wordCard: WordCard): WordCardClient => {
+export const convertWordCardDBToClient = (wordCard: WordCard): WordCardClient => {
   const { definitions, example1, example2, example3, ...rest } = wordCard;
 
   const definitionsArray = definitions
     .split("\n")
     .filter((definition) => !!definition)
     .map((definition) => {
-      const parts = definition.split("|");
+      const parts = definition.split(DB_DEFINITION_DIVIDER);
       const [posString, meaning, translation = undefined] = parts;
       if (!posString || !meaning) return undefined;
 
@@ -63,5 +65,20 @@ export const convertWordCardData = (wordCard: WordCard): WordCardClient => {
     ...rest,
     definitions: definitionsArray,
     examples: exampleArray,
+  };
+};
+
+/**
+ * 単語カードデータをデータベース用に変換
+ * @param wordCard 単語カード
+ * @returns データベース用の単語カードデータ
+ */
+export const convertWordCardClientToDB = (wordCard: WordCardClient): WordCard => {
+  return {
+    ...wordCard,
+    definitions: mergeDefinitions(wordCard.definitions),
+    example1: mergeExamples(wordCard.examples[0]),
+    example2: wordCard.examples[1] ? mergeExamples(wordCard.examples[1]) : null,
+    example3: wordCard.examples[2] ? mergeExamples(wordCard.examples[2]) : null,
   };
 };
