@@ -8,7 +8,7 @@ export type WordbookState = {
   /** 単語カード */
   wordCards: WordCardClient[];
   /** 選択された単語カードのID */
-  selectedIndex: number;
+  selectedId: number;
   /** 選択された単語カードのリファレンス */
   selectedElement: HTMLButtonElement | null;
   /** ドロワーの開閉 */
@@ -28,7 +28,7 @@ export type WordbookActions = {
   /** 単語カードを追加する */
   addWordCards: (wordCards: WordCardClient[]) => void;
   /** 選択された単語カードのIDを設定する */
-  setSelectedIndex: (index: number, ref: HTMLButtonElement) => void;
+  setSelectedCard: (id: number, ref: HTMLButtonElement) => void;
   /** ドロワーの開閉を設定する */
   setIsDrawerOpen: (isOpen: boolean) => void;
   /** 保存中かどうかを設定する */
@@ -53,7 +53,7 @@ export type WordbookStore = WordbookState & WordbookActions;
  */
 export const defaultInitState: WordbookState = {
   wordCards: [],
-  selectedIndex: -1,
+  selectedId: 0,
   selectedElement: null,
   isDrawerOpen: false,
   isSaving: false,
@@ -82,8 +82,8 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
     addWordCards: (wordCards: WordCardClient[]) => {
       set((state) => ({ wordCards: [...wordCards, ...state.wordCards] }));
     },
-    setSelectedIndex: (index: number, ref: HTMLButtonElement) => {
-      set((state) => onWordCardSelected(state, index, ref));
+    setSelectedCard: (id: number, ref: HTMLButtonElement) => {
+      set((state) => onWordCardSelected(state, id, ref));
     },
     setIsDrawerOpen: (isOpen: boolean) => {
       set(() => ({ isDrawerOpen: isOpen }));
@@ -113,7 +113,14 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
  */
 const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
   const currentElement = state.selectedElement;
-  if (state.selectedIndex >= state.wordCards.length - 1) {
+  const nextElement =
+    currentElement?.nextElementSibling instanceof HTMLButtonElement
+      ? currentElement.nextElementSibling.dataset.wordCardId
+        ? currentElement.nextElementSibling
+        : null
+      : null;
+
+  if (!nextElement) {
     if (e.key === "ArrowDown") {
       return state;
     }
@@ -128,12 +135,7 @@ const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
     };
   }
 
-  const nextElement =
-    currentElement instanceof HTMLButtonElement
-      ? (currentElement.nextElementSibling as HTMLButtonElement)
-      : null;
-
-  if (currentElement && nextElement) {
+  if (currentElement) {
     e.preventDefault();
     currentElement.dataset.selected = "false";
     nextElement.dataset.selected = "true";
@@ -141,8 +143,8 @@ const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
   }
 
   return {
-    selectedIndex: Math.min(state.selectedIndex + 1, state.wordCards.length - 1),
-    selectedElement: nextElement ?? null,
+    selectedId: Number(nextElement.dataset.wordCardId ?? 0),
+    selectedElement: nextElement,
   };
 };
 
@@ -153,8 +155,14 @@ const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
  */
 const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
   const currentElement = state.selectedElement;
+  const prevElement =
+    currentElement?.previousElementSibling instanceof HTMLButtonElement
+      ? currentElement.previousElementSibling.dataset.wordCardId
+        ? currentElement.previousElementSibling
+        : null
+      : null;
 
-  if (state.selectedIndex <= 0) {
+  if (!prevElement) {
     if (e.key === "ArrowUp") {
       return state;
     }
@@ -169,12 +177,7 @@ const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
     };
   }
 
-  const prevElement =
-    currentElement instanceof HTMLButtonElement
-      ? (currentElement.previousElementSibling as HTMLButtonElement)
-      : null;
-
-  if (currentElement && prevElement) {
+  if (currentElement) {
     e.preventDefault();
     currentElement.dataset.selected = "false";
     prevElement.dataset.selected = "true";
@@ -182,19 +185,19 @@ const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
   }
 
   return {
-    selectedIndex: Math.max(state.selectedIndex - 1, 0),
-    selectedElement: prevElement ?? null,
+    selectedId: Number(prevElement.dataset.wordCardId ?? 0),
+    selectedElement: prevElement,
   };
 };
 
 /**
  * 単語カードが選択されたときの処理
- * @param index 選択された単語カードのID
+ * @param id 選択された単語カードのID
  * @param ref 選択された単語カードのリファレンス
  * @returns 単語帳の状態
  */
-const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButtonElement) => {
-  if (state.selectedIndex === index && state.isDrawerOpen && state.selectedElement === ref) {
+const onWordCardSelected = (state: WordbookState, id: number, ref: HTMLButtonElement) => {
+  if (state.selectedId === id && state.isDrawerOpen && state.selectedElement === ref) {
     state.selectedElement.dataset.selected = "false";
     ref.blur();
     return { isDrawerOpen: false, selectedElement: null };
@@ -207,7 +210,7 @@ const onWordCardSelected = (state: WordbookState, index: number, ref: HTMLButton
   ref.focus();
 
   return {
-    selectedIndex: index,
+    selectedId: id,
     isDrawerOpen: true,
     selectedElement: ref,
   };
