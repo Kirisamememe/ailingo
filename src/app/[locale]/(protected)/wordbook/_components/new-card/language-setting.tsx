@@ -19,7 +19,7 @@ export const LanguageSetting = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <Button variant="secondary" className="bg-foreground/5 w-full shadow-none">
+        <Button variant="secondary" size="icon" className="bg-foreground/5 w-full shadow-none">
           <Languages className="size-5" />
         </Button>
       </PopoverTrigger>
