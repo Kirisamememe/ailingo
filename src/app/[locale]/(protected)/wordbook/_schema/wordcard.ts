@@ -28,6 +28,7 @@ export const wordcardBase = z.object({
       "Example of the wordcard. Insert a line break (\n) after the example sentence and also write its translation.",
     ),
   language: z.enum(LANGUAGE_CODES).describe("Language of the wordcard"),
+  translationLanguage: z.enum(LANGUAGE_CODES).describe("Language of the translation"),
 });
 
 /**
