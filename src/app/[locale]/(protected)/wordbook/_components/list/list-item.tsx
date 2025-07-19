@@ -3,10 +3,11 @@
 import { memo, useRef } from "react";
 import { ListItemView } from "./list-item-view";
 import { useWordbookStore } from "../../_hooks/store-provider";
-import type { WordCardClient } from "@/types";
+import { convertWordCardDBToListItem } from "../../_utils";
+import type { WordCard } from "@/types";
 
 type Props = {
-  wordCard: WordCardClient;
+  wordCard: WordCard;
 };
 
 const _isEqual = (prevProps: Props, nextProps: Props) => {
@@ -29,7 +30,9 @@ export const ListItem: React.FC<Props> = memo(({ wordCard }) => {
     setSelectedIndex(wordCard.id, ref.current);
   };
 
-  return <ListItemView ref={ref} onClick={onClick} wordCard={wordCard} />;
+  return (
+    <ListItemView ref={ref} onClick={onClick} listItem={convertWordCardDBToListItem(wordCard)} />
+  );
 }, _isEqual);
 
 ListItem.displayName = "ListItem";

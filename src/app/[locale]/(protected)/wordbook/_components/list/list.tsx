@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { ListItem } from "./list-item";
 import { WordbookListNew } from "./list-new";
+import { WordbookListStreaming } from "./list-streaming";
 import { useWordbookStore } from "../../_hooks/store-provider";
 
 /**
@@ -38,6 +39,7 @@ export const WordbookList = () => {
   return (
     <FlexColumn className="mb-24 w-full">
       <WordbookListNew />
+      <WordbookListStreaming />
       {wordCards.map((wordCard) => (
         <ListItem key={wordCard.id} wordCard={wordCard} />
       ))}
