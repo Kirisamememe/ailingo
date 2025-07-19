@@ -1,12 +1,12 @@
 import { createStore } from "zustand/vanilla";
-import type { WordCardClient } from "@/types";
+import type { WordCard } from "@/types";
 
 /**
  * 単語帳の状態
  */
 export type WordbookState = {
   /** 単語カード */
-  wordCards: WordCardClient[];
+  wordCards: WordCard[];
   /** 選択された単語カードのID */
   selectedId: number;
   /** 選択された単語カードのリファレンス */
@@ -24,11 +24,11 @@ export type WordbookState = {
  */
 export type WordbookActions = {
   /** 単語カードを設定する */
-  setWordCards: (wordCards: WordCardClient[]) => void;
+  setWordCards: (wordCards: WordCard[]) => void;
   /** 単語カードを追加する */
-  addWordCards: (wordCards: WordCardClient[]) => void;
+  addWordCards: (wordCards: WordCard[]) => void;
   /** 単語カードを更新する */
-  upsertWordCard: (newWordCard: WordCardClient) => void;
+  upsertWordCard: (newWordCard: WordCard) => void;
   /** 単語カードを削除する */
   removeWordCard: (id: number) => void;
   /** 選択された単語カードのIDを設定する */
@@ -67,7 +67,7 @@ export const defaultInitState: WordbookState = {
 /**
  * 単語帳のストアを初期化する
  */
-export const initStore = (wordCards: WordCardClient[]): WordbookState => {
+export const initStore = (wordCards: WordCard[]): WordbookState => {
   return {
     ...defaultInitState,
     wordCards,
@@ -80,13 +80,13 @@ export const initStore = (wordCards: WordCardClient[]): WordbookState => {
 export const createWordbookStore = (initState: WordbookState = defaultInitState) => {
   return createStore<WordbookStore>()((set) => ({
     ...initState,
-    setWordCards: (wordCards: WordCardClient[]) => {
+    setWordCards: (wordCards: WordCard[]) => {
       set(() => ({ wordCards }));
     },
-    addWordCards: (wordCards: WordCardClient[]) => {
+    addWordCards: (wordCards: WordCard[]) => {
       set((state) => ({ wordCards: [...wordCards, ...state.wordCards] }));
     },
-    upsertWordCard: (newWordCard: WordCardClient) => {
+    upsertWordCard: (newWordCard: WordCard) => {
       set((state) => ({
         wordCards: state.wordCards.map((wordCard) =>
           wordCard.id === newWordCard.id ? newWordCard : wordCard,
