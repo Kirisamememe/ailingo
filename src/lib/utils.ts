@@ -1,6 +1,8 @@
 import { type ClassValue, clsx } from "clsx";
 import { enUS as en, ja, zhCN, zhTW } from "date-fns/locale";
 import { twMerge } from "tailwind-merge";
+import { DB_DEFINITION_DIVIDER } from "@/constants";
+import type { Definition, Example } from "@/types";
 
 /**
  * Utility function to merge class names
@@ -50,4 +52,24 @@ export const getCurrentDate = () => {
   const month = String(now.getMonth() + 1).padStart(2, "0");
   const day = String(now.getDate()).padStart(2, "0");
   return `${year}-${month}-${day}`;
+};
+
+/**
+ * 定義をマージ
+ * @param definitions 定義
+ * @returns マージされた定義
+ */
+export const mergeDefinitions = (definitions: Definition[]) => {
+  return definitions
+    .map((definition) => `[${definition.pos}]${DB_DEFINITION_DIVIDER}${definition.meaning}`)
+    .join("\n");
+};
+
+/**
+ * 例文をマージ
+ * @param example 例文
+ * @returns マージされた例文
+ */
+export const mergeExamples = (example: Example) => {
+  return `${example.sentence}\n${example.translation}`;
 };
