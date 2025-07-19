@@ -27,6 +27,10 @@ export type WordbookActions = {
   setWordCards: (wordCards: WordCardClient[]) => void;
   /** 単語カードを追加する */
   addWordCards: (wordCards: WordCardClient[]) => void;
+  /** 単語カードを更新する */
+  upsertWordCard: (newWordCard: WordCardClient) => void;
+  /** 単語カードを削除する */
+  removeWordCard: (id: number) => void;
   /** 選択された単語カードのIDを設定する */
   setSelectedCard: (id: number, ref: HTMLButtonElement) => void;
   /** ドロワーの開閉を設定する */
@@ -82,6 +86,18 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
     addWordCards: (wordCards: WordCardClient[]) => {
       set((state) => ({ wordCards: [...wordCards, ...state.wordCards] }));
     },
+    upsertWordCard: (newWordCard: WordCardClient) => {
+      set((state) => ({
+        wordCards: state.wordCards.map((wordCard) =>
+          wordCard.id === newWordCard.id ? newWordCard : wordCard,
+        ),
+      }));
+    },
+    removeWordCard: (id: number) => {
+      set((state) => ({
+        wordCards: state.wordCards.filter((wordCard) => wordCard.id !== id),
+      }));
+    },
     setSelectedCard: (id: number, ref: HTMLButtonElement) => {
       set((state) => onWordCardSelected(state, id, ref));
     },
@@ -112,6 +128,8 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
  * @returns 単語帳の状態
  */
 const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
+  if (state.isEditing) return state;
+
   const currentElement = state.selectedElement;
   const nextElement =
     currentElement?.nextElementSibling instanceof HTMLButtonElement
@@ -154,6 +172,8 @@ const onNextWord = (state: WordbookState, e: KeyboardEvent) => {
  * @returns 単語帳の状態
  */
 const onPrevWord = (state: WordbookState, e: KeyboardEvent) => {
+  if (state.isEditing) return state;
+
   const currentElement = state.selectedElement;
   const prevElement =
     currentElement?.previousElementSibling instanceof HTMLButtonElement

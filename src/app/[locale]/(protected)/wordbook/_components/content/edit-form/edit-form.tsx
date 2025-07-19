@@ -11,11 +11,12 @@ import { Form, FormField } from "@/components/ui/form/form";
 import { Separator } from "@/components/ui/separator";
 import { Headline } from "@/components/ui/typography";
 import { DeleteBtn } from "./delete-btn";
+import { Regenerate } from "./regenerate";
 import { deleteWordCard } from "../../../_actions/delete";
 import { updateWordCard } from "../../../_actions/update";
 import { useWordbookStore } from "../../../_hooks/store-provider";
 import { wordcardFormSchema } from "../../../_schema";
-import { getWordCardFormData } from "../../../_utils";
+import { convertWordCardDBToClient, getWordCardFormData } from "../../../_utils";
 import type { WordCardClient } from "@/types";
 
 type Props = {
@@ -31,6 +32,8 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
 
   const setIsEditing = useWordbookStore((state) => state.setIsEditing);
   const closeDrawer = useWordbookStore((state) => state.closeDrawer);
+  const removeWordCard = useWordbookStore((state) => state.removeWordCard);
+  const upsertWordCard = useWordbookStore((state) => state.upsertWordCard);
 
   const wordCardForm = useForm<z.infer<typeof wordcardFormSchema>>({
     resolver: zodResolver(wordcardFormSchema),
@@ -43,20 +46,22 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
     if (!validation) return { isSuccess: false, error: { message: t("save.invalidForm") } };
 
     const values = wordCardForm.getValues();
-    await updateWordCard(wordCard.id, values).catch((err: unknown) => {
+    const result = await updateWordCard(wordCard.id, values).catch((err: unknown) => {
       toast.error(t("save.error"), {
         description: err instanceof Error ? err.message : tCommon("error.database"),
       });
     });
+    if (!result) return;
+    upsertWordCard(convertWordCardDBToClient(result));
     toast.success(t("save.success"));
     handleEndEditing();
   }, null);
 
   const handleDelete = async () => {
-    await deleteWordCard(wordCard.id).then(() => {
-      closeDrawer();
-      handleEndEditing();
-    });
+    await deleteWordCard(wordCard.id);
+    closeDrawer();
+    handleEndEditing();
+    removeWordCard(wordCard.id);
   };
 
   const handleEndEditing = () => {
@@ -76,6 +81,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           </Button>
         </FlexRow>
         <Separator />
+        <Regenerate id={wordCard.id} form={wordCardForm} />
         <FormField
           control={wordCardForm.control}
           name="entry"
