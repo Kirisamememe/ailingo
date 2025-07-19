@@ -4,9 +4,8 @@ import { revalidatePath } from "next/cache";
 import type { z } from "zod";
 import { getSession } from "@/lib/auth";
 import type { wordcardAISchema, wordcardAISchemaArray } from "../_schema";
+import { DB_DEFINITION_DIVIDER } from "@/constants";
 import { wordCardService } from "@/services/wordcard-service";
-
-const DIVIDER = "|";
 
 /**
  * ワードカードを複数作成
@@ -16,7 +15,7 @@ export const createWordcards = async (data: z.infer<typeof wordcardAISchemaArray
   const wordcards = data.wordcards.map((wordcard) => ({
     ...wordcard,
     definitions: wordcard.definitions
-      .map((definition) => `[${definition.pos}]${DIVIDER}${definition.meaning}`)
+      .map((definition) => `[${definition.pos}]${DB_DEFINITION_DIVIDER}${definition.meaning}`)
       .join("\n"),
   }));
   await wordCardService.createMany(wordcards, operatorId);
@@ -35,7 +34,7 @@ export const createWordcard = async (
     definitions: data.definitions
       .map(
         (definition) =>
-          `[${definition.pos}]${DIVIDER}${definition.meaning}${DIVIDER}${definition.translation}`,
+          `[${definition.pos}]${DB_DEFINITION_DIVIDER}${definition.meaning}${DB_DEFINITION_DIVIDER}${definition.translation}`,
       )
       .join("\n"),
   };
