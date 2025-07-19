@@ -1,18 +1,20 @@
 "use client";
 
 import { SquarePen } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Sheet, SheetContent, SheetDescription, SheetTitle } from "@/components/ui/sheet";
 import { WordbookContentView } from "./content-view";
 import { EditForm } from "./edit-form";
 import { useWordbookStore } from "../../_hooks/store-provider";
-import { convertWordCardData } from "../../_utils";
 
 /**
  * ワードブックコンテンツ
  */
 export const WordbookContent = () => {
+  const t = useTranslations("wordbook");
+
   const wordCards = useWordbookStore((state) => state.wordCards);
   const selectedIndex = useWordbookStore((state) => state.selectedIndex);
   const isDrawerOpen = useWordbookStore((state) => state.isDrawerOpen);
@@ -31,12 +33,12 @@ export const WordbookContent = () => {
         }}
       >
         <ScrollArea className="h-full">
-          <SheetTitle hidden>{wordCard?.entry}</SheetTitle>
-          <SheetDescription hidden>{wordCard?.definitions}</SheetDescription>
+          <SheetTitle hidden>{t("contentSheet.title")}</SheetTitle>
+          <SheetDescription hidden>{t("contentSheet.description")}</SheetDescription>
           {isEditing && wordCard && <EditForm wordCard={wordCard} />}
           {!isEditing && wordCard && (
             <>
-              <WordbookContentView wordCard={convertWordCardData(wordCard)} />
+              <WordbookContentView wordCard={wordCard} />
               <Button
                 type="button"
                 variant="outline"
