@@ -1,4 +1,4 @@
-import { useActionState, useEffect } from "react";
+import { useActionState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
@@ -16,10 +16,10 @@ import { updateWordCard } from "../../../_actions/update";
 import { useWordbookStore } from "../../../_hooks/store-provider";
 import { wordcardFormSchema } from "../../../_schema";
 import { getWordCardFormData } from "../../../_utils";
-import type { WordCard } from "@/types";
+import type { WordCardClient } from "@/types";
 
 type Props = {
-  wordCard: WordCard;
+  wordCard: WordCardClient;
 };
 
 /**
@@ -34,13 +34,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
 
   const wordCardForm = useForm<z.infer<typeof wordcardFormSchema>>({
     resolver: zodResolver(wordcardFormSchema),
-    defaultValues: getWordCardFormData(),
+    defaultValues: getWordCardFormData(wordCard),
     mode: "onChange",
   });
-
-  useEffect(() => {
-    wordCardForm.reset(getWordCardFormData(wordCard));
-  }, [wordCard, wordCardForm]);
 
   const [, formAction, isPending] = useActionState(async () => {
     const validation = await wordCardForm.trigger();
