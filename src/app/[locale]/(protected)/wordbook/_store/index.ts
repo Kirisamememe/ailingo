@@ -42,7 +42,7 @@ export type WordbookActions = {
   /** 選択された単語カードのIDを減らす */
   prevWord: (e: KeyboardEvent) => void;
   /** ドロワーを閉じる */
-  closeDrawer: () => void;
+  closeDrawer: (options?: { shouldFocus: boolean }) => void;
   /** 編集モードを設定する */
   setIsEditing: (isEditing: boolean) => void;
 };
@@ -128,8 +128,8 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
     prevWord: (e: KeyboardEvent) => {
       set((state) => onPrevWord(state, e));
     },
-    closeDrawer: () => {
-      set((state) => onDrawerClose(state));
+    closeDrawer: (options: { shouldFocus: boolean } = { shouldFocus: false }) => {
+      set((state) => onDrawerClose(state, options));
     },
     setIsEditing: (isEditing: boolean) => {
       set(() => ({ isEditing }));
@@ -254,10 +254,15 @@ const onWordCardSelected = (state: WordbookState, id: number, ref: HTMLButtonEle
 /**
  * ドロワーが閉じたときの処理
  */
-const onDrawerClose = (state: WordbookState) => {
+const onDrawerClose = (
+  state: WordbookState,
+  options: { shouldFocus: boolean } = { shouldFocus: false },
+) => {
   if (state.selectedElement) {
     state.selectedElement.dataset.selected = "false";
-    state.selectedElement.focus();
+    if (options.shouldFocus) {
+      state.selectedElement.focus();
+    }
   }
 
   return { isDrawerOpen: false, selectedElement: null, isEditing: false };

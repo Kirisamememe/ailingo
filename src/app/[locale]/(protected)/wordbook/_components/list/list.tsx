@@ -19,7 +19,7 @@ export const WordbookList = () => {
   useEffect(() => {
     const onFocusChange = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        closeDrawer();
+        closeDrawer({ shouldFocus: true });
         return;
       }
 
