@@ -90,7 +90,7 @@ export const GenerateFormProvider = ({
       const result = await createWordcards({ wordcards: object.wordcards });
       addWordCards(result);
       toast.success("Wordcards created successfully");
-      form.reset({ entries: "" });
+      form.setValue("entries", "");
     } catch {
       toast.error("Failed to create wordcards");
     } finally {
