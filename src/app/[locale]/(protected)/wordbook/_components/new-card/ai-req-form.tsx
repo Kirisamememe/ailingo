@@ -40,7 +40,7 @@ export const AiReqForm = () => {
 
   return (
     <Form {...form}>
-      <form className="flex h-full w-full gap-3 rounded-lg" onSubmit={form.handleSubmit(onSubmit)}>
+      <form className="flex h-full w-full gap-3" onSubmit={form.handleSubmit(onSubmit)}>
         <div className="relative h-fit w-full">
           {isLoading && object?.wordcards ? (
             <FlexColumn
@@ -63,7 +63,7 @@ export const AiReqForm = () => {
                   disabled={isLoading}
                   description={t("entries.description")}
                   placeholder={t("entries.placeholder")}
-                  className="bg-background dark:border-border/70 field-sizing-content min-h-20 px-4 py-3"
+                  className="bg-background dark:border-border/70 field-sizing-content min-h-20 rounded-md px-4 py-3"
                   i18nNameSpace="wordbook.newWordAIForm.entries"
                   {...field}
                   onKeyDown={handleSubmitByEnter}

@@ -33,7 +33,7 @@ export const SelectFormItem: React.FC<Props> = ({
   const variantClass = useMemo(() => {
     switch (variant) {
       case "ghost":
-        return "text-muted-foreground hover:text-foreground w-fit border-none bg-transparent px-1 hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent";
+        return "shadow-none text-muted-foreground hover:text-foreground w-fit border-none bg-transparent px-1 hover:bg-transparent dark:bg-transparent dark:hover:bg-transparent";
       default:
         return "";
     }

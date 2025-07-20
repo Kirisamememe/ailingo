@@ -30,7 +30,7 @@ export const ListItemView: React.FC<Props> = ({ ref, onClick, listItem, isStream
       onClick={onClick}
       disabled={isStreaming}
       className={cn(
-        "relative flex h-fit w-full cursor-pointer flex-col items-start gap-1 rounded-sm px-4 py-3 text-left font-semibold",
+        "relative flex h-fit w-full cursor-pointer flex-col items-start gap-1 rounded-md px-4 py-3 text-left font-semibold",
         "sm:flex-row sm:justify-start sm:gap-4",
         "hover:bg-accent",
         "after:bg-accent after:absolute after:-bottom-0.25 after:h-0.25 after:content-[''] last:after:hidden",

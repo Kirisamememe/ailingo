@@ -34,7 +34,7 @@ export const SpeechBtn: React.FC<Props> = ({ text, language, variant, className,
       variant={isPlaying ? playingVariant : normalVariant}
       onClick={() => handlePlay(text)}
       size="icon"
-      className={cn(className, "size-7 rounded-sm align-middle")}
+      className={cn(className, "size-7 rounded-md align-middle")}
       {...props}
     >
       <Volume2 className="size-4" />
