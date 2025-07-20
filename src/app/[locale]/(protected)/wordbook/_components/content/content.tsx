@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { SquarePen } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
@@ -17,13 +18,39 @@ export const WordbookContent = () => {
 
   const wordCardMap = useWordbookStore((state) => state.wordCardMap);
   const selectedId = useWordbookStore((state) => state.selectedId);
+  const selectedElement = useWordbookStore((state) => state.selectedElement);
   const isDrawerOpen = useWordbookStore((state) => state.isDrawerOpen);
   const isEditing = useWordbookStore((state) => state.isEditing);
   const setIsDrawerOpen = useWordbookStore((state) => state.setIsDrawerOpen);
   const setIsEditing = useWordbookStore((state) => state.setIsEditing);
+  const closeDrawer = useWordbookStore((state) => state.closeDrawer);
 
-  // ストアのMapから直接O(1)でアクセス
   const wordCard = wordCardMap.get(selectedId);
+
+  // 選択されているアイテムがViewportから外れたときにドロワーを閉じる
+  useEffect(() => {
+    if (!selectedElement || !isDrawerOpen || isEditing) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const [entry] = entries;
+        if (!entry.isIntersecting) {
+          closeDrawer();
+        }
+      },
+      {
+        // ルートマージンを設定してViewportの境界を少し拡張
+        rootMargin: "100px",
+        threshold: 0,
+      },
+    );
+
+    observer.observe(selectedElement);
+
+    return () => {
+      observer.unobserve(selectedElement);
+    };
+  }, [selectedElement, isDrawerOpen, isEditing, closeDrawer]);
 
   return (
     <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen} modal={isEditing}>
