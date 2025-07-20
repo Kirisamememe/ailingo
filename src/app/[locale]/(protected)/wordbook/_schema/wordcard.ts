@@ -117,13 +117,17 @@ export const otherSchema = z.object({
 const definitionsSchema = z.object({
   definitions: z
     .string()
-    .min(1, "definitionIsRequired")
-    .max(500, "definitionIsTooLong")
+    .min(1, "definitionsIsRequired")
+    .max(1000, "definitionsIsTooLong")
     .describe("Definition of the wordcard"),
 });
 
 const noteSchema = z.object({
   note: z.string().max(1000, "noteIsTooLong").optional(),
+});
+
+const tagsSchema = z.object({
+  tags: z.array(z.string()).max(5, "tagsIsTooMany").optional(),
 });
 
 /**
@@ -133,7 +137,8 @@ export const wordcardFormSchema = wordcardBase
   .and(definitionsSchema)
   .and(extraExampleOptional)
   .and(otherSchema)
-  .and(noteSchema);
+  .and(noteSchema)
+  .and(tagsSchema);
 
 /**
  * ワードカードクライアントスキーマ

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { modelListTuple } from "@/lib/ai";
+import { TAGS } from "@/constants/tag";
 import { definitionsArraySchema, otherSchema, wordcardBase } from "./wordcard";
 import { LANGUAGE_CODES } from "@/drizzle/schema";
 
@@ -20,13 +21,18 @@ const extraExampleRequiredSchema = z.object({
     ),
 });
 
+const tagsSchema = z.object({
+  tags: z.array(z.enum(TAGS)).max(5, "tagsIsTooMany").describe("Tags of the wordcard"),
+});
+
 /**
  * AIワードカードリクエストスキーマ
  */
 export const wordcardAISchema = wordcardBase
   .and(definitionsArraySchema)
   .and(extraExampleRequiredSchema)
-  .and(otherSchema);
+  .and(otherSchema)
+  .and(tagsSchema);
 
 /**
  * ワードカードフォームスキーマ配列
