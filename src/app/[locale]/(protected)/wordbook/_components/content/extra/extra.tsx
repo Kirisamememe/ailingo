@@ -8,12 +8,13 @@ type Props = {
   derivatives: string;
   synonyms: string;
   antonyms: string;
+  tags: string[];
 };
 
 /**
  * 追加情報
  */
-export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, antonyms }) => {
+export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, antonyms, tags }) => {
   const t = useTranslations("wordbook.extra");
 
   if (!collocations && !derivatives && !synonyms && !antonyms) return null;
@@ -54,6 +55,14 @@ export const Extra: React.FC<Props> = ({ collocations, derivatives, synonyms, an
               {t("antonyms")}
             </Headline>
             <Paragraph className="text-sm break-all sm:text-base">{antonyms}</Paragraph>
+          </FlexColumn>
+        )}
+        {tags.length > 0 && (
+          <FlexColumn gap={1} className="relative pl-3">
+            <Headline color="muted" className={beforeClassName}>
+              {t("tags")}
+            </Headline>
+            <Paragraph className="text-sm break-all sm:text-base">{tags.join(", ")}</Paragraph>
           </FlexColumn>
         )}
       </FlexColumn>

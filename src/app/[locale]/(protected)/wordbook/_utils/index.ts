@@ -19,6 +19,7 @@ export const getWordCardFormData = (wordCard?: WordCard) => {
     derivatives: wordCard?.derivatives ?? "",
     synonyms: wordCard?.synonyms ?? "",
     antonyms: wordCard?.antonyms ?? "",
+    tags: wordCard?.tags ?? [],
     note: wordCard?.note ?? "",
     language: wordCard?.language ?? "en-US",
     translationLanguage: wordCard?.translationLanguage ?? "ja",

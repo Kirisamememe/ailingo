@@ -165,7 +165,8 @@
       "collocations": "共起词",
       "derivatives": "派生词",
       "synonyms": "近义词",
-      "antonyms": "反义词"
+      "antonyms": "反义词",
+      "tags": "标签"
     }
   },
   "writingCorrection": {
