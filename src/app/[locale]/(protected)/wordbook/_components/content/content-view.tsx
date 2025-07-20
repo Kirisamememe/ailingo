@@ -49,6 +49,7 @@ export const WordbookContentView: React.FC<Props> = ({ wordCard }) => {
         derivatives={wordCard.derivatives ?? ""}
         synonyms={wordCard.synonyms ?? ""}
         antonyms={wordCard.antonyms ?? ""}
+        tags={wordCard.tags ?? []}
       />
       <WordbookContentFooter
         createdAt={wordCard.createdAt}
