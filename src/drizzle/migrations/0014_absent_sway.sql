@@ -1,0 +1,1 @@
+ALTER TABLE "word_card" ADD COLUMN "not_for_learning" boolean DEFAULT false NOT NULL;

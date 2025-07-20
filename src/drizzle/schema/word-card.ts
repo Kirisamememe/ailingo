@@ -1,5 +1,14 @@
 import { sql } from "drizzle-orm";
-import { date, foreignKey, pgTable, serial, smallint, text, timestamp } from "drizzle-orm/pg-core";
+import {
+  boolean,
+  date,
+  foreignKey,
+  pgTable,
+  serial,
+  smallint,
+  text,
+  timestamp,
+} from "drizzle-orm/pg-core";
 import { language } from "./language";
 import { users } from "./users";
 
@@ -21,6 +30,7 @@ export const wordCard = pgTable(
     antonyms: text(),
     synonyms: text(),
     derivatives: text(),
+    notForLearning: boolean("not_for_learning").default(false).notNull(),
     retentionRate: smallint("retention_rate").default(1).notNull(),
     createdAt: timestamp("created_at", { precision: 3 })
       .default(sql`CURRENT_TIMESTAMP`)
