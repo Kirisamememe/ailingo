@@ -39,7 +39,7 @@ export const ListItemView: React.FC<Props> = ({ ref, onClick, listItem, isStream
         "focus:shadow-primary/40 focus:shadow-[inset_0_0_0_2px] focus:outline-none focus-visible:outline-none",
         "data-[selected=true]:hover:bg-primary/5 data-[selected=true]:bg-primary/5 dark:data-[selected=true]:hover:bg-primary/5 data-[selected=true]:shadow-primary data-[selected=true]:shadow-[inset_0_0_0_2px] data-[selected=true]:after:hidden",
         "focus:after:hidden focus-visible:after:hidden",
-        "active:bg-primary/3",
+        "active:bg-transparent",
         isStreaming && "pointer-events-none animate-pulse opacity-70",
       )}
     >
