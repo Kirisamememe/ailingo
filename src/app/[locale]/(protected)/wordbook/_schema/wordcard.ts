@@ -74,8 +74,10 @@ export const definitionsArraySchema = z.object({
           ),
       }),
     )
-    .max(3, "definitionsIsTooMany")
-    .describe("Definitions of the wordcard. Up to 3 definitions are allowed."),
+    .max(5, "definitionsIsTooMany")
+    .describe(
+      "Definitions of the wordcard. Up to 5 definitions are allowed. If this is an English WordCard, and there are meanings or usages that are difficult or unusual especially for Asians (particularly Japanese or Chinese people), be sure to include them in the definitions.",
+    ),
 });
 
 /**
