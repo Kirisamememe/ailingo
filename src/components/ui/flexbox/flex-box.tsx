@@ -5,18 +5,15 @@ import { generalStyles } from "./variant-styles";
 
 type DivProps = ComponentPropsWithRef<"div">;
 
-const flexboxVariants = cva(
-  "min-w-4 min-h-4 ring-offset-background ring-offset-2 focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2",
-  {
-    variants: {
-      orientation: {
-        vertical: "flex flex-col",
-        horizontal: "flex",
-      },
-      ...generalStyles,
+const flexboxVariants = cva("min-w-4 min-h-4", {
+  variants: {
+    orientation: {
+      vertical: "flex flex-col",
+      horizontal: "flex",
     },
+    ...generalStyles,
   },
-);
+});
 
 type FlexboxProps = {
   border?: boolean;

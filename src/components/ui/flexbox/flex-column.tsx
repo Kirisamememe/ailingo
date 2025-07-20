@@ -5,14 +5,11 @@ import { generalStyles } from "./variant-styles";
 
 type DivProps = ComponentPropsWithRef<"div">;
 
-const flexColumnVariants = cva(
-  "flex flex-col min-w-4 min-h-4 ring-offset-background ring-offset-2 focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2",
-  {
-    variants: {
-      ...generalStyles,
-    },
+const flexColumnVariants = cva("flex flex-col min-w-4 min-h-4", {
+  variants: {
+    ...generalStyles,
   },
-);
+});
 
 type FlexColumnProps = {
   className?: string;

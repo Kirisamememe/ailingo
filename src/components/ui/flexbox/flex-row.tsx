@@ -5,14 +5,11 @@ import { generalStyles } from "./variant-styles";
 
 type DivProps = ComponentPropsWithRef<"div">;
 
-const flexRowVariants = cva(
-  "flex min-w-4 min-h-4 ring-offset-background ring-offset-2 focus-visible:outline-none focus-visible:ring-ring focus-visible:ring-2",
-  {
-    variants: {
-      ...generalStyles,
-    },
+const flexRowVariants = cva("flex min-w-4 min-h-4", {
+  variants: {
+    ...generalStyles,
   },
-);
+});
 
 type FlexRowProps = {
   border?: boolean;
