@@ -1,0 +1,1 @@
+ALTER TABLE "word_card" ADD COLUMN "tags" text[];

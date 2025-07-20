@@ -45,6 +45,7 @@ export const wordCard = pgTable(
     nextReviewAt: date("next_review_at", { mode: "string" }),
     language: language().notNull(),
     translationLanguage: language("translation_language").notNull(),
+    tags: text("tags").array(),
   },
   (table) => [
     foreignKey({
