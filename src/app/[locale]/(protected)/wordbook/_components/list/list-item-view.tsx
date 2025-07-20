@@ -52,7 +52,7 @@ export const ListItemView: React.FC<Props> = ({ ref, onClick, listItem, isStream
         </Caption>
       </Flexbox>
       <FlexColumn gap={1}>
-        <Paragraph lang={language} clamp={1} className="pt-1 align-baseline leading-none">
+        <Paragraph lang={language} className="w-full pt-1 leading-none">
           {definitions?.map((definition) => (
             <Fragment key={`${id}-${definition?.meaning}`}>
               <Badge
@@ -63,7 +63,7 @@ export const ListItemView: React.FC<Props> = ({ ref, onClick, listItem, isStream
                   posSchema.safeParse(definition.pos).success &&
                   t(definition.pos)}
               </Badge>
-              <Caption size={14} className="mr-4" color="foreground">
+              <Caption className="mr-4 h-4 text-sm" color="foreground">
                 {definition?.translation ?? definition?.meaning}
               </Caption>
             </Fragment>

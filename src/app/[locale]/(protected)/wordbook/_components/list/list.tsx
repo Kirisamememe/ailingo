@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
 import { FlexColumn } from "@/components/ui/flexbox";
 import { ListItem } from "./list-item";
 import { WordbookListNew } from "./list-new";
@@ -11,7 +11,7 @@ import { useWordbookStore } from "../../_hooks/store-provider";
  * ワードブックリスト
  */
 export const WordbookList = () => {
-  const wordCards = useWordbookStore((state) => state.wordCards);
+  const wordCardMap = useWordbookStore((state) => state.wordCardMap);
   const nextWord = useWordbookStore((state) => state.nextWord);
   const prevWord = useWordbookStore((state) => state.prevWord);
   const closeDrawer = useWordbookStore((state) => state.closeDrawer);
@@ -35,6 +35,10 @@ export const WordbookList = () => {
       window.removeEventListener("keydown", onFocusChange);
     };
   }, [prevWord, nextWord, closeDrawer]);
+
+  const wordCards = useMemo(() => {
+    return [...wordCardMap.values()];
+  }, [wordCardMap]);
 
   return (
     <FlexColumn className="mb-24 w-full">

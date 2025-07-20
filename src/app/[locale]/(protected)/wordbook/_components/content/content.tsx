@@ -15,14 +15,15 @@ import { useWordbookStore } from "../../_hooks/store-provider";
 export const WordbookContent = () => {
   const t = useTranslations("wordbook");
 
-  const wordCards = useWordbookStore((state) => state.wordCards);
+  const wordCardMap = useWordbookStore((state) => state.wordCardMap);
   const selectedId = useWordbookStore((state) => state.selectedId);
   const isDrawerOpen = useWordbookStore((state) => state.isDrawerOpen);
   const isEditing = useWordbookStore((state) => state.isEditing);
   const setIsDrawerOpen = useWordbookStore((state) => state.setIsDrawerOpen);
   const setIsEditing = useWordbookStore((state) => state.setIsEditing);
 
-  const wordCard = wordCards.find((wordCard) => wordCard.id === selectedId);
+  // ストアのMapから直接O(1)でアクセス
+  const wordCard = wordCardMap.get(selectedId);
 
   return (
     <Sheet open={isDrawerOpen} onOpenChange={setIsDrawerOpen} modal={isEditing}>

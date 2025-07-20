@@ -5,8 +5,8 @@ import type { WordCard } from "@/types";
  * 単語帳の状態
  */
 export type WordbookState = {
-  /** 単語カード */
-  wordCards: WordCard[];
+  /** 単語カードのMap */
+  wordCardMap: Map<number, WordCard>;
   /** 選択された単語カードのID */
   selectedId: number;
   /** 選択された単語カードのリファレンス */
@@ -53,10 +53,17 @@ export type WordbookActions = {
 export type WordbookStore = WordbookState & WordbookActions;
 
 /**
+ * WordCardの配列からMapを作成する
+ */
+const createWordCardMap = (wordCards: WordCard[]): Map<number, WordCard> => {
+  return new Map(wordCards.map((wordCard) => [wordCard.id, wordCard]));
+};
+
+/**
  * 単語帳の初期状態
  */
 export const defaultInitState: WordbookState = {
-  wordCards: [],
+  wordCardMap: new Map(),
   selectedId: 0,
   selectedElement: null,
   isDrawerOpen: false,
@@ -70,7 +77,7 @@ export const defaultInitState: WordbookState = {
 export const initStore = (wordCards: WordCard[]): WordbookState => {
   return {
     ...defaultInitState,
-    wordCards,
+    wordCardMap: createWordCardMap(wordCards),
   };
 };
 
@@ -81,22 +88,30 @@ export const createWordbookStore = (initState: WordbookState = defaultInitState)
   return createStore<WordbookStore>()((set) => ({
     ...initState,
     setWordCards: (wordCards: WordCard[]) => {
-      set(() => ({ wordCards }));
+      set(() => ({
+        wordCardMap: createWordCardMap(wordCards),
+      }));
     },
     addWordCards: (wordCards: WordCard[]) => {
-      set((state) => ({ wordCards: [...wordCards, ...state.wordCards] }));
+      set((state) => {
+        const existingWordCards = Array.from(state.wordCardMap.values());
+        const mergedWordCards = [...wordCards, ...existingWordCards];
+        return { wordCardMap: createWordCardMap(mergedWordCards) };
+      });
     },
     upsertWordCard: (newWordCard: WordCard) => {
-      set((state) => ({
-        wordCards: state.wordCards.map((wordCard) =>
-          wordCard.id === newWordCard.id ? newWordCard : wordCard,
-        ),
-      }));
+      set((state) => {
+        const newMap = new Map(state.wordCardMap);
+        newMap.set(newWordCard.id, newWordCard);
+        return { wordCardMap: newMap };
+      });
     },
     removeWordCard: (id: number) => {
-      set((state) => ({
-        wordCards: state.wordCards.filter((wordCard) => wordCard.id !== id),
-      }));
+      set((state) => {
+        const newMap = new Map(state.wordCardMap);
+        newMap.delete(id);
+        return { wordCardMap: newMap };
+      });
     },
     setSelectedCard: (id: number, ref: HTMLButtonElement) => {
       set((state) => onWordCardSelected(state, id, ref));
