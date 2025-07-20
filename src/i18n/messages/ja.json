@@ -165,7 +165,8 @@
       "collocations": "共起語",
       "derivatives": "派生語",
       "synonyms": "類義語",
-      "antonyms": "対義語"
+      "antonyms": "対義語",
+      "tags": "タグ"
     }
   },
   "writingCorrection": {
