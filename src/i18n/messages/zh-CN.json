@@ -155,6 +155,11 @@
         "placeholder": "选择语言",
         "description": "请选择单词卡的语言。",
         "languageIsRequired": "语言为必填项。"
+      },
+      "priority": {
+        "label": "优先度",
+        "placeholder": "选择优先度",
+        "description": "请选择单词卡的优先度。"
       }
     },
     "contentSheet": {
@@ -167,6 +172,11 @@
       "synonyms": "近义词",
       "antonyms": "反义词",
       "tags": "标签"
+    },
+    "priority": {
+      "high": "高",
+      "medium": "中",
+      "low": "低"
     }
   },
   "writingCorrection": {

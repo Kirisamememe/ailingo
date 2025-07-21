@@ -155,6 +155,11 @@
         "placeholder": "Select a language",
         "description": "Please select the language of the wordcard.",
         "languageIsRequired": "Language is required"
+      },
+      "priority": {
+        "label": "Priority",
+        "placeholder": "Select a priority",
+        "description": "Please select the priority of the wordcard."
       }
     },
     "contentSheet": {
@@ -167,6 +172,11 @@
       "synonyms": "Synonyms",
       "antonyms": "Antonyms",
       "tags": "Tags"
+    },
+    "priority": {
+      "high": "High",
+      "medium": "Medium",
+      "low": "Low"
     }
   },
   "writingCorrection": {
