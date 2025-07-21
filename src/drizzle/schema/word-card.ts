@@ -47,7 +47,7 @@ export const wordCard = pgTable(
     language: language().notNull(),
     translationLanguage: language("translation_language").notNull(),
     tags: text("tags").array(),
-    priority: priorityEnum("priority").default("medium").notNull(),
+    priority: priorityEnum("priority").default("high").notNull(),
   },
   (table) => [
     foreignKey({

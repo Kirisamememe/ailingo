@@ -1,0 +1,1 @@
+ALTER TABLE "word_card" ALTER COLUMN "priority" SET DEFAULT 'high';
