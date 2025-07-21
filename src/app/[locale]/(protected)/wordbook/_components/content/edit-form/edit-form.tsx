@@ -6,8 +6,9 @@ import { toast } from "sonner";
 import type z from "zod";
 import { Button, Submit } from "@/components/ui/button";
 import { FlexRow } from "@/components/ui/flexbox";
-import { InputItem, TextareaItem } from "@/components/ui/form";
+import { InputItem, SelectFormItem, TextareaItem } from "@/components/ui/form";
 import { Form, FormField } from "@/components/ui/form/form";
+import { SelectItem } from "@/components/ui/select";
 import { Separator } from "@/components/ui/separator";
 import { Headline } from "@/components/ui/typography";
 import { DeleteBtn } from "./delete-btn";
@@ -17,7 +18,8 @@ import { updateWordCard } from "../../../_actions/update";
 import { useWordbookStore } from "../../../_hooks/store-provider";
 import { wordcardFormSchema } from "../../../_schema";
 import { getWordCardFormData } from "../../../_utils";
-import type { WordCard } from "@/types";
+import { priorityEnum } from "@/drizzle/schema/priority";
+import type { Priority, WordCard } from "@/types";
 
 type Props = {
   wordCard: WordCard;
@@ -27,7 +29,7 @@ type Props = {
  * 単語カード編集フォーム
  */
 export const EditForm: React.FC<Props> = ({ wordCard }) => {
-  const t = useTranslations("wordbook.editForm");
+  const t = useTranslations("wordbook");
   const tCommon = useTranslations("common");
 
   const setIsEditing = useWordbookStore((state) => state.setIsEditing);
@@ -43,17 +45,18 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
 
   const [, formAction, isPending] = useActionState(async () => {
     const validation = await wordCardForm.trigger();
-    if (!validation) return { isSuccess: false, error: { message: t("save.invalidForm") } };
+    if (!validation)
+      return { isSuccess: false, error: { message: t("editForm.save.invalidForm") } };
 
     const values = wordCardForm.getValues();
     const result = await updateWordCard(wordCard.id, values).catch((err: unknown) => {
-      toast.error(t("save.error"), {
+      toast.error(t("editForm.save.error"), {
         description: err instanceof Error ? err.message : tCommon("error.database"),
       });
     });
     if (!result) return;
     upsertWordCard(result);
-    toast.success(t("save.success"));
+    toast.success(t("editForm.save.success"));
     handleEndEditing();
   }, null);
 
@@ -73,7 +76,7 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
       <form className="appear flex flex-col gap-6 p-4" action={formAction}>
         <FlexRow className="items-center gap-3 pt-4">
           <Headline size={20} mx={1} className="mr-auto">
-            {t("title")}
+            {t("editForm.title")}
           </Headline>
           <Button variant="outline">{tCommon("save")}</Button>
           <Button variant="outline" onClick={handleEndEditing} type="button">
@@ -87,9 +90,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="entry"
           render={({ field }) => (
             <InputItem
-              label={t("entry.label")}
-              description={t("entry.description")}
-              placeholder={t("entry.placeholder")}
+              label={t("editForm.entry.label")}
+              description={t("editForm.entry.description")}
+              placeholder={t("editForm.entry.placeholder")}
               autoComplete="off"
               hiddenDescription
               i18nNameSpace="wordbook.editForm.entry"
@@ -102,9 +105,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="phonetics"
           render={({ field }) => (
             <InputItem
-              label={t("phonetics.label")}
-              description={t("phonetics.description")}
-              placeholder={t("phonetics.placeholder")}
+              label={t("editForm.phonetics.label")}
+              description={t("editForm.phonetics.description")}
+              placeholder={t("editForm.phonetics.placeholder")}
               autoComplete="off"
               hiddenDescription
               i18nNameSpace="wordbook.editForm.phonetics"
@@ -117,9 +120,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="definitions"
           render={({ field }) => (
             <TextareaItem
-              label={t("definitions.label")}
-              description={t("definitions.description")}
-              placeholder={t("definitions.placeholder")}
+              label={t("editForm.definitions.label")}
+              description={t("editForm.definitions.description")}
+              placeholder={t("editForm.definitions.placeholder")}
               className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.definitions"
               {...field}
@@ -131,9 +134,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="example1"
           render={({ field }) => (
             <TextareaItem
-              label={`${t("example.label")}-1`}
-              description={t("example.description")}
-              placeholder={t("example.placeholder")}
+              label={`${t("editForm.example.label")}-1`}
+              description={t("editForm.example.description")}
+              placeholder={t("editForm.example.placeholder")}
               className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
               {...field}
@@ -145,9 +148,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="example2"
           render={({ field }) => (
             <TextareaItem
-              label={`${t("example.label")}-2`}
-              description={t("example.description")}
-              placeholder={t("example.placeholder")}
+              label={`${t("editForm.example.label")}-2`}
+              description={t("editForm.example.description")}
+              placeholder={t("editForm.example.placeholder")}
               className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
               {...field}
@@ -159,9 +162,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="example3"
           render={({ field }) => (
             <TextareaItem
-              label={`${t("example.label")}-3`}
-              description={t("example.description")}
-              placeholder={t("example.placeholder")}
+              label={`${t("editForm.example.label")}-3`}
+              description={t("editForm.example.description")}
+              placeholder={t("editForm.example.placeholder")}
               className="field-sizing-content"
               i18nNameSpace="wordbook.editForm.example"
               {...field}
@@ -173,9 +176,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="collocations"
           render={({ field }) => (
             <InputItem
-              label={t("collocations.label")}
-              description={t("collocations.description")}
-              placeholder={t("collocations.placeholder")}
+              label={t("editForm.collocations.label")}
+              description={t("editForm.collocations.description")}
+              placeholder={t("editForm.collocations.placeholder")}
               i18nNameSpace="wordbook.editForm.collocations"
               {...field}
             />
@@ -186,9 +189,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="derivatives"
           render={({ field }) => (
             <InputItem
-              label={t("derivatives.label")}
-              description={t("derivatives.description")}
-              placeholder={t("derivatives.placeholder")}
+              label={t("editForm.derivatives.label")}
+              description={t("editForm.derivatives.description")}
+              placeholder={t("editForm.derivatives.placeholder")}
               i18nNameSpace="wordbook.editForm.derivatives"
               {...field}
             />
@@ -199,9 +202,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="synonyms"
           render={({ field }) => (
             <InputItem
-              label={t("synonyms.label")}
-              description={t("synonyms.description")}
-              placeholder={t("synonyms.placeholder")}
+              label={t("editForm.synonyms.label")}
+              description={t("editForm.synonyms.description")}
+              placeholder={t("editForm.synonyms.placeholder")}
               i18nNameSpace="wordbook.editForm.synonyms"
               {...field}
             />
@@ -212,9 +215,9 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="antonyms"
           render={({ field }) => (
             <InputItem
-              label={t("antonyms.label")}
-              description={t("antonyms.description")}
-              placeholder={t("antonyms.placeholder")}
+              label={t("editForm.antonyms.label")}
+              description={t("editForm.antonyms.description")}
+              placeholder={t("editForm.antonyms.placeholder")}
               i18nNameSpace="wordbook.editForm.antonyms"
               {...field}
             />
@@ -225,13 +228,34 @@ export const EditForm: React.FC<Props> = ({ wordCard }) => {
           name="note"
           render={({ field }) => (
             <TextareaItem
-              label={t("note.label")}
-              description={t("note.description")}
-              placeholder={t("note.placeholder")}
+              label={t("editForm.note.label")}
+              description={t("editForm.note.description")}
+              placeholder={t("editForm.note.placeholder")}
               className="h-48"
               i18nNameSpace="wordbook.editForm.note"
               {...field}
             />
+          )}
+        />
+        <FormField
+          control={wordCardForm.control}
+          name="priority"
+          render={() => (
+            <SelectFormItem
+              label={t("editForm.priority.label")}
+              value={wordCardForm.getValues("priority")}
+              onValueChange={(value) => {
+                wordCardForm.setValue("priority", value as Priority);
+              }}
+              description={t("editForm.priority.description")}
+              placeholder={t("editForm.priority.placeholder")}
+            >
+              {priorityEnum.enumValues.map((priority) => (
+                <SelectItem key={priority} value={priority}>
+                  {t(`priority.${priority}`)}
+                </SelectItem>
+              ))}
+            </SelectFormItem>
           )}
         />
         <Separator />

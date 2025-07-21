@@ -23,6 +23,7 @@ export const getWordCardFormData = (wordCard?: WordCard) => {
     note: wordCard?.note ?? "",
     language: wordCard?.language ?? "en-US",
     translationLanguage: wordCard?.translationLanguage ?? "ja",
+    priority: wordCard?.priority ?? "high",
   };
 };
 

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { POS } from "@/constants";
 import { LANGUAGE_CODES } from "@/drizzle/schema";
+import { priorityEnum } from "@/drizzle/schema/priority";
 
 /**
  * AIワードカードリクエストスキーマ
@@ -29,6 +30,11 @@ export const wordcardBase = z.object({
     ),
   language: z.enum(LANGUAGE_CODES).describe("Language of the wordcard"),
   translationLanguage: z.enum(LANGUAGE_CODES).describe("Language of the translation"),
+  priority: z
+    .enum(priorityEnum.enumValues)
+    .describe(
+      "Priority of the wordcard, divided into three levels: high, medium, and low. In terms of CEFR, please categorize with A1, A2, B1, and B2 as high, C1 as medium, and C2 or words only seen in literary works are low—that's the standard. Please make sure to categorize them with learning efficiency and actual usage frequency as your top priorities, without any bias.",
+    ),
 });
 
 /**

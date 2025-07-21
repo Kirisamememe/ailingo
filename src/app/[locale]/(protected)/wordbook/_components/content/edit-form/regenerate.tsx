@@ -79,6 +79,7 @@ export const Regenerate: React.FC<Props> = ({ form }) => {
     form.setValue("synonyms", wordCard.synonyms);
     form.setValue("antonyms", wordCard.antonyms);
     form.setValue("tags", wordCard.tags?.filter((tag) => !!tag) ?? []);
+    form.setValue("priority", wordCard.priority ?? "high");
   }, [form, isLoading, object?.wordcards]);
 
   return (
