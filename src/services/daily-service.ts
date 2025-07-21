@@ -2,6 +2,7 @@ import "server-only";
 import { and, desc, eq } from "drizzle-orm";
 import { db, dbExceptionHandler } from "@/lib/db";
 import { dailyLearning } from "@/drizzle/schema";
+import type { DailyLearningNewWord, DailyLearningReviewWord } from "@/types/db/daily";
 
 class DailyService {
   /**
@@ -45,16 +46,16 @@ class DailyService {
   async createDailyLearning(
     userId: string,
     date: string,
-    newWords: string,
-    reviewWords: string | undefined,
+    newEntries: DailyLearningNewWord,
+    reviewEntries: DailyLearningReviewWord,
   ) {
     await db
       .insert(dailyLearning)
       .values({
         userId,
         date,
-        newWords,
-        reviewWords,
+        newEntries,
+        reviewEntries,
       })
       .catch(dbExceptionHandler);
   }
