@@ -25,6 +25,7 @@ export const POST = auth(async function POST(req) {
     translationLanguage,
     type,
     entries,
+    numberOfQuestions,
   }: z.infer<typeof multipleChoiceQuestionAIRequestSchema> = await req.json();
 
   /**
@@ -76,10 +77,21 @@ export const POST = auth(async function POST(req) {
 
     ${examplesSection}
 
+    ## Vocabulary Entries for Question Creation
     Base the questions on these vocabulary entries:
     ${entriesString}
 
-    Requirements:
+    ## Important Guidelines for Using Vocabulary Entries:
+    - **Purpose**: The goal is to help learners study vocabulary and grammar together
+    - **Flexibility**: You do NOT need to create exactly one question per entry
+    - **Entry Placement**: Each entry can appear as a choice option, in the question text, or in both - whatever creates the highest quality question. The location of the entry is not important; the educational value of the question is what matters most.
+    - **Usage Requirement**: All provided entries should be used appropriately according to their definitions throughout the question set
+    - **Repetition Welcome**: The same entry can appear multiple times across different questions
+    - **Context Variety**: Use entries in different grammatical contexts and sentence structures
+    - **Learning Focus**: Prioritize meaningful language learning over strict adherence to entry distribution
+
+    ## Requirements:
+    - Generate exactly ${numberOfQuestions} questions total
     - Each question should have at least 4 choices
     - Include clear explanations for each answer
     - Provide translations for questions and explanations in ${translationLanguageName}

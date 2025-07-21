@@ -15,6 +15,7 @@ export const multipleChoiceQuestionAIRequestSchema = z.object({
   translationLanguage: z.enum(LANGUAGE_CODES),
   type: z.enum(multipleChoiceQuestionType.enumValues).optional(),
   difficulty: z.enum(multipleChoiceQuestionDifficulty.enumValues).optional(),
+  numberOfQuestions: z.number().min(5).max(15),
   entries: z
     .array(
       z.object({
