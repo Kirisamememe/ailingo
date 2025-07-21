@@ -2,7 +2,7 @@ import "server-only";
 import { and, desc, eq } from "drizzle-orm";
 import { db, dbExceptionHandler } from "@/lib/db";
 import { dailyLearning } from "@/drizzle/schema";
-import type { DailyLearningNewWord, DailyLearningReviewWord } from "@/types/db/daily";
+import type { DailyLearningNewWord, DailyLearningReviewWord } from "@/types/db";
 
 class DailyService {
   /**
