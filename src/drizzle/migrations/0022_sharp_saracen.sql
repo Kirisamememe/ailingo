@@ -1,0 +1,1 @@
+ALTER TABLE "multiple_choice_question" ADD COLUMN "is_single_choice" boolean DEFAULT true NOT NULL;
