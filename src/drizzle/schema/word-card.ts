@@ -10,6 +10,7 @@ import {
   timestamp,
 } from "drizzle-orm/pg-core";
 import { language } from "./language";
+import { priorityEnum } from "./priority";
 import { users } from "./users";
 
 /**
@@ -46,6 +47,7 @@ export const wordCard = pgTable(
     language: language().notNull(),
     translationLanguage: language("translation_language").notNull(),
     tags: text("tags").array(),
+    priority: priorityEnum("priority").default("medium").notNull(),
   },
   (table) => [
     foreignKey({

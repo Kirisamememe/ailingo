@@ -6,3 +6,8 @@ export * from "./word-card";
 export * from "./verification-token";
 export * from "./language";
 export * from "./daily";
+export * from "./question-tag";
+export * from "./multiple-choice-question";
+export * from "./generated-reading";
+export * from "./multiple-choice-answer";
+export * from "./cloze-test-question";
