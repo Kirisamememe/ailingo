@@ -26,7 +26,8 @@ export const dailyLearning = pgTable(
       .notNull(),
     reviewEntries: jsonb("review_entries")
       .$type<{ id: number; entry: string }[]>()
-      .default(sql`'[]'::jsonb`),
+      .default(sql`'[]'::jsonb`)
+      .notNull(),
     createdAt: timestamp("created_at", { precision: 3 })
       .default(sql`CURRENT_TIMESTAMP`)
       .notNull(),

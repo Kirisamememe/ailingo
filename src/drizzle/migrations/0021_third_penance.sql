@@ -1,0 +1,1 @@
+ALTER TABLE "daily_learning" ALTER COLUMN "review_entries" SET NOT NULL;
