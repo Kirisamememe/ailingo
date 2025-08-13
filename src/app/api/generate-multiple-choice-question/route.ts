@@ -26,6 +26,7 @@ export const POST = auth(async function POST(req) {
     type,
     entries,
     numberOfQuestions,
+    difficulty,
   }: z.infer<typeof multipleChoiceQuestionAIRequestSchema> = await req.json();
 
   /**
@@ -36,12 +37,11 @@ export const POST = auth(async function POST(req) {
 
     ## Question Types Available
     - FILL_IN_BLANK: Fill in the blank with the most appropriate choice
-    - SELECT_FOR_UNDERLINED: Select the best option for the underlined part (synonym/antonym, definition, usage similarity/difference)
-    - COMPREHENSION: Read the passage and answer the question
+    - SELECT_FOR_UNDERLINED: Select the best option for the underlined part (usage similarity selection)
     - ARRANGEMENT: Choose the correct word order from the given options
 
     ## Instructions
-    1. Create questions that are appropriate for the specified difficulty level
+    1. Create questions that are appropriate for the specified difficulty level: ${difficulty}
     2. Ensure all choices are plausible but only one (or specified number) is correct
     3. Provide clear, educational explanations
     4. For underlined selection questions, use <u>underline</u> to mark the target word/phrase
@@ -63,7 +63,7 @@ export const POST = auth(async function POST(req) {
 
   const typeInstruction = type
     ? `Generate questions ONLY of type "${type}".`
-    : "Generate questions using a random mix of all available types (FILL_IN_BLANK, SELECT_FOR_UNDERLINED, COMPREHENSION, ARRANGEMENT).";
+    : "Generate questions using a random mix of all available types (FILL_IN_BLANK, SELECT_FOR_UNDERLINED, ARRANGEMENT).";
 
   // typeに応じて例題を選択
   const examplesSection = type
@@ -71,36 +71,26 @@ export const POST = auth(async function POST(req) {
     : `## Examples\n${Object.values(QUESTION_EXAMPLES).join("\n")}`;
 
   const prompt = `
-    Generate appropriate multiple-choice questions for learning ${learningLanguageName} with translations in ${translationLanguageName}.
+    Create ${numberOfQuestions} grammar-focused multiple-choice questions in ${learningLanguageName} with ${translationLanguageName} translations. The difficulty level is ${difficulty}.
 
     ${typeInstruction}
 
     ${examplesSection}
 
-    ## Vocabulary Entries for Question Creation
-    Base the questions on these vocabulary entries:
+    ## Vocabulary Context:
     ${entriesString}
 
-    ## Important Guidelines for Using Vocabulary Entries:
-    - **Purpose**: The goal is to help learners study vocabulary and grammar together
-    - **Flexibility**: You do NOT need to create exactly one question per entry
-    - **Entry Placement**: Each entry can appear as a choice option, in the question text, or in both - whatever creates the highest quality question. The location of the entry is not important; the educational value of the question is what matters most.
-    - **Usage Requirement**: All provided entries should be used appropriately according to their definitions throughout the question set
-    - **Repetition Welcome**: The same entry can appear multiple times across different questions
-    - **Context Variety**: Use entries in different grammatical contexts and sentence structures
-    - **Learning Focus**: Prioritize meaningful language learning over strict adherence to entry distribution
+    ## Core Rules:
+    1. **Grammar Focus Only**: Create ONLY grammar-related questions. NO simple vocabulary questions.
+    2. **Avoid User Entries in Choices**: Do NOT use the provided vocabulary entries as answer choices when possible.
+    3. **Question Integration**: Use the vocabulary entries naturally within question contexts to demonstrate grammar usage.
+    4. **Choice Strategy**: Create grammatically challenging distractors that test specific grammar knowledge.
 
-    ## Requirements:
-    - Generate exactly ${numberOfQuestions} questions total
-    - Each question should have at least 4 choices
-    - Include clear explanations for each answer
-    - Provide translations for questions and explanations in ${translationLanguageName}
-    - For ARRANGEMENT type questions, choicesTranslation can be empty array as word order doesn't need translation
-    - Make questions engaging and educational
-    - Vary difficulty appropriately
-    - Ensure cultural sensitivity and inclusivity
-
-    Focus on creating questions that test genuine understanding rather than mere memorization.
+    ## Output Requirements:
+    - ${numberOfQuestions} questions with 4 choices each
+    - Clear explanations focusing on grammar rules
+    - Translations in ${translationLanguageName}
+    - Educational value over vocabulary memorization
   `;
 
   return ai
