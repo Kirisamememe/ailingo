@@ -29,7 +29,7 @@ export const WordbookList = () => {
   const entriesArray = useMemo(() => {
     return entries
       .split(",")
-      .map((entry) => entry.trim())
+      .map((entry) => entry.trim().toLowerCase())
       .filter(Boolean);
   }, [entries]);
 
