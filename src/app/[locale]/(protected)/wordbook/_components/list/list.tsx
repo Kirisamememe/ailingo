@@ -1,10 +1,14 @@
 "use client";
 
 import { useEffect, useMemo } from "react";
+import { useWatch } from "react-hook-form";
+import { cn } from "@/lib/utils";
 import { FlexColumn } from "@/components/ui/flexbox";
+import { VirtualList } from "@/components/ui/virtual-list";
 import { ListItem } from "./list-item";
 import { WordbookListNew } from "./list-new";
 import { WordbookListStreaming } from "./list-streaming";
+import { useGenerateForm } from "../../_hooks/generate-form-provider";
 import { useWordbookStore } from "../../_hooks/store-provider";
 
 /**
@@ -15,6 +19,19 @@ export const WordbookList = () => {
   const nextWord = useWordbookStore((state) => state.nextWord);
   const prevWord = useWordbookStore((state) => state.prevWord);
   const closeDrawer = useWordbookStore((state) => state.closeDrawer);
+
+  const {
+    form: { control },
+  } = useGenerateForm();
+
+  const entries = useWatch({ control, name: "entries" });
+
+  const entriesArray = useMemo(() => {
+    return entries
+      .split(",")
+      .map((entry) => entry.trim())
+      .filter(Boolean);
+  }, [entries]);
 
   useEffect(() => {
     const onFocusChange = (e: KeyboardEvent) => {
@@ -37,16 +54,29 @@ export const WordbookList = () => {
   }, [prevWord, nextWord, closeDrawer]);
 
   const wordCards = useMemo(() => {
-    return [...wordCardMap.values()];
-  }, [wordCardMap]);
+    let filtered = [...wordCardMap.values()];
+
+    if (entriesArray.length > 0) {
+      filtered = filtered.filter((wordCard) => {
+        return entriesArray.some((entry) => wordCard.entry.includes(entry));
+      });
+    }
+
+    return filtered;
+  }, [wordCardMap, entriesArray]);
 
   return (
-    <FlexColumn className="mb-24 w-full">
+    <FlexColumn className={cn("w-full px-4 sm:pt-5 [&_[data-content-type=meaning]]:hidden")}>
       <WordbookListNew />
       <WordbookListStreaming />
-      {wordCards.map((wordCard) => (
-        <ListItem key={wordCard.id} wordCard={wordCard} />
-      ))}
+      <VirtualList
+        itemCount={wordCards.length}
+        itemHeight={92}
+        overScan={8}
+        height={"calc(100vh - 12.5rem)"}
+      >
+        {(index) => <ListItem key={wordCards[index].id} wordCard={wordCards[index]} />}
+      </VirtualList>
     </FlexColumn>
   );
 };

@@ -26,6 +26,7 @@ export const ListItemView: React.FC<Props> = ({ ref, onClick, listItem, isStream
     <button
       ref={ref}
       data-word-card-id={id}
+      data-word-card-entry={entry}
       type="button"
       onClick={onClick}
       disabled={isStreaming}
@@ -63,7 +64,14 @@ export const ListItemView: React.FC<Props> = ({ ref, onClick, listItem, isStream
                   posSchema.safeParse(definition.pos).success &&
                   t(definition.pos)}
               </Badge>
-              <Caption className="mr-4 h-4 text-sm" color="foreground">
+              <Caption data-content-type="meaning" className="mr-4 h-4 text-sm" color="foreground">
+                {definition?.meaning}
+              </Caption>
+              <Caption
+                data-content-type="translation"
+                className="mr-4 h-4 text-sm"
+                color="foreground"
+              >
                 {definition?.translation ?? definition?.meaning}
               </Caption>
             </Fragment>
