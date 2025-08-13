@@ -24,10 +24,11 @@ export const planDailyLearning = async (userId: string) => {
       JSON.stringify(newEntries) === JSON.stringify(lastLearning.newEntries) &&
       JSON.stringify(reviewEntries) === JSON.stringify(lastLearning.reviewEntries)
     ) {
-      await dailyService.updateDailyLearning(userId, lastLearning.id, date);
-      return;
+      return await dailyService.updateDailyLearning(userId, lastLearning.id, date);
     }
 
-    await dailyService.createDailyLearning(userId, date, newEntries, reviewEntries);
+    return await dailyService.createDailyLearning(userId, date, newEntries, reviewEntries);
   }
+
+  return lastLearning;
 };
