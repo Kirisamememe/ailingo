@@ -1,10 +1,10 @@
 import { Badge } from "@/components/ui/badge";
 import { FlexColumn, FlexRow } from "@/components/ui/flexbox";
 import { Caption, Headline } from "@/components/ui/typography";
-import type { DailyLearningNewWord } from "@/types/db/daily";
+import type { DailyLearningNewEntry } from "@/types/db/daily";
 
 type Props = {
-  newEntries: DailyLearningNewWord;
+  newEntries: DailyLearningNewEntry[];
 };
 
 /**
