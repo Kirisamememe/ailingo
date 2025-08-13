@@ -5,6 +5,7 @@ import { DisplayWhenMobile } from "@/components/media-query-wrapper";
 import { ScrollStateProvider } from "@/components/providers";
 import { Header } from "./_components/nav/header";
 import { Nav } from "./_components/nav/nav";
+import { GlobalStoreProvider } from "./_hooks/global-store-provider";
 import { planDailyLearning } from "./_utils";
 
 type Props = {
@@ -16,18 +17,23 @@ const RootLayout: React.FC<Props> = async ({ children, params }) => {
   const { operatorId } = await getSession();
   const { locale } = await params;
 
-  await planDailyLearning(operatorId);
+  const dailyLearning = await planDailyLearning(operatorId);
 
   return (
-    <BaseLayout locale={locale}>
-      <ScrollStateProvider>
-        <Nav />
-        <DisplayWhenMobile>
-          <Header />
-        </DisplayWhenMobile>
-        <main className="grid min-h-dvh place-content-center">{children}</main>
-      </ScrollStateProvider>
-    </BaseLayout>
+    <GlobalStoreProvider
+      dailyNewWords={dailyLearning?.newEntries ?? []}
+      dailyReviewWords={dailyLearning?.reviewEntries ?? []}
+    >
+      <BaseLayout locale={locale}>
+        <ScrollStateProvider>
+          <Nav />
+          <DisplayWhenMobile>
+            <Header />
+          </DisplayWhenMobile>
+          <main className="flex flex-col items-center">{children}</main>
+        </ScrollStateProvider>
+      </BaseLayout>
+    </GlobalStoreProvider>
   );
 };
 
