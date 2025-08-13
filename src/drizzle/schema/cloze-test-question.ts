@@ -1,7 +1,6 @@
 import { sql } from "drizzle-orm";
 import { boolean, foreignKey, integer, pgTable, text, timestamp } from "drizzle-orm/pg-core";
 import { language } from "./language";
-import { questionTag } from "./question-tag";
 import { users } from "./users";
 
 /**
@@ -30,7 +29,7 @@ export const clozeTestQuestion = pgTable(
     /** 翻訳言語 */
     translationLanguage: language("translation_language").notNull(),
     /** 問題のタグ（文法項目など） */
-    tags: questionTag().array().notNull(),
+    tags: text().array().notNull(),
     /** 公開設定 */
     isPublic: boolean("is_public").default(true).notNull(),
     /** 正解数 */

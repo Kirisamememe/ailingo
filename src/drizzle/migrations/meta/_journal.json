@@ -169,6 +169,20 @@
       "when": 1753088973316,
       "tag": "0023_common_blob",
       "breakpoints": true
+    },
+    {
+      "idx": 24,
+      "version": "7",
+      "when": 1753114688954,
+      "tag": "0024_left_fenris",
+      "breakpoints": true
+    },
+    {
+      "idx": 25,
+      "version": "7",
+      "when": 1753115706504,
+      "tag": "0025_minor_black_tom",
+      "breakpoints": true
     }
   ]
 }

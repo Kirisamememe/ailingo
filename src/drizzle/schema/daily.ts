@@ -21,11 +21,11 @@ export const dailyLearning = pgTable(
     date: date("date", { mode: "string" }).notNull(),
     userId: text("user_id").notNull(),
     newEntries: jsonb("new_entries")
-      .$type<{ id: number; entry: string }[]>()
+      .$type<{ id: number; entry: string; definitions: string }[]>()
       .default(sql`'[]'::jsonb`)
       .notNull(),
     reviewEntries: jsonb("review_entries")
-      .$type<{ id: number; entry: string }[]>()
+      .$type<{ id: number; entry: string; definitions: string }[]>()
       .default(sql`'[]'::jsonb`)
       .notNull(),
     createdAt: timestamp("created_at", { precision: 3 })

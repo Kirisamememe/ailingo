@@ -11,7 +11,6 @@ import {
 } from "drizzle-orm/pg-core";
 import { createInsertSchema } from "drizzle-zod";
 import { language } from "./language";
-import { questionTag } from "./question-tag";
 import { users } from "./users";
 
 /**
@@ -20,7 +19,6 @@ import { users } from "./users";
 export const multipleChoiceQuestionType = pgEnum("multiple_choice_question_type", [
   "FILL_IN_BLANK", // 穴埋め形式
   "SELECT_FOR_UNDERLINED", // 下線部選択形式
-  "COMPREHENSION", // 読解・聴解選択形式
   "ARRANGEMENT", // 並び替え選択形式
 ]);
 
@@ -59,7 +57,7 @@ export const multipleChoiceQuestion = pgTable(
     authorId: text("author_id").notNull(),
     language: language().notNull(),
     translationLanguage: language("translation_language").notNull(),
-    tags: questionTag().array().notNull(),
+    tags: text().array().notNull(),
     isPublic: boolean("is_public").default(true).notNull(),
     isSingleChoice: boolean("is_single_choice").default(true).notNull(),
     correctCount: integer("correct_count").default(0).notNull(),
