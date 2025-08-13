@@ -14,6 +14,18 @@ class MultipleChoiceQuestionService {
       .returning()
       .catch(dbExceptionHandler);
   }
+
+  /**
+   * 選択問題を保存する
+   */
+  async saveMultipleChoiceQuestion(question: MultipleChoiceQuestionInsert) {
+    const newQuestion = await db
+      .insert(multipleChoiceQuestion)
+      .values(question)
+      .returning()
+      .catch(dbExceptionHandler);
+    return newQuestion[0] ?? undefined;
+  }
 }
 
 const multipleChoiceQuestionService = new MultipleChoiceQuestionService();

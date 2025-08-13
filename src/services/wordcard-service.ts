@@ -90,7 +90,7 @@ class WordCardService {
    */
   async getDailyNewWords(userId: string, number: number) {
     const result = await db
-      .select({ id: wordCard.id, entry: wordCard.entry })
+      .select({ id: wordCard.id, entry: wordCard.entry, definitions: wordCard.definitions })
       .from(wordCard)
       .where(
         and(
@@ -116,7 +116,7 @@ class WordCardService {
    */
   async getDailyReviewWords(userId: string, date: string) {
     const result = await db
-      .select({ id: wordCard.id, entry: wordCard.entry })
+      .select({ id: wordCard.id, entry: wordCard.entry, definitions: wordCard.definitions })
       .from(wordCard)
       .where(
         and(

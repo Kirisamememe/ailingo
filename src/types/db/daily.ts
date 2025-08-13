@@ -8,9 +8,9 @@ export type DailyLearning = typeof dailyLearning.$inferSelect;
 /**
  * 学習履歴の新規単語
  */
-export type DailyLearningNewWord = DailyLearning["newEntries"];
+export type DailyLearningNewEntry = DailyLearning["newEntries"][number];
 
 /**
  * 学習履歴の復習単語
  */
-export type DailyLearningReviewWord = DailyLearning["reviewEntries"];
+export type DailyLearningReviewEntry = DailyLearning["reviewEntries"][number];

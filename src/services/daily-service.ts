@@ -2,7 +2,7 @@ import "server-only";
 import { and, desc, eq } from "drizzle-orm";
 import { db, dbExceptionHandler } from "@/lib/db";
 import { dailyLearning } from "@/drizzle/schema";
-import type { DailyLearningNewWord, DailyLearningReviewWord } from "@/types/db";
+import type { DailyLearningNewEntry, DailyLearningReviewEntry } from "@/types/db";
 
 class DailyService {
   /**
@@ -46,10 +46,10 @@ class DailyService {
   async createDailyLearning(
     userId: string,
     date: string,
-    newEntries: DailyLearningNewWord,
-    reviewEntries: DailyLearningReviewWord,
+    newEntries: DailyLearningNewEntry[],
+    reviewEntries: DailyLearningReviewEntry[],
   ) {
-    await db
+    const result = await db
       .insert(dailyLearning)
       .values({
         userId,
@@ -57,18 +57,22 @@ class DailyService {
         newEntries,
         reviewEntries,
       })
+      .returning()
       .catch(dbExceptionHandler);
+    return result.length ? result[0] : undefined;
   }
 
   /**
    * 今日の学習の日付を更新する
    */
   async updateDailyLearning(userId: string, learningId: number, date: string) {
-    await db
+    const result = await db
       .update(dailyLearning)
       .set({ date })
       .where(and(eq(dailyLearning.userId, userId), eq(dailyLearning.id, learningId)))
+      .returning()
       .catch(dbExceptionHandler);
+    return result.length ? result[0] : undefined;
   }
 }
 
