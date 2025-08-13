@@ -93,11 +93,11 @@
         "invalidForm": "無効なフォーム"
       },
       "entry": {
-        "label": "見出し",
-        "placeholder": "見出しを入力",
-        "description": "単語カードの見出しを入力してください。",
-        "entryIsRequired": "見出しは必須です",
-        "entryIsTooLong": "見出しは100文字以内で入力してください。"
+        "label": "語彙",
+        "placeholder": "語彙を入力",
+        "description": "語彙を入力してください。",
+        "entryIsRequired": "語彙は必須です",
+        "entryIsTooLong": "語彙は100文字以内で入力してください。"
       },
       "phonetics": {
         "label": "発音",
@@ -215,6 +215,51 @@
         "label": "フィードバック言語",
         "placeholder": "言語を選択",
         "description": "作文のフィードバックの言語を選択してください。"
+      }
+    }
+  },
+  "input": {
+    "multipleChoiceQuestion": {
+      "title": "複数選択問題",
+      "generateWithDailyWords": "デイリーの単語で生成",
+      "generateWithRandomWords": "ランダムな単語で生成",
+      "stop": "停止",
+      "generateForm": {
+        "model": {
+          "label": "モデル",
+          "placeholder": "モデルを選択",
+          "description": "モデルを選択してください。"
+        },
+        "learningLanguage": {
+          "label": "学習言語",
+          "placeholder": "言語を選択",
+          "description": "単語の言語を選択してください。"
+        },
+        "translationLanguage": {
+          "label": "翻訳言語",
+          "placeholder": "言語を選択",
+          "description": "定義と例文の翻訳言語を選択してください。"
+        },
+        "numberOfQuestions": {
+          "label": "問題数",
+          "placeholder": "問題数を入力",
+          "description": "問題数を入力してください。"
+        },
+        "type": {
+          "label": "問題タイプ",
+          "placeholder": "問題タイプを選択",
+          "description": "問題タイプを選択してください。"
+        },
+        "difficulty": {
+          "label": "難易度",
+          "placeholder": "難易度を選択",
+          "description": "難易度を選択してください。"
+        },
+        "entries": {
+          "label": "語彙",
+          "placeholder": "語彙を入力",
+          "description": "語彙を入力してください。"
+        }
       }
     }
   },

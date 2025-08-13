@@ -218,6 +218,51 @@
       }
     }
   },
+  "input": {
+    "multipleChoiceQuestion": {
+      "title": "Multiple Choice Question",
+      "generateWithDailyWords": "Generate with Daily Words",
+      "generateWithRandomWords": "Generate with Random Words",
+      "stop": "Stop",
+      "generateForm": {
+        "model": {
+          "label": "Model",
+          "placeholder": "Select a model",
+          "description": "Select the model you want to use to generate a wordcard."
+        },
+        "learningLanguage": {
+          "label": "Learning Language",
+          "placeholder": "Select a language",
+          "description": "Select the language of the words."
+        },
+        "translationLanguage": {
+          "label": "Translation Language",
+          "placeholder": "Select a language",
+          "description": "Select the language for translating definitions and examples."
+        },
+        "numberOfQuestions": {
+          "label": "Number of Questions",
+          "placeholder": "Enter the number of questions",
+          "description": "Enter the number of questions you want to generate."
+        },
+        "type": {
+          "label": "Type",
+          "placeholder": "Select a type",
+          "description": "Select the type of the questions you want to generate."
+        },
+        "difficulty": {
+          "label": "Difficulty",
+          "placeholder": "Select a difficulty",
+          "description": "Select the difficulty of the questions you want to generate."
+        },
+        "entries": {
+          "label": "Entries",
+          "placeholder": "Enter the entries",
+          "description": "Enter the entries you want to generate a wordcard for."
+        }
+      }
+    }
+  },
   "POS": {
     "NOUN": "noun",
     "MASCULINE_NOUN": "noun[masculine]",
