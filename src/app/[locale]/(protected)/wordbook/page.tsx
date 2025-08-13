@@ -1,7 +1,7 @@
 import type { AIModel } from "@/lib/ai";
 import { modelListTuple } from "@/lib/ai";
 import { getSession } from "@/lib/auth";
-import { InsetLayoutWithPadding } from "@/components/layout";
+import { InsetLayoutNoPadding } from "@/components/layout";
 import { WordbookContent } from "./_components/content";
 import { WordbookList } from "./_components/list";
 import { GenerateFormProvider } from "./_hooks/generate-form-provider";
@@ -23,10 +23,10 @@ const WordbookPage = async () => {
   return (
     <StoreProvider wordCards={wordCards}>
       <GenerateFormProvider model={model} translationLanguage={translationLanguage}>
-        <InsetLayoutWithPadding className="w-full max-w-360 flex-row gap-0 sm:gap-4 sm:pt-5">
+        <InsetLayoutNoPadding className="w-full max-w-360 flex-row">
           <WordbookList />
           <WordbookContent />
-        </InsetLayoutWithPadding>
+        </InsetLayoutNoPadding>
       </GenerateFormProvider>
     </StoreProvider>
   );
