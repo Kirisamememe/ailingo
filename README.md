@@ -11,9 +11,7 @@
 
 ### 動作環境
 
-- volta: 2.0.2
-- Node: 22.15.x
-- npm: 10.9.x
+- Bun: 1.3.14 以上
 
 ### エディタ
 
@@ -24,7 +22,7 @@
 ```bash
 git clone git@github.com:Kirisamememe/ailingo.git
 cd ailingo
-npm install
+bun install
 ```
 
 ## 自動生成
@@ -41,16 +39,16 @@ npm install
   - `フォルダー＋index.tsx`で作成するか、`ファイル名.tsx`で作成するかを選択
 
 ```bash
-npm run plop
+bun run plop
 ```
 
 ## ビルド
 
 ```bash
-npm run build
+bun run build
 
 # ビルド結果の動作確認
-npm run start
+bun run start
 ```
 
 ## Gitルール
@@ -59,12 +57,12 @@ npm run start
 
 - Prettier
   - ファイル保存時、コミット時に自動で全ファイルをフォーマット
-  - 全てのファイルをフォーマットする場合は`npm run format:write`で可能
+  - 全てのファイルをフォーマットする場合は`bun run format:write`で可能
 - ESLint
   - コミット時に自動でファイルを解析
   - 対象ファイルは`.js`, `.ts`, `.tsx`
   - エラーを解消しないとコミットできない
-  - `npm run lint`を実行すると任意のタイミングで解析可能(推奨)
+  - `bun run lint`を実行すると任意のタイミングで解析可能(推奨)
 - commitlint
   - コミット時にコミットメッセージを解析
   - コミットメッセージのルールは後述
@@ -110,7 +108,7 @@ npm run start
 ├── next.config.ts         # Next.js設定
 ├── next-env.d.ts          # Next.js型定義
 ├── package.json           # 依存関係と設定
-├── package-lock.json      # 依存関係のロック
+├── bun.lock               # 依存関係のロック
 ├── plopfile.ts            # Plop設定
 ├── postcss.config.mjs     # PostCSS設定
 ├── tsconfig.json          # TypeScript設定

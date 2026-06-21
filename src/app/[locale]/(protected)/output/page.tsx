@@ -22,7 +22,7 @@ const WritingCorrection = async () => {
   const writingCorrections = await writingService.findMany();
 
   return (
-    <InsetLayoutWithPadding className="relative">
+    <InsetLayoutWithPadding className="relative w-full">
       <WritingCorrectionProvider
         model={model}
         targetLanguage={targetLanguage}

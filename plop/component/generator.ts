@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { execSync } from "child_process";
+import { execFileSync } from "child_process";
 import fs from "fs";
 import path from "path";
 import type { NodePlopAPI } from "plop";
@@ -120,7 +120,7 @@ export const setComponentGenerator = (plop: NodePlopAPI): void => {
           console.log("Formatting component with Prettier...");
           try {
             if (fs.existsSync(componentFilePath)) {
-              execSync(`npx prettier --write "${componentFilePath}"`, {
+              execFileSync("bun", ["x", "prettier", "--write", componentFilePath], {
                 stdio: "inherit",
               });
               return "✅ Prettier formatting applied to the generated component.";

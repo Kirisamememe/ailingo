@@ -2,7 +2,10 @@
 
 import type z from "zod";
 import { getSession } from "@/lib/auth";
-import type { multipleChoiceQuestionResponseSchema } from "./_schema";
+import type {
+  multipleChoiceQuestionInsertSchema,
+  multipleChoiceQuestionResponseSchema,
+} from "../_schema";
 import { multipleChoiceQuestionService } from "@/services/multiple-choice-question-service";
 import type { AIModel } from "@/types";
 
@@ -21,4 +24,19 @@ export const createMultipleChoiceQuestions = async (
   }));
 
   return await multipleChoiceQuestionService.saveMultipleChoiceQuestions(questions);
+};
+
+/**
+ * 複数選択問題を作成する
+ */
+export const createMultipleChoiceQuestion = async (
+  values: z.infer<typeof multipleChoiceQuestionInsertSchema>,
+  generatedBy: AIModel,
+) => {
+  const { operatorId } = await getSession();
+  return await multipleChoiceQuestionService.saveMultipleChoiceQuestion({
+    ...values,
+    authorId: operatorId,
+    generatedBy,
+  });
 };

@@ -3,7 +3,6 @@ import {
   LANGUAGE_CODES,
   multipleChoiceQuestionDifficulty,
   multipleChoiceQuestionType,
-  questionTag,
 } from "@/drizzle/schema";
 
 /**
@@ -31,7 +30,12 @@ export const multipleChoiceQuestionInsertSchema = z.object({
     .describe("The correct answers, index of the choices"),
   language: z.enum(LANGUAGE_CODES).describe("The language of the question"),
   translationLanguage: z.enum(LANGUAGE_CODES).describe("The language of the translation"),
-  tags: z.array(z.enum(questionTag.enumValues)).max(10).describe("The tags of the question"),
+  tags: z
+    .array(z.string())
+    .max(10)
+    .describe(
+      "The tags of the question. Just like 'grammar_past_tense', 'grammar_present_tense', 'grammar_future_tense', 'grammar_conditionals_simple', 'grammar_conditionals_mixed', 'grammar_conditionals_wish', 'grammar_subjunctive_present', etc.",
+    ),
   isSingleChoice: z.boolean().describe("Whether the question is a single choice question"),
 });
 

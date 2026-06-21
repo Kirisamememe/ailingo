@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-import { execSync } from "child_process";
+import { execFileSync } from "child_process";
 import path from "path";
 import type { NodePlopAPI } from "plop";
 import { z } from "zod/v4";
@@ -57,7 +57,7 @@ export const setContextGenerator = (plop: NodePlopAPI): void => {
         function formatWithPrettier() {
           console.log("Formatting context with Prettier...");
           try {
-            execSync(`npx prettier --write 'src/{contexts,hooks}/*.{ts,tsx}'`, {
+            execFileSync("bun", ["x", "prettier", "--write", "src/{contexts,hooks}/*.{ts,tsx}"], {
               stdio: "inherit",
             });
             return "✅ Prettier formatting applied to the generated context.";

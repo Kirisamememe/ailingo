@@ -71,8 +71,8 @@ export const WordbookList = () => {
       <WordbookListStreaming />
       <VirtualList
         itemCount={wordCards.length}
-        itemHeight={92}
-        overScan={8}
+        itemHeight={80}
+        overScan={12}
         height={"calc(100vh - 12.5rem)"}
       >
         {(index) => <ListItem key={wordCards[index].id} wordCard={wordCards[index]} />}

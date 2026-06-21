@@ -7,11 +7,13 @@ import { cn } from "@/lib/utils";
 import { SidebarMenuButton } from "@/components/ui/sidebar";
 import { Link } from "@/i18n";
 
+type LinkProps = ComponentPropsWithRef<typeof Link>;
+
 type Props = {
   url: string;
   title: string;
   blank?: boolean;
-} & ComponentPropsWithRef<"a">;
+} & Omit<LinkProps, "href">;
 
 /**
  * NavLink
