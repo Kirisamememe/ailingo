@@ -27,6 +27,7 @@
     "output": "輸出訓練",
     "input": "輸入訓練",
     "profile": "個人資料",
+    "passkey": "通行密鑰",
     "signOut": "登出"
   },
   "sidebar": {
@@ -43,6 +44,7 @@
     "footer": {
       "theme": "主題",
       "profile": "個人資料",
+      "passkey": "通行密鑰",
       "setting": "設定",
       "language": "語言",
       "signOut": "登出"

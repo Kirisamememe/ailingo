@@ -1,8 +1,9 @@
 import type { z } from "zod";
 import { ai } from "@/lib/ai/ai";
+import { requireSession } from "@/lib/auth";
+import { toAuthErrorResponse } from "@/lib/auth/response";
 import type { wordcardRequestSchema } from "@/app/[locale]/(protected)/wordbook/_schema";
 import { wordcardAISchemaArray } from "@/app/[locale]/(protected)/wordbook/_schema";
-import { auth } from "@/auth";
 import { LANGUAGES, LANGUAGE_CODES } from "@/drizzle/schema";
 
 /**
@@ -13,9 +14,13 @@ export const maxDuration = 300;
 /**
  * 記事生成API
  */
-export const POST = auth(async function POST(req) {
-  if (!req.auth) {
-    return new Response("Unauthorized", { status: 401 });
+export const POST = async function POST(req: Request) {
+  try {
+    await requireSession(req);
+  } catch (error) {
+    const authResponse = toAuthErrorResponse(error);
+    if (authResponse) return authResponse;
+    throw error;
   }
 
   const {
@@ -51,4 +56,4 @@ export const POST = auth(async function POST(req) {
   `;
 
   return ai.generate(model, prompt, system, wordcardAISchemaArray).toTextStreamResponse();
-});
+};

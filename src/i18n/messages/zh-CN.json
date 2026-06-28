@@ -27,6 +27,7 @@
     "output": "输出训练",
     "input": "输入训练",
     "profile": "个人资料",
+    "passkey": "通行密钥",
     "signOut": "登出"
   },
   "sidebar": {
@@ -43,6 +44,7 @@
     "footer": {
       "theme": "主题",
       "profile": "个人资料",
+      "passkey": "通行密钥",
       "setting": "设置",
       "language": "语言",
       "signOut": "登出"

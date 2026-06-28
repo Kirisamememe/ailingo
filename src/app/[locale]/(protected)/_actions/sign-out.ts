@@ -1,12 +1,14 @@
 "use server";
 
+import { redirect } from "next/navigation";
 import { getLocale } from "next-intl/server";
-import { signOut } from "@/auth";
+import { destroySession } from "@/lib/auth";
 
 /**
  * サインアウト
  */
 export const signOutAction = async () => {
   const locale = await getLocale();
-  await signOut({ redirectTo: `/${locale}/login` });
+  await destroySession();
+  redirect(`/${locale}/login`);
 };

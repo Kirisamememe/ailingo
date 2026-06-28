@@ -27,6 +27,7 @@
     "output": "アウトプット",
     "input": "インプット",
     "profile": "プロフィール",
+    "passkey": "パスキー",
     "signOut": "ログアウト"
   },
   "sidebar": {
@@ -43,6 +44,7 @@
     "footer": {
       "theme": "テーマ",
       "profile": "プロフィール",
+      "passkey": "パスキー",
       "setting": "設定",
       "language": "言語",
       "signOut": "ログアウト"

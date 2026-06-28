@@ -27,6 +27,7 @@
     "output": "Output",
     "input": "Input",
     "profile": "Profile",
+    "passkey": "Passkey",
     "signOut": "Sign Out"
   },
   "sidebar": {
@@ -43,6 +44,7 @@
     "footer": {
       "theme": "Theme",
       "profile": "Profile",
+      "passkey": "Passkey",
       "setting": "Setting",
       "language": "Language",
       "signOut": "Sign Out"

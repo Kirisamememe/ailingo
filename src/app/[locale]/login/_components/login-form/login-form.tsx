@@ -1,5 +1,6 @@
+import { redirect } from "next/navigation";
+import { getLocale } from "next-intl/server";
 import { LoginFormView } from "./login-form-view";
-import { signIn } from "@/auth";
 
 /**
  * Login form
@@ -7,7 +8,8 @@ import { signIn } from "@/auth";
 export const LoginForm = () => {
   const login = async () => {
     "use server";
-    await signIn("google");
+    const locale = await getLocale();
+    redirect(`/api/auth/google/start?redirectTo=/${locale}/home`);
   };
 
   return <LoginFormView action={login} />;

@@ -1,6 +1,7 @@
-import type { AdapterAccountType } from "@auth/core/adapters";
 import { integer, pgTable, primaryKey, text } from "drizzle-orm/pg-core";
 import { users } from "./users";
+
+type AuthAccountType = "oauth" | "oidc" | "email" | "webauthn";
 
 /**
  * アカウント
@@ -11,7 +12,7 @@ export const accounts = pgTable(
     userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
-    type: text("type").$type<AdapterAccountType>().notNull(),
+    type: text("type").$type<AuthAccountType>().notNull(),
     provider: text("provider").notNull(),
     providerAccountId: text("providerAccountId").notNull(),
     refresh_token: text("refresh_token"),

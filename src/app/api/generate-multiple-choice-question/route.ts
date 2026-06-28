@@ -1,9 +1,10 @@
 import type { z } from "zod";
 import { ai } from "@/lib/ai/ai";
+import { requireSession } from "@/lib/auth";
+import { toAuthErrorResponse } from "@/lib/auth/response";
 import { QUESTION_EXAMPLES } from "@/constants/multiple-choice-question";
 import type { multipleChoiceQuestionAIRequestSchema } from "@/app/[locale]/(protected)/input/_schema/ai-request";
 import { multipleChoiceQuestionResponseSchema } from "@/app/[locale]/(protected)/input/_schema/ai-response";
-import { auth } from "@/auth";
 import { LANGUAGES } from "@/drizzle/schema";
 
 /**
@@ -14,9 +15,13 @@ export const maxDuration = 300;
 /**
  * 記事生成API
  */
-export const POST = auth(async function POST(req) {
-  if (!req.auth) {
-    return new Response("Unauthorized", { status: 401 });
+export const POST = async function POST(req: Request) {
+  try {
+    await requireSession(req);
+  } catch (error) {
+    const authResponse = toAuthErrorResponse(error);
+    if (authResponse) return authResponse;
+    throw error;
   }
 
   const {
@@ -96,4 +101,4 @@ export const POST = auth(async function POST(req) {
   return ai
     .generate(model, prompt, system, multipleChoiceQuestionResponseSchema)
     .toTextStreamResponse();
-});
+};

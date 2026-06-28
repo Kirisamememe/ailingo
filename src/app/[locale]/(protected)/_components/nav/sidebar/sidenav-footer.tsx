@@ -1,5 +1,6 @@
-import { ChevronsUpDown, CircleUser, Cog, LogOut } from "lucide-react";
+import { ChevronsUpDown, CircleUser, KeyRound, LogOut } from "lucide-react";
 import { getTranslations } from "next-intl/server";
+import { getSession } from "@/lib/auth";
 import { LocaleSwitcher } from "@/components/locale-switcher";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -20,25 +21,24 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { signOutAction } from "../../../_actions";
-import { auth } from "@/auth";
 import { Link } from "@/i18n";
 
 /**
  * SideNavFooterContainer
  */
 export const SideNavFooterContainer = async () => {
-  const session = await auth();
+  const session = await getSession();
   const t = await getTranslations("sidebar.footer");
 
   const avatarLabel = (
     <>
       <Avatar className="size-9 group-data-[collapsible=icon]:size-8">
-        {session?.user.image && <AvatarImage src={session.user.image} />}
-        <AvatarFallback>{session?.user.name ?? "USER"}</AvatarFallback>
+        {session.user.image && <AvatarImage src={session.user.image} />}
+        <AvatarFallback>{session.user.name ?? "USER"}</AvatarFallback>
       </Avatar>
       <div className="grid flex-1 text-left text-sm leading-tight">
-        <span className="truncate font-semibold">{session?.user.name ?? ""}</span>
-        <span className="text-muted-foreground truncate text-xs">{session?.user.email}</span>
+        <span className="truncate font-semibold">{session.user.name ?? ""}</span>
+        <span className="text-muted-foreground truncate text-xs">{session.user.email}</span>
       </div>
     </>
   );
@@ -80,17 +80,19 @@ export const SideNavFooterContainer = async () => {
               <DropdownMenuSeparator />
 
               {/* その他諸々 */}
-              <Link href={`/profile/${session?.operatorId}`} scroll={false}>
+              <Link href={`/profile/${session.operatorId}`} scroll={false}>
                 <DropdownMenuItem className="h-9">
                   <CircleUser size={16} />
                   {t("profile")}
                 </DropdownMenuItem>
               </Link>
 
-              <DropdownMenuItem className="h-9" disabled>
-                <Cog size={16} />
-                {t("setting")}
-              </DropdownMenuItem>
+              <Link href="/preference" scroll={false}>
+                <DropdownMenuItem className="h-9">
+                  <KeyRound size={16} />
+                  {t("passkey")}
+                </DropdownMenuItem>
+              </Link>
 
               <DropdownMenuItem asChild className="cursor-pointer">
                 <LocaleSwitcher variant="ghost" className="font-normal" />

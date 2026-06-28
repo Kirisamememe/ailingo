@@ -1,4 +1,4 @@
-import { CircleUser, LogOut } from "lucide-react";
+import { CircleUser, KeyRound, LogOut } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { getSession } from "@/lib/auth";
 import { LocaleSwitcher } from "@/components/locale-switcher";
@@ -43,9 +43,7 @@ export const NavAvatar = async () => {
           {avatar}
           <div className="grid flex-1 text-left text-sm leading-tight">
             <span className="truncate font-semibold">{session.user.name ?? ""}</span>
-            <span className="text-muted-foreground truncate text-xs">
-              {session.user.email ?? ""}
-            </span>
+            <span className="text-muted-foreground truncate text-xs">{session.user.email}</span>
           </div>
         </DropdownMenuLabel>
 
@@ -63,6 +61,13 @@ export const NavAvatar = async () => {
           <DropdownMenuItem className="h-9">
             <CircleUser size={16} />
             {t("profile")}
+          </DropdownMenuItem>
+        </Link>
+
+        <Link href="/preference" scroll={false}>
+          <DropdownMenuItem className="h-9">
+            <KeyRound size={16} />
+            {t("passkey")}
           </DropdownMenuItem>
         </Link>
 

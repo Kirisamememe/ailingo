@@ -2,7 +2,8 @@ import type { z } from "zod";
 import { ai } from "@/lib/ai/ai";
 import type { aiArticleRequestSchema } from "@/lib/ai/schema";
 import { aiArticleResponseSchema } from "@/lib/ai/schema";
-import { auth } from "@/auth";
+import { requireSession } from "@/lib/auth";
+import { toAuthErrorResponse } from "@/lib/auth/response";
 import { LANGUAGES } from "@/drizzle/schema";
 
 /**
@@ -13,9 +14,13 @@ export const maxDuration = 59;
 /**
  * 記事生成API
  */
-export const POST = auth(async function POST(req) {
-  if (!req.auth) {
-    return new Response("Unauthorized", { status: 401 });
+export const POST = async function POST(req: Request) {
+  try {
+    await requireSession(req);
+  } catch (error) {
+    const authResponse = toAuthErrorResponse(error);
+    if (authResponse) return authResponse;
+    throw error;
   }
 
   const { model, language, prompt, context }: z.infer<typeof aiArticleRequestSchema> =
@@ -32,4 +37,4 @@ export const POST = auth(async function POST(req) {
     ${context ? `The context is as follows: ${context}.` : ""}
   `;
   return ai.generate(model, prompt, system, aiArticleResponseSchema).toTextStreamResponse();
-});
+};

@@ -1,7 +1,8 @@
 import { ai } from "@/lib/ai/ai";
+import { requireSession } from "@/lib/auth";
+import { toAuthErrorResponse } from "@/lib/auth/response";
 import type { WritingCorrectionAIRequestSchema } from "@/app/[locale]/(protected)/output/_schema";
 import { writingCorrectionAIGeneratedContentSchema } from "@/app/[locale]/(protected)/output/_schema";
-import { auth } from "@/auth";
 import { LANGUAGES } from "@/drizzle/schema";
 
 /**
@@ -12,9 +13,13 @@ export const maxDuration = 300;
 /**
  * 作文添削API
  */
-export const POST = auth(async function POST(req) {
-  if (!req.auth) {
-    return new Response("Unauthorized", { status: 401 });
+export const POST = async function POST(req: Request) {
+  try {
+    await requireSession(req);
+  } catch (error) {
+    const authResponse = toAuthErrorResponse(error);
+    if (authResponse) return authResponse;
+    throw error;
   }
 
   const {
@@ -62,4 +67,4 @@ export const POST = auth(async function POST(req) {
   return ai
     .generate(model, prompt, system, writingCorrectionAIGeneratedContentSchema)
     .toTextStreamResponse();
-});
+};

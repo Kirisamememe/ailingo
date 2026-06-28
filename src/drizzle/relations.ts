@@ -1,10 +1,13 @@
 import { relations } from "drizzle-orm/relations";
 import {
   accounts,
+  authChallenge,
+  authSession,
   clozeTestQuestion,
   generatedReading,
   multipleChoiceAnswer,
   multipleChoiceQuestion,
+  passkey,
   users,
   wordCard,
   writing,
@@ -21,10 +24,43 @@ export const accountsRelations = relations(accounts, ({ one }) => ({
 }));
 
 /**
+ * 認証セッションのリレーション
+ */
+export const authSessionRelations = relations(authSession, ({ one }) => ({
+  user: one(users, {
+    fields: [authSession.userId],
+    references: [users.id],
+  }),
+}));
+
+/**
+ * 認証チャレンジのリレーション
+ */
+export const authChallengeRelations = relations(authChallenge, ({ one }) => ({
+  user: one(users, {
+    fields: [authChallenge.userId],
+    references: [users.id],
+  }),
+}));
+
+/**
+ * Passkeyのリレーション
+ */
+export const passkeyRelations = relations(passkey, ({ one }) => ({
+  user: one(users, {
+    fields: [passkey.userId],
+    references: [users.id],
+  }),
+}));
+
+/**
  * ユーザーのリレーション
  */
 export const userRelations = relations(users, ({ many }) => ({
   accounts: many(accounts),
+  authSessions: many(authSession),
+  authChallenges: many(authChallenge),
+  passkeys: many(passkey),
   writings: many(writing),
   wordCards: many(wordCard),
   multipleChoiceQuestions: many(multipleChoiceQuestion),
